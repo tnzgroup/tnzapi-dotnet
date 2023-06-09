@@ -275,6 +275,7 @@ if (response.Result == Enums.ResultCode.Success)
 ```
 
 ### Reschedule
+
 ```csharp
 var response = client.Actions.Reschedule.Submit(
     messageID: "ID123456",                              // MessageID
@@ -290,9 +291,176 @@ if (response.Result == Enums.ResultCode.Success)
 }
 ```
 
-## Addressbook
+### Abort Job
 
-###
+```csharp
+var response = client.Actions.Abort.Submit("ID123456"); // MessageID
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine("Status of MessageID '" + response.MessageID + "':");
+    Console.WriteLine(" => Status: '" + response.GetStatusString() + "'");
+    Console.WriteLine(" => JobNum: '" + response.JobNum + "'");
+    Console.WriteLine(" => Action: '" + response.Action + "'");
+}
+```
+
+### Change pacing (TTS/Voice message only)
+
+```csharp
+var response = client.Actions.Pacing.Submit(
+    messageID: "ID123456",      // MessageID
+    numberOfOperators: 1        // No. of operators
+);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine("Status of MessageID '" + response.MessageID + "':");
+    Console.WriteLine(" => Status: '" + response.GetStatusString() + "'");
+    Console.WriteLine(" => JobNum: '" + response.JobNum + "'");
+    Console.WriteLine(" => Action: '" + response.Action + "'");
+}
+```
+
+# Addressbook
+
+## Contact
+
+### Create Contact
+
+```csharp
+var requestResult = request.Addressbook.Contact.Create(
+  new ContactBuilder()
+    .SetAttention("API Test")
+    .SetFirstName("API")
+    .SetLastName("Test")
+    .SetMobileNumber("+64211231234")
+    .SetEmailAddress("test@example.com")
+    .SetMainPhone("+6491112222")
+    .Build()
+);
+```
+
+### Get Contact Detail
+
+```csharp
+var response = client.Addressbook.Contact.ReadById(ContactID);
+
+if (response.Result == ResultCode.Success)
+{
+    Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+    Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
+    Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
+    Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
+    Console.WriteLine($"    -> Attention: '{response.Contact.Attention}'");
+    Console.WriteLine($"    -> Company: '{response.Contact.Company}'");
+    Console.WriteLine($"    -> RecipDepartment: '{response.Contact.CompanyDepartment}'");
+    Console.WriteLine($"    -> FirstName: '{response.Contact.FirstName}'");
+    Console.WriteLine($"    -> LastName: '{response.Contact.LastName}'");
+    Console.WriteLine($"    -> Position: '{response.Contact.Position}'");
+    Console.WriteLine($"    -> StreetAddress: '{response.Contact.StreetAddress}'");
+    Console.WriteLine($"    -> Suburb: '{response.Contact.Suburb}'");
+    Console.WriteLine($"    -> City: '{response.Contact.City}'");
+    Console.WriteLine($"    -> State: '{response.Contact.State}'");
+    Console.WriteLine($"    -> Country: '{response.Contact.Country}'");
+    Console.WriteLine($"    -> Postcode: '{response.Contact.Postcode}'");
+    Console.WriteLine($"    -> MainPhone: '{response.Contact.MainPhone}'");
+    Console.WriteLine($"    -> AltPhone1: '{response.Contact.AltPhone1}'");
+    Console.WriteLine($"    -> AltPhone2: '{response.Contact.AltPhone2}'");
+    Console.WriteLine($"    -> DirectPhone: '{response.Contact.DirectPhone}'");
+    Console.WriteLine($"    -> MobilePhone: '{response.Contact.MobilePhone}'");
+    Console.WriteLine($"    -> FaxNumber: '{response.Contact.FaxNumber}'");
+    Console.WriteLine($"    -> EmailAddress: '{response.Contact.EmailAddress}'");
+    Console.WriteLine($"    -> WebAddress: '{response.Contact.WebAddress}'");
+    Console.WriteLine($"    -> Custom1: '{response.Contact.Custom1}'");
+    Console.WriteLine($"    -> Custom2: '{response.Contact.Custom2}'");
+    Console.WriteLine($"    -> Custom3: '{response.Contact.Custom3}'");
+    Console.WriteLine($"    -> Custom4: '{response.Contact.Custom4}'");
+    Console.WriteLine($"-------------------------");
+}
+```
+
+### Update Contact
+
+```csharp
+var contact = client.Addressbook.Contact.ReadById(ContactID);
+
+contact.Contact.Attention = "Test Person Updated";
+
+var response = client.Addressbook.Contact.Update(contact);
+
+if (response.Result == ResultCode.Success)
+{
+    Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+    Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
+    Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
+    Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
+    Console.WriteLine($"    -> Attention: '{response.Contact.Attention}'");
+    Console.WriteLine($"    -> Company: '{response.Contact.Company}'");
+    Console.WriteLine($"    -> RecipDepartment: '{response.Contact.CompanyDepartment}'");
+    Console.WriteLine($"    -> FirstName: '{response.Contact.FirstName}'");
+    Console.WriteLine($"    -> LastName: '{response.Contact.LastName}'");
+    Console.WriteLine($"    -> Position: '{response.Contact.Position}'");
+    Console.WriteLine($"    -> StreetAddress: '{response.Contact.StreetAddress}'");
+    Console.WriteLine($"    -> Suburb: '{response.Contact.Suburb}'");
+    Console.WriteLine($"    -> City: '{response.Contact.City}'");
+    Console.WriteLine($"    -> State: '{response.Contact.State}'");
+    Console.WriteLine($"    -> Country: '{response.Contact.Country}'");
+    Console.WriteLine($"    -> Postcode: '{response.Contact.Postcode}'");
+    Console.WriteLine($"    -> MainPhone: '{response.Contact.MainPhone}'");
+    Console.WriteLine($"    -> AltPhone1: '{response.Contact.AltPhone1}'");
+    Console.WriteLine($"    -> AltPhone2: '{response.Contact.AltPhone2}'");
+    Console.WriteLine($"    -> DirectPhone: '{response.Contact.DirectPhone}'");
+    Console.WriteLine($"    -> MobilePhone: '{response.Contact.MobilePhone}'");
+    Console.WriteLine($"    -> FaxNumber: '{response.Contact.FaxNumber}'");
+    Console.WriteLine($"    -> EmailAddress: '{response.Contact.EmailAddress}'");
+    Console.WriteLine($"    -> WebAddress: '{response.Contact.WebAddress}'");
+    Console.WriteLine($"    -> Custom1: '{response.Contact.Custom1}'");
+    Console.WriteLine($"    -> Custom2: '{response.Contact.Custom2}'");
+    Console.WriteLine($"    -> Custom3: '{response.Contact.Custom3}'");
+    Console.WriteLine($"    -> Custom4: '{response.Contact.Custom4}'");
+    Console.WriteLine($"-------------------------");
+}
+```
+
+### Delete Contact
+
+```csharp
+var response = request.Addressbook.Contact.DeleteById(contactID);
+
+if (response.Result == ResultCode.Success)
+{
+    Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+    Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
+    Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
+    Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
+    Console.WriteLine($"    -> Attention: '{response.Contact.Attention}'");
+    Console.WriteLine($"    -> Company: '{response.Contact.Company}'");
+    Console.WriteLine($"    -> RecipDepartment: '{response.Contact.CompanyDepartment}'");
+    Console.WriteLine($"    -> FirstName: '{response.Contact.FirstName}'");
+    Console.WriteLine($"    -> LastName: '{response.Contact.LastName}'");
+    Console.WriteLine($"    -> Position: '{response.Contact.Position}'");
+    Console.WriteLine($"    -> StreetAddress: '{response.Contact.StreetAddress}'");
+    Console.WriteLine($"    -> Suburb: '{response.Contact.Suburb}'");
+    Console.WriteLine($"    -> City: '{response.Contact.City}'");
+    Console.WriteLine($"    -> State: '{response.Contact.State}'");
+    Console.WriteLine($"    -> Country: '{response.Contact.Country}'");
+    Console.WriteLine($"    -> Postcode: '{response.Contact.Postcode}'");
+    Console.WriteLine($"    -> MainPhone: '{response.Contact.MainPhone}'");
+    Console.WriteLine($"    -> AltPhone1: '{response.Contact.AltPhone1}'");
+    Console.WriteLine($"    -> AltPhone2: '{response.Contact.AltPhone2}'");
+    Console.WriteLine($"    -> DirectPhone: '{response.Contact.DirectPhone}'");
+    Console.WriteLine($"    -> MobilePhone: '{response.Contact.MobilePhone}'");
+    Console.WriteLine($"    -> FaxNumber: '{response.Contact.FaxNumber}'");
+    Console.WriteLine($"    -> EmailAddress: '{response.Contact.EmailAddress}'");
+    Console.WriteLine($"    -> WebAddress: '{response.Contact.WebAddress}'");
+    Console.WriteLine($"    -> Custom1: '{response.Contact.Custom1}'");
+    Console.WriteLine($"    -> Custom2: '{response.Contact.Custom2}'");
+    Console.WriteLine($"    -> Custom3: '{response.Contact.Custom3}'");
+    Console.WriteLine($"    -> Custom4: '{response.Contact.Custom4}'");
+    Console.WriteLine($"-------------------------");
+}
+```
 
 ## Support
 

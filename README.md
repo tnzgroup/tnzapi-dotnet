@@ -233,6 +233,31 @@ if (response.Result == Enums.ResultCode.Success)
 }
 ```
 
+### SMS Received
+
+```dotnet
+var client = new TNZApiClient(apiUser);
+
+var response = client.Reports.SMSReceived.List(
+    timePeriod: 1440,       // No. of minutes
+    recordsPerPage: 100,    // x numbers of records to return per request
+    page: 1                 // current location
+);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    foreach (var received in response.Messages)
+    {
+        Console.WriteLine("======================================");
+        Console.WriteLine(" => MessageReceived");
+        Console.WriteLine("    -> Date: '" + received.Date.ToString("yyyy-MM-dd hh:mm:ss") + "'");
+        Console.WriteLine("    -> From: '" + received.From + "'");
+        Console.WriteLine("    -> MessageText: '" + received.MessageText.Replace("'", "\'") + "'");
+    }
+
+}
+```
+
 ## Support
 
 ### Getting help

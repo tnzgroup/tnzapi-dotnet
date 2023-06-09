@@ -6,7 +6,7 @@ The documentation for the TNZ API can be found [here][apidocs].
 
 ## Versions
 
-`tnzapi` uses a modified version of [Semantic Versioning](https://semver.org) for all changes. [See this document](VERSIONS.md) for details.
+`TNZAPI.NET` uses a modified version of [Semantic Versioning](https://semver.org) for all changes. [See this document](VERSIONS.md) for details.
 
 ### Supported .NET Versions
 
@@ -21,7 +21,7 @@ Getting started with the TNZ API couldn't be easier. Create a
 
 ### API Credentials
 
-The `TNZAPI` needs your TNZ API credentials (TNZ Auth Tokens). You can either pass these
+The `TNZAPI.NET` needs your TNZ API credentials (TNZ Auth Tokens). You can either pass these
 directly to the constructor (see the code below) or via environment variables.
 
 ```dotnet
@@ -257,6 +257,26 @@ if (response.Result == Enums.ResultCode.Success)
 
 }
 ```
+
+## Actions - Resbumit / Reschedule / Abort / Pacing
+
+### Resubmit
+
+```csharp
+var response = client.Actions.Resubmit.Submit("ID123456"); // Message ID
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine("Status of MessageID '" + response.MessageID + "':");
+    Console.WriteLine(" => Status: '" + response.GetStatusString() + "'");
+    Console.WriteLine(" => JobNum: '" + response.JobNum + "'");
+    Console.WriteLine(" => Action: '" + response.Action + "'");
+}
+```
+
+## Addressbook
+
+###
 
 ## Support
 

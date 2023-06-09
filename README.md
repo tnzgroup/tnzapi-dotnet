@@ -274,6 +274,22 @@ if (response.Result == Enums.ResultCode.Success)
 }
 ```
 
+### Reschedule
+```cs
+var response = client.Actions.Reschedule.Submit(
+    messageID: "ID123456",                              // MessageID
+    sendTime: DateTime.Parse("2023-12-31T12:00:00")     // Set send time
+);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine("Status of MessageID '" + response.MessageID + "':");
+    Console.WriteLine(" => Status: '" + response.GetStatusString() + "'");
+    Console.WriteLine(" => JobNum: '" + response.JobNum + "'");
+    Console.WriteLine(" => Action: '" + response.Action + "'");
+}
+```
+
 ## Addressbook
 
 ###

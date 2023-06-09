@@ -24,7 +24,7 @@ Getting started with the TNZ API couldn't be easier. Create a
 The `TNZAPI.NET` needs your TNZ API credentials (TNZ Auth Tokens). You can either pass these
 directly to the constructor (see the code below) or via environment variables.
 
-```dotnet
+```csharp
 var apiUser = new TNZApiUser()
 {
     AuthToken = "[Your Auth Token]"
@@ -37,7 +37,7 @@ var client = new TNZApiClient(apiUser);
 
 ### Send an SMS
 
-```dotnet
+```csharp
 var response = client.Messaging.SMS.SendMessage(
     destinations: new List<string>()
     {
@@ -63,7 +63,7 @@ else
 ```
 
 ### Send an Email
-```dotnet
+```csharp
 var response = client.Messaging.Email.SendMessage(
     fromEmail: "from@test.com",             // Optional : Sets From Email Address - leave blank to use your api username as email sender
     emailSubject: "Test Email",             // Email Subject
@@ -84,7 +84,7 @@ else
 
 ### Make a Call - Text-to-Speech (TTS)
 
-```dotnet
+```csharp
 var response = client.Messaging.TTS.SendMessage(
     messageToPeople: "Hello, this is a call from test. This is relevant information.", // Message to people
     destinations: new List<string>
@@ -112,7 +112,7 @@ else
 
 ### Make a Call - Upload MP3 / Wav File
 
-```dotnet
+```csharp
 var response = client.Messaging.Voice.SendMessage(
     destinations: new List<string>()
     {
@@ -139,7 +139,7 @@ else
 
 ### Send a Fax Document
 
-```dotnet
+```csharp
 var client = new TNZApiClient(apiUser);
 
 var response = client.Messaging.Fax.SendMessage(
@@ -170,7 +170,7 @@ else
 
 ### Message Status
 
-```dotnet
+```csharp
 var response = client.Reports.Status.Poll("ID123456");
 
 if (response.Result == Enums.ResultCode.Success)
@@ -235,7 +235,7 @@ if (response.Result == Enums.ResultCode.Success)
 
 ### SMS Received
 
-```dotnet
+```csharp
 var client = new TNZApiClient(apiUser);
 
 var response = client.Reports.SMSReceived.List(
@@ -275,7 +275,7 @@ if (response.Result == Enums.ResultCode.Success)
 ```
 
 ### Reschedule
-```cs
+```csharp
 var response = client.Actions.Reschedule.Submit(
     messageID: "ID123456",                              // MessageID
     sendTime: DateTime.Parse("2023-12-31T12:00:00")     // Set send time

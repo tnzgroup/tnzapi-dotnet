@@ -25,11 +25,34 @@ The `TNZAPI` needs your TNZ API credentials (TNZ Auth Tokens). You can either pa
 directly to the constructor (see the code below) or via environment variables.
 
 ```dotnet
-from tnzapi import TNZAPI
+var apiUser = new TNZApiUser()
+{
+    AuthToken = "[Your Auth Token]"
+};
 
-client = TNZAPI()
+var client = new TNZApiClient(apiUser);
+```
 
-client.AuthToken = "[Your Auth Token]"
+## Messaging
+
+### Send an Email
+```dotnet
+var response = client.Messaging.Email.SendMessage(
+    fromEmail: "from@test.com",             // Optional : Sets From Email Address - leave blank to use your api username as email sender
+    emailSubject: "Test Email",             // Email Subject
+    messagePlain: "Test Email Body",        // Email Body
+    destination: "email.one@test.com",      // Recipient 1
+    sendMode: Enums.SendModeType.Test       // TEST Mode - Remove this to send live traffic
+);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine("Success - " + response.MessageID);
+}
+else
+{
+    Console.WriteLine("Error - " + response.ErrorMessage);
+}
 ```
 
 ### Send an SMS

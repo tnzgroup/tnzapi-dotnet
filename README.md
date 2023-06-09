@@ -17,7 +17,7 @@ This library supports the following .NET implementations:
 ## Getting Started
 
 Getting started with the TNZ API couldn't be easier. Create a
-`Client` and you're ready to go.
+`TNZApiClient` and you're ready to go.
 
 ### API Credentials
 
@@ -165,6 +165,8 @@ else
     }
 }
 ```
+
+## Support
 
 ### Getting help
 

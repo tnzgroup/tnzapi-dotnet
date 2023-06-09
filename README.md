@@ -322,9 +322,7 @@ if (response.Result == Enums.ResultCode.Success)
 }
 ```
 
-# Addressbook
-
-## Contact
+## Addressbook - Contact
 
 ### Create Contact
 
@@ -383,11 +381,7 @@ if (response.Result == ResultCode.Success)
 ### Update Contact
 
 ```csharp
-var contact = client.Addressbook.Contact.ReadById(ContactID);
-
-contact.Contact.Attention = "Test Person Updated";
-
-var response = client.Addressbook.Contact.Update(contact);
+var response = client.Addressbook.Contact.Update(contactModel);
 
 if (response.Result == ResultCode.Success)
 {
@@ -459,6 +453,280 @@ if (response.Result == ResultCode.Success)
     Console.WriteLine($"    -> Custom3: '{response.Contact.Custom3}'");
     Console.WriteLine($"    -> Custom4: '{response.Contact.Custom4}'");
     Console.WriteLine($"-------------------------");
+}
+```
+
+## Addressbook - Group
+
+### Create Group
+
+```csharp
+var response = client.Addressbook.Group.Create(
+  new GroupModel()
+  {
+      GroupName = "API Test Group"
+  }
+);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+    Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
+    Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
+    Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
+    Console.WriteLine($"    -> Department: '{response.Group.Department}'");
+    Console.WriteLine($"    -> ViewEditBy: '{response.Group.ViewEditBy}'");
+    Console.WriteLine($"    -> Owner: '{response.Group.Owner}'");
+    Console.WriteLine($"-------------------------");
+
+    return response.Group;
+}
+```
+
+### Get Group Detail
+
+```csharp
+var response = client.Addressbook.Group.GetByGroupCode(groupCode);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+    Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
+    Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
+    Console.WriteLine($"    -> Department: '{response.Group.Department}'");
+    Console.WriteLine($"    -> ViewEditBy: '{response.Group.ViewEditBy}'");
+    Console.WriteLine($"    -> Owner: '{response.Group.Owner}'");
+    Console.WriteLine($"-------------------------");
+
+    return response.Group;
+}
+```
+
+### Update Group
+```csharp
+var response = client.Addressbook.Group.Update(groupModel);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+    Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
+    Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
+    Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
+    Console.WriteLine($"    -> Department: '{response.Group.Department}'");
+    Console.WriteLine($"    -> ViewEditBy: '{response.Group.ViewEditBy}'");
+    Console.WriteLine($"    -> Owner: '{response.Group.Owner}'");
+    Console.WriteLine($"-------------------------");
+}
+```
+
+### Delete Group
+```csharp
+var response = client.Addressbook.Group.Delete(groupModel);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+    Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
+    Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
+    Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
+    Console.WriteLine($"    -> Department: '{response.Group.Department}'");
+    Console.WriteLine($"    -> ViewEditBy: '{response.Group.ViewEditBy}'");
+    Console.WriteLine($"    -> Owner: '{response.Group.Owner}'");
+    Console.WriteLine($"-------------------------");
+}
+```
+
+## Addressbook - Contact/Group Relationships
+
+### List ContactGroup
+
+```csharp
+var response = client.Addressbook.ContactGroupList.List(
+    contactModel,           // ContactModel
+    recordsPerPage: 10,     // Record per page
+    page: 1                 // Page number
+);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine($"Contact list details");
+    Console.WriteLine($"    -> Contact ID: {response.Contact.ID}");
+    Console.WriteLine($"    -> Total Records: {response.TotalRecords}");
+    Console.WriteLine($"    -> Records Per Page: {response.RecordsPerPage}");
+    Console.WriteLine($"    -> Page Count: {response.PageCount}");
+    Console.WriteLine($"    -> Page: {response.Page}");
+
+    if (response.Groups is not null)
+    {
+        foreach (var group in response.Groups)
+        {
+            Console.WriteLine($"Group details for GroupCode={group.GroupCode}");
+            Console.WriteLine($"    -> GroupCode: '{group.GroupCode}'");
+            Console.WriteLine($"    -> GroupName: '{group.GroupName}'");
+            Console.WriteLine($"    -> SubAccount: '{group.SubAccount}'");
+            Console.WriteLine($"    -> Department: '{group.Department}'");
+            Console.WriteLine($"    -> ViewEditBy: '{group.ViewEditBy}'");
+            Console.WriteLine($"    -> Owner: '{group.Owner}'");
+            Console.WriteLine($"-------------------------");
+        }
+    }
+}
+```
+
+### Add ContactGroup
+
+```csharp
+var response = request.Addressbook.ContactGroup.Add(contactModel, groupModel);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+    Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
+    Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
+    Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
+    Console.WriteLine($"    -> Attention: '{response.Contact.Attention}'");
+    Console.WriteLine($"    -> Company: '{response.Contact.Company}'");
+    Console.WriteLine($"    -> RecipDepartment: '{response.Contact.CompanyDepartment}'");
+    Console.WriteLine($"    -> FirstName: '{response.Contact.FirstName}'");
+    Console.WriteLine($"    -> LastName: '{response.Contact.LastName}'");
+    Console.WriteLine($"    -> Position: '{response.Contact.Position}'");
+    Console.WriteLine($"    -> StreetAddress: '{response.Contact.StreetAddress}'");
+    Console.WriteLine($"    -> Suburb: '{response.Contact.Suburb}'");
+    Console.WriteLine($"    -> City: '{response.Contact.City}'");
+    Console.WriteLine($"    -> State: '{response.Contact.State}'");
+    Console.WriteLine($"    -> Country: '{response.Contact.Country}'");
+    Console.WriteLine($"    -> Postcode: '{response.Contact.Postcode}'");
+    Console.WriteLine($"    -> MainPhone: '{response.Contact.MainPhone}'");
+    Console.WriteLine($"    -> AltPhone1: '{response.Contact.AltPhone1}'");
+    Console.WriteLine($"    -> AltPhone2: '{response.Contact.AltPhone2}'");
+    Console.WriteLine($"    -> DirectPhone: '{response.Contact.DirectPhone}'");
+    Console.WriteLine($"    -> MobilePhone: '{response.Contact.MobilePhone}'");
+    Console.WriteLine($"    -> FaxNumber: '{response.Contact.FaxNumber}'");
+    Console.WriteLine($"    -> EmailAddress: '{response.Contact.EmailAddress}'");
+    Console.WriteLine($"    -> WebAddress: '{response.Contact.WebAddress}'");
+    Console.WriteLine($"    -> Custom1: '{response.Contact.Custom1}'");
+    Console.WriteLine($"    -> Custom2: '{response.Contact.Custom2}'");
+    Console.WriteLine($"    -> Custom3: '{response.Contact.Custom3}'");
+    Console.WriteLine($"    -> Custom4: '{response.Contact.Custom4}'");
+    Console.WriteLine($"-------------------------");
+
+    if (response.Group is not null)
+    {
+        Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+        Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
+        Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
+        Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
+        Console.WriteLine($"    -> Department: '{response.Group.Department}'");
+        Console.WriteLine($"    -> ViewEditBy: '{response.Group.ViewEditBy}'");
+        Console.WriteLine($"    -> Owner: '{response.Group.Owner}'");
+        Console.WriteLine($"-------------------------");
+    }
+
+    return response;
+}
+```
+
+### Remove ContactGroup
+
+```csharp
+var response = client.Addressbook.ContactGroup.Remove(contactModel, groupModel);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+    Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
+    Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
+    Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
+    Console.WriteLine($"    -> Attention: '{response.Contact.Attention}'");
+    Console.WriteLine($"    -> Company: '{response.Contact.Company}'");
+    Console.WriteLine($"    -> RecipDepartment: '{response.Contact.CompanyDepartment}'");
+    Console.WriteLine($"    -> FirstName: '{response.Contact.FirstName}'");
+    Console.WriteLine($"    -> LastName: '{response.Contact.LastName}'");
+    Console.WriteLine($"    -> Position: '{response.Contact.Position}'");
+    Console.WriteLine($"    -> StreetAddress: '{response.Contact.StreetAddress}'");
+    Console.WriteLine($"    -> Suburb: '{response.Contact.Suburb}'");
+    Console.WriteLine($"    -> City: '{response.Contact.City}'");
+    Console.WriteLine($"    -> State: '{response.Contact.State}'");
+    Console.WriteLine($"    -> Country: '{response.Contact.Country}'");
+    Console.WriteLine($"    -> Postcode: '{response.Contact.Postcode}'");
+    Console.WriteLine($"    -> MainPhone: '{response.Contact.MainPhone}'");
+    Console.WriteLine($"    -> AltPhone1: '{response.Contact.AltPhone1}'");
+    Console.WriteLine($"    -> AltPhone2: '{response.Contact.AltPhone2}'");
+    Console.WriteLine($"    -> DirectPhone: '{response.Contact.DirectPhone}'");
+    Console.WriteLine($"    -> MobilePhone: '{response.Contact.MobilePhone}'");
+    Console.WriteLine($"    -> FaxNumber: '{response.Contact.FaxNumber}'");
+    Console.WriteLine($"    -> EmailAddress: '{response.Contact.EmailAddress}'");
+    Console.WriteLine($"    -> WebAddress: '{response.Contact.WebAddress}'");
+    Console.WriteLine($"    -> Custom1: '{response.Contact.Custom1}'");
+    Console.WriteLine($"    -> Custom2: '{response.Contact.Custom2}'");
+    Console.WriteLine($"    -> Custom3: '{response.Contact.Custom3}'");
+    Console.WriteLine($"    -> Custom4: '{response.Contact.Custom4}'");
+    Console.WriteLine($"-------------------------");
+
+    if (response.Group is not null)
+    {
+        Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+        Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
+        Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
+        Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
+        Console.WriteLine($"    -> Department: '{response.Group.Department}'");
+        Console.WriteLine($"    -> ViewEditBy: '{response.Group.ViewEditBy}'");
+        Console.WriteLine($"    -> Owner: '{response.Group.Owner}'");
+        Console.WriteLine($"-------------------------");
+    }
+}
+```
+
+### List GroupContact
+
+```csharp
+var response = client.Addressbook.GroupContactList.List(
+    groupModel,             // GroupModel
+    recordsPerPage: 10,     // Number of records for this request
+    page: 1                 // Current location
+);
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine($"Group Contact list details");
+    Console.WriteLine($"    -> GroupCode: {response.Group.GroupCode}");
+    Console.WriteLine($"    -> Total Records: {response.TotalRecords}");
+    Console.WriteLine($"    -> Records Per Page: {response.RecordsPerPage}");
+    Console.WriteLine($"    -> Page Count: {response.PageCount}");
+    Console.WriteLine($"    -> Page: {response.Page}");
+
+    foreach (var contact in response.Contacts)
+    {
+        Console.WriteLine($"Contact details for ContactID={contact.ID}");
+        Console.WriteLine($"    -> Owner: '{contact.Owner}'");
+        Console.WriteLine($"    -> Created: '{contact.Created}'");
+        Console.WriteLine($"    -> Updated: '{contact.Updated}'");
+        Console.WriteLine($"    -> Attention: '{contact.Attention}'");
+        Console.WriteLine($"    -> Company: '{contact.Company}'");
+        Console.WriteLine($"    -> RecipDepartment: '{contact.CompanyDepartment}'");
+        Console.WriteLine($"    -> FirstName: '{contact.FirstName}'");
+        Console.WriteLine($"    -> LastName: '{contact.LastName}'");
+        Console.WriteLine($"    -> Position: '{contact.Position}'");
+        Console.WriteLine($"    -> StreetAddress: '{contact.StreetAddress}'");
+        Console.WriteLine($"    -> Suburb: '{contact.Suburb}'");
+        Console.WriteLine($"    -> City: '{contact.City}'");
+        Console.WriteLine($"    -> State: '{contact.State}'");
+        Console.WriteLine($"    -> Country: '{contact.Country}'");
+        Console.WriteLine($"    -> Postcode: '{contact.Postcode}'");
+        Console.WriteLine($"    -> MainPhone: '{contact.MainPhone}'");
+        Console.WriteLine($"    -> AltPhone1: '{contact.AltPhone1}'");
+        Console.WriteLine($"    -> AltPhone2: '{contact.AltPhone2}'");
+        Console.WriteLine($"    -> DirectPhone: '{contact.DirectPhone}'");
+        Console.WriteLine($"    -> MobilePhone: '{contact.MobilePhone}'");
+        Console.WriteLine($"    -> FaxNumber: '{contact.FaxNumber}'");
+        Console.WriteLine($"    -> EmailAddress: '{contact.EmailAddress}'");
+        Console.WriteLine($"    -> WebAddress: '{contact.WebAddress}'");
+        Console.WriteLine($"    -> Custom1: '{contact.Custom1}'");
+        Console.WriteLine($"    -> Custom2: '{contact.Custom2}'");
+        Console.WriteLine($"    -> Custom3: '{contact.Custom3}'");
+        Console.WriteLine($"    -> Custom4: '{contact.Custom4}'");
+        Console.WriteLine($"-------------------------");
+    }
 }
 ```
 

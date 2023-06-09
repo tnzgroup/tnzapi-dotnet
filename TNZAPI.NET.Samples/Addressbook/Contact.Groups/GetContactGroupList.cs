@@ -30,7 +30,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
             var client = new TNZApiClient(apiUser);
 
             var response = client.Addressbook.ContactGroupList.List(
-                Contact,                // Contact
+                Contact,                // ContactModel
                 recordsPerPage: 10,     // Record per page
                 page: 1                 // Page number
             );

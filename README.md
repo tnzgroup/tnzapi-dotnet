@@ -730,7 +730,7 @@ if (response.Result == Enums.ResultCode.Success)
 }
 ```
 
-### Create GroupContact
+### Add GroupContact
 
 ```csharp
 var response = client.Addressbook.GroupContact.Add(groupModel, contactModel);
@@ -783,7 +783,7 @@ if (response.Result == Enums.ResultCode.Success)
 }
 ```
 
-### Delete GroupContact
+### Remove GroupContact
 
 ```csharp
 var response = client.Addressbook.GroupContact.Remove(groupModel, contactModel);

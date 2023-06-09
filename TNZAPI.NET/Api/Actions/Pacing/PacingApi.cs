@@ -68,16 +68,16 @@ namespace TNZAPI.NET.Api.Actions.Pacing
         {
             #region XML Sample
             /*
-<?xml version="1.0" encoding="UTF-8"?>
-<root>
-  <Sender>application@domain.com</Sender>
-  <APIKey>ta8wr7ymd</APIKey>
-  <Type>Pacing</Type>
-  <APIVersion>1.04</APIVersion>
-  <MessageID>ID123456</MessageID>
-  <Pacing>1</Pacing>
-</root>
-*/
+            <?xml version="1.0" encoding="UTF-8"?>
+            <root>
+              <Sender>application@domain.com</Sender>
+              <APIKey>ta8wr7ymd</APIKey>
+              <Type>Pacing</Type>
+              <APIVersion>1.04</APIVersion>
+              <MessageID>ID123456</MessageID>
+              <Pacing>1</Pacing>
+            </root>
+            */
             #endregion XML Sample
 
             XmlDocument xmlDoc = new XmlDocument();

@@ -66,16 +66,15 @@ namespace TNZAPI.NET.Api.Actions.Reschedule
         {
             #region XML Sample
             /*
-<?xml version="1.0" encoding="UTF-8"?>
-<root>
-  <Sender>application@domain.com</Sender>
-  <APIKey>ta8wr7ymd</APIKey>
-  <Type>Reschedule</Type>
-  <APIVersion>1.04</APIVersion>
-  <MessageID>ID123456</MessageID>
-  <SendTime>2020-05-12 12:00:00</SendTime>
-</root>
-*/
+            <?xml version="1.0" encoding="UTF-8"?>
+            <root>
+              <Sender>application@domain.com</Sender>
+              <APIKey>ta8wr7ymd</APIKey>
+              <MessageID>ID123456</MessageID>
+              <SendTime>2023-05-12 12:00:00</SendTime>
+            </root>
+            */
+
             #endregion XML Sample
 
             XmlDocument xmlDoc = new XmlDocument();

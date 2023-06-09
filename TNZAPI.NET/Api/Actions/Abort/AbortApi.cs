@@ -68,15 +68,16 @@ namespace TNZAPI.NET.Api.Actions.Abort
         {
             #region XML Sample
             /*
-<?xml version="1.0" encoding="UTF-8"?>
-<root>
-  <Sender>application@domain.com</Sender>
-  <APIKey>ta8wr7ymd</APIKey>
-  <Type>Abort</Type>
-  <APIVersion>1.04</APIVersion>
-  <MessageID>ID123456</MessageID>
-</root>
-*/
+            <?xml version="1.0" encoding="UTF-8"?>
+            <root>
+              <Sender>application@domain.com</Sender>
+              <APIKey>ta8wr7ymd</APIKey>
+              <Type>Abort</Type>
+              <APIVersion>1.04</APIVersion>
+              <MessageID>ID123456</MessageID>
+            </root>
+            */
+
             #endregion XML Sample
 
             XmlDocument xmlDoc = new XmlDocument();

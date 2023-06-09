@@ -33,7 +33,34 @@ var apiUser = new TNZApiUser()
 var client = new TNZApiClient(apiUser);
 ```
 
-## Messaging
+## Messaging - Send SMS / Email / TTS / Voice / Fax
+
+### Send an SMS
+
+```dotnet
+var response = client.Messaging.SMS.SendMessage(
+    destinations: new List<string>()
+    {
+        "+64211111111",                         // Recipient
+        "+64222222222"                          // Recipient
+    },
+    messageText: "Test SMS",                    // SMS Message
+    sendMode: Enums.SendModeType.Test           // TEST Mode - Remove this to send live traffic
+    );
+
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine("Success - " + response.MessageID);
+}
+else
+{
+    Console.WriteLine("Error occurred while processing...");
+    foreach (var error in response.ErrorMessage)
+    {
+        Console.WriteLine($"- {error}");
+    }
+}
+```
 
 ### Send an Email
 ```dotnet
@@ -55,89 +82,88 @@ else
 }
 ```
 
-### Send an SMS
-
-```dotnet
-from tnzapi import TNZAPI
-
-client = TNZAPI(
-    AuthToken="[Your Auth Token]"
-)
-
-request = client.Send.SMS(
-    Reference="Test",
-    MessageText = "Test SMS Message click [[Reply]] to opt out",
-    Recipients = ["+64211231234"],
-)
-
-response = request.SendMessage()
-
-print(repr(response))
-```
-
-### Send a Fax Document
-
-```dotnet
-from tnzapi import TNZAPI
-
-client = TNZAPI(
-    AuthToken="[Your Auth Token]"
-)
-
-request = client.Send.Fax(
-    Recipients = "+6491232345",
-    Attachments = ["C:\\Document.pdf"]
-)
-
-response = request.SendMessage()
-
-print(repr(response))
-```
-
 ### Make a Call - Text-to-Speech (TTS)
 
 ```dotnet
-from tnzapi import TNZAPI
+var response = client.Messaging.TTS.SendMessage(
+    messageToPeople: "Hello, this is a call from test. This is relevant information.", // Message to people
+    destinations: new List<string>
+    {
+        "+64211111111",                     // Recipient
+        "+64222222222",                     // Recipient
+    },
+    ttsVoiceType: TTSVoiceType.Emma,        // TTS Engine
+    sendMode: Enums.SendModeType.Test       // TEST Mode - Remove this to send live traffic
+);
 
-client = TNZAPI(
-    AuthToken="[Your Auth Token]"
-)
-
-request = client.Send.TTS(
-    Recipients = "+64211232345",
-    Reference = "Voice Test - 64211232345",
-    MessageToPeople = "Hi there!"
-)
-
-request.AddKeypad(Tone=1,RouteNumber="+6491232345",Play="You pressed 1")
-
-response = request.SendMessage()
-
-print(repr(response))
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine("Success - " + response.MessageID);
+}
+else
+{
+    Console.WriteLine("Error occurred while processing...");
+    foreach (var error in response.ErrorMessage)
+    {
+        Console.WriteLine($"- {error}");
+    }
+}
 ```
 
 ### Make a Call - Upload MP3 / Wav File
 
 ```dotnet
-from tnzapi import TNZAPI
+var response = client.Messaging.Voice.SendMessage(
+    destinations: new List<string>()
+    {
+        "+64211111111",                     // Recipient
+        "+64222222222"                      // Recipient
+    },
+    messageToPeople: "D:\\File1.wav",       // WAV format, 16-bit, 8000hz
+    sendMode: Enums.SendModeType.Test       // TEST Mode - Remove this to send live traffic
+);
 
-client = TNZAPI(
-    AuthToken="[Your Auth Token]"
-)
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine("Success - " + response.MessageID);
+}
+else
+{
+    Console.WriteLine("Error occurred while processing...");
+    foreach (var error in response.ErrorMessage)
+    {
+        Console.WriteLine($"- {error}");
+    }
+}
+```
 
-request = client.Send.Voice(
-    Recipients = "+64211232345",
-    Reference = "Voice Test - 64211232345",
-)
+### Send a Fax Document
 
-request.AddMessageData("MessageToPeople","C:\\file1.wav")
-request.AddMessageData("MessageToAnswerPhones","C:\\file2.wav")
+```dotnet
+var client = new TNZApiClient(apiUser);
 
-request.AddKeypad(Tone=1,RouteNumber="+6491232345",PlayFile="C:\\file3.wav")
+var response = client.Messaging.Fax.SendMessage(
+    destinations: new List<string>()
+    {
+        "+6491111111",                      // Recipient 1
+        "+6491111112"                       // Recipient 2
+    },
+    file: "D:\\File1.pdf",                  // Attach File
+    sendMode: Enums.SendModeType.Test       // TEST Mode - Remove this to send live traffic
+);
 
-response = request.SendMessage()
-
-print(repr(response))
+if (response.Result == Enums.ResultCode.Success)
+{
+    Console.WriteLine("Success - " + response.MessageID);
+}
+else
+{
+    Console.WriteLine("Error occurred while processing...");
+    foreach (var error in response.ErrorMessage)
+    {
+        Console.WriteLine($"- {error}");
+    }
+}
 ```
 
 ### Getting help

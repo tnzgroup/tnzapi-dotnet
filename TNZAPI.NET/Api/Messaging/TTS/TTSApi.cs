@@ -1,15 +1,15 @@
 ﻿using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Xml;
-using TNZAPI.NET.Api.Messaging.Common.Components.List;
-using static TNZAPI.NET.Api.Messaging.Common.Enums;
-using static TNZAPI.NET.Api.Messaging.TTS.Dto.TTSModel;
 using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
+using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.TTS.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces.Messaging;
+using TNZAPI.NET.Extensions;
 using TNZAPI.NET.Helpers;
+using static TNZAPI.NET.Api.Messaging.Common.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.TTS
 {
@@ -184,7 +184,8 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "CallRouteMessageOnWrongKey", Entity.CallRouteMessageOnWrongKey));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "NumberOfOperators", Entity.NumberOfOperators.ToString()));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "CallerID", Entity.CallerID));
-            messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Voice", Enum.GetName(typeof(TTSVoiceType), Entity.TTSVoice)));
+            //messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Voice", Enum.GetName(typeof(TTSVoiceType), Entity.TTSVoice)));
+            messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Voice", Entity.TTSVoice.GetDescription()));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Options", Entity.Options));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "NumberOfOperators", Entity.NumberOfOperators.ToString()));
             if (Entity.RetryAttempts > 0)

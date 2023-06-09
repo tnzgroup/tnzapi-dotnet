@@ -4,7 +4,7 @@ using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Voice;
 using TNZAPI.NET.Api.Messaging.Voice.Dto;
 using TNZAPI.NET.Core;
-using static TNZAPI.NET.Api.Messaging.Voice.Dto.VoiceModel;
+using static TNZAPI.NET.Api.Messaging.Common.Enums;
 
 namespace TNZAPI.NET.Samples.Messaging.Send
 {

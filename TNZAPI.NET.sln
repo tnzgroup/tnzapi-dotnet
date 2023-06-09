@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNZAPI.NET", "TNZAPI.NET\TNZAPI.NET.csproj", "{33CE7A9F-B3D0-47C2-A5DF-A6BE03BC12F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNZAPI.NET.Samples", "TNZAPI.NET.Samples\TNZAPI.NET.Samples.csproj", "{E6E4D257-0B3F-480F-A707-4DB75E8CF2E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33CE7A9F-B3D0-47C2-A5DF-A6BE03BC12F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33CE7A9F-B3D0-47C2-A5DF-A6BE03BC12F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33CE7A9F-B3D0-47C2-A5DF-A6BE03BC12F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33CE7A9F-B3D0-47C2-A5DF-A6BE03BC12F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6E4D257-0B3F-480F-A707-4DB75E8CF2E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6E4D257-0B3F-480F-A707-4DB75E8CF2E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6E4D257-0B3F-480F-A707-4DB75E8CF2E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6E4D257-0B3F-480F-A707-4DB75E8CF2E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9E56CF1-F46F-4857-9B99-33F2303EDEEF}
+	EndGlobalSection
+EndGlobal

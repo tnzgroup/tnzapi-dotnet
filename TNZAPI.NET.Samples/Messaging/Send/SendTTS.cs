@@ -4,6 +4,7 @@ using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.TTS;
 using TNZAPI.NET.Api.Messaging.TTS.Dto;
 using TNZAPI.NET.Core;
+using static TNZAPI.NET.Api.Messaging.Common.Enums;
 using static TNZAPI.NET.Api.Messaging.TTS.Dto.TTSModel;
 
 namespace TNZAPI.NET.Samples.Messaging.Send
@@ -29,7 +30,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     "+64211111111",                     // Recipient
                     "+64222222222",                     // Recipient
                 },
-                ttsVoiceType: TTSVoiceType.Emma,        // TTS Engine
+                ttsVoiceType: TTSVoiceType.EnglishNZFemale1, // TTS Engine
                 sendMode: Enums.SendModeType.Test       // TEST Mode - Remove this to send live traffic
             );
 

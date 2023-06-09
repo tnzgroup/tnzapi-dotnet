@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
+using static TNZAPI.NET.Api.Messaging.Common.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.Voice.Dto
 {
@@ -21,7 +21,7 @@ namespace TNZAPI.NET.Api.Messaging.Voice.Dto
         public string Department { get; set; } = "";
         public string ChargeCode { get; set; } = "";
 
-        public enum MessageDataType { MessageToPeople, MessageToAnswerPhones, CallRouteMessageToPeople, CallRouteMessageToOperators, CallRouteMessageOnWrongKey };
+        
 
         public string CallerID { get; set; } = "";
         public string Options { get; set; } = "";

@@ -92,7 +92,7 @@ var response = client.Messaging.TTS.SendMessage(
         "+64211111111",                     // Recipient
         "+64222222222",                     // Recipient
     },
-    ttsVoiceType: TTSVoiceType.Emma,        // TTS Engine
+    ttsVoiceType: TTSVoiceType.EnglishNZFemale1, // TTS Engine
     sendMode: Enums.SendModeType.Test       // TEST Mode - Remove this to send live traffic
 );
 

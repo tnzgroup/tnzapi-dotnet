@@ -1,18 +1,7 @@
 ﻿using TNZAPI.NET.Api.Actions;
-using TNZAPI.NET.Api.Actions.Abort;
-using TNZAPI.NET.Api.Actions.Pacing;
-using TNZAPI.NET.Api.Actions.Reschedule;
-using TNZAPI.NET.Api.Actions.Resubmit;
 using TNZAPI.NET.Api.Addressbook;
 using TNZAPI.NET.Api.Messaging;
-using TNZAPI.NET.Api.Messaging.Email;
-using TNZAPI.NET.Api.Messaging.Fax;
-using TNZAPI.NET.Api.Messaging.SMS;
-using TNZAPI.NET.Api.Messaging.TTS;
-using TNZAPI.NET.Api.Messaging.Voice;
 using TNZAPI.NET.Api.Reports;
-using TNZAPI.NET.Api.Reports.SMSReceived;
-using TNZAPI.NET.Api.Reports.Status;
 using TNZAPI.NET.Core.Interfaces;
 
 namespace TNZAPI.NET.Core

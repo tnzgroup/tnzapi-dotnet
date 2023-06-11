@@ -43,19 +43,6 @@ namespace TNZAPI.NET.Helpers
 
             return memberExpression.Member.Name;
         }
-        /*
-        public static bool IsNewObject<T>(T obj)
-        {
-            foreach (var prop in typeof(T).GetProperties())
-            {
-                if (!prop.GetValue(obj).Equals(Activator.CreateInstance(prop.PropertyType)))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        */
 
         public static bool IsNewObject<T>(T obj)
         {

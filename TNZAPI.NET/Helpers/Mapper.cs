@@ -1,9 +1,13 @@
-﻿using System.Reflection;
-
-namespace TNZAPI.NET.Helpers
+﻿namespace TNZAPI.NET.Helpers
 {
     public class Mapper
     {
+        /// <summary>
+        /// Maps one object to another
+        /// </summary>
+        /// <typeparam name="TDestination">Destination object type</typeparam>
+        /// <param name="source">Source object</param>
+        /// <returns>TDestination</returns>
         public static TDestination Map<TDestination>(object source)
         {
             var destination = Activator.CreateInstance<TDestination>();

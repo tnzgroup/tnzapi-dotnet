@@ -26,16 +26,5 @@ namespace TNZAPI.NET.Helpers
             var newBody = visitor.Visit(expression.Body);
             return Expression.Lambda<Func<TNew, object>>(newBody, parameter);
         }
-
-        //public static Expression<Func<TNew, object>> ConvertExpressionParameterType<TOld, TNew>(Expression<Func<TOld, object>> expression)
-        //{
-        //    var oldParameter = expression.Parameters[0];
-        //    var newParameter = Expression.Parameter(typeof(TNew), oldParameter.Name);
-        //    var converter = new ParameterConverter(oldParameter, newParameter);
-        //    var newBody = converter.Visit(expression.Body);
-        //    var newLambda = Expression.Lambda<Func<TNew, object>>(newBody, newParameter);
-
-        //    return newLambda;
-        //}
     }
 }

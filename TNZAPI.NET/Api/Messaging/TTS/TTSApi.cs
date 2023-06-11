@@ -84,48 +84,44 @@ namespace TNZAPI.NET.Api.Messaging.TTS
         {
             #region XML Sample
             /*
-						<?xml version="1.0" encoding="UTF-8"?>
-						<TTSRequest>
-							<Sender>application@domain.com</Sender>
-							<APIKey>ta8wr7ymd</APIKey>
-							<MessageType>TextToSpeech</MessageType>
-							<APIVersion>1.02</APIVersion>
-							<MessageID>ID123456</MessageID>
-							<MessageData>
-								<Reference>Test1</Reference>
-								<SendTime></SendTime>
-								<TimeZone>New Zealand</TimeZone>
-								<SubAccount>SubAccount01</SubAccount>
-								<Department>Department01</Department>
-								<ChargeCode>BillingGroup01</ChargeCode>
-								<MessageToPeople>Hello, this is a call from Department01. This is relevant information. Press one to be connected to our call centre.</MessageToPeople>
-								<MessageToAnswerphones>Hello, sorry we missed you. This is a call from Department 01. Please contact us on 0800 123123.</MessageToAnswerphones>
-								<Keypads>
-									<Tone>1</Tone>
-									<RouteNumber>64800123123</RouteNumber>
-								</Keypads>
-								<Keypads>
-									<Tone>2</Tone>
-									<RouteNumber>6498008000</RouteNumber>
-								</Keypads>
-								<CallRouteMessageToPeople>Connecting you now.</CallRouteMessageToPeople>
-								<CallRouteMessageToOperators>Incoming Text To Speech call.</CallRouteMessageToOperators>
-								<CallRouteMessageOnWrongKey>Sorry, you have pressed an invalid key. Please try again.</CallRouteMessageOnWrongKey>
-								<NumberOfOperators>5</NumberOfOperators>
-								<CallerID>6495005000</CallerID>
-								<Voice>Female2</Voice>
-								<Options></Options>
-								<Destinations>
-                  <Destination>
-										<Recipient>6421000001</Recipient>
-										<Custom1></Custom1>
-										<Custom2></Custom2>
-                  </Destination>
-								</Destinations>
-								<Recipients>6495005002</Recipients>
-								<Recipients>6421000003</Recipients>
-							</MessageData>
-						</TTSRequest>  
+			<?xml version="1.0" encoding="UTF-8"?>
+			<TTSRequest>
+				<MessageData>
+                    <MessageID>ID123456</MessageID>
+					<Reference>Test1</Reference>
+					<SendTime></SendTime>
+					<TimeZone>New Zealand</TimeZone>
+					<SubAccount>SubAccount01</SubAccount>
+					<Department>Department01</Department>
+					<ChargeCode>BillingGroup01</ChargeCode>
+					<MessageToPeople>Hello, this is a call from Department01. This is relevant information. Press one to be connected to our call centre.</MessageToPeople>
+					<MessageToAnswerphones>Hello, sorry we missed you. This is a call from Department 01. Please contact us on 0800 123123.</MessageToAnswerphones>
+					<Keypads>
+						<Tone>1</Tone>
+						<RouteNumber>64800123123</RouteNumber>
+					</Keypads>
+					<Keypads>
+						<Tone>2</Tone>
+						<RouteNumber>6498008000</RouteNumber>
+					</Keypads>
+					<CallRouteMessageToPeople>Connecting you now.</CallRouteMessageToPeople>
+					<CallRouteMessageToOperators>Incoming Text To Speech call.</CallRouteMessageToOperators>
+					<CallRouteMessageOnWrongKey>Sorry, you have pressed an invalid key. Please try again.</CallRouteMessageOnWrongKey>
+					<NumberOfOperators>5</NumberOfOperators>
+					<CallerID>6495005000</CallerID>
+					<Voice>Female2</Voice>
+					<Options></Options>
+					<Destinations>
+                        <Destination>
+							<Recipient>6421000001</Recipient>
+							<Custom1></Custom1>
+							<Custom2></Custom2>
+                        </Destination>
+					</Destinations>
+					<Recipients>6495005002</Recipients>
+					<Recipients>6421000003</Recipients>
+				</MessageData>
+			</TTSRequest>  
             */
             #endregion XML Sample
 

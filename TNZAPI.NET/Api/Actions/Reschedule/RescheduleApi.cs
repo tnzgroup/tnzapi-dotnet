@@ -94,6 +94,11 @@ namespace TNZAPI.NET.Api.Actions.Reschedule
 
             rootNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "SendTime", Options.SendTime.ToString("yyyy-MM-ddTHH:mm:ss")));
 
+            if (Options.Timezone is not null)
+            {
+                rootNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Timezone", Options.Timezone));
+            }
+
             return xmlDoc;
         }
 
@@ -228,13 +233,15 @@ namespace TNZAPI.NET.Api.Actions.Reschedule
         /// </summary>
         /// <param name="messageID">Message ID</param>
         /// <param name="sendTime">Scheduled for</param>
+        /// <param name="timezone">Timezone for sendTime (optional)</param>
         /// <returns>RescheduleResult</returns>
-        public RescheduleApiResult Submit(string messageID, DateTime sendTime)
+        public RescheduleApiResult Submit(string messageID, DateTime sendTime, string timezone = null)
         {
             Options = new RescheduleRequestOptions
             {
                 MessageID = messageID,
-                SendTime = sendTime
+                SendTime = sendTime,
+                Timezone = timezone
             };
 
             return Submit();
@@ -290,14 +297,16 @@ namespace TNZAPI.NET.Api.Actions.Reschedule
         /// </summary>
         /// <param name="messageID">Message ID</param>
         /// <param name="sendTime">DateTime</param>
+        /// <param name="timezone">Timezone for sendTime (optional)</param>
         /// <returns>Task<RescheduleResult></returns>
         [ComVisible(false)]
-        public async Task<RescheduleApiResult> SubmitAsync(string messageID, DateTime sendTime)
+        public async Task<RescheduleApiResult> SubmitAsync(string messageID, DateTime sendTime, string timezone = null)
         {
             Options = new RescheduleRequestOptions
             {
                 MessageID = messageID,
-                SendTime = sendTime
+                SendTime = sendTime,
+                Timezone = timezone
             };
 
             return await SubmitAsync();

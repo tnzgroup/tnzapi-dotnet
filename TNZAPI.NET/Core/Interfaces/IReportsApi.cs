@@ -4,7 +4,8 @@ namespace TNZAPI.NET.Core.Interfaces
 {
     public interface IReportsApi
     {
-        ISMSReceivedApi SMSReceived { get; set; }
         IStatusApi Status { get; set; }
+        ISMSReceivedApi SMSReceived { get; set; }
+        ISMSReplyApi SMSReply { get; set; }
     }
 }

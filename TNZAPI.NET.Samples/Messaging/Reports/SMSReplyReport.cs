@@ -1,14 +1,14 @@
 ﻿using TNZAPI.NET.Api.Messaging.Common;
-using TNZAPI.NET.Api.Reports.Status.Dto;
+using TNZAPI.NET.Api.Reports.SMSReply.Dto;
 using TNZAPI.NET.Core;
 
 namespace TNZAPI.NET.Samples.Messaging.Reports
 {
-    public class StatusReport
+    public class SMSReplyReport
     {
         private readonly ITNZAuth apiUser;
 
-        public StatusReport(ITNZAuth apiUser)
+        public SMSReplyReport(ITNZAuth apiUser)
         {
             this.apiUser = apiUser;
         }
@@ -17,7 +17,7 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
         {
             var client = new TNZApiClient(apiUser);
 
-            var response = client.Reports.Status.Poll("ID123456");
+            var response = client.Reports.SMSReply.Poll("ID123456");
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -48,6 +48,7 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     Console.WriteLine($"    -> Type: '{message.Type}'");
                     Console.WriteLine($"    -> DestSeq: '{message.DestSeq}'");
                     Console.WriteLine($"    -> Destination: '{message.Destination}'");
+                    Console.WriteLine($"    -> MessageText: '{message.MessageText}'");
                     Console.WriteLine($"    -> Status: '{message.Status}'");
                     Console.WriteLine($"    -> Result: '{message.Result}'");
                     Console.WriteLine($"    -> SentDate: '{message.SentDate}'");
@@ -64,6 +65,16 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     Console.WriteLine($"    -> Custom9: '{message.Custom9}'");
                     Console.WriteLine($"    -> RemoteID: '{message.RemoteID}'");
                     Console.WriteLine($"    -> Price: '{message.Price}'");
+
+                    foreach (var reply in message.SMSReplies)
+                    {
+                        Console.WriteLine($"======================================");
+                        Console.WriteLine($" => SMS Reply");
+                        Console.WriteLine($"    -> Date: '{reply.Date}'");
+                        Console.WriteLine($"    -> DateUTC: '{reply.DateUTC}'");
+                        Console.WriteLine($"    -> From: '{reply.From}'");
+                        Console.WriteLine($"    -> MessageText: '{reply.MessageText}'");
+                    }
                 }
             }
             else
@@ -86,12 +97,12 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
 
             var client = new TNZApiClient(apiUser);
 
-            var options = new StatusRequestOptions()
+            var options = new SMSReplyRequestOptions()
             {
                 MessageID = "ID123456"
             };
 
-            var response = client.Reports.Status.Poll(options);
+            var response = client.Reports.SMSReply.Poll(options);
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -122,6 +133,7 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     Console.WriteLine($"    -> Type: '{message.Type}'");
                     Console.WriteLine($"    -> DestSeq: '{message.DestSeq}'");
                     Console.WriteLine($"    -> Destination: '{message.Destination}'");
+                    Console.WriteLine($"    -> MessageText: '{message.MessageText}'");
                     Console.WriteLine($"    -> Status: '{message.Status}'");
                     Console.WriteLine($"    -> Result: '{message.Result}'");
                     Console.WriteLine($"    -> SentDate: '{message.SentDate}'");
@@ -138,6 +150,16 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     Console.WriteLine($"    -> Custom9: '{message.Custom9}'");
                     Console.WriteLine($"    -> RemoteID: '{message.RemoteID}'");
                     Console.WriteLine($"    -> Price: '{message.Price}'");
+
+                    foreach (var reply in message.SMSReplies)
+                    {
+                        Console.WriteLine($"======================================");
+                        Console.WriteLine($" => SMS Reply");
+                        Console.WriteLine($"    -> Date: '{reply.Date}'");
+                        Console.WriteLine($"    -> DateUTC: '{reply.DateUTC}'");
+                        Console.WriteLine($"    -> From: '{reply.From}'");
+                        Console.WriteLine($"    -> MessageText: '{reply.MessageText}'");
+                    }
                 }
             }
             else

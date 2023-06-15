@@ -2,10 +2,10 @@
 using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Core.Interfaces;
 
-namespace TNZAPI.NET.Api.Reports.Status.Dto
+namespace TNZAPI.NET.Api.Reports.SMSReply.Dto
 {
     [XmlType(TypeName = "root")]
-    public class StatusApiResult : IApiResult
+    public class SMSReplyApiResult : IApiResult
     {
         public Enums.ResultCode Result { get; set; }
         public string MessageID { get; set; } = "";
@@ -52,6 +52,7 @@ namespace TNZAPI.NET.Api.Reports.Status.Dto
         public Enums.MessageType Type { get; set; }
         public string DestSeq { get; set; }
         public string Destination { get; set; }
+        public string MessageText { get; set; }
         public Enums.ResultCode Status { get; set; }
         public string Result { get; set; }
         public DateTime SentDate { get; set; }
@@ -68,6 +69,8 @@ namespace TNZAPI.NET.Api.Reports.Status.Dto
         public string Custom9 { get; set; }
         public string RemoteID { get; set; }
         public double Price { get; set; }
+
+        public List<SMSReply> SMSReplies { get; set; }
 
     }
 

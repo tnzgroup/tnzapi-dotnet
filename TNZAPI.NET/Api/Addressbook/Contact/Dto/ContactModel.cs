@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using TNZAPI.NET.Api.Messaging.Common;
 
 namespace TNZAPI.NET.Api.Addressbook.Contact.Dto
 {
@@ -14,6 +15,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Dto
         public DateTime? Updated { get; set; }
 
         public string Attention { get; set; }
+        public string Title { get; set; }
         public string Company { get; set; }
 
         [XmlElement("RecipDepartment")]
@@ -39,6 +41,9 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Dto
         public string Custom2 { get; set; }
         public string Custom3 { get; set; }
         public string Custom4 { get; set; }
+
+        public Enums.ViewEditByOptions? ViewBy { get; set; }
+        public Enums.ViewEditByOptions? EditBy { get; set; }
 
         public override string ToString()
         {

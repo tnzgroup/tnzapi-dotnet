@@ -278,5 +278,7 @@ namespace TNZAPI.NET.Api.Messaging.Common
             [Description("Welsh@Female1")]
             WelshFemale1,
         };
+
+        public enum ViewEditByOptions { Account, SubAccount, Department, No };
     }
 }

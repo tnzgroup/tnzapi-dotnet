@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Api.Addressbook.Contact
@@ -26,7 +27,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Sets the Attention
         /// </summary>
-        /// <param name="attention">Attention</param>
+        /// <param name="attention">Attention or focus associated with the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetAttention(string attention)
         {
@@ -36,9 +37,21 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         }
 
         /// <summary>
+        /// Sets the title
+        /// </summary>
+        /// <param name="title">Title or honorific of the contact (e.g., Mr, Mrs, Ms)</param>
+        /// <returns>ContactBuilder</returns>
+        public ContactBuilder SetTitle(string title)
+        {
+            Entity.Title = title;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the company name
         /// </summary>
-        /// <param name="company">Company name</param>
+        /// <param name="company">Specifies the company or organization associated with the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetCompany(string company)
         {
@@ -50,7 +63,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Sets the company department
         /// </summary>
-        /// <param name="companyDepartment">Company Department</param>
+        /// <param name="companyDepartment">Indicates the department or division within the company associated with the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetCompanyDepartment(string companyDepartment)
         {
@@ -62,7 +75,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Sets the first name
         /// </summary>
-        /// <param name="firstName">First Name</param>
+        /// <param name="firstName">First name of the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetFirstName(string firstName)
         {
@@ -74,7 +87,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Sets the last name
         /// </summary>
-        /// <param name="lastName">Last Name</param>
+        /// <param name="lastName">Last name of the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetLastName(string lastName)
         {
@@ -86,7 +99,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Sets the position
         /// </summary>
-        /// <param name="position">Position</param>
+        /// <param name="position">Job position or role of the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetPosition(string position)
         {
@@ -98,7 +111,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Sets the street address
         /// </summary>
-        /// <param name="streetAddress">Street Address</param>
+        /// <param name="streetAddress">Street address or location of the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetStreetAddress(string streetAddress)
         {
@@ -110,7 +123,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Sets the suburb
         /// </summary>
-        /// <param name="suburb">Suburb</param>
+        /// <param name="suburb">Suburb or district associated with the contact's address.</param>
         /// <returns></returns>
         public ContactBuilder SetSuburb(string suburb)
         {
@@ -122,7 +135,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Sets the city
         /// </summary>
-        /// <param name="city">City</param>
+        /// <param name="city">City or locality associated with the contact's address.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetCity(string city)
         {
@@ -134,7 +147,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Sets the state (Contact's Address)
         /// </summary>
-        /// <param name="state">State</param>
+        /// <param name="state">State or province associated with the contact's address.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetState(string state)
         {
@@ -146,7 +159,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Sets the country
         /// </summary>
-        /// <param name="country">Country</param>
+        /// <param name="country">Country associated with the contact's address.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetCountry(string country)
         {
@@ -158,7 +171,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Sets the post code
         /// </summary>
-        /// <param name="postCode">Post Code</param>
+        /// <param name="postCode">Postal code or ZIP code associated with the contact's address.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetPostCode(string postCode)
         {
@@ -170,7 +183,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set Main Phone - for TTS/Voice
         /// </summary>
-        /// <param name="mainPhone">Phone number</param>
+        /// <param name="mainPhone">Main phone number of the contact. This property typically used for Voice & Text-To-Speech messages.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetMainPhone(string mainPhone)
         {
@@ -182,7 +195,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set Alternative Phone 1 - for TTS/Voice
         /// </summary>
-        /// <param name="altPhone1">Phone number</param>
+        /// <param name="altPhone1">Alternate phone number for the contact. This property typically used for Voice & Text-To-Speech messages.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetAltPhone1(string altPhone1)
         {
@@ -194,7 +207,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set Alternative Phone 2 - for TTS/Voice
         /// </summary>
-        /// <param name="altPhone2">Phone number</param>
+        /// <param name="altPhone2">Alternate phone number for the contact. This property typically used for Voice & Text-To-Speech messages.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetAltPhone2(string altPhone2)
         {
@@ -206,9 +219,9 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set DDI Number
         /// </summary>
-        /// <param name="ddiNumber">DDI number</param>
+        /// <param name="ddiNumber">Direct phone number of the contact.</param>
         /// <returns>ContactBuilder</returns>
-        public ContactBuilder SetDDINumber(string ddiNumber)
+        public ContactBuilder SetDirectPhone(string ddiNumber)
         {
             Entity.DirectPhone = ddiNumber;
 
@@ -218,11 +231,11 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set mobile number - for sending SMS
         /// </summary>
-        /// <param name="mobileNumber">Mobile number</param>
+        /// <param name="mobilePhone">Mobile phone number of the contact. This property typically used for SMS messages.</param>
         /// <returns>ContactBuilder</returns>
-        public ContactBuilder SetMobileNumber(string mobileNumber)
+        public ContactBuilder SetMobilePhone(string mobilePhone)
         {
-            Entity.MobilePhone = mobileNumber;
+            Entity.MobilePhone = mobilePhone;
 
             return this;
         }
@@ -230,7 +243,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set fax number - for sending fax
         /// </summary>
-        /// <param name="faxNumber">Fax number</param>
+        /// <param name="faxNumber">Fax number associated with the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetFaxNumber(string faxNumber)
         {
@@ -242,7 +255,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set email address - for sending email
         /// </summary>
-        /// <param name="emailAddress">Email address</param>
+        /// <param name="emailAddress">Email address of the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetEmailAddress(string emailAddress)
         {
@@ -254,7 +267,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set customer's website
         /// </summary>
-        /// <param name="webAddress">Website URL</param>
+        /// <param name="webAddress">Website address or URL associated with the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetWebAddress(string webAddress)
         {
@@ -266,7 +279,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set custom 1
         /// </summary>
-        /// <param name="custom1">Custom1</param>
+        /// <param name="custom1">Custom fields or additional information associated with the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetCustom1(string custom1)
         {
@@ -278,7 +291,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set custom 2
         /// </summary>
-        /// <param name="custom2">Custom2</param>
+        /// <param name="custom2">Custom fields or additional information associated with the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetCustom2(string custom2)
         {
@@ -290,7 +303,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set custom 3
         /// </summary>
-        /// <param name="custom3">Custom3</param>
+        /// <param name="custom3">Custom fields or additional information associated with the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetCustom3(string custom3)
         {
@@ -302,11 +315,35 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Set custom 4
         /// </summary>
-        /// <param name="custom4">Custom4</param>
+        /// <param name="custom4">Custom fields or additional information associated with the contact.</param>
         /// <returns>ContactBuilder</returns>
         public ContactBuilder SetCustom4(string custom4)
         {
             Entity.Custom4 = custom4;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Set ViewBy
+        /// </summary>
+        /// <param name="viewBy">Visibility of the contact. Values can be "Account", "SubAccount", "Department" or "No" visibility option.</param>
+        /// <returns>ContactBuilder</returns>
+        public ContactBuilder SetViewBy(Enums.ViewEditByOptions viewBy)
+        {
+            Entity.ViewBy = viewBy;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Set EditBy
+        /// </summary>
+        /// <param name="editBy">Permission level required to edit the contact. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
+        /// <returns>ContactBuilder</returns>
+        public ContactBuilder SetEditBy(Enums.ViewEditByOptions editBy)
+        {
+            Entity.EditBy = editBy;
 
             return this;
         }

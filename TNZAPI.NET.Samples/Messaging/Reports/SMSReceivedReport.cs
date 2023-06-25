@@ -50,7 +50,9 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             var client = new TNZApiClient(apiUser);
 
             var response = client.Reports.SMSReceived.List(
-                timePeriod: 1440    // No. of minutes
+                dateFrom: DateTime.Parse("2023-08-01T00:00:00"),    // Return results from the date/time
+                dateTo: DateTime.Parse("2023-08-01T23:59:59"),      // Return results from the date/time
+                page: 1                                             // current location
             );
 
             if (response.Result == Enums.ResultCode.Success)

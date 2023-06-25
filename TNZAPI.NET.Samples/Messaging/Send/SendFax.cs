@@ -133,17 +133,6 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
             #endregion Declarations
 
-            //var FaxMessage = new TNZAPI.Messaging.Fax.Fax()
-            //{
-            //    User = apiUser,
-
-            //    WebhookCallbackURL = webhook_callback_url,
-            //    WebhookCallbackFormat = webhook_callback_format,
-            //    ErrorEmailNotify = error_email_notify,
-
-            //    SendMode = Enums.SendModeType.Test                  //TEST Mode - Remove this to send live traffic
-            //};
-
             var client = new TNZApiClient(apiUser);
 
             var message = new FaxModel();

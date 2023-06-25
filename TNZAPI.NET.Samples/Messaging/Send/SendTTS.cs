@@ -202,7 +202,6 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             keypads.Add(keypad7);
             #endregion Add Keypads
 
-
             #region Add Recipients
 
             var recipients = new RecipientList();
@@ -229,7 +228,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             recipients.Add(recipient);
 
             //
-            // Add Recipient Method 3 - AddRecipients(new List<IRecipient>()); using simple destination
+            // Add Recipient Method 3 - AddRecipients(new List<Recipient>()); using simple destination
             //
 
             var recipientList = new List<Recipient>();

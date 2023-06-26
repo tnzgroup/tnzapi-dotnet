@@ -6,8 +6,10 @@ namespace TNZAPI.NET.Core.Interfaces.Reports
     {
         SMSReplyApiResult Poll(string messageID);
         SMSReplyApiResult Poll(SMSReplyRequestOptions options);
+        SMSReplyApiResult Poll(string messageID, IListRequestOptions listOptions = null);
 
         Task<SMSReplyApiResult> PollAsync(string messageID);
         Task<SMSReplyApiResult> PollAsync(SMSReplyRequestOptions options);
+        Task<SMSReplyApiResult> PollAsync(string messageID, IListRequestOptions listOptions = null);
     }
 }

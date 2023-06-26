@@ -1,6 +1,8 @@
-﻿namespace TNZAPI.NET.Api.Reports.SMSReply.Dto
+﻿using TNZAPI.NET.Core.Interfaces.Reports;
+
+namespace TNZAPI.NET.Api.Reports.SMSReply.Dto
 {
-    public class SMSReplyRequestOptions
+    public class SMSReplyRequestOptions : IReportRequestOptions
     {
         public string MessageID { get; set; } = "";
         public int RecordsPerPage { get; set; } = 100;

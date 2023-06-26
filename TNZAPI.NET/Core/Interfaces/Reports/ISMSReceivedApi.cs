@@ -12,6 +12,12 @@ namespace TNZAPI.NET.Core.Interfaces.Reports
             int? recordsPerPage = null,
             int? page = null
         );
+        SMSReceivedApiResult List(
+            int? timePeriod = null,
+            DateTime? dateFrom = null,
+            DateTime? dateTo = null,
+            IListRequestOptions listOptions = null
+        );
 
         Task<SMSReceivedApiResult> ListAsync(SMSReceivedRequestOptions options);
         Task<SMSReceivedApiResult> ListAsync(
@@ -20,6 +26,12 @@ namespace TNZAPI.NET.Core.Interfaces.Reports
             DateTime? dateTo = null,
             int? recordsPerPage = null,
             int? page = null
+        );
+        Task<SMSReceivedApiResult> ListAsync(
+            int? timePeriod = null,
+            DateTime? dateFrom = null,
+            DateTime? dateTo = null,
+            IListRequestOptions listOptions = null
         );
     }
 }

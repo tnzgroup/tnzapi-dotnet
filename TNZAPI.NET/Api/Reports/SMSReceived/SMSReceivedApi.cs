@@ -3,6 +3,7 @@ using System.Text;
 using System.Xml;
 using TNZAPI.NET.Api.Reports.SMSReceived.Dto;
 using TNZAPI.NET.Core;
+using TNZAPI.NET.Core.Interfaces;
 using TNZAPI.NET.Core.Interfaces.Reports;
 using TNZAPI.NET.Helpers;
 
@@ -300,6 +301,45 @@ namespace TNZAPI.NET.Api.Reports.SMSReceived
             return List(options);
         }
 
+        /// <summary>
+        /// List SMS Received
+        /// </summary>
+        /// <param name="timePeriod">Time period in minutes</param>
+        /// <param name="dateFrom">From Date/Time</param>
+        /// <param name="dateTo">To Date/Time</param>
+        /// <param name="listOptions">IListRequestOptions</param>
+        /// <returns>SMSReceivedApiResult</returns>
+        [ComVisible(false)]
+        public SMSReceivedApiResult List(
+            int? timePeriod = null,
+            DateTime? dateFrom = null,
+            DateTime? dateTo = null,
+            IListRequestOptions listOptions = null
+        )
+        {
+            var options = new SMSReceivedRequestOptions();
+
+            if (timePeriod is not null)
+            {
+                options.TimePeriod = (int)timePeriod;
+            }
+            if (dateFrom is not null)
+            {
+                options.DateFrom = (DateTime)dateFrom;
+            }
+            if (dateTo is not null)
+            {
+                options.DateTo = (DateTime)dateTo;
+            }
+            if (listOptions is not null)
+            {
+                options.RecordsPerPage = listOptions.RecordsPerPage;
+                options.Page = listOptions.Page;
+            }
+
+            return List(options);
+        }
+
         #endregion List
 
         #region ListAsync
@@ -395,6 +435,45 @@ namespace TNZAPI.NET.Api.Reports.SMSReceived
             if (page is not null)
             {
                 options.Page = (int)page;
+            }
+
+            return await ListAsync(options);
+        }
+
+        /// <summary>
+        /// List SMS Received
+        /// </summary>
+        /// <param name="timePeriod">Time period in minutes</param>
+        /// <param name="dateFrom">From Date/Time</param>
+        /// <param name="dateTo">To Date/Time</param>
+        /// <param name="listOptions">IListRequestOptions</param>
+        /// <returns>Task<SMSReceivedApiResult></returns>
+        [ComVisible(false)]
+        public async Task<SMSReceivedApiResult> ListAsync(
+            int? timePeriod = null,
+            DateTime? dateFrom = null,
+            DateTime? dateTo = null,
+            IListRequestOptions listOptions = null
+        )
+        {
+            var options = new SMSReceivedRequestOptions();
+
+            if (timePeriod is not null)
+            {
+                options.TimePeriod = (int)timePeriod;
+            }
+            if (dateFrom is not null)
+            {
+                options.DateFrom = (DateTime)dateFrom;
+            }
+            if (dateTo is not null)
+            {
+                options.DateTo = (DateTime)dateTo;
+            }
+            if (listOptions is not null)
+            {
+                options.RecordsPerPage = listOptions.RecordsPerPage;
+                options.Page = listOptions.Page;
             }
 
             return await ListAsync(options);

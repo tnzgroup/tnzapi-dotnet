@@ -3,6 +3,7 @@ using System.Text;
 using System.Xml;
 using TNZAPI.NET.Api.Reports.SMSReply.Dto;
 using TNZAPI.NET.Core;
+using TNZAPI.NET.Core.Interfaces;
 using TNZAPI.NET.Core.Interfaces.Reports;
 using TNZAPI.NET.Helpers;
 
@@ -242,6 +243,29 @@ namespace TNZAPI.NET.Api.Reports.SMSReply
 
             return Poll();
         }
+
+        /// <summary>
+        /// Poll SMS replies
+        /// </summary>
+        /// <param name="messageID">MessageID</param>
+        /// <param name="listOptions">IListRequestOptions</param>
+        /// <returns>SMSReplyApiResult</returns>
+        [ComVisible(false)]
+        public SMSReplyApiResult Poll(string messageID, IListRequestOptions listOptions = null)
+        {
+            if (messageID is not null)
+            {
+                Options.MessageID = messageID;
+            }
+
+            if (listOptions is not null)
+            {
+                Options.RecordsPerPage = listOptions.RecordsPerPage;
+                Options.Page = listOptions.Page;
+            }
+
+            return Poll();
+        }
         #endregion Poll
 
         #region PollAsync
@@ -298,6 +322,29 @@ namespace TNZAPI.NET.Api.Reports.SMSReply
         public async Task<SMSReplyApiResult> PollAsync(SMSReplyRequestOptions options)
         {
             Options = Mapper.Update(new SMSReplyRequestOptions(), options);
+
+            return await PollAsync();
+        }
+
+        /// <summary>
+        /// Poll SMS replies
+        /// </summary>
+        /// <param name="messageID">MessageID</param>
+        /// <param name="listOptions">IListRequestOptions</param>
+        /// <returns>SMSReplyApiResult</returns>
+        [ComVisible(false)]
+        public async Task<SMSReplyApiResult> PollAsync(string messageID, IListRequestOptions listOptions = null)
+        {
+            if (messageID is not null)
+            {
+                Options.MessageID = messageID;
+            }
+
+            if (listOptions is not null)
+            {
+                Options.RecordsPerPage = listOptions.RecordsPerPage;
+                Options.Page = listOptions.Page;
+            }
 
             return await PollAsync();
         }

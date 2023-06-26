@@ -3,6 +3,7 @@ using System.Text;
 using System.Xml;
 using TNZAPI.NET.Api.Reports.Status.Dto;
 using TNZAPI.NET.Core;
+using TNZAPI.NET.Core.Interfaces;
 using TNZAPI.NET.Core.Interfaces.Reports;
 using TNZAPI.NET.Helpers;
 
@@ -242,6 +243,28 @@ namespace TNZAPI.NET.Api.Reports.Status
 
             return Poll();
         }
+
+        /// <summary>
+        /// Poll message status
+        /// </summary>
+        /// <param name="messageID">MessageID</param>
+        /// <param name="listOptions">IListRequestOptions</param>
+        /// <returns></returns>
+        [ComVisible(false)]
+        public StatusApiResult Poll(string messageID, IListRequestOptions listOptions = null)
+        {
+            if (messageID is not null)
+            {
+                Options.MessageID = messageID;
+            }
+            if (listOptions is not null)
+            {
+                Options.RecordsPerPage = listOptions.RecordsPerPage;
+                Options.Page = listOptions.Page;
+            }
+
+            return Poll();
+        }
         #endregion Poll
 
         #region PollAsync
@@ -278,7 +301,7 @@ namespace TNZAPI.NET.Api.Reports.Status
         /// <summary>
         /// Poll message status (async)
         /// </summary>
-        /// <param name="messageID"></param>
+        /// <param name="messageID">MessageID</param>
         /// <returns>Task<StatusResult></returns>
         [ComVisible(false)]
         public async Task<StatusApiResult> PollAsync(string messageID)
@@ -292,12 +315,34 @@ namespace TNZAPI.NET.Api.Reports.Status
         /// <summary>
         /// Poll message status (async)
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">StatusRequestOptions</param>
         /// <returns>Task<StatusResult></returns>
         [ComVisible(false)]
         public async Task<StatusApiResult> PollAsync(StatusRequestOptions options)
         {
             Options = Mapper.Update(new StatusRequestOptions(), options);
+
+            return await PollAsync();
+        }
+
+        /// <summary>
+        /// Poll message status (async)
+        /// </summary>
+        /// <param name="messageID">MessageID</param>
+        /// <param name="listOptions">IListRequestOptions</param>
+        /// <returns></returns>
+        [ComVisible(false)]
+        public async Task<StatusApiResult> PollAsync(string messageID, IListRequestOptions listOptions = null)
+        {
+            if (messageID is not null)
+            {
+                Options.MessageID = messageID;
+            }
+            if (listOptions is not null)
+            {
+                Options.RecordsPerPage = listOptions.RecordsPerPage;
+                Options.Page = listOptions.Page;
+            }
 
             return await PollAsync();
         }

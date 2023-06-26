@@ -6,8 +6,10 @@ namespace TNZAPI.NET.Core.Interfaces.Reports
     {
         StatusApiResult Poll(string messageID);
         StatusApiResult Poll(StatusRequestOptions options);
+        StatusApiResult Poll(string messageID, IListRequestOptions listOptions = null);
 
         Task<StatusApiResult> PollAsync(string messageID);
         Task<StatusApiResult> PollAsync(StatusRequestOptions options);
+        Task<StatusApiResult> PollAsync(string messageID, IListRequestOptions listOptions = null);
     }
 }

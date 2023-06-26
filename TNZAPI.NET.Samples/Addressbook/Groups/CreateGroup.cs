@@ -97,8 +97,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-            var group = new GroupBuilder()
-                            .SetGroupCode("Test-Group")
+            var group = new GroupBuilder("Test-Group")
                             .SetGroupName("Test Group")
                             .SetSubAccount("Test SubAccount")
                             .SetDepartment("Test Department")

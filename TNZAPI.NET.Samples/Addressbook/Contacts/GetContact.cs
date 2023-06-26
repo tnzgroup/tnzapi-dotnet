@@ -25,11 +25,14 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             ContactID = contactID;
         }
 
-        public void Basic()
+        public void Basic(string? contactID = null)
         {
             var client = new TNZApiClient(apiUser);
 
-            var contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
+            if (contactID is null)
+            {
+                contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
+            }
 
             var response = client.Addressbook.Contact.ReadById(contactID);
 
@@ -78,12 +81,15 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
 
         public void Simple() => Basic();    // Same as Basic
 
-        public void Builder()
+        public void Builder(ContactModel? contact = null)
         {
             var request = new TNZApiClient(apiUser);
 
-            var contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+            if (contact is null)
+            {
+                contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
                                 .Build();
+            }
 
             var response = request.Addressbook.Contact.Read(contact);
 
@@ -130,14 +136,19 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             }
         }
 
-        public void Advanced()
+        public void Advanced(ContactModel? contact = null)
         {
             var client = new TNZApiClient(apiUser);
 
-            var response = client.Addressbook.Contact.Read(new ContactModel()
+            if (contact is null)
             {
-                ID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"
-            });
+                contact = new ContactModel()
+                {
+                    ID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"
+                };
+            }
+
+            var response = client.Addressbook.Contact.Read(contact);
 
             if (response.Result == ResultCode.Success)
             {

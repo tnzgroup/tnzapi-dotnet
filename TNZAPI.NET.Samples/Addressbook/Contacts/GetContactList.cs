@@ -14,7 +14,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             this.apiUser = apiUser;
         }
 
-        public void Basic()
+        public ContactListApiResult? Basic()
         {
             var request = new TNZApiClient(apiUser);
 
@@ -63,8 +63,6 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
                     Console.WriteLine($"    -> Custom4: '{contact.Custom4}'");
                     Console.WriteLine($"-------------------------");
                 }
-
-
             }
             else
             {
@@ -75,11 +73,13 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Simple() => Basic();    // Same as Basic
+        public ContactListApiResult? Simple() => Basic();    // Same as Basic
 
-        public void Builder()
+        public ContactListApiResult? Builder()
         {
             var request = new TNZApiClient(apiUser);
 
@@ -142,9 +142,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Advanced()
+        public ContactListApiResult? Advanced()
         {
             var request = new TNZApiClient(apiUser);
 
@@ -206,6 +208,8 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
     }
 }

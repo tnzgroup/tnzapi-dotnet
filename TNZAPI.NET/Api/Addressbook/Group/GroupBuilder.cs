@@ -14,6 +14,14 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             Entity = new GroupModel();
         }
 
+        public GroupBuilder(string groupCode)
+        {
+            Entity = new GroupModel()
+            { 
+                GroupCode = groupCode
+            };
+        }
+
         #region Dispose
 
         public void Dispose()
@@ -24,17 +32,6 @@ namespace TNZAPI.NET.Api.Addressbook.Group
         #endregion
 
         #region Options
-
-        /// <summary>
-        /// Set group code
-        /// </summary>
-        /// <param name="groupCode">Group Code</param>
-        public GroupBuilder SetGroupCode(string groupCode)
-        {
-            Entity.GroupCode = groupCode;
-
-            return this;
-        }
 
         /// <summary>
         /// Set group name

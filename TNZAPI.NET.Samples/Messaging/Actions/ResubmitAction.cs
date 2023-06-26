@@ -13,7 +13,7 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
             this.apiUser = apiUser;
         }
 
-        public void Basic()
+        public ResubmitApiResult Basic()
         {
             var client = new TNZApiClient(apiUser);
 
@@ -35,13 +35,15 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Simple() => Basic();
+        public ResubmitApiResult Simple() => Basic();
 
-        public void Builder() => Basic();
+        public ResubmitApiResult Builder() => Basic();
 
-        public void Advanced()
+        public ResubmitApiResult Advanced()
         {
             //
             // Sample code using ResubmitBuilder()
@@ -71,6 +73,8 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
     }
 }

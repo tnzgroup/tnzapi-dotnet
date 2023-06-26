@@ -13,7 +13,7 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
             this.apiUser = apiUser;
         }
 
-        public void Basic()
+        public AbortApiResult Basic()
         {
             //
             // AuthToken can be found from our web portal
@@ -39,13 +39,15 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Simple() => Basic();        // Same as Basic()
+        public AbortApiResult Simple() => Basic();        // Same as Basic()
 
-        public void Builder() => Basic();
+        public AbortApiResult Builder() => Basic();
 
-        public void Advanced()
+        public AbortApiResult Advanced()
         {
             //
             // Sample code using AbortBuilder()
@@ -75,6 +77,8 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
     }
 }

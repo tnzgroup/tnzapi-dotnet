@@ -22,7 +22,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             this.apiUser = apiUser;
         }
 
-        public void Basic()
+        public MessageApiResult Basic()
         {
             //
             // Use AuthToken (can find it from our web portal) if you prefer
@@ -51,9 +51,11 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Simple()
+        public MessageApiResult Simple()
         {
             var client = new TNZApiClient(apiUser);
 
@@ -86,9 +88,11 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Builder()
+        public MessageApiResult Builder()
         {
             //
             // Sample code using EmailBuilder()
@@ -120,9 +124,11 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Advanced()
+        public MessageApiResult Advanced()
         {
             #region Declarations
 
@@ -277,6 +283,8 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             this.apiUser = apiUser;
         }
 
-        public void Basic()
+        public MessageApiResult Basic()
         {
             var client = new TNZApiClient(apiUser);
 
@@ -44,9 +44,11 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Simple()
+        public MessageApiResult Simple()
         {
             const string recipient = "+64211111111";
 
@@ -73,9 +75,11 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Builder()
+        public MessageApiResult Builder()
         {
             //
             // Sample code using TTSApiBuilder()
@@ -104,9 +108,11 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Advanced()
+        public MessageApiResult Advanced()
         {
             const string reference = "Test Voice - Advanced version";
 
@@ -286,6 +292,8 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
     }
 }

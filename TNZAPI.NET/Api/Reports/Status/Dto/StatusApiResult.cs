@@ -33,6 +33,8 @@ namespace TNZAPI.NET.Api.Reports.Status.Dto
 
         [XmlArray("Recipients")]
         public List<MessageRecipient> Recipients { get; set; }
+
+        [XmlElement("ErrorMessage")]
         public List<string> ErrorMessage { get; set; }
 
         public string GetStatusString()

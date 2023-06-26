@@ -13,6 +13,8 @@ namespace TNZAPI.NET.Api.Actions.Pacing.Dto
         public Enums.StatusCode Status { get; set; } = Enums.StatusCode.Unknown;
         public string JobNum { get; set; } = "";
         public string Action { get; set; } = "";
+
+        [XmlElement("ErrorMessage")]
         public List<string> ErrorMessage { get; set; }
 
         public string GetStatusString()

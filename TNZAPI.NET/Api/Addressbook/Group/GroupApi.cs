@@ -6,6 +6,7 @@ using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
 using TNZAPI.NET.Core.Interfaces.Addressbook;
 using TNZAPI.NET.Helpers;
+using static TNZAPI.NET.Api.Messaging.Common.Enums;
 
 namespace TNZAPI.NET.Api.Addressbook.Group
 {
@@ -103,9 +104,9 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             rootNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "GroupName", Entity.GroupName));
             rootNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "SubAccount", Entity.SubAccount));
             rootNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Department", Entity.Department));
-            if (Entity.ViewEditBy is not null && Entity.ViewEditBy != "")
+            if (Entity.ViewEditBy is not null)
             {
-                rootNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ViewEditBy", Entity.ViewEditBy));
+                rootNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ViewEditBy", Entity.ViewEditBy.ToString()));
             }
 
             return xmlDoc;
@@ -308,12 +309,19 @@ namespace TNZAPI.NET.Api.Addressbook.Group
         /// <summary>
         /// Create group
         /// </summary>
-        /// <param name="groupCode">Group Code</param>
-        /// <param name="groupName">Group Name</param>
-        /// <param name="subaccount">SubAccount</param>
-        /// <param name="department">Department</param>
+        /// <param name="groupCode">Specifies the code or identifier for the group. Leave empty if you want the system to generate the code from the group name.</param>
+        /// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
+        /// <param name="subAccount">Specifies the subaccount associated with the group.</param>
+        /// <param name="department">Specifies the department or division associated with the group.</param>
+        /// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
         /// <returns>GroupResult</returns>
-        public GroupApiResult Create(string groupCode = null, string groupName = null, string subaccount = null, string department = null)
+        public GroupApiResult Create(
+            string groupCode = null, 
+            string groupName = null, 
+            string subAccount = null, 
+            string department = null, 
+            ViewEditByOptions? viewEditBy = null
+        )
         {
             if (groupCode is not null)
             {
@@ -323,13 +331,17 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             {
                 Entity.GroupName = groupName;
             }
-            if (subaccount is not null)
+            if (subAccount is not null)
             {
-                Entity.SubAccount = subaccount;
+                Entity.SubAccount = subAccount;
             }
             if (department is not null)
             {
                 Entity.Department = department;
+            }
+            if (viewEditBy is not null)
+            {
+                Entity.ViewEditBy = viewEditBy;
             }
 
             return Create();
@@ -375,13 +387,20 @@ namespace TNZAPI.NET.Api.Addressbook.Group
         /// <summary>
         /// Create group (async)
         /// </summary>
-        /// <param name="groupCode">Group Code</param>
-        /// <param name="groupName">Group Name</param>
-        /// <param name="subaccount">SubAccount</param>
-        /// <param name="department">Department</param>
-        /// <returns></returns>
+        /// <param name="groupCode">Specifies the code or identifier for the group. Leave empty if you want the system to generate the code from the group name.</param>
+        /// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
+        /// <param name="subAccount">Specifies the subaccount associated with the group.</param>
+        /// <param name="department">Specifies the department or division associated with the group.</param>
+        /// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
+        /// <returns>Task<GroupApiResult></returns>
         [ComVisible(false)]
-        public async Task<GroupApiResult> CreateAsync(string groupCode = null, string groupName = null, string subaccount = null, string department = null)
+        public async Task<GroupApiResult> CreateAsync(
+            string groupCode = null, 
+            string groupName = null, 
+            string subAccount = null, 
+            string department = null, 
+            ViewEditByOptions? viewEditBy = null
+        )
         {
             if (groupCode is not null)
             {
@@ -391,13 +410,17 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             {
                 Entity.GroupName = groupName;
             }
-            if (subaccount is not null)
+            if (subAccount is not null)
             {
-                Entity.SubAccount = subaccount;
+                Entity.SubAccount = subAccount;
             }
             if (department is not null)
             {
                 Entity.Department = department;
+            }
+            if (viewEditBy is not null)
+            {
+                Entity.ViewEditBy = viewEditBy;
             }
             return await CreateAsync();
         }
@@ -440,12 +463,19 @@ namespace TNZAPI.NET.Api.Addressbook.Group
         /// <summary>
         /// Update group
         /// </summary>
-        /// <param name="groupCode">Group code</param>
-        /// <param name="groupName">Group name</param>
-        /// <param name="subaccount">Subaccount</param>
-        /// <param name="department">Department</param>
+        /// <param name="groupCode">Specifies the code or identifier for the group. Leave empty if you want the system to generate the code from the group name.</param>
+        /// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
+        /// <param name="subAccount">Specifies the subaccount associated with the group.</param>
+        /// <param name="department">Specifies the department or division associated with the group.</param>
+        /// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
         /// <returns>GroupResult</returns>
-        public GroupApiResult Update(string groupCode = null, string groupName = null, string subaccount = null, string department = null)
+        public GroupApiResult Update(
+            string groupCode = null, 
+            string groupName = null, 
+            string subAccount = null, 
+            string department = null,
+            ViewEditByOptions? viewEditBy = null
+        )
         {
             if (groupCode is not null)
             {
@@ -455,13 +485,17 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             {
                 Entity.GroupName = groupName;
             }
-            if (subaccount is not null)
+            if (subAccount is not null)
             {
-                Entity.SubAccount = subaccount;
+                Entity.SubAccount = subAccount;
             }
             if (department is not null)
             {
                 Entity.Department = department;
+            }
+            if (viewEditBy is not null)
+            {
+                Entity.ViewEditBy = viewEditBy;
             }
 
             return Update();
@@ -504,7 +538,22 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             return await UpdateAsync();
         }
 
-        public async Task<GroupApiResult> UpdateAsync(string groupCode = null, string groupName = null, string subaccount = null, string department = null)
+        /// <summary>
+        /// Update group (async)
+        /// </summary>
+        /// <param name="groupCode">Specifies the code or identifier for the group. Leave empty if you want the system to generate the code from the group name.</param>
+        /// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
+        /// <param name="subAccount">Specifies the subaccount associated with the group.</param>
+        /// <param name="department">Specifies the department or division associated with the group.</param>
+        /// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
+        /// <returns>Task<GroupApiResult></returns>
+        public async Task<GroupApiResult> UpdateAsync(
+            string groupCode = null, 
+            string groupName = null, 
+            string subAccount = null, 
+            string department = null,
+            ViewEditByOptions? viewEditBy = null
+        )
         {
             if (groupCode is not null)
             {
@@ -514,13 +563,17 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             {
                 Entity.GroupName = groupName;
             }
-            if (subaccount is not null)
+            if (subAccount is not null)
             {
-                Entity.SubAccount = subaccount;
+                Entity.SubAccount = subAccount;
             }
             if (department is not null)
             {
                 Entity.Department = department;
+            }
+            if (viewEditBy is not null)
+            {
+                Entity.ViewEditBy = viewEditBy;
             }
             return await UpdateAsync();
         }

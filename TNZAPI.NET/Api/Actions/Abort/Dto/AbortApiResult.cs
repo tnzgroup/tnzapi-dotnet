@@ -14,6 +14,7 @@ namespace TNZAPI.NET.Api.Actions.Abort.Dto
         public string JobNum { get; set; } = "";
         public string Action { get; set; } = "";
 
+        [XmlElement("ErrorMessage")]
         public List<string> ErrorMessage { get; set; }
 
         public string GetStatusString()

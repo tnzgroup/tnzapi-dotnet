@@ -4,14 +4,11 @@ using TNZAPI.NET.Api.Messaging.Common.Components;
 
 namespace TNZAPI.NET.Helpers
 {
-    internal class XMLHelpers
+    public class XMLHelpers
     {
         #region XmlSerialize
-        /*
-		* https://www.codeproject.com/Articles/1163664/Convert-XML-to-Csharp-Object
-		*/
 
-        internal static T Deserialize<T>(string input) where T : class
+        public static T Deserialize<T>(string input) where T : class
         {
             XmlSerializer ser = new XmlSerializer(typeof(T));
 

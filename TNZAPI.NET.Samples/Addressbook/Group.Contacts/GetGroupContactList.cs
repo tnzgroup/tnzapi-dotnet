@@ -79,10 +79,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             }
             else
             {
-                Console.WriteLine($"Could not find any contact list");
-                if (response.ErrorMessage is not null)
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
                 {
-                    Console.WriteLine($"Error={response.ErrorMessage}");
+                    Console.WriteLine($"- Error={error}");
                 }
             }
 
@@ -151,10 +152,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             }
             else
             {
-                Console.WriteLine($"Could not find any contact list");
-                if (response.ErrorMessage is not null)
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
                 {
-                    Console.WriteLine($"Error={response.ErrorMessage}");
+                    Console.WriteLine($"- Error={error}");
                 }
             }
 

@@ -9,16 +9,18 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Dto
     {
         public Enums.ResultCode Result { get; set; }
 
-        public int TotalRecords { get; set; } = 0;
+        public int TotalRecords { get; set; }
 
-        public int RecordsPerPage { get; set; } = 100;
+        public int RecordsPerPage { get; set; }
 
-        public int PageCount { get; set; } = 0;
+        public int PageCount { get; set; }
 
-        public int Page { get; set; } = 1;
+        public int Page { get; set; }
 
-        public List<ContactModel> Contacts { get; set; } = new List<ContactModel>();
+        [XmlArray("Contacts")]
+        public List<ContactModel> Contacts { get; set; }
 
-        public List<string> ErrorMessage { get; set; } = new List<string>();
+        [XmlElement("ErrorMessage")]
+        public List<string> ErrorMessage { get; set; }
     }
 }

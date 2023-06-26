@@ -10,33 +10,26 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
     {
         private readonly ITNZAuth apiUser;
 
-        public ContactModel Contact { get; set; }
-
-        public GroupModel Group { get; set; }
-
         public DeleteContactGroup(ITNZAuth apiUser)
         {
             this.apiUser = apiUser;
-
-            Contact = new ContactModel();
-
-            Group = new GroupModel();
         }
 
-        public DeleteContactGroup(ITNZAuth apiUser, ContactModel contact, GroupModel group)
-        {
-            this.apiUser = apiUser;
-
-            Contact = contact;
-
-            Group = group;
-        }
-
-        public ContactGroupApiResult Basic()
+        public ContactGroupApiResult Basic(string? contactID = null, string? groupCode = null)
         {
             var client = new TNZApiClient(apiUser);
 
-            var response = client.Addressbook.ContactGroup.Remove(Contact, Group);
+            if (contactID is null)
+            {
+                contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
+            }
+
+            if (groupCode is null)
+            {
+                groupCode = "Test-Group";
+            }
+
+            var response = client.Addressbook.ContactGroup.Remove(contactID, groupCode);
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -84,7 +77,12 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
             }
             else
             {
-                Console.WriteLine(response.ErrorMessage);
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
             }
 
             return response;

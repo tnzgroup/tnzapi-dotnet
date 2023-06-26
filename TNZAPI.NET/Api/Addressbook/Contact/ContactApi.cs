@@ -644,7 +644,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// 
         /// <returns></returns>
         public ContactApiResult Update(
-            string contactId,
+            string contactId = null,
             string attention = null,
             string title = null,
             string company = null,
@@ -778,7 +778,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// 
         /// <returns>Task<ContactApiResult></returns>
         public async Task<ContactApiResult> UpdateAsync(
-            string contactId,
+            string contactId = null,
             string attention = null,
             string title = null,
             string company = null,

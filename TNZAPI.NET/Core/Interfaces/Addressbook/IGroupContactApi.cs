@@ -7,24 +7,76 @@ namespace TNZAPI.NET.Core.Interfaces.Addressbook
     public interface IGroupContactApi : IApiClientBase
     {
         GroupContactApiResult Add(GroupModel group, ContactModel contact);
-        GroupContactApiResult AddById(string groupCode, string contactID);
+        GroupContactApiResult Add(string groupCode, string contactID);
+        GroupContactApiResult Add(
+            GroupModel group = null,
+            ContactModel contact = null,
+            string groupCode = null,
+            string contactID = null
+        );
+
         Task<GroupContactApiResult> AddAsync(GroupModel group, ContactModel contact);
-        Task<GroupContactApiResult> AddByIdAsync(string groupCode, string contactID);
+        Task<GroupContactApiResult> AddAsync(string groupCode,string contactID);
+        Task<GroupContactApiResult> AddAsync(
+            GroupModel group = null,
+            ContactModel contact = null,
+            string groupCode = null,
+            string contactID = null
+        );
 
         GroupContactApiResult Get(GroupModel group, ContactModel contact);
-        GroupContactApiResult GetById(string groupCode, string contactID);
+        GroupContactApiResult Get(string groupCode, string contactID);
+        GroupContactApiResult Get(
+            GroupModel group = null,
+            ContactModel contact = null,
+            string groupCode = null,
+            string contactID = null
+        );
+
         Task<GroupContactApiResult> GetAsync(GroupModel group, ContactModel contact);
-        Task<GroupContactApiResult> GetByIdAsync(string groupCode, string contactID);
+        Task<GroupContactApiResult> GetAsync(string groupCode, string contactID);
+        Task<GroupContactApiResult> GetAsync(
+            GroupModel group = null,
+            ContactModel contact = null,
+            string groupCode = null,
+            string contactID = null
+        );
 
         GroupContactApiResult Read(GroupModel group, ContactModel contact);
-        GroupContactApiResult ReadById(string groupCode, string contactID);
+        GroupContactApiResult Read(string groupCode, string contactID);
+        GroupContactApiResult Read(
+            GroupModel group = null,
+            ContactModel contact = null,
+            string groupCode = null,
+            string contactID = null
+        );
+
         Task<GroupContactApiResult> ReadAsync(GroupModel group, ContactModel contact);
-        Task<GroupContactApiResult> ReadByIdAsync(string groupCode, string contactID);
+        Task<GroupContactApiResult> ReadAsync(string groupCode, string contactID);
+        Task<GroupContactApiResult> ReadAsync(
+            GroupModel group = null,
+            ContactModel contact = null,
+            string groupCode = null,
+            string contactID = null
+        );
 
         GroupContactApiResult Remove(GroupModel group, ContactModel contact);
-        GroupContactApiResult RemoveById(string groupCode, string contactID);
+        GroupContactApiResult Remove(string groupCode, string contactID);
+        GroupContactApiResult Remove(
+            GroupModel group = null,
+            ContactModel contact = null,
+            string groupCode = null,
+            string contactID = null
+        );
+
         Task<GroupContactApiResult> RemoveAsync(GroupModel group, ContactModel contact);
-        Task<GroupContactApiResult> RemoveByIdAsync(string groupCode, string contactID);
+        Task<GroupContactApiResult> RemoveAsync(string groupCode, string contactID);
+        Task<GroupContactApiResult> RemoveAsync(
+            GroupModel group = null,
+            ContactModel contact = null,
+            string groupCode = null,
+            string contactID = null
+        );
 
     }
 }

@@ -14,6 +14,8 @@ namespace TNZAPI.NET.Api.Reports.SMSReceived.Dto
         public int Page { get; set; }
         [XmlArray("Messages")]
         public List<SMSMessageReceived> Messages { get; set; }
+
+        [XmlElement("ErrorMessage")]
         public List<string> ErrorMessage { get; set; }
     }
 

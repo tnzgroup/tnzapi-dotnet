@@ -3,6 +3,7 @@ using TNZAPI.NET.Api.Messaging.Common;
 
 namespace TNZAPI.NET.Api.Addressbook.Contact.Dto
 {
+    [XmlType(TypeName = "Contact")]
     public class ContactModel
     {
         public string ID { get; set; }

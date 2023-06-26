@@ -1,4 +1,6 @@
-﻿namespace TNZAPI.NET.Api.Addressbook.Group.Dto
+﻿using TNZAPI.NET.Api.Messaging.Common;
+
+namespace TNZAPI.NET.Api.Addressbook.Group.Dto
 {
     public class GroupModel
     {
@@ -10,7 +12,7 @@
 
         public string Department { get; set; }
 
-        public string ViewEditBy { get; set; }
+        public Enums.ViewEditByOptions? ViewEditBy { get; set; }
 
         public string Owner { get; set; }
     }

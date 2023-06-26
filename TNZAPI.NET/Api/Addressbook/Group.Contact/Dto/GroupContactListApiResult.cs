@@ -23,6 +23,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact.Dto
 
         public List<ContactModel> Contacts { get; set; }
 
+        [XmlElement("ErrorMessage")]
         public List<string> ErrorMessage { get; set; }
     }
 }

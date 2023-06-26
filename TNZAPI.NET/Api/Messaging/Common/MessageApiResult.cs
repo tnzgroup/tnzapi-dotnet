@@ -12,7 +12,7 @@ namespace TNZAPI.NET.Api.Messaging.Common
         [XmlElement("MessageID")]
         public string MessageID { get; set; } = "";
 
-        [XmlArray("ErrorMessage")]
+        [XmlElement("ErrorMessage")]
         public List<string> ErrorMessage { get; set; }
     }
 }

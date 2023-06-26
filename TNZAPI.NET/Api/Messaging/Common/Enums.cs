@@ -10,7 +10,7 @@ namespace TNZAPI.NET.Api.Messaging.Common
 
         public enum WebhookCallbackType { JSON, XML };
 
-        public enum ResultCode { Failed, Success };
+        public enum ResultCode { Failed, Success, Unauthorized };
 
         public enum StatusCode { Unknown, Received, Pending, Delayed, Remote, Error, CreditHold, Completed, Transmit };
 

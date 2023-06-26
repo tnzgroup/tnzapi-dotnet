@@ -1,4 +1,5 @@
-﻿using TNZAPI.NET.Api.Addressbook.Group.Dto;
+﻿using TNZAPI.NET.Api.Addressbook.Group;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Core;
 
@@ -24,19 +25,13 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
             Group = group;
         }
 
-        public GroupModel? Basic()
+        public GroupApiResult? Basic()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (Group is null)
-            {
-                Group = new GroupModel()
-                {
-                    GroupName = "API Test Group"
-                };
-            }
-
-            var response = client.Addressbook.Group.Create(Group);
+            var response = client.Addressbook.Group.Create(
+                groupName: "Test Group"
+            );
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -48,22 +43,130 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
                 Console.WriteLine($"    -> ViewEditBy: '{response.Group.ViewEditBy}'");
                 Console.WriteLine($"    -> Owner: '{response.Group.Owner}'");
                 Console.WriteLine($"-------------------------");
-
-                return response.Group;
             }
             else
             {
-                Console.WriteLine("Error occurred while processing...");
-                Console.WriteLine($"Error: {response.ErrorMessage}");
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
             }
 
-            return null;
+            return response;
         }
 
-        public GroupModel? Simple() => Basic();    // Same as Basic
+        public GroupApiResult? Simple()
+        {
+            var client = new TNZApiClient(apiUser);
 
-        public GroupModel? Builder() => Basic();   // Same as Basic
+            var response = client.Addressbook.Group.Create(
+                groupCode: "Test-Group",
+                groupName: "Test Group",
+                subAccount: "Test SubAccount",
+                department: "Test Department",
+                viewEditBy: Enums.ViewEditByOptions.Account
+            );
 
-        public GroupModel? Advanced() => Basic();  // Same as Basic
+            if (response.Result == Enums.ResultCode.Success)
+            {
+                Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+                Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
+                Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
+                Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
+                Console.WriteLine($"    -> Department: '{response.Group.Department}'");
+                Console.WriteLine($"    -> ViewEditBy: '{response.Group.ViewEditBy}'");
+                Console.WriteLine($"    -> Owner: '{response.Group.Owner}'");
+                Console.WriteLine($"-------------------------");
+            }
+            else
+            {
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
+            }
+
+            return response;
+        }
+
+        public GroupApiResult? Builder()
+        {
+            var client = new TNZApiClient(apiUser);
+
+            var group = new GroupBuilder()
+                            .SetGroupCode("Test-Group")
+                            .SetGroupName("Test Group")
+                            .SetSubAccount("Test SubAccount")
+                            .SetDepartment("Test Department")
+                            .SetViewEditBy(Enums.ViewEditByOptions.Account)
+                            .Build();
+                            
+
+            var response = client.Addressbook.Group.Create(group);
+
+            if (response.Result == Enums.ResultCode.Success)
+            {
+                Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+                Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
+                Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
+                Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
+                Console.WriteLine($"    -> Department: '{response.Group.Department}'");
+                Console.WriteLine($"    -> ViewEditBy: '{response.Group.ViewEditBy}'");
+                Console.WriteLine($"    -> Owner: '{response.Group.Owner}'");
+                Console.WriteLine($"-------------------------");
+            }
+            else
+            {
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
+            }
+
+            return response;
+        }
+
+        public GroupApiResult? Advanced()
+        {
+            var client = new TNZApiClient(apiUser);
+
+            var response = client.Addressbook.Group.Create(new GroupModel()
+            {
+                GroupCode = "Test-Group",
+                GroupName = "Test Group",
+                SubAccount = "Test SubAccount",
+                Department = "Test Department",
+                ViewEditBy = Enums.ViewEditByOptions.Account
+            });
+
+            if (response.Result == Enums.ResultCode.Success)
+            {
+                Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+                Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
+                Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
+                Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
+                Console.WriteLine($"    -> Department: '{response.Group.Department}'");
+                Console.WriteLine($"    -> ViewEditBy: '{response.Group.ViewEditBy}'");
+                Console.WriteLine($"    -> Owner: '{response.Group.Owner}'");
+                Console.WriteLine($"-------------------------");
+            }
+            else
+            {
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
+            }
+
+            return response;
+        }
     }
 }

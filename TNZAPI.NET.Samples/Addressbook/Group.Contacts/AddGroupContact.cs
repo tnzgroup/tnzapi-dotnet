@@ -86,7 +86,12 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             }
             else
             {
-                Console.WriteLine($"Could not find any group contact with GroupCode={Group.GroupCode}");
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
             }
 
             return response;

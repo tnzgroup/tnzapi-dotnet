@@ -37,10 +37,11 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             }
             else
             {
-                Console.WriteLine("Error occurred while processing...");
+                Console.WriteLine("Error occurred while processing.");
+
                 foreach (var error in response.ErrorMessage)
                 {
-                    Console.WriteLine($"- {error}");
+                    Console.WriteLine($"- Error={error}");
                 }
             }
         }
@@ -65,10 +66,11 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             }
             else
             {
-                Console.WriteLine("Error occurred while processing...");
+                Console.WriteLine("Error occurred while processing.");
+
                 foreach (var error in response.ErrorMessage)
                 {
-                    Console.WriteLine($"- {error}");
+                    Console.WriteLine($"- Error={error}");
                 }
             }
         }
@@ -95,10 +97,11 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             }
             else
             {
-                Console.WriteLine("Error occurred while processing...");
+                Console.WriteLine("Error occurred while processing.");
+
                 foreach (var error in response.ErrorMessage)
                 {
-                    Console.WriteLine($"- {error}");
+                    Console.WriteLine($"- Error={error}");
                 }
             }
         }
@@ -276,10 +279,11 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             }
             else
             {
-                Console.WriteLine("Error occurred while processing...");
+                Console.WriteLine("Error occurred while processing.");
+
                 foreach (var error in response.ErrorMessage)
                 {
-                    Console.WriteLine($"- {error}");
+                    Console.WriteLine($"- Error={error}");
                 }
             }
         }

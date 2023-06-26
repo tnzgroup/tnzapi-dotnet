@@ -14,6 +14,15 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
             Entity = new ContactModel();
         }
 
+        public ContactBuilder(string contactID)
+        {
+            Entity = new ContactModel()
+            { 
+                ID = contactID
+            };
+
+        }
+
         #region Dispose
 
         public void Dispose()

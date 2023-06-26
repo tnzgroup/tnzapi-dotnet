@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
+using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Api.Addressbook.Group
@@ -28,36 +29,56 @@ namespace TNZAPI.NET.Api.Addressbook.Group
         /// Set group code
         /// </summary>
         /// <param name="groupCode">Group Code</param>
-        public void SetGroupCode(string groupCode)
+        public GroupBuilder SetGroupCode(string groupCode)
         {
             Entity.GroupCode = groupCode;
+
+            return this;
         }
 
         /// <summary>
         /// Set group name
         /// </summary>
         /// <param name="groupName">Group Name</param>
-        public void SetGroupName(string groupName)
+        public GroupBuilder SetGroupName(string groupName)
         {
             Entity.GroupName = groupName;
+
+            return this;
         }
 
         /// <summary>
         /// Set group subaccount
         /// </summary>
         /// <param name="subaccount">SubAccount</param>
-        public void SetSubAccount(string subaccount)
+        public GroupBuilder SetSubAccount(string subaccount)
         {
             Entity.SubAccount = subaccount;
+
+            return this;
         }
 
         /// <summary>
         /// Set group department
         /// </summary>
         /// <param name="department"></param>
-        public void SetDepartment(string department)
+        public GroupBuilder SetDepartment(string department)
         {
             Entity.Department = department;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the visibility and edit permissions for the group. 
+        /// </summary>
+        /// <param name="viewEditBy">Enums.ViewEditByOptions</param>
+        /// <returns></returns>
+        public GroupBuilder SetViewEditBy(Enums.ViewEditByOptions viewEditBy)
+        {
+            Entity.ViewEditBy = viewEditBy;
+
+            return this;
         }
 
         public void Set<T>(Expression<Func<T, object>> propertyExpression, object value)

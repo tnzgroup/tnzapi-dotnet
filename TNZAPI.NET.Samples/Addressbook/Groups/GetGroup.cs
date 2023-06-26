@@ -44,8 +44,12 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
             }
             else
             {
-                Console.WriteLine("Error occurred while processing...");
-                Console.WriteLine($"Error={response.ErrorMessage}");
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
             }
 
             return null;

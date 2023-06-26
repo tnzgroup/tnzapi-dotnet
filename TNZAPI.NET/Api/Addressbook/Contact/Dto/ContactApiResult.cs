@@ -11,6 +11,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Dto
 
         public ContactModel Contact { get; set; }
 
+        [XmlElement("ErrorMessage")]
         public List<string> ErrorMessage { get; set; }
     }
 }

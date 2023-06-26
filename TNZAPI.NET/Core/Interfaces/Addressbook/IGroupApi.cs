@@ -1,4 +1,5 @@
 ﻿using TNZAPI.NET.Api.Addressbook.Group.Dto;
+using TNZAPI.NET.Api.Messaging.Common;
 
 namespace TNZAPI.NET.Core.Interfaces.Addressbook
 {
@@ -10,16 +11,18 @@ namespace TNZAPI.NET.Core.Interfaces.Addressbook
         GroupApiResult Create(
             string groupCode = null, 
             string groupName = null, 
-            string subaccount = null, 
-            string department = null
+            string subAccount = null, 
+            string department = null,
+            Enums.ViewEditByOptions? viewEditBy = null
         );
 
         Task<GroupApiResult> CreateAsync(GroupModel entity);
         Task<GroupApiResult> CreateAsync(
             string groupCode = null, 
             string groupName = null, 
-            string subaccount = null, 
-            string department = null
+            string subAccount = null, 
+            string department = null,
+            Enums.ViewEditByOptions? viewEditBy = null
         );
 
         GroupApiResult Delete(GroupModel entity);
@@ -44,16 +47,18 @@ namespace TNZAPI.NET.Core.Interfaces.Addressbook
         GroupApiResult Update(
             string groupCode = null, 
             string groupName = null,
-            string subaccount = null, 
-            string department = null
+            string subAccount = null, 
+            string department = null,
+            Enums.ViewEditByOptions? viewEditBy = null
         );
 
         Task<GroupApiResult> UpdateAsync(GroupModel entity);
         Task<GroupApiResult> UpdateAsync(
             string groupCode = null, 
             string groupName = null, 
-            string subaccount = null, 
-            string department = null
+            string subAccount = null, 
+            string department = null,
+            Enums.ViewEditByOptions? viewEditBy = null
         );
 
         GroupListApiResult List();

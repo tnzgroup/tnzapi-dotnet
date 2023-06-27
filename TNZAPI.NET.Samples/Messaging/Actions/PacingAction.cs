@@ -14,7 +14,7 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
             this.apiUser = apiUser;
         }
 
-        public void Basic()
+        public PacingApiResult Basic()
         {
             var client = new TNZApiClient(apiUser);
 
@@ -39,13 +39,15 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Simple() => Basic();        // Same as Basic()
+        public PacingApiResult Simple() => Basic();        // Same as Basic()
 
-        public void Builder() => Basic();       // Doesn't support Builder()
+        public PacingApiResult Builder() => Basic();       // Doesn't support Builder()
 
-        public void Advanced()
+        public PacingApiResult Advanced()
         {
             var client = new TNZApiClient(apiUser);
 
@@ -72,6 +74,8 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
             this.apiUser = apiUser;
         }
 
-        public void Basic()
+        public RescheduleApiResult Basic()
         {
             var client = new TNZApiClient(apiUser);
 
@@ -39,13 +39,15 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Simple() => Basic();        // Same as Basic
+        public RescheduleApiResult Simple() => Basic();        // Same as Basic
 
-        public void Builder() => Basic();       // Don't have builder for this module
+        public RescheduleApiResult Builder() => Basic();       // Don't have builder for this module
 
-        public void Advanced()
+        public RescheduleApiResult Advanced()
         {
             //
             // Sample code using RescheduleBuilder()
@@ -76,6 +78,8 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
     }
 }

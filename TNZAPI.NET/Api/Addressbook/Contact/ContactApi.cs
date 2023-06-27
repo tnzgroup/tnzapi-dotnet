@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 using TNZAPI.NET.Api.Addressbook.Contact.Dto;
-using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
 using TNZAPI.NET.Core.Interfaces.Addressbook;

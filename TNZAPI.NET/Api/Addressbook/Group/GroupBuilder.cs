@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
-using TNZAPI.NET.Api.Messaging.Common;
+using TNZAPI.NET.Core;
 using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Api.Addressbook.Group

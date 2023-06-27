@@ -1,7 +1,7 @@
 ﻿using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Voice.Dto;
-using static TNZAPI.NET.Api.Messaging.Common.Enums;
+using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Core.Interfaces.Messaging
 {

@@ -1,7 +1,7 @@
 ﻿using System.Xml.Serialization;
 using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
-using TNZAPI.NET.Api.Messaging.Common;
+using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
 
 namespace TNZAPI.NET.Api.Addressbook.Contact.Group.Dto

@@ -9,7 +9,7 @@ using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces.Messaging;
 using TNZAPI.NET.Extensions;
 using TNZAPI.NET.Helpers;
-using static TNZAPI.NET.Api.Messaging.Common.Enums;
+using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.TTS
 {

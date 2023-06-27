@@ -1,4 +1,4 @@
-﻿using static TNZAPI.NET.Api.Messaging.Common.Enums;
+﻿using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Core.Interfaces
 {

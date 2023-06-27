@@ -2,7 +2,7 @@
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.SMS.Dto;
-using static TNZAPI.NET.Api.Messaging.Common.Enums;
+using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.SMS
 {

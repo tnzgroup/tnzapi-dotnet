@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using static TNZAPI.NET.Api.Messaging.Common.Enums;
+using static TNZAPI.NET.Core.Enums;
 using static TNZAPI.NET.Api.Messaging.Voice.Dto.VoiceModel;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;

@@ -1,5 +1,5 @@
 ﻿using System.Xml.Serialization;
-using TNZAPI.NET.Api.Messaging.Common;
+using TNZAPI.NET.Core;
 
 namespace TNZAPI.NET.Api.Addressbook.Contact.Dto
 {

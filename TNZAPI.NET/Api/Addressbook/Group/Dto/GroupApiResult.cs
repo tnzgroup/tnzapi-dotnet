@@ -1,7 +1,7 @@
 ﻿using System.Xml.Serialization;
-using TNZAPI.NET.Api.Messaging.Common;
+using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
-using static TNZAPI.NET.Api.Messaging.Common.Enums;
+using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Addressbook.Group.Dto
 {

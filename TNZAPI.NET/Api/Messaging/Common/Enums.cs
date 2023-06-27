@@ -6,7 +6,7 @@ namespace TNZAPI.NET.Api.Messaging.Common
     {
         public enum SendModeType { Live, Test };
 
-        public enum MessageType { Email, Text, Voice }
+        public enum MessageType { Email, Text, Fax, Voice }
 
         public enum WebhookCallbackType { JSON, XML };
 

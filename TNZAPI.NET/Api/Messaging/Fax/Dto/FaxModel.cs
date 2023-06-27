@@ -1,5 +1,5 @@
-﻿using TNZAPI.NET.Api.Messaging.Common;
-using TNZAPI.NET.Api.Messaging.Common.Components;
+﻿using TNZAPI.NET.Api.Messaging.Common.Components;
+using TNZAPI.NET.Core;
 
 namespace TNZAPI.NET.Api.Messaging.Fax.Dto
 {

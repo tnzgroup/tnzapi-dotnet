@@ -1,6 +1,5 @@
 ﻿using TNZAPI.NET.Api.Actions.Pacing;
 using TNZAPI.NET.Api.Actions.Pacing.Dto;
-using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Core;
 
 namespace TNZAPI.NET.Samples.Messaging.Actions
@@ -43,9 +42,9 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
             return response;
         }
 
-        public PacingApiResult Simple() => Basic();        // Same as Basic()
+        public void Simple() => Basic();        // Same as Basic()
 
-        public PacingApiResult Builder() => Basic();       // Doesn't support Builder()
+        public void Builder() => Basic();       // Doesn't support Builder()
 
         public PacingApiResult Advanced()
         {

@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
 
 namespace TNZAPI.NET.Api.Messaging.Common

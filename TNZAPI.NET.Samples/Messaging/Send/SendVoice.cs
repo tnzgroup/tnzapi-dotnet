@@ -4,7 +4,7 @@ using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Voice;
 using TNZAPI.NET.Api.Messaging.Voice.Dto;
 using TNZAPI.NET.Core;
-using static TNZAPI.NET.Api.Messaging.Common.Enums;
+using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Samples.Messaging.Send
 {
@@ -275,6 +275,9 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     MessageData = voiceFiles,                           // List of voice files
                     Keypads = keypads.ToList(),                         // Keypads (1..9)
                     Recipients = recipients.ToList(),                   // Recipients
+
+                    SendTime = DateTime.Now,                            // SendTime
+                    Timezone = "New Zealand",                           // Timezone for SendTime
 
                     SendMode = Enums.SendModeType.Test                  // TEST Mode - Remove this to send live traffic
                 });

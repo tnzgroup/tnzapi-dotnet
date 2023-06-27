@@ -130,6 +130,8 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
         public MessageApiResult Advanced()
         {
+            var client = new TNZApiClient(apiUser);
+
             #region Declarations
 
             const string reference = "Test Email - Advanced version";
@@ -158,8 +160,6 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             const string messageHtml = "This is Test message body. Thank you so much!";
 
             #endregion Declarations
-
-            var client = new TNZApiClient(apiUser);
 
             #region Add Recipients
 
@@ -266,6 +266,9 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
                     Recipients = recipients.ToList(),                   // Recipient List
                     Attachments = attachments.ToList(),                 // Attachment List
+
+                    SendTime = DateTime.Now,                            // SendTime
+                    Timezone = "New Zealand",                           // Timezone for SendTime
 
                     SendMode = Enums.SendModeType.Test                  // TEST Mode - Remove this to send live traffic
                 });

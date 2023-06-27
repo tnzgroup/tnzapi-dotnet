@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
-using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
-using static TNZAPI.NET.Api.Messaging.Common.Enums;
+using TNZAPI.NET.Core;
+using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.TTS.Dto
 {

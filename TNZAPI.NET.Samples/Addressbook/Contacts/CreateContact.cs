@@ -1,7 +1,7 @@
 ﻿using TNZAPI.NET.Api.Addressbook.Contact;
 using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Core;
-using static TNZAPI.NET.Api.Messaging.Common.Enums;
+using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Samples.Addressbook.Contacts
 {
@@ -9,34 +9,49 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
     {
         private readonly ITNZAuth apiUser;
 
-        public ContactModel Contact;
-
         public CreateContact(ITNZAuth apiUser)
         {
             this.apiUser = apiUser;
-
-            Contact = new ContactModel();
         }
 
-        public CreateContact(ITNZAuth apiUser, ContactModel contact)
+        #region Run()
+        public ContactApiResult Run(ContactModel contact)
         {
-            this.apiUser = apiUser;
+            var client = new TNZApiClient(apiUser);
 
-            Contact = contact;
+            var response = client.Addressbook.Contact.Create(contact);
+
+            if (response.Result == Enums.ResultCode.Success)
+            {
+                response.Contact.Dump();
+                Console.WriteLine($"-------------------------");
+            }
+            else
+            {
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
+            }
+
+            return response;
         }
+        #endregion
 
-        public ContactApiResult? Basic()
+        public ContactApiResult Basic()
         {
-            var request = new TNZApiClient(apiUser);
+            var client = new TNZApiClient(apiUser);
 
-            var response = request.Addressbook.Contact.Create(
+            var response = client.Addressbook.Contact.Create(
                 attention: "Test Person",
                 firstName: "Test",
                 lastName: "Person",
                 mobilePhone: "+6421000001"
                 );
 
-            if (response.Result == ResultCode.Success)
+            if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
@@ -81,11 +96,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             return response;
         }
 
-        public ContactApiResult? Simple()
+        public ContactApiResult Simple()
         {
-            var request = new TNZApiClient(apiUser);
+            var client = new TNZApiClient(apiUser);
 
-            var response = request.Addressbook.Contact.Create(
+            var response = client.Addressbook.Contact.Create(
                 attention: "Test Person",
                 firstName: "Test",
                 lastName: "Person",
@@ -93,11 +108,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
                 mobilePhone: "+6421000001",
                 emailAddress: "recipient.one@example.com",
                 faxNumber: "+6495005002",
-                viewBy: ViewEditByOptions.Account,
-                editBy: ViewEditByOptions.Account
+                viewBy: Enums.ViewEditByOptions.Account,
+                editBy: Enums.ViewEditByOptions.Account
                 );
 
-            if (response.Result == ResultCode.Success)
+            if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
@@ -142,9 +157,9 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             return response;
         }
 
-        public ContactApiResult? Builder()
+        public ContactApiResult Builder()
         {
-            var request = new TNZApiClient(apiUser);
+            var client = new TNZApiClient(apiUser);
 
             var contact = new ContactBuilder()
                             .SetAttention("Test Person")
@@ -154,13 +169,13 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
                             .SetMobilePhone("+6421000001")
                             .SetEmailAddress("recipient.one@example.com")
                             .SetFaxNumber("+6495005002")
-                            .SetViewBy(ViewEditByOptions.Account)
-                            .SetEditBy(ViewEditByOptions.Account)
+                            .SetViewBy(Enums.ViewEditByOptions.Account)
+                            .SetEditBy(Enums.ViewEditByOptions.Account)
                             .Build();
 
-            var response = request.Addressbook.Contact.Create(contact);
+            var response = client.Addressbook.Contact.Create(contact);
 
-            if (response.Result == ResultCode.Success)
+            if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
@@ -205,11 +220,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             return response;
         }
 
-        public ContactApiResult? Advanced()
+        public ContactApiResult Advanced()
         {
-            var request = new TNZApiClient(apiUser);
+            var client = new TNZApiClient(apiUser);
 
-            var response = request.Addressbook.Contact.Create(
+            var response = client.Addressbook.Contact.Create(
                 new ContactModel() 
                 {
                     Attention = "Person Attention",
@@ -237,12 +252,12 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
                     Custom2 = "",
                     Custom3 = "",
                     Custom4 = "",
-                    ViewBy = ViewEditByOptions.Account,
-                    EditBy = ViewEditByOptions.No
+                    ViewBy = Enums.ViewEditByOptions.Account,
+                    EditBy = Enums.ViewEditByOptions.No
                 }
             );
 
-            if (response.Result == ResultCode.Success)
+            if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");

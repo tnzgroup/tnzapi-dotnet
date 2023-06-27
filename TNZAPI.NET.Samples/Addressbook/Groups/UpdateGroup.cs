@@ -1,7 +1,7 @@
 ﻿using TNZAPI.NET.Api.Addressbook.Group;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
-using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Core;
+using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Samples.Addressbook.Groups
 {
@@ -9,30 +9,42 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
     {
         private readonly ITNZAuth apiUser;
 
-        public GroupModel GroupModel { get; set; }
-
         public UpdateGroup(ITNZAuth apiUser)
         {
             this.apiUser = apiUser;
-
-            GroupModel = new GroupModel();
         }
 
-        public UpdateGroup(ITNZAuth apiUser, GroupModel group)
-        {
-            this.apiUser = apiUser;
-
-            GroupModel = group;
-        }
-
-        public void Basic(string? groupCode = null)
+        #region Run()
+        public GroupApiResult Run(GroupModel group)
         {
             var client = new TNZApiClient(apiUser);
 
-            if (groupCode is null)
+            var response = client.Addressbook.Group.Update(group);
+
+            if (response.Result == Enums.ResultCode.Success)
             {
-                groupCode = "Test-Group";
+                response.Group.Dump();
+                Console.WriteLine($"-------------------------");
             }
+            else
+            {
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
+            }
+
+            return response;
+        }
+        #endregion
+
+        public GroupApiResult Basic()
+        {
+            var client = new TNZApiClient(apiUser);
+
+            var groupCode = "Test-Group";
 
             var response = client.Addressbook.Group.Update(
                 groupCode: groupCode,
@@ -59,16 +71,15 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Simple(string? groupCode = null)
+        public GroupApiResult Simple()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (groupCode is null)
-            {
-                groupCode = "Test-Group";
-            }
+            var groupCode = "Test-Group";
 
             var response = client.Addressbook.Group.Update(
                 groupCode: groupCode,
@@ -98,21 +109,20 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Builder(GroupModel? group = null)
+        public GroupApiResult Builder()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (group is null)
-            {
-                group = new GroupBuilder("Test-Group")
-                            .SetGroupName("Test Group")
-                            .SetSubAccount("Test SubAccount")
-                            .SetDepartment("Test Department")
-                            .SetViewEditBy(Enums.ViewEditByOptions.Account)
-                            .Build();
-            }
+            var group = new GroupBuilder("Test-Group")
+                        .SetGroupName("Test Group")
+                        .SetSubAccount("Test SubAccount")
+                        .SetDepartment("Test Department")
+                        .SetViewEditBy(Enums.ViewEditByOptions.Account)
+                        .Build();
 
             var response = client.Addressbook.Group.Update(group);
 
@@ -136,25 +146,24 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
 
-        public void Advanded(GroupModel? group = null)
+        public GroupApiResult Advanced()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (group is null)
-            {
-                group = new GroupModel()
+            var response = client.Addressbook.Group.Update(
+                new GroupModel()
                 {
-                    GroupCode = "Test-Group",
-                    GroupName = "Test Group",
-                    SubAccount = "Test SubAccount",
-                    Department = "Test Department",
-                    ViewEditBy = Enums.ViewEditByOptions.Account
-                };
-            }
-
-            var response = client.Addressbook.Group.Update(group);
+                    GroupCode = "Test-Group",                           // Group Code (optional)
+                    GroupName = "Test Group",                           // Group Name
+                    SubAccount = "Test SubAccount",                     // SubAccount (optional)
+                    Department = "Test Department",                     // Department (optional)
+                    ViewEditBy = Enums.ViewEditByOptions.Account        // Permission (optional), leave blank to use system (your TNZ user record) default
+                }
+            );
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -176,6 +185,8 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
                     Console.WriteLine($"- Error={error}");
                 }
             }
+
+            return response;
         }
     }
 }

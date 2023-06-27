@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel;
 
-namespace TNZAPI.NET.Api.Messaging.Common
+namespace TNZAPI.NET.Core
 {
     public static class Enums
     {
         public enum SendModeType { Live, Test };
 
-        public enum MessageType { Email, Text, Voice }
+        public enum MessageType { Email, Text, Fax, Voice }
 
         public enum WebhookCallbackType { JSON, XML };
 
@@ -16,8 +16,9 @@ namespace TNZAPI.NET.Api.Messaging.Common
 
         public enum MessageDataType { MessageToPeople, MessageToAnswerPhones, CallRouteMessageToPeople, CallRouteMessageToOperators, CallRouteMessageOnWrongKey };
 
-        public enum TTSVoiceType { 
-            Female1, 
+        public enum TTSVoiceType
+        {
+            Female1,
             Male1,
 
             [Description("Arabic@Female1")]

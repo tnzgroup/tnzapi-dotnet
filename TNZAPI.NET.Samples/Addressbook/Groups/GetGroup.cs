@@ -1,7 +1,7 @@
 ﻿using TNZAPI.NET.Api.Addressbook.Group;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
-using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Core;
+using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Samples.Addressbook.Groups
 {
@@ -14,14 +14,37 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
             this.apiUser = apiUser;
         }
 
-        public GroupApiResult Basic(string? groupCode = null)
+        #region Run()
+        public GroupApiResult Run(GroupModel group)
         {
             var client = new TNZApiClient(apiUser);
 
-            if (groupCode is null)
+            var response = client.Addressbook.Group.Get(group);
+
+            if (response.Result == Enums.ResultCode.Success)
             {
-                groupCode = "Test-Group";
+                response.Group.Dump();
+                Console.WriteLine($"-------------------------");
             }
+            else
+            {
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
+            }
+
+            return response;
+        }
+        #endregion
+
+        public GroupApiResult Basic()
+        {
+            var client = new TNZApiClient(apiUser);
+
+            var groupCode = "Test-Group";
 
             var response = client.Addressbook.Group.GetByGroupCode(groupCode);
 
@@ -48,16 +71,13 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
             return response;
         }
 
-        public GroupApiResult Simple(string? groupCode = null) => Basic(groupCode);    // Same as Basic
+        public GroupApiResult Simple() => Basic();    // Same as Basic
 
-        public GroupApiResult Builder(GroupModel? group = null)
+        public GroupApiResult Builder()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (group is null)
-            {
-                group = new GroupBuilder("Test-Group").Build();
-            }
+            var group = new GroupBuilder("Test-Group").Build();
 
             var response = client.Addressbook.Group.Get(group);
 
@@ -88,15 +108,12 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-            if (group is null)
-            {
-                group = new GroupModel()
+            var response = client.Addressbook.Group.Get(
+                new GroupModel()
                 {
                     GroupCode = "Test-Group"
-                };
-            }
-
-            var response = client.Addressbook.Group.Get(group);
+                }
+            );
 
             if (response.Result == Enums.ResultCode.Success)
             {

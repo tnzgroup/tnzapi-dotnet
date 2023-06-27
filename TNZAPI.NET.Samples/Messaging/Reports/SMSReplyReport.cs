@@ -1,5 +1,4 @@
-﻿using TNZAPI.NET.Api.Messaging.Common;
-using TNZAPI.NET.Api.Reports.SMSReply;
+﻿using TNZAPI.NET.Api.Reports.SMSReply;
 using TNZAPI.NET.Api.Reports.SMSReply.Dto;
 using TNZAPI.NET.Core;
 

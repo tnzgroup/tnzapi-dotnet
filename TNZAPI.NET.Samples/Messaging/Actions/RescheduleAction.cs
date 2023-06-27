@@ -1,6 +1,5 @@
 ﻿using TNZAPI.NET.Api.Actions.Reschedule;
 using TNZAPI.NET.Api.Actions.Reschedule.Dto;
-using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Core;
 
 namespace TNZAPI.NET.Samples.Messaging.Actions
@@ -45,7 +44,36 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
 
         public RescheduleApiResult Simple() => Basic();        // Same as Basic
 
-        public RescheduleApiResult Builder() => Basic();       // Don't have builder for this module
+        public RescheduleApiResult Builder()
+        {
+            var client = new TNZApiClient(apiUser);
+
+            var options = new RescheduleBuilder("ID123456")                             // MessageID
+                                .SetSendTime(DateTime.Parse("2023-12-31T12:00:00"))     // Set send time
+                                .SetTimezone("New Zealand")                             // Timezone (optional)
+                                .Build();
+
+            var response = client.Actions.Reschedule.Submit(options);
+
+            if (response.Result == Enums.ResultCode.Success)
+            {
+                Console.WriteLine("Status of MessageID '" + response.MessageID + "':");
+                Console.WriteLine(" => Status: '" + response.GetStatusString() + "'");
+                Console.WriteLine(" => JobNum: '" + response.JobNum + "'");
+                Console.WriteLine(" => Action: '" + response.Action + "'");
+            }
+            else
+            {
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
+            }
+
+            return response;
+        }
 
         public RescheduleApiResult Advanced()
         {
@@ -59,7 +87,8 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
                 new RescheduleRequestOptions()
                 {
                     MessageID = "ID123456",                             // MessageID
-                    SendTime = DateTime.Parse("2023-12-31T12:00:00")    // Set send time
+                    SendTime = DateTime.Parse("2023-12-31T12:00:00"),   // Set send time
+                    Timezone = "New Zealand"                            // Timezone (optional)
                 });
 
             if (response.Result == Enums.ResultCode.Success)

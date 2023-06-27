@@ -115,6 +115,8 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
         public MessageApiResult Advanced()
         {
+            var client = new TNZApiClient(apiUser);
+
             #region Declarations
 
             const string reference = "Test Fax - Advanced version";
@@ -140,10 +142,6 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             const int retryPeriod = 1;
 
             #endregion Declarations
-
-            var client = new TNZApiClient(apiUser);
-
-            var message = new FaxModel();
 
             #region Add Recipients
 
@@ -239,8 +237,6 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
                     MessageID = "",                                     // MessageID - Leave blank to auto-generate
                     Reference = reference,                              // Reference
-                    SendTime = DateTime.Now,                            // SendTime
-                    Timezone = "New Zealand",                           // Timezone
                     SubAccount = "",                                    // SubAccount
                     Department = "",                                    // Department
                     ChargeCode = "",                                    // ChargeCode
@@ -256,6 +252,9 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
                     Recipients = recipients.ToList(),                   // Recipient list
                     Attachments = attachments.ToList(),                 // Attachment list
+
+                    SendTime = DateTime.Now,                            // SendTime
+                    Timezone = "New Zealand",                           // Timezone for SendTime
 
                     SendMode = Enums.SendModeType.Test
                 });

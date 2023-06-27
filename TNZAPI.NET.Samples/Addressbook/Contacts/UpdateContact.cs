@@ -1,7 +1,7 @@
 ﻿using TNZAPI.NET.Api.Addressbook.Contact;
 using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Core;
-using static TNZAPI.NET.Api.Messaging.Common.Enums;
+using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Samples.Addressbook.Contacts
 {
@@ -9,36 +9,48 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
     {
         private readonly ITNZAuth apiUser;
 
-        public ContactModel Contact { get; set; }
-
         public UpdateContact(ITNZAuth apiUser)
         {
             this.apiUser = apiUser;
-
-            Contact = new ContactModel();
         }
 
-        public UpdateContact(ITNZAuth apiUser, ContactModel contact)
-        {
-            this.apiUser = apiUser;
-
-            Contact = contact;
-        }
-
-        public ContactApiResult? Basic(string? contactID = null)
+        #region Run()
+        public ContactApiResult Run(ContactModel contact)
         {
             var client = new TNZApiClient(apiUser);
 
-            if (contactID is null)
+            var response = client.Addressbook.Contact.Update(contact);
+
+            if (response.Result == Enums.ResultCode.Success)
             {
-                contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
+                response.Contact.Dump();
+                Console.WriteLine($"-------------------------");
             }
+            else
+            {
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
+            }
+
+            return response;
+        }
+        #endregion
+
+        public ContactApiResult Basic()
+        {
+            var client = new TNZApiClient(apiUser);
+
+            var contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
 
             var response = client.Addressbook.Contact.Update(
                 contactId: contactID,           // Contact ID (required)
                 attention: "Test Person");
 
-            if (response.Result == ResultCode.Success)
+            if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
@@ -83,11 +95,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             return response;
         }
 
-        public ContactApiResult? Simple()
+        public ContactApiResult Simple()
         {
-            var request = new TNZApiClient(apiUser);
+            var client = new TNZApiClient(apiUser);
 
-            var response = request.Addressbook.Contact.Update(
+            var response = client.Addressbook.Contact.Update(
                 contactId: "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD",      // Contact ID (required)
                 attention: "Test Person",
                 firstName: "Test",
@@ -96,11 +108,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
                 mobilePhone: "+6421000001",
                 emailAddress: "recipient.one@example.com",
                 faxNumber: "+6495005002",
-                viewBy: ViewEditByOptions.Account,
-                editBy: ViewEditByOptions.Account
+                viewBy: Enums.ViewEditByOptions.Account,
+                editBy: Enums.ViewEditByOptions.Account
                 );
 
-            if (response.Result == ResultCode.Success)
+            if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
@@ -145,28 +157,25 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             return response;
         }
 
-        public ContactApiResult? Builder()
+        public ContactApiResult Builder()
         {
-            var request = new TNZApiClient(apiUser);
+            var client = new TNZApiClient(apiUser);
 
-            if (Contact is null)
-            {
-                Contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")    // Initiate builder with contact id
-                                .SetAttention("Test Person")
-                                .SetFirstName("Test")
-                                .SetLastName("Person")
-                                .SetMainPhone("+6495005001")
-                                .SetMobilePhone("+6421000001")
-                                .SetEmailAddress("recipient.one@example.com")
-                                .SetFaxNumber("+6495005002")
-                                .SetViewBy(ViewEditByOptions.Account)
-                                .SetEditBy(ViewEditByOptions.Account)
-                                .Build();
-            }
+            var contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")    // Initiate builder with contact id
+                            .SetAttention("Test Person")
+                            .SetFirstName("Test")
+                            .SetLastName("Person")
+                            .SetMainPhone("+6495005001")
+                            .SetMobilePhone("+6421000001")
+                            .SetEmailAddress("recipient.one@example.com")
+                            .SetFaxNumber("+6495005002")
+                            .SetViewBy(Enums.ViewEditByOptions.Account)
+                            .SetEditBy(Enums.ViewEditByOptions.Account)
+                            .Build();
 
-            var response = request.Addressbook.Contact.Update(Contact);
+            var response = client.Addressbook.Contact.Update(contact);
 
-            if (response.Result == ResultCode.Success)
+            if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
@@ -211,11 +220,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             return response;
         }
 
-        public ContactApiResult? Advanced()
+        public ContactApiResult Advanced()
         {
-            var request = new TNZApiClient(apiUser);
+            var client = new TNZApiClient(apiUser);
 
-            var response = request.Addressbook.Contact.Update(
+            var response = client.Addressbook.Contact.Update(
                 new ContactModel()
                 {
                     ID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD",        // Contact id
@@ -244,12 +253,12 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
                     Custom2 = "",
                     Custom3 = "",
                     Custom4 = "",
-                    ViewBy = ViewEditByOptions.Account,
-                    EditBy = ViewEditByOptions.No
+                    ViewBy = Enums.ViewEditByOptions.Account,
+                    EditBy = Enums.ViewEditByOptions.No
                 }
             );
 
-            if (response.Result == ResultCode.Success)
+            if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");

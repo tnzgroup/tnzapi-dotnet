@@ -4,8 +4,7 @@ using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.TTS;
 using TNZAPI.NET.Api.Messaging.TTS.Dto;
 using TNZAPI.NET.Core;
-using static TNZAPI.NET.Api.Messaging.Common.Enums;
-using static TNZAPI.NET.Api.Messaging.TTS.Dto.TTSModel;
+using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Samples.Messaging.Send
 {
@@ -117,6 +116,10 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
         public MessageApiResult Advanced()
         {
+            var client = new TNZApiClient(apiUser);
+
+            #region Declarations
+
             const string reference = "Test TTS - Advanced version";
 
             const string webhookCallbackURL = "https://example.com/webhook";
@@ -152,6 +155,8 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             const string keypad6Play = "Hello, you have pressed 5.";
             const string keypad7Route = "+6497777777";
             const string keypad7Play = "Hello, you have pressed 6.";
+
+            #endregion
 
             #region Add Keypads
 
@@ -262,8 +267,6 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
             #endregion Add Recipients
 
-            var client = new TNZApiClient(apiUser);
-
             var response = client.Messaging.TTS.SendMessage(
                 new TTSModel()
                 {
@@ -274,8 +277,6 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
                     MessageID = "",                                     // MessageID - Leave blank to auto-generate
                     Reference = reference,                              // Reference
-                    SendTime = DateTime.Now,                            // SendTime
-                    Timezone = "New Zealand",                           // Timezone
                     SubAccount = billingAccount,                        // Billing Account
                     Department = "",                                    // Department
                     ChargeCode = "",                                    // ChargeCode
@@ -295,6 +296,9 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
                     Keypads = keypads.ToList(),                         // Keypads (1..9)
                     Recipients = recipients.ToList(),                   // Recipients
+
+                    SendTime = DateTime.Now,                            // SendTime
+                    Timezone = "New Zealand",                           // Timezone for SendTime
 
                     SendMode = Enums.SendModeType.Test                  // TEST Mode - Remove this to send live traffic
                 });

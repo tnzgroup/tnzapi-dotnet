@@ -1,7 +1,7 @@
 ﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
-using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Builders;
+using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Samples.Addressbook.Contacts
 {
@@ -14,11 +14,44 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             this.apiUser = apiUser;
         }
 
-        public ContactListApiResult? Basic()
+        #region Run()
+        public ContactListApiResult Run()
         {
-            var request = new TNZApiClient(apiUser);
+            var client = new TNZApiClient(apiUser);
 
-            var response = request.Addressbook.ContactList.List(
+            var response = client.Addressbook.ContactList.List();
+
+            if (response.Result == Enums.ResultCode.Success)
+            {
+                response.Dump();
+                Console.WriteLine($"-------------------------");
+
+                foreach (var contact in response.Contacts)
+                {
+                    contact.Dump();
+                    Console.WriteLine($"-------------------------");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
+            }
+
+            return response;
+        }
+
+        #endregion
+
+        public ContactListApiResult Basic()
+        {
+            var client = new TNZApiClient(apiUser);
+
+            var response = client.Addressbook.ContactList.List(
                 recordsPerPage: 10,
                 page: 1
             );
@@ -77,18 +110,18 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             return response;
         }
 
-        public ContactListApiResult? Simple() => Basic();    // Same as Basic
+        public ContactListApiResult Simple() => Basic();    // Same as Basic
 
-        public ContactListApiResult? Builder()
+        public ContactListApiResult Builder()
         {
-            var request = new TNZApiClient(apiUser);
+            var client = new TNZApiClient(apiUser);
 
             var options = new ListRequestOptionBuilder<ContactListRequestOptions>()
                                 .SetRecordsPerPage(10)
                                 .SetPage(1)
                                 .Build();
 
-            var response = request.Addressbook.ContactList.List(options);
+            var response = client.Addressbook.ContactList.List(options);
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -130,8 +163,6 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
                     Console.WriteLine($"    -> Custom4: '{contact.Custom4}'");
                     Console.WriteLine($"-------------------------");
                 }
-
-
             }
             else
             {
@@ -146,11 +177,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             return response;
         }
 
-        public ContactListApiResult? Advanced()
+        public ContactListApiResult Advanced()
         {
-            var request = new TNZApiClient(apiUser);
+            var client = new TNZApiClient(apiUser);
 
-            var response = request.Addressbook.ContactList.List(
+            var response = client.Addressbook.ContactList.List(
                 new ContactListRequestOptions()
                 {
                     RecordsPerPage = 10,

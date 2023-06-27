@@ -1,7 +1,7 @@
 ﻿using TNZAPI.NET.Api.Addressbook.Group;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
-using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Core;
+using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Samples.Addressbook.Groups
 {
@@ -9,23 +9,38 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
     {
         private readonly ITNZAuth apiUser;
 
-        public GroupModel Group;
-
         public CreateGroup(ITNZAuth apiUser)
         {
             this.apiUser = apiUser;
-
-            Group = new GroupModel();
         }
 
-        public CreateGroup(ITNZAuth apiUser, GroupModel group)
+        #region Run(GroupModel group)
+        public GroupApiResult Run(GroupModel group)
         {
-            this.apiUser = apiUser;
+            var client = new TNZApiClient(apiUser);
 
-            Group = group;
+            var response = client.Addressbook.Group.Create(group);
+
+            if (response.Result == Enums.ResultCode.Success)
+            {
+                response.Group.Dump();
+                Console.WriteLine($"-------------------------");
+            }
+            else
+            {
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
+            }
+
+            return response;
         }
+        #endregion
 
-        public GroupApiResult? Basic()
+        public GroupApiResult Basic()
         {
             var client = new TNZApiClient(apiUser);
 
@@ -57,7 +72,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
             return response;
         }
 
-        public GroupApiResult? Simple()
+        public GroupApiResult Simple()
         {
             var client = new TNZApiClient(apiUser);
 
@@ -93,7 +108,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
             return response;
         }
 
-        public GroupApiResult? Builder()
+        public GroupApiResult Builder()
         {
             var client = new TNZApiClient(apiUser);
 
@@ -131,7 +146,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
             return response;
         }
 
-        public GroupApiResult? Advanced()
+        public GroupApiResult Advanced()
         {
             var client = new TNZApiClient(apiUser);
 

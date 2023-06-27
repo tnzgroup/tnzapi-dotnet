@@ -121,6 +121,8 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
         public MessageApiResult Advanced()
         {
+            var client = new TNZApiClient(apiUser);
+
             #region Declarations
 
             const string reference = "Test SMS - Advanced version";
@@ -145,8 +147,6 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             const string messageText = "Test SMS Message [[File1]] | [[File2]] | [[File3]] | [[File4]]";
 
             #endregion Declarations
-
-            var message = new TNZApiClient(apiUser).Messaging.SMS;
 
             #region Add Recipients
 
@@ -238,8 +238,6 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
             #endregion Add Attachments
 
-            var client = new TNZApiClient(apiUser);
-
             var response = client.Messaging.SMS.SendMessage(
                 new SMSModel()
                 {
@@ -250,8 +248,6 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
                     MessageID = "",                                     // MessageID - Leave blank to auto-generate
                     Reference = reference,                              // Reference
-                    SendTime = DateTime.Now,                            // SendTime
-                    Timezone = "New Zealand",                           // Timezone
                     SubAccount = "",                                    // SubAccount
                     Department = "",                                    // Department
                     SMSEmailReply = smsEmailReply,                      // SMSEmailReply - For email (SMTP) reply receipt notifications
@@ -260,6 +256,9 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
                     Recipients = recipients.ToList(),                   // Recipient List
                     Attachments = attachments.ToList(),                 // Attachment List - Attachments only be supported with MessageLink facility
+
+                    SendTime = DateTime.Now,                            // SendTime
+                    Timezone = "New Zealand",                           // Timezone for SendTime
 
                     SendMode = Enums.SendModeType.Test                  // TEST Mode - Remove this to send live traffic
                 });

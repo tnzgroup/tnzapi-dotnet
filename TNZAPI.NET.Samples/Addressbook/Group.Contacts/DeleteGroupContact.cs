@@ -3,8 +3,8 @@ using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Group;
 using TNZAPI.NET.Api.Addressbook.Group.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
-using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Core;
+using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
 {
@@ -12,41 +12,52 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
     {
         private readonly ITNZAuth apiUser;
 
-        public ContactModel Contact { get; set; }
-
-        public GroupModel Group { get; set; }
-
         public DeleteGroupContact(ITNZAuth apiUser)
         {
             this.apiUser = apiUser;
-
-            Contact = new ContactModel();
-
-            Group = new GroupModel();
         }
 
-        public DeleteGroupContact(ITNZAuth apiUser, GroupModel group, ContactModel contact)
-        {
-            this.apiUser = apiUser;
-
-            Group = group;
-
-            Contact = contact;
-        }
-
-        public GroupContactApiResult Basic(string? groupCode = null, string? contactID = null)
+        #region Run()
+        public GroupContactApiResult Run(GroupModel group, ContactModel contact)
         {
             var client = new TNZApiClient(apiUser);
 
-            if (groupCode is null)
+            var response = client.Addressbook.GroupContact.Remove(group, contact);
+
+            if (response.Result == Enums.ResultCode.Success)
             {
-                groupCode = "Test-Group";
+                if (response.Group is not null)
+                {
+                    response.Group.Dump();
+                    Console.WriteLine($"-------------------------");
+                }
+                if (response.Contact is not null)
+                {
+                    response.Contact.Dump();
+                    Console.WriteLine($"-------------------------");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Error occurred while processing.");
+
+                foreach (var error in response.ErrorMessage)
+                {
+                    Console.WriteLine($"- Error={error}");
+                }
             }
 
-            if (contactID is null)
-            {
-                contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
-            }
+            return response;
+        }
+        #endregion
+
+        public GroupContactApiResult Basic()
+        {
+            var client = new TNZApiClient(apiUser);
+
+            var groupCode = "Test-Group";
+
+            var contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
 
             var response = client.Addressbook.GroupContact.Remove(groupCode, contactID);
 
@@ -109,23 +120,13 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             return response;
         }
 
-        public GroupContactApiResult Simple(string? groupCode = null, string? contactID = null)
+        public GroupContactApiResult Simple()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (groupCode is null)
-            {
-                groupCode = "Test-Group";
-            }
-
-            if (contactID is null)
-            {
-                contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
-            }
-
             var response = client.Addressbook.GroupContact.Remove(
-                groupCode: groupCode, 
-                contactID: contactID
+                groupCode: "Test-Group",                                // Group Code
+                contactID: "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"       // Contact ID
             );
 
             if (response.Result == Enums.ResultCode.Success)
@@ -187,19 +188,13 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             return response;
         }
 
-        public GroupContactApiResult Builder(GroupModel? group = null, ContactModel? contact = null)
+        public GroupContactApiResult Builder()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (group is null)
-            {
-                group = new GroupBuilder("Test-Group").Build();
-            }
+            var group = new GroupBuilder("Test-Group").Build();
 
-            if (contact is null)
-            {
-                contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD").Build();
-            }
+            var contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD").Build();
 
             var response = client.Addressbook.GroupContact.Remove(group, contact);
 
@@ -262,27 +257,19 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             return response;
         }
 
-        public GroupContactApiResult Advanced(GroupModel? group = null, ContactModel? contact = null)
+        public GroupContactApiResult Advanced()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (group is null)
-            {
-                group = new GroupModel()
+            var response = client.Addressbook.GroupContact.Remove(
+                new GroupModel()
                 {
-                    GroupCode = "Test-Group"
-                };
-            }
-
-            if (contact is null)
-            {
-                contact = new ContactModel()
+                    GroupCode = "Test-Group"                        // Group Code
+                },
+                new ContactModel()
                 {
-                    ID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"
-                };
-            }
-
-            var response = client.Addressbook.GroupContact.Remove(group, contact);
+                    ID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"     // Contact ID
+                });
 
             if (response.Result == Enums.ResultCode.Success)
             {

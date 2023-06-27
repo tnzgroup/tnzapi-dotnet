@@ -1,5 +1,4 @@
-﻿using TNZAPI.NET.Api.Messaging.Common;
-using TNZAPI.NET.Api.Reports.SMSReceived;
+﻿using TNZAPI.NET.Api.Reports.SMSReceived;
 using TNZAPI.NET.Api.Reports.SMSReceived.Dto;
 using TNZAPI.NET.Core;
 

@@ -612,7 +612,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Update Contact
         /// </summary>
-        /// <param name="contactId">Specifies the unique identifier of the contact to update.</param>
+        /// <param name="contactID">Specifies the unique identifier of the contact to update.</param>
         /// <param name="attention">Indicates the attention or focus associated with the contact.</param>
         /// <param name="title">Represents the title or honorific of the contact (e.g., Mr, Mrs, Ms).</param>
         /// <param name="company">Specifies the company or organization associated with the contact.</param>
@@ -643,7 +643,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// 
         /// <returns></returns>
         public ContactApiResult Update(
-            string contactId = null,
+            string contactID = null,
             string attention = null,
             string title = null,
             string company = null,
@@ -675,7 +675,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         {
             return Update(new ContactModel()
             {
-                ID = contactId,
+                ID = contactID,
                 Attention = attention,
                 Title = title,
                 Company = company,
@@ -746,7 +746,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Update Contact (async)
         /// </summary>
-        /// <param name="contactId">Specifies the unique identifier of the contact to update.</param>
+        /// <param name="contactID">Specifies the unique identifier of the contact to update.</param>
         /// <param name="attention">Indicates the attention or focus associated with the contact.</param>
         /// <param name="title">Represents the title or honorific of the contact (e.g., Mr, Mrs, Ms).</param>
         /// <param name="company">Specifies the company or organization associated with the contact.</param>
@@ -777,7 +777,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// 
         /// <returns>Task<ContactApiResult></returns>
         public async Task<ContactApiResult> UpdateAsync(
-            string contactId = null,
+            string contactID = null,
             string attention = null,
             string title = null,
             string company = null,
@@ -809,7 +809,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         {
             return await UpdateAsync(new ContactModel()
             {
-                ID = contactId,
+                ID = contactID,
                 Attention = attention,
                 Title = title,
                 Company = company,
@@ -975,11 +975,11 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <summary>
         /// Read contact
         /// </summary>
-        /// <param name="contactId">Contact ID</param>
+        /// <param name="contactID">Contact ID</param>
         /// <returns>ContactResult</returns>
-        public ContactApiResult ReadById(string contactId)
+        public ContactApiResult ReadById(string contactID)
         {
-            Entity = new ContactModel() { ID = contactId };
+            Entity = new ContactModel() { ID = contactID };
 
             return Read();
         }

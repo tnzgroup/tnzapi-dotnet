@@ -3,6 +3,7 @@ using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Contact.Group.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Builders;
+using TNZAPI.NET.Core.Common;
 using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
@@ -28,7 +29,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
 
             var response = client.Addressbook.ContactGroupList.List(
                 contact,                                    // Contact
-                new ContactGroupListRequestOptions()
+                new ListRequestOptions()
                 {
                     RecordsPerPage = recordsPerPage,        // Record per page
                     Page = page                             // Page number
@@ -170,7 +171,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
             var contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
                             .Build();
 
-            var listOptions = new ListRequestOptionBuilder<ContactGroupListRequestOptions>()
+            var listOptions = new ListRequestOptionBuilder()
                                 .SetRecordsPerPage(100)
                                 .SetPage(1)
                                 .Build();
@@ -226,7 +227,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
                 {
                     ID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"
                 },
-                new ContactGroupListRequestOptions()
+                new ListRequestOptions()
                 {
                     RecordsPerPage = 10,        // Record per page
                     Page = 1                    // Page number

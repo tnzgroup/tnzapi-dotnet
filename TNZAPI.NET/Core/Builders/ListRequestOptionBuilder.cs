@@ -1,4 +1,5 @@
-﻿using TNZAPI.NET.Core.Interfaces;
+﻿using TNZAPI.NET.Core.Common;
+using TNZAPI.NET.Core.Interfaces;
 
 namespace TNZAPI.NET.Core.Builders
 {
@@ -31,4 +32,8 @@ namespace TNZAPI.NET.Core.Builders
         }
     }
 
+    public class ListRequestOptionBuilder : ListRequestOptionBuilder<ListRequestOptions>
+    { 
+
+    }
 }

@@ -642,6 +642,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <param name="editBy">Specifies the permission level required to edit the contact. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
         /// 
         /// <returns></returns>
+        [ComVisible(false)]
         public ContactApiResult Update(
             string contactID = null,
             string attention = null,
@@ -776,6 +777,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <param name="editBy">Specifies the permission level required to edit the contact. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
         /// 
         /// <returns>Task<ContactApiResult></returns>
+        [ComVisible(false)]
         public async Task<ContactApiResult> UpdateAsync(
             string contactID = null,
             string attention = null,

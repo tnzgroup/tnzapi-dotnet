@@ -21,6 +21,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group.Dto
 
         public ContactModel Contact { get; set; }
 
+        [XmlArray("Groups")]
         public List<GroupModel> Groups { get; set; }
 
         [XmlElement("ErrorMessage")]

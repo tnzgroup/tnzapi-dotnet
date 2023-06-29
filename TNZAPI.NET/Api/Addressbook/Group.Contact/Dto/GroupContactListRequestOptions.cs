@@ -1,10 +1,10 @@
-﻿using TNZAPI.NET.Core.Interfaces;
+﻿using TNZAPI.NET.Api.Addressbook.Group.Dto;
 
 namespace TNZAPI.NET.Api.Addressbook.Group.Contact.Dto
 {
-    public class GroupContactListRequestOptions : IListRequestOptions
+    internal class GroupContactListRequestOptions
     {
-        public string GroupCode { get; set; } = "";
+        public GroupModel Group { get; set; }
 
         public int RecordsPerPage { get; set; } = 100;
 

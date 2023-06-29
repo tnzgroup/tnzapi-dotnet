@@ -4,6 +4,7 @@ using System.Xml;
 using TNZAPI.NET.Api.Addressbook.Group.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Core;
+using TNZAPI.NET.Core.Interfaces;
 using TNZAPI.NET.Core.Interfaces.Addressbook;
 using TNZAPI.NET.Helpers;
 
@@ -15,7 +16,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
     {
         private ITNZAuth User = new TNZApiUser();
 
-        public GroupContactListRequestOptions Options = new GroupContactListRequestOptions();
+        private GroupContactListRequestOptions Options { get; set; } = new GroupContactListRequestOptions();
 
         /// <summary>
         /// Addressbook group contact list
@@ -72,7 +73,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         {
             var requestUri = new StringBuilder();
 
-            requestUri.Append($"{TNZApiConfig.Domain}/api/v{TNZApiConfig.Version}/addressbook/group/{Options.GroupCode}/contact/list?recordsPerPage={Options.RecordsPerPage}&page={Options.Page}");
+            requestUri.Append($"{TNZApiConfig.Domain}/api/v{TNZApiConfig.Version}/addressbook/group/{Options.Group.GroupCode}/contact/list?recordsPerPage={Options.RecordsPerPage}&page={Options.Page}");
 
             return requestUri.ToString();
         }
@@ -165,7 +166,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             {
                 return ResultHelper.RespondError<GroupContactListApiResult>("AuthToken required for this module.");
             }
-            if (Options.GroupCode == null || Options.GroupCode == "")
+            if (Options.Group is null || Options.Group.GroupCode is null || Options.Group.GroupCode == "")
             {
                 return ResultHelper.RespondError<GroupContactListApiResult>("Missing GroupCode. Please specify Options.GroupCode.");
             }
@@ -178,14 +179,35 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <param name="recordsPerPage">No of records per page</param>
         /// <param name="page">Page number</param>
         /// <returns>GroupContactListResult</returns>
-        public GroupContactListApiResult List(GroupModel entity, int? recordsPerPage = null, int? page = null) => ListByGroupCode(entity.GroupCode, recordsPerPage, page);
+        public GroupContactListApiResult List(GroupModel entity, int? recordsPerPage = null, int? page = null)
+        {
+            Options.Group = entity;
+
+            if (recordsPerPage is not null)
+            {
+                Options.RecordsPerPage = (int)recordsPerPage;
+            }
+            if (page is not null)
+            {
+                Options.Page = (int)page;
+            }
+
+            return List();
+        }
 
         /// <summary>
         /// List group contacts
         /// </summary>
         /// <param name="options">GroupContactListOptions</param>
         /// <returns>GroupContactListResult</returns>
-        public GroupContactListApiResult List(GroupModel entity, GroupContactListRequestOptions options) => ListByGroupCode(entity.GroupCode, options);
+        public GroupContactListApiResult List(GroupModel entity, IListRequestOptions options)
+        {
+            Options.Group = entity;
+            Options.RecordsPerPage = options.RecordsPerPage;
+            Options.Page = options.Page;
+
+            return List();
+        }
 
         #endregion Read
 
@@ -199,21 +221,14 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <returns>GroupContactListResult</returns>
         public GroupContactListApiResult ListByGroupCode(string groupCode, int? recordsPerPage = null, int? page = null)
         {
-            var options = new GroupContactListRequestOptions()
-            {
-                GroupCode = groupCode
-            };
-
-            if (recordsPerPage is not null)
-            {
-                options.RecordsPerPage = (int)recordsPerPage;
-            }
-            if (page is not null)
-            {
-                options.Page = (int)page;
-            }
-
-            return ListByGroupCode(groupCode, options);
+            return List(
+                new GroupModel()
+                {
+                    GroupCode = groupCode
+                },
+                recordsPerPage,
+                page
+            );
         }
 
         /// <summary>
@@ -221,13 +236,15 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// </summary>
         /// <param name="options">GroupContactListOptions</param>
         /// <returns>GroupContactListResult</returns>
-        public GroupContactListApiResult ListByGroupCode(string groupCode, GroupContactListRequestOptions options)
+        public GroupContactListApiResult ListByGroupCode(string groupCode, IListRequestOptions options)
         {
-            options.GroupCode = groupCode;
-
-            Options = Mapper.Update(new GroupContactListRequestOptions(), options);
-
-            return List();
+            return List(
+                new GroupModel()
+                {
+                    GroupCode = groupCode
+                },
+                options
+            );
         }
 
         #endregion
@@ -245,7 +262,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             {
                 return ResultHelper.RespondError<GroupContactListApiResult>("AuthToken required for this module.");
             }
-            if (Options.GroupCode == null || Options.GroupCode == "")
+            if (Options.Group is null || Options.Group.GroupCode is null || Options.Group.GroupCode == "")
             {
                 return ResultHelper.RespondError<GroupContactListApiResult>("Missing GroupCode. Please specify Options.GroupCode.");
             }
@@ -259,7 +276,21 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <param name="recordsPerPage">No of records per page</param>
         /// <param name="page">Page number</param>
         /// <returns>Task<GroupContactListResult></returns>
-        public async Task<GroupContactListApiResult> ListAsync(GroupModel entity, int? recordsPerPage = null, int? page = null) => await ListByGroupCodeAsync(entity.GroupCode, recordsPerPage, page);
+        public async Task<GroupContactListApiResult> ListAsync(GroupModel entity, int? recordsPerPage = null, int? page = null)
+        {
+            Options.Group = entity;
+            
+            if (recordsPerPage is not null)
+            {
+                Options.RecordsPerPage = (int)recordsPerPage;
+            }
+            if (page is not null)
+            {
+                Options.Page = (int)page;
+            }
+
+            return await ListAsync();
+        }
 
         /// <summary>
         /// List group contacts (async)
@@ -267,7 +298,14 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <param name="options"></param>
         /// <returns>Task<GroupContactListResult></returns>
         [ComVisible(false)]
-        public async Task<GroupContactListApiResult> ListAsync(GroupModel entity, GroupContactListRequestOptions options) => await ListByGroupCodeAsync(entity.GroupCode, options);
+        public async Task<GroupContactListApiResult> ListAsync(GroupModel entity, IListRequestOptions options)
+        {
+            Options.Group = entity;
+            Options.RecordsPerPage = options.RecordsPerPage;
+            Options.Page = options.Page;
+
+            return await ListAsync();
+        }
 
         #endregion ReadAsync
 
@@ -281,21 +319,14 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <returns>Task<GroupContactListResult></returns>
         public async Task<GroupContactListApiResult> ListByGroupCodeAsync(string groupCode, int? recordsPerPage = null, int? page = null)
         {
-            var options = new GroupContactListRequestOptions()
-            {
-                GroupCode = groupCode
-            };
-
-            if (recordsPerPage is not null)
-            {
-                options.RecordsPerPage = (int)recordsPerPage;
-            }
-            if (page is not null)
-            {
-                options.Page = (int)page;
-            }
-
-            return await ListByGroupCodeAsync(groupCode, options);
+            return await ListAsync(
+                new GroupModel()
+                {
+                    GroupCode = groupCode
+                },
+                recordsPerPage,
+                page
+            );
         }
 
         /// <summary>
@@ -304,13 +335,15 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <param name="options"></param>
         /// <returns>Task<GroupContactListResult></returns>
         [ComVisible(false)]
-        public async Task<GroupContactListApiResult> ListByGroupCodeAsync(string groupCode, GroupContactListRequestOptions options)
+        public async Task<GroupContactListApiResult> ListByGroupCodeAsync(string groupCode, IListRequestOptions options)
         {
-            options.GroupCode = groupCode;
-
-            Options = Mapper.Update(new GroupContactListRequestOptions(), options);
-
-            return await ListAsync();
+            return await ListAsync(
+                new GroupModel()
+                {
+                    GroupCode = groupCode
+                },
+                options
+            );
         }
         #endregion ReadAsync
     }

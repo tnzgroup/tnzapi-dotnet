@@ -71,7 +71,7 @@ namespace TNZAPI.NET.Core.Interfaces.Addressbook
         ContactApiResult Update(ContactModel entity);
 
         ContactApiResult Update(
-            string contactId = null,
+            string contactID = null,
             string attention = null,
             string title = null,
             string company = null,
@@ -104,7 +104,7 @@ namespace TNZAPI.NET.Core.Interfaces.Addressbook
         Task<ContactApiResult> UpdateAsync(ContactModel entity);
 
         Task<ContactApiResult> UpdateAsync(
-            string contactId = null,
+            string contactID = null,
             string attention = null,
             string title = null,
             string company = null,

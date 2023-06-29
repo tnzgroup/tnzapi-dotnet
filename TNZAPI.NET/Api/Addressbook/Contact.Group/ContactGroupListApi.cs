@@ -4,6 +4,7 @@ using System.Xml;
 using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Contact.Group.Dto;
 using TNZAPI.NET.Core;
+using TNZAPI.NET.Core.Interfaces;
 using TNZAPI.NET.Core.Interfaces.Addressbook;
 using TNZAPI.NET.Helpers;
 
@@ -72,7 +73,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
         {
             User = auth;
 
-            Options.ContactID = contact.ID;
+            Options.Contact = contact;
         }
 
         private XmlDocument BuildXmlDocument()
@@ -84,7 +85,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
         {
             var requestUri = new StringBuilder();
 
-            requestUri.Append($"{TNZApiConfig.Domain}/api/v{TNZApiConfig.Version}/addressbook/contact/{Options.ContactID}/group/list?recordsPerPage={Options.RecordsPerPage}&page={Options.Page}");
+            requestUri.Append($"{TNZApiConfig.Domain}/api/v{TNZApiConfig.Version}/addressbook/contact/{Options.Contact.ID}/group/list?recordsPerPage={Options.RecordsPerPage}&page={Options.Page}");
 
             return requestUri.ToString();
         }
@@ -177,7 +178,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             {
                 return ResultHelper.RespondError<ContactGroupListApiResult>("AuthToken required for this module.");
             }
-            if (Options.ContactID is null || Options.ContactID == "")
+            if (Options.Contact is null || Options.Contact.ID == "")
             {
                 return ResultHelper.RespondError<ContactGroupListApiResult>("Empty Contact ID - Please specify Options.ContactID.");
             }
@@ -185,12 +186,46 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
         }
 
         /// <summary>
+        /// List contact groups with records per page with page number
+        /// </summary>
+        /// <param name="recordsPerPage">No of records per page</param>
+        /// <param name="page">Page number</param>
+        /// <returns>ContactGroupListResult</returns>
+        public ContactGroupListApiResult List(ContactModel entity, int? recordsPerPage = null, int? page = null)
+        {
+            Options.Contact = entity;
+
+            if (recordsPerPage is not null)
+            {
+                Options.RecordsPerPage = (int)recordsPerPage;
+            }
+
+            if (page is not null)
+            {
+                Options.Page = (int)page;
+            }
+
+            return List();
+        }
+
+        /// <summary>
         /// List contact groups
         /// </summary>
         /// <param name="entity">ContactModel</param>
-        /// <param name="options">ContactGroupListOptions</param>
-        /// <returns>ContactGroupListResult</returns>
-        public ContactGroupListApiResult List(ContactModel entity, ContactGroupListRequestOptions options) => ListById(entity.ID, options);
+        /// <param name="options">IListRequestOptions</param>
+        /// <returns>ContactGroupListApiResult</returns>
+        public ContactGroupListApiResult List(ContactModel entity, IListRequestOptions options)
+        {
+            Options.Contact = entity;
+            Options.RecordsPerPage = options.RecordsPerPage;
+            Options.Page = options.Page;
+
+            return List();
+        }
+
+        #endregion
+
+        #region ListById
 
         /// <summary>
         /// List contact groups with records per page with page number
@@ -198,25 +233,16 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
         /// <param name="recordsPerPage">No of records per page</param>
         /// <param name="page">Page number</param>
         /// <returns>ContactGroupListResult</returns>
-        public ContactGroupListApiResult List(ContactModel entity, int? recordsPerPage = null, int? page = null) => ListById(entity.ID, recordsPerPage, page);
-
-        #endregion
-
-        #region ListById
-
-        /// <summary>
-        /// List contact groups
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <param name="options">ContactGroupListOptions</param>
-        /// <returns>ContactGroupListResult</returns>
-        public ContactGroupListApiResult ListById(string contactId, ContactGroupListRequestOptions options)
+        public ContactGroupListApiResult ListById(string contactID, int? recordsPerPage = null, int? page = null)
         {
-            options.ContactID = contactId;
-
-            Options = Mapper.Update(new ContactGroupListRequestOptions(), options);
-
-            return List();
+            return List(
+                new ContactModel()
+                {
+                    ID = contactID
+                },
+                recordsPerPage,
+                page
+            );
         }
 
         /// <summary>
@@ -225,24 +251,15 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
         /// <param name="recordsPerPage">No of records per page</param>
         /// <param name="page">Page number</param>
         /// <returns>ContactGroupListResult</returns>
-        public ContactGroupListApiResult ListById(string contactId, int? recordsPerPage = null, int? page = null)
+        public ContactGroupListApiResult ListById(string contactID, IListRequestOptions options)
         {
-            var options = new ContactGroupListRequestOptions()
-            {
-                ContactID = contactId
-            };
-
-            if (recordsPerPage is not null)
-            {
-                options.RecordsPerPage = (int)recordsPerPage;
-            }
-
-            if (page is not null)
-            {
-                options.Page = (int)page;
-            }
-
-            return ListById(contactId, options);
+            return List(
+                new ContactModel()
+                {
+                    ID = contactID
+                },
+                options
+            );
         }
 
         #endregion
@@ -260,7 +277,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             {
                 return ResultHelper.RespondError<ContactGroupListApiResult>("AuthToken required for this module.");
             }
-            if (Options.ContactID is null || Options.ContactID == "")
+            if (Options.Contact is null || Options.Contact.ID == "")
             {
                 return ResultHelper.RespondError<ContactGroupListApiResult>("Empty Contact ID - Please specify contact id.");
             }
@@ -268,14 +285,6 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
         }
 
         /// <summary>
-        /// List contact groups
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <param name="options">ContactGroupListOptions</param>
-        /// <returns>Task<ContactGroupListResult></returns>
-        public async Task<ContactGroupListApiResult> ListAsync(ContactModel entity, ContactGroupListRequestOptions options) => await ListByIdAsync(entity.ID, options);
-
-        /// <summary>
         /// List contact groups using records per page and page number (async)
         /// </summary>
         /// <param name="entity">ContactModel</param>
@@ -283,23 +292,19 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
         /// <param name="page">Page number</param>
         /// <returns>ContactGroupListResult</returns>
         [ComVisible(false)]
-        public async Task<ContactGroupListApiResult> ListAsync(ContactModel entity, int? recordsPerPage = null, int? page = null) => await ListByIdAsync(entity.ID, recordsPerPage, page);
-
-        #endregion ReadAsync
-
-        #region ListByAsync
-
-        /// <summary>
-        /// List contact groups
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <param name="options">ContactGroupListOptions</param>
-        /// <returns>Task<ContactGroupListResult></returns>
-        public async Task<ContactGroupListApiResult> ListByIdAsync(string contactID, ContactGroupListRequestOptions options)
+        public async Task<ContactGroupListApiResult> ListAsync(ContactModel entity, int? recordsPerPage = null, int? page = null)
         {
-            options.ContactID = contactID;
+            Options.Contact = entity;
 
-            Options = Mapper.Update(new ContactGroupListRequestOptions(), options);
+            if (recordsPerPage is not null)
+            {
+                Options.RecordsPerPage = (int)recordsPerPage;
+            }
+
+            if (page is not null)
+            {
+                Options.Page = (int)page;
+            }
 
             return await ListAsync();
         }
@@ -307,27 +312,58 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
         /// <summary>
         /// List contact groups using records per page and page number (async)
         /// </summary>
+        /// <param name="entity">ContactModel</param>
+        /// <param name="options">IListRequestOptions</param>
+        /// <returns>Task<ContactGroupListResult></returns>
+        [ComVisible(false)]
+        public async Task<ContactGroupListApiResult> ListAsync(ContactModel entity, IListRequestOptions options)
+        {
+            Options.Contact = entity;
+            Options.RecordsPerPage = options.RecordsPerPage;
+            Options.Page = options.Page;
+
+            return await ListAsync();
+        }
+
+        #endregion ReadAsync
+
+        #region ListByAsync
+
+        /// <summary>
+        /// List contact groups using records per page and page number (async)
+        /// </summary>
         /// <param name="recordsPerPage">No of records per page</param>
         /// <param name="page">Page number</param>
-        /// <returns>ContactGroupListResult</returns>
+        /// <returns>Task<ContactGroupListResult></returns>
         [ComVisible(false)]
         public async Task<ContactGroupListApiResult> ListByIdAsync(string contactID, int? recordsPerPage = null, int? page = null)
         {
-            var options = new ContactGroupListRequestOptions()
-            {
-                ContactID = contactID
-            };
+            return await ListAsync(
+                new ContactModel()
+                {
+                    ID = contactID
+                },
+                recordsPerPage,
+                page
+            );
+        }
 
-            if (recordsPerPage is not null)
-            {
-                options.RecordsPerPage = (int)recordsPerPage;
-            }
-            if (page is not null)
-            {
-                options.Page = (int)page;
-            }
-
-            return await ListByIdAsync(contactID, options);
+        /// <summary>
+        /// List contact groups using records per page and page number (async)
+        /// </summary>
+        /// <param name="recordsPerPage">No of records per page</param>
+        /// <param name="page">Page number</param>
+        /// <returns>Task<ContactGroupListResult></returns>
+        [ComVisible(false)]
+        public async Task<ContactGroupListApiResult> ListByIdAsync(string contactID, IListRequestOptions options)
+        {
+            return await ListAsync(
+                new ContactModel()
+                {
+                    ID = contactID
+                },
+                options
+            );
         }
 
         #endregion ReadAsync

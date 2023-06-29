@@ -1,7 +1,9 @@
-﻿using TNZAPI.NET.Core;
+﻿using System.Xml.Serialization;
+using TNZAPI.NET.Core;
 
 namespace TNZAPI.NET.Api.Addressbook.Group.Dto
 {
+    [XmlType(TypeName = "Group")]
     public class GroupModel
     {
         public string GroupCode { get; set; }

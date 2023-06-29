@@ -1,13 +1,13 @@
-﻿using TNZAPI.NET.Core.Interfaces;
+﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 
 namespace TNZAPI.NET.Api.Addressbook.Contact.Group.Dto
 {
-    public class ContactGroupListRequestOptions : IListRequestOptions
+    internal class ContactGroupListRequestOptions
     {
-        public string ContactID { get; set; } = "";
+        internal ContactModel Contact { get; set; }
 
-        public int RecordsPerPage { get; set; } = 100;
+        internal int RecordsPerPage { get; set; } = 100;
 
-        public int Page { get; set; } = 1;
+        internal int Page { get; set; } = 1;
     }
 }

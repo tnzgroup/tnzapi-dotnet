@@ -12,8 +12,14 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Dto
 
         // readonly
         public DateTime? Created { get; set; }
+
+        public DateTime? CreatedUTC { get; set; }
+
         // readonly
         public DateTime? Updated { get; set; }
+        public DateTime? UpdatedUTC { get; set; }
+
+        public string Timezone { get; set; }
 
         public string Attention { get; set; }
         public string Title { get; set; }

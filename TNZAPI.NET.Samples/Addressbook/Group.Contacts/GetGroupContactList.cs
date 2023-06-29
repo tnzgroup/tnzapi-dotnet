@@ -1,9 +1,9 @@
-﻿using TNZAPI.NET.Api.Addressbook.Contact.Group.Dto;
-using TNZAPI.NET.Api.Addressbook.Group;
+﻿using TNZAPI.NET.Api.Addressbook.Group;
 using TNZAPI.NET.Api.Addressbook.Group.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Builders;
+using TNZAPI.NET.Core.Common;
 using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
@@ -191,8 +191,8 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
 
             var group = new GroupBuilder("Test-Group").Build();
 
-            var listOptions = new ListRequestOptionBuilder<GroupContactListRequestOptions>()
-                .SetRecordsPerPage(100)         // Number of records for this request
+            var listOptions = new ListRequestOptionBuilder()
+                .SetRecordsPerPage(50)          // Number of records for this request
                 .SetPage(1)                     // Current location
                 .Build();
 
@@ -265,11 +265,10 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
                 {
                     GroupCode = "Test-Group"    
                 },                      
-                new GroupContactListRequestOptions()
+                new ListRequestOptions()
                 {
-                    RecordsPerPage = 10,    // Number of records for this request
+                    RecordsPerPage = 50,    // Number of records for this request
                     Page = 1                // Current location
-
                 }
             );
 

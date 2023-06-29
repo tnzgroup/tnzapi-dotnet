@@ -47,7 +47,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             var contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
 
             var response = client.Addressbook.Contact.Update(
-                contactId: contactID,           // Contact ID (required)
+                contactID: contactID,           // Contact ID (required)
                 attention: "Test Person");
 
             if (response.Result == Enums.ResultCode.Success)
@@ -100,7 +100,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             var client = new TNZApiClient(apiUser);
 
             var response = client.Addressbook.Contact.Update(
-                contactId: "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD",      // Contact ID (required)
+                contactID: "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD",      // Contact ID (required)
                 attention: "Test Person",
                 firstName: "Test",
                 lastName: "Person",

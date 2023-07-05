@@ -29,6 +29,6 @@ steps:
   inputs:
     command: 'push'
     #packagesToPush: '$(Build.ArtifactStagingDirectory)/*.symbols.nupkg'
-    packagesToPush: '$(Pipeline.Workspace)/**/drop/*.nupkg'
+    packagesToPush: '$(System.DefaultWorkingDirectory)/**/*.nupkg;!$(System.DefaultWorkingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'TNZAPI.NET.Nuget'

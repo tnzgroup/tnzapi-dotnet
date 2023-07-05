@@ -32,6 +32,7 @@ variables:
 #    nuGetFeedType: 'external'
 #    publishFeedCredentials: 'TNZAPI.NET.Nuget'
 
+steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:

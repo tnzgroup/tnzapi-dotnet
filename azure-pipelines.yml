@@ -19,6 +19,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
+    packDirectory: "$(Build.ArtifactStagingDirectory)/packages"
     #packagesToPack: '**/*.csproj;!**/*.Tests.csproj;!**/*.Samples.csproj'
     packagesToPack: 'TNZAPI.NET/*.csproj;'
     versioningScheme: 'off'
@@ -29,7 +30,8 @@ steps:
     command: 'push'
     #packagesToPush: '$(Build.ArtifactStagingDirectory)/*.symbols.nupkg'
     #packagesToPush: '$(System.DefaultWorkingDirectory)/**/*.nupkg;!$(System.DefaultWorkingDirectory)/**/*.symbols.nupkg'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/TNZAPI.NET/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/TNZAPI.NET/**/*.symbols.nupkg'
+    #packagesToPush: '$(Build.ArtifactStagingDirectory)/TNZAPI.NET/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/TNZAPI.NET/**/*.symbols.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/packages/*.*nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'TNZAPI.NET.Nuget'
 

@@ -12,16 +12,43 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
+steps:
+- script: dotnet build TNZAPI.NET/*.csproj -c $(buildConfiguration)
+  displayName: 'dotnet build TNZAPI.NET/*.csproj $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    #packagesToPack: '**/*.csproj;!**/*.Tests.csproj;!**/*.Samples.csproj'
+    packagesToPack: 'TNZAPI.NET/*.csproj;'
+    versioningScheme: 'off'
+  displayName: 'Create package'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    #packagesToPush: '$(Build.ArtifactStagingDirectory)/*.symbols.nupkg'
+    #packagesToPush: '$(System.DefaultWorkingDirectory)/**/*.nupkg;!$(System.DefaultWorkingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/TNZAPI.NET/*.nupkg;!$(Build.ArtifactStagingDirectory)/TNZAPI.NET/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'TNZAPI.NET.Nuget'
+
 #steps:
-#- script: dotnet build TNZAPI.NET/TNZAPI.NET.csproj -c $(buildConfiguration)
-#  displayName: 'dotnet build TNZAPI.NET/TNZAPI.NET.csproj $(buildConfiguration)'
+#- task: DotNetCoreCLI@2
+#  displayName: 'dotnet build'
+#  inputs:
+#    command: 'build'
+#    arguments: '--configuration $(buildConfiguration)'
+#    projects: '**/*.csproj;!**/*.Samples.csproj'
 
 #- task: DotNetCoreCLI@2
+#  displayName: "dotnet pack"
 #  inputs:
 #    command: 'pack'
-#    packagesToPack: '**/*.csproj;!**/*.Tests.csproj;!**/*.Samples.csproj'
+#    arguments: '--configuration $(buildConfiguration)'
+#    packagesToPack: '**/*.csproj;!**/*.Samples.csproj'
+#    nobuild: true
 #    versioningScheme: 'off'
-#  displayName: 'Create package'
 
 #- task: NuGetCommand@2
 #  inputs:
@@ -31,29 +58,3 @@ variables:
 #    packagesToPush: '$(Agent.ReleaseDirectory)/**/*.nupkg;!$(Agent.ReleaseDirectory)/**/*.symbols.nupkg'
 #    nuGetFeedType: 'external'
 #    publishFeedCredentials: 'TNZAPI.NET.Nuget'
-
-steps:
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet build'
-  inputs:
-    command: 'build'
-    arguments: '--configuration $(buildConfiguration)'
-    projects: '**/*.csproj;!**/*.Samples.csproj'
-
-- task: DotNetCoreCLI@2
-  displayName: "dotnet pack"
-  inputs:
-    command: 'pack'
-    arguments: '--configuration $(buildConfiguration)'
-    packagesToPack: '**/*.csproj;!**/*.Samples.csproj'
-    nobuild: true
-    versioningScheme: 'off'
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'push'
-    #packagesToPush: '$(Build.ArtifactStagingDirectory)/*.symbols.nupkg'
-    #packagesToPush: '$(System.DefaultWorkingDirectory)/**/*.nupkg;!$(System.DefaultWorkingDirectory)/**/*.symbols.nupkg'
-    packagesToPush: '$(Agent.ReleaseDirectory)/**/*.nupkg;!$(Agent.ReleaseDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'TNZAPI.NET.Nuget'

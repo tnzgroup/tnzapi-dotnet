@@ -29,7 +29,7 @@ steps:
     command: 'push'
     #packagesToPush: '$(Build.ArtifactStagingDirectory)/*.symbols.nupkg'
     #packagesToPush: '$(System.DefaultWorkingDirectory)/**/*.nupkg;!$(System.DefaultWorkingDirectory)/**/*.symbols.nupkg'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/TNZAPI.NET/*.nupkg;!$(Build.ArtifactStagingDirectory)/TNZAPI.NET/*.symbols.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/TNZAPI.NET/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/TNZAPI.NET/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'TNZAPI.NET.Nuget'
 

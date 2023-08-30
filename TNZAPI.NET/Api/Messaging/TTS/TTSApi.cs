@@ -196,6 +196,11 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             if (Entity.Keypads.Count > 0)
             {
                 messageDataNode.AppendChild(XMLHelpers.BuildXmlKeypadsNode(xmlDoc, Entity.Keypads));
+
+                if (Entity.KeypadOptionRequired)
+                {
+                    messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "KeypadOptionRequired", "1"));
+                }
             }
 
             // Set Destinations
@@ -327,9 +332,9 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             {
                 foreach (Keypad keypad in Entity.Keypads)
                 {
-                    if (keypad.RouteNumber.Equals("") && keypad.Play.Equals(""))
+                    if (keypad.RouteNumber.Equals("") && keypad.Play.Equals("") && keypad.PlaySection == KeypadPlaySection.None)
                     {
-                        return ResultHelper.RespondError<MessageApiResult>("Empty Keypad " + keypad.Tone + " Data: Please specify RouteNumber OR Play");
+                        return ResultHelper.RespondError<MessageApiResult>("Empty Keypad " + keypad.Tone + " Data: Please specify RouteNumber OR Play OR PlaySection.");
                     }
                 }
             }

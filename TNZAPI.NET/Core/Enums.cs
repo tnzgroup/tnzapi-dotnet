@@ -281,5 +281,7 @@ namespace TNZAPI.NET.Core
         };
 
         public enum ViewEditByOptions { Account, SubAccount, Department, No };
+
+        public enum KeypadPlaySection { None, Main, AnswerPhone };
     }
 }

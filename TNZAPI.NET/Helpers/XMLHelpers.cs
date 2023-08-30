@@ -1,6 +1,7 @@
 ﻿using System.Xml;
 using System.Xml.Serialization;
 using TNZAPI.NET.Api.Messaging.Common.Components;
+using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Helpers
 {
@@ -165,6 +166,10 @@ namespace TNZAPI.NET.Helpers
             //{
             //    workingNode.AppendChild(addChildNode(xmlDoc, "Play", FileHandlers.GetFileContents(keypad.PlayFile)));
             //}
+            if (keypad.PlaySection != KeypadPlaySection.None )
+            {
+                workingNode.AppendChild(addChildNode(xmlDoc, "PlaySection", keypad.PlaySection.ToString()));
+            }
             if (keypad.PlayFileData != null)
             {
                 workingNode.AppendChild(addChildNode(xmlDoc, "PlayFile", keypad.PlayFileData.FileContent));

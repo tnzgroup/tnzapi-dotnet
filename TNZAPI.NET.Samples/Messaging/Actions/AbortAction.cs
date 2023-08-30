@@ -13,7 +13,7 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
             this.apiUser = apiUser;
         }
 
-        public void Basic()
+        public AbortApiResult Basic()
         {
             //
             // AuthToken can be found from our web portal

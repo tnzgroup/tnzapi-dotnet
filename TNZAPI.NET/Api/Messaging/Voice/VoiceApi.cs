@@ -198,6 +198,11 @@ namespace TNZAPI.NET.Api.Messaging.Voice
             if (Entity.Keypads.Count > 0)
             {
                 messageDataNode.AppendChild(XMLHelpers.BuildXmlKeypadsNode(xmlDoc, Entity.Keypads));
+
+                if (Entity.KeypadOptionRequired)
+                {
+                    messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "KeypadOptionRequired", "1"));
+                }
             }
 
             // Set Destinations
@@ -349,6 +354,17 @@ namespace TNZAPI.NET.Api.Messaging.Voice
                         Entity.MessageDataAttachments.Add(data.Key, Mapper.Update(new Attachment(), attachment));
                     }
 
+                }
+            }
+
+            if (Entity.Keypads.Count > 0)
+            {
+                foreach (Keypad keypad in Entity.Keypads)
+                {
+                    if (keypad.RouteNumber.Equals("") && keypad.PlayFile.Equals("") && keypad.PlayFileData is null && keypad.PlaySection == KeypadPlaySection.None)
+                    {
+                        return ResultHelper.RespondError<MessageApiResult>("Empty Keypad " + keypad.Tone + " Data: Please specify RouteNumber OR PlayFile OR PlayFileData OR PlaySection.");
+                    }
                 }
             }
 

@@ -40,5 +40,8 @@ namespace TNZAPI.NET.Api.Messaging.TTS.Dto
 
         [ComVisible(false)]
         public ICollection<Keypad> Keypads { get; set; } = new List<Keypad>();
+
+        [ComVisible(false)]
+        public bool KeypadOptionRequired { get; set; } = false;
     }
 }

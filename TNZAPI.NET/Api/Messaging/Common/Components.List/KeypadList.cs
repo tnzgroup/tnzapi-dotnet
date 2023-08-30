@@ -1,7 +1,6 @@
 ﻿using System.Runtime.InteropServices;
-using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Helpers;
-using Attachment = TNZAPI.NET.Api.Messaging.Common.Components.Attachment;
+using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.Common.Components.List
 {
@@ -20,7 +19,7 @@ namespace TNZAPI.NET.Api.Messaging.Common.Components.List
         /// <param name="tone">Keypad for call connection (supports buttons 1-9)</param>
         /// <param name="keypadType">Type of keypad</param>
         /// <param name="keypadData">Keypad data - Route Number OR Play</param>
-        /// <returns></returns>
+        /// <returns>KeypadList</returns>
         [ComVisible(false)]
         public KeypadList Add(int tone, Keypad.KeypadType keypadType, string keypadData)
         {
@@ -51,7 +50,7 @@ namespace TNZAPI.NET.Api.Messaging.Common.Components.List
         /// <param name="tone">Keypad for call connection (supports buttons 1-9)</param>
         /// <param name="routeNumber">Telephone number for call routing in dialling format</param>
         /// <param name="play">Message to play when tone is pressed</param>
-        /// <returns></returns>
+        /// <returns>KeypadList</returns>
         [ComVisible(false)]
         public KeypadList Add(int tone, string routeNumber, string play)
         {
@@ -65,11 +64,45 @@ namespace TNZAPI.NET.Api.Messaging.Common.Components.List
         /// </summary>
         /// <param name="tone">Keypad for call connection (supports buttons 1-9)</param>
         /// <param name="routeNumber">Telephone number for call routing in dialling format</param>
-        /// <returns></returns>
+        /// <returns>KeypadList</returns>
         [ComVisible(false)]
         public KeypadList Add(int tone, string routeNumber)
         {
             Add(new Keypad(tone, routeNumber));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding keypad
+        /// </summary>
+        /// <param name="tone">Keypad for call connection (supports buttons 1-9)</param>
+        /// <param name="routeNumber">Telephone number for call routing in dialling format</param>
+        /// <param name="play">Message to play when tone is pressed</param>
+        /// <param name="playFile">File name (full path) to play</param>
+        /// <param name="playSection">Plays the MessageToPeople ('Main') or MessageToAnswerphones ('AnswerPhone').</param>
+        /// <param name="playFileData">Attachment object</param>
+        /// <returns>KeypadList</returns>
+        [ComVisible(false)]
+        public KeypadList Add(
+            int? tone = null, 
+            string routeNumber = null, 
+            string play = null, 
+            string playFile = null, 
+            KeypadPlaySection? playSection = null, 
+            Attachment playFileData = null
+        )
+        {
+            Add(
+                new Keypad(
+                    tone,
+                    routeNumber,
+                    play,
+                    playFile,
+                    playSection,
+                    playFileData
+                )
+            );
 
             return this;
         }

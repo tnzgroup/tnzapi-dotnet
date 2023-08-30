@@ -144,6 +144,8 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             const string keypad3Route = "+6493333333";
             const string keypad4Route = "+6494444444";
 
+            const KeypadPlaySection keypad9PlaySection = KeypadPlaySection.Main;
+
             #region Add Keypads
 
             var keypads = new KeypadList();
@@ -183,8 +185,17 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
             keypad_list.Add(keypad5);
 
-
             keypads.Add(keypad_list);
+
+            //
+            // Add Keypad Method 9 - Add Keypad 9 to play MessageToPeople (Main) section
+            //
+
+            keypads.Add(
+                tone: 9,
+                playSection: keypad9PlaySection
+            );
+
             #endregion Add Keypads
 
             #region Add Recipients
@@ -274,6 +285,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
                     MessageData = voiceFiles,                           // List of voice files
                     Keypads = keypads.ToList(),                         // Keypads (1..9)
+                    KeypadOptionRequired = true,                        // Requires the callee presses a keypad option
                     Recipients = recipients.ToList(),                   // Recipients
 
                     SendTime = DateTime.Now,                            // SendTime

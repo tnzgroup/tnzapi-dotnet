@@ -36,6 +36,9 @@ namespace TNZAPI.NET.Api.Messaging.Voice.Dto
         [ComVisible(false)]
         public ICollection<Keypad> Keypads { get; set; } = new List<Keypad>();
 
+        [ComVisible(false)]
+        public bool KeypadOptionRequired { get; set; } = false;
+
         // MessageData
         public IDictionary<MessageDataType, string> MessageData { get; set; } = new Dictionary<MessageDataType, string>();
         public IDictionary<MessageDataType, Attachment> MessageDataAttachments { get; set; } = new Dictionary<MessageDataType, Attachment>();

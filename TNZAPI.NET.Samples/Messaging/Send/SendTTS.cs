@@ -155,6 +155,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             const string keypad6Play = "Hello, you have pressed 5.";
             const string keypad7Route = "+6497777777";
             const string keypad7Play = "Hello, you have pressed 6.";
+            const KeypadPlaySection keypad9PlaySection = KeypadPlaySection.Main;
 
             #endregion
 
@@ -213,6 +214,16 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             keypad7.RouteNumber = keypad7Route;
 
             keypads.Add(keypad7);
+
+            //
+            // Add Keypad Method 9 - Add Keypad 9 to play MessageToPeople (Main) section
+            //
+
+            keypads.Add(
+                tone:9, 
+                playSection: keypad9PlaySection
+            );
+
             #endregion Add Keypads
 
             #region Add Recipients
@@ -295,6 +306,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     CallRouteMessageOnWrongKey = callRouteMessageOnWrongKey,    // Call Route Message on Wrong Key (when wrong key is entered)
 
                     Keypads = keypads.ToList(),                         // Keypads (1..9)
+                    KeypadOptionRequired = true,                        // Requires the callee presses a keypad option
                     Recipients = recipients.ToList(),                   // Recipients
 
                     SendTime = DateTime.Now,                            // SendTime

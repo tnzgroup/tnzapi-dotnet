@@ -1,19 +1,18 @@
 ﻿using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Xml;
-using TNZAPI.NET.Api.Messaging.Common.Components.List;
-using static TNZAPI.NET.Core.Enums;
-using static TNZAPI.NET.Api.Messaging.Voice.Dto.VoiceModel;
 using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
+using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Voice.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces.Messaging;
 using TNZAPI.NET.Helpers;
+using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.Voice
 {
-    [ComVisible(true)]
+	[ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     public class VoiceApi : IVoiceApi
     {
@@ -384,34 +383,36 @@ namespace TNZAPI.NET.Api.Messaging.Voice
             return SendMessage();
         }
 
-        /// <summary>
-        /// Send Voice Message
-        /// </summary>
-        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="reference">Tracking ID or message description</param>
-        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="chargeCode">Cost allocation for billing</param>
-        /// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
-        /// <param name="messageToPeople">The recorded message content played if the call is answered by a human</param>
-        /// <param name="messageToAnswerPhones">The recorded message content played when the call is answered by an answering machine/voicemail service</param>
-        /// <param name="callRouteMessageToPeople">recorded message content message played when a keypad option is pressed</param>
-        /// <param name="callRouteMessageToOperators">recorded message content message played to the call centre representative answering the connected call</param>
-        /// <param name="callRouteMessageOnWrongKey">recorded message content message played when an unregistered keypad button is pressed</param>
-        /// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
-        /// <param name="options">Customisable field</param>
-        /// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
-        /// <param name="destination">Destination - string value</param>
-        /// <param name="destinations">Desitnations - ICollection<string>()</param>
-        /// <param name="recipient">Destination - Recipient() object</param>
-        /// <param name="recipients">Destinations - ICollection<Recipient>()</param>
-        /// <param name="webhookCallbackURL">Webhook Callback URL</param>
-        /// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
-        /// <param name="sendMode">SendMode.Live or SendMode.Test</param>
-        /// <returns>MessageApiResult</returns>
-        [ComVisible(false)]
+		/// <summary>
+		/// Send Voice Message
+		/// </summary>
+		/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+		/// <param name="reference">Tracking ID or message description</param>
+		/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+		/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+		/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+		/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+		/// <param name="chargeCode">Cost allocation for billing</param>
+		/// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
+		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
+		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
+		/// <param name="messageToPeople">The recorded message content played if the call is answered by a human</param>
+		/// <param name="messageToAnswerPhones">The recorded message content played when the call is answered by an answering machine/voicemail service</param>
+		/// <param name="callRouteMessageToPeople">recorded message content message played when a keypad option is pressed</param>
+		/// <param name="callRouteMessageToOperators">recorded message content message played to the call centre representative answering the connected call</param>
+		/// <param name="callRouteMessageOnWrongKey">recorded message content message played when an unregistered keypad button is pressed</param>
+		/// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
+		/// <param name="options">Customisable field</param>
+		/// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
+		/// <param name="destination">Destination - string value</param>
+		/// <param name="destinations">Desitnations - ICollection<string>()</param>
+		/// <param name="recipient">Destination - Recipient() object</param>
+		/// <param name="recipients">Destinations - ICollection<Recipient>()</param>
+		/// <param name="webhookCallbackURL">Webhook Callback URL</param>
+		/// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
+		/// <param name="sendMode">SendMode.Live or SendMode.Test</param>
+		/// <returns>MessageApiResult</returns>
+		[ComVisible(false)]
         public MessageApiResult SendMessage(
             string messageID = null,
             string reference = null,
@@ -426,7 +427,9 @@ namespace TNZAPI.NET.Api.Messaging.Voice
             string callRouteMessageToOperators = null,
             string callRouteMessageOnWrongKey = null,
             int? numberOfOperators = null,
-            string callerID = null,
+			int? retryAttempts = null,
+			int? retryPeriod = null,
+			string callerID = null,
             string options = null,
             ICollection<Keypad> keypads = null,
             string destination = null,
@@ -452,7 +455,10 @@ namespace TNZAPI.NET.Api.Messaging.Voice
                 ChargeCode = chargeCode,
 
                 NumberOfOperators = numberOfOperators is not null ? (int)numberOfOperators : 0,
-                CallerID = callerID,
+				RetryAttempts = retryAttempts is not null ? (int)retryAttempts : 0,
+				RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
+
+				CallerID = callerID,
                 Options = options,
 
                 MessageData = new Dictionary<MessageDataType, string>()
@@ -537,34 +543,36 @@ namespace TNZAPI.NET.Api.Messaging.Voice
             return await SendMessageAsync();
         }
 
-        /// <summary>
-        /// Send Voice Message
-        /// </summary>
-        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="reference">Tracking ID or message description</param>
-        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="chargeCode">Cost allocation for billing</param>
-        /// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
-        /// <param name="messageToPeople">The recorded message content played if the call is answered by a human</param>
-        /// <param name="messageToAnswerPhones">The recorded message content played when the call is answered by an answering machine/voicemail service</param>
-        /// <param name="callRouteMessageToPeople">recorded message content message played when a keypad option is pressed</param>
-        /// <param name="callRouteMessageToOperators">recorded message content message played to the call centre representative answering the connected call</param>
-        /// <param name="callRouteMessageOnWrongKey">recorded message content message played when an unregistered keypad button is pressed</param>
-        /// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
-        /// <param name="options">Customisable field</param>
-        /// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
-        /// <param name="destination">Destination - string value</param>
-        /// <param name="destinations">Desitnations - ICollection<string>()</param>
-        /// <param name="recipient">Destination - Recipient() object</param>
-        /// <param name="recipients">Destinations - ICollection<Recipient>()</param>
-        /// <param name="webhookCallbackURL">Webhook Callback URL</param>
-        /// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
-        /// <param name="sendMode">SendMode.Live or SendMode.Test</param>
-        /// <returns>MessageApiResult</returns>
-        public async Task<MessageApiResult> SendMessageAsync(
+		/// <summary>
+		/// Send Voice Message
+		/// </summary>
+		/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+		/// <param name="reference">Tracking ID or message description</param>
+		/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+		/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+		/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+		/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+		/// <param name="chargeCode">Cost allocation for billing</param>
+		/// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
+		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
+		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
+		/// <param name="messageToPeople">The recorded message content played if the call is answered by a human</param>
+		/// <param name="messageToAnswerPhones">The recorded message content played when the call is answered by an answering machine/voicemail service</param>
+		/// <param name="callRouteMessageToPeople">recorded message content message played when a keypad option is pressed</param>
+		/// <param name="callRouteMessageToOperators">recorded message content message played to the call centre representative answering the connected call</param>
+		/// <param name="callRouteMessageOnWrongKey">recorded message content message played when an unregistered keypad button is pressed</param>
+		/// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
+		/// <param name="options">Customisable field</param>
+		/// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
+		/// <param name="destination">Destination - string value</param>
+		/// <param name="destinations">Desitnations - ICollection<string>()</param>
+		/// <param name="recipient">Destination - Recipient() object</param>
+		/// <param name="recipients">Destinations - ICollection<Recipient>()</param>
+		/// <param name="webhookCallbackURL">Webhook Callback URL</param>
+		/// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
+		/// <param name="sendMode">SendMode.Live or SendMode.Test</param>
+		/// <returns>MessageApiResult</returns>
+		public async Task<MessageApiResult> SendMessageAsync(
             string messageID = null,
             string reference = null,
             DateTime? sendTime = null,
@@ -578,7 +586,9 @@ namespace TNZAPI.NET.Api.Messaging.Voice
             string callRouteMessageToOperators = null,
             string callRouteMessageOnWrongKey = null,
             int? numberOfOperators = null,
-            string callerID = null,
+			int? retryAttempts = null,
+			int? retryPeriod = null,
+			string callerID = null,
             string options = null,
             ICollection<Keypad> keypads = null,
             string destination = null,
@@ -604,7 +614,10 @@ namespace TNZAPI.NET.Api.Messaging.Voice
                 ChargeCode = chargeCode,
 
                 NumberOfOperators = numberOfOperators is not null ? (int)numberOfOperators : 0,
-                CallerID = callerID,
+				RetryAttempts = retryAttempts is not null ? (int)retryAttempts : 0,
+				RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
+
+				CallerID = callerID,
                 Options = options,
 
                 MessageData = new Dictionary<MessageDataType, string>()

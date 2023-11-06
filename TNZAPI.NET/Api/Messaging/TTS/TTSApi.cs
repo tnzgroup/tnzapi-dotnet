@@ -13,7 +13,7 @@ using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.TTS
 {
-    [ComVisible(true)]
+	[ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     public class TTSApi : ITTSApi
     {
@@ -354,35 +354,37 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             return SendMessage();
         }
 
-        /// <summary>
-        /// Send TextToSpeech Message
-        /// </summary>
-        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="reference">Tracking ID or message description</param>
-        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="chargeCode">Cost allocation for billing</param>
-        /// <param name="messageToPeople">The voice file be played if the call is answered by a human</param>
-        /// <param name="messageToAnswerphones">The voice file be played when the call is answered by an answering machine/voicemail service</param>
-        /// <param name="callRouteMessageToPeople">The voice file be played when a keypad option is pressed</param>
-        /// <param name="callRouteMessageToOperators">Text-to-speech message played to the call centre representative answering the connected call</param>
-        /// <param name="callRouteMessageOnWrongKey">Text-to-speech message played when an unregistered keypad button is pressed</param>
-        /// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
-        /// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
-        /// <param name="ttsVoiceType">Text-to-Speech voice to use (Male1, Female1, Female2, Female3, Female4)</param>
-        /// <param name="options">Customisable field</param>
-        /// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
-        /// <param name="destination">Destination - string value</param>
-        /// <param name="destinations">Desitnations - ICollection<string>()</param>
-        /// <param name="recipient">Destination - Recipient() object</param>
-        /// <param name="recipients">Destinations - ICollection<Recipient>()</param>
-        /// <param name="webhookCallbackURL">Webhook Callback URL</param>
-        /// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
-        /// <param name="sendMode">SendMode.Live or SendMode.Test</param>
-        /// <returns>MessageApiResult</returns>
-        [ComVisible(false)]
+		/// <summary>
+		/// Send TextToSpeech Message
+		/// </summary>
+		/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+		/// <param name="reference">Tracking ID or message description</param>
+		/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+		/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+		/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+		/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+		/// <param name="chargeCode">Cost allocation for billing</param>
+		/// <param name="messageToPeople">The voice file be played if the call is answered by a human</param>
+		/// <param name="messageToAnswerphones">The voice file be played when the call is answered by an answering machine/voicemail service</param>
+		/// <param name="callRouteMessageToPeople">The voice file be played when a keypad option is pressed</param>
+		/// <param name="callRouteMessageToOperators">Text-to-speech message played to the call centre representative answering the connected call</param>
+		/// <param name="callRouteMessageOnWrongKey">Text-to-speech message played when an unregistered keypad button is pressed</param>
+		/// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
+		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
+		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
+		/// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
+		/// <param name="ttsVoiceType">Text-to-Speech voice to use (Male1, Female1, Female2, Female3, Female4)</param>
+		/// <param name="options">Customisable field</param>
+		/// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
+		/// <param name="destination">Destination - string value</param>
+		/// <param name="destinations">Desitnations - ICollection<string>()</param>
+		/// <param name="recipient">Destination - Recipient() object</param>
+		/// <param name="recipients">Destinations - ICollection<Recipient>()</param>
+		/// <param name="webhookCallbackURL">Webhook Callback URL</param>
+		/// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
+		/// <param name="sendMode">SendMode.Live or SendMode.Test</param>
+		/// <returns>MessageApiResult</returns>
+		[ComVisible(false)]
         public MessageApiResult SendMessage(
             string messageID = null,
             string reference = null,
@@ -397,6 +399,8 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             string callRouteMessageToOperators = null,
             string callRouteMessageOnWrongKey = null,
             int? numberOfOperators = null,
+            int? retryAttempts = null,
+            int? retryPeriod = null,
             string callerID = null,
             TTSVoiceType? ttsVoiceType = null,
             string options = null,
@@ -424,6 +428,9 @@ namespace TNZAPI.NET.Api.Messaging.TTS
                 ChargeCode = chargeCode,
 
                 NumberOfOperators = numberOfOperators is not null ? (int)numberOfOperators : 0,
+                RetryAttempts = retryAttempts is not null ? (int)retryAttempts : 0,
+                RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
+
                 CallerID = callerID,
                 TTSVoice = ttsVoiceType is not null ? (TTSVoiceType)ttsVoiceType : TTSVoiceType.Female1,
                 Options = options,
@@ -509,35 +516,37 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             return await SendMessageAsync();
         }
 
-        /// <summary>
-        /// Send TextToSpeech Message
-        /// </summary>
-        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="reference">Tracking ID or message description</param>
-        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="chargeCode">Cost allocation for billing</param>
-        /// <param name="messageToPeople">The voice file be played if the call is answered by a human</param>
-        /// <param name="messageToAnswerphones">The voice file be played when the call is answered by an answering machine/voicemail service</param>
-        /// <param name="callRouteMessageToPeople">The voice file be played when a keypad option is pressed</param>
-        /// <param name="callRouteMessageToOperators">Text-to-speech message played to the call centre representative answering the connected call</param>
-        /// <param name="callRouteMessageOnWrongKey">Text-to-speech message played when an unregistered keypad button is pressed</param>
-        /// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
-        /// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
-        /// <param name="ttsVoiceType">Text-to-Speech voice to use (Male1, Female1, Female2, Female3, Female4)</param>
-        /// <param name="options">Customisable field</param>
-        /// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
-        /// <param name="destination">Destination - string value</param>
-        /// <param name="destinations">Desitnations - ICollection<string>()</param>
-        /// <param name="recipient">Destination - Recipient() object</param>
-        /// <param name="recipients">Destinations - ICollection<Recipient>()</param>
-        /// <param name="webhookCallbackURL">Webhook Callback URL</param>
-        /// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
-        /// <param name="sendMode">SendMode.Live or SendMode.Test</param>
-        /// <returns>MessageApiResult</returns>
-        [ComVisible(false)]
+		/// <summary>
+		/// Send TextToSpeech Message
+		/// </summary>
+		/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+		/// <param name="reference">Tracking ID or message description</param>
+		/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+		/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+		/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+		/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+		/// <param name="chargeCode">Cost allocation for billing</param>
+		/// <param name="messageToPeople">The voice file be played if the call is answered by a human</param>
+		/// <param name="messageToAnswerphones">The voice file be played when the call is answered by an answering machine/voicemail service</param>
+		/// <param name="callRouteMessageToPeople">The voice file be played when a keypad option is pressed</param>
+		/// <param name="callRouteMessageToOperators">Text-to-speech message played to the call centre representative answering the connected call</param>
+		/// <param name="callRouteMessageOnWrongKey">Text-to-speech message played when an unregistered keypad button is pressed</param>
+		/// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
+		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
+		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
+		/// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
+		/// <param name="ttsVoiceType">Text-to-Speech voice to use (Male1, Female1, Female2, Female3, Female4)</param>
+		/// <param name="options">Customisable field</param>
+		/// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
+		/// <param name="destination">Destination - string value</param>
+		/// <param name="destinations">Desitnations - ICollection<string>()</param>
+		/// <param name="recipient">Destination - Recipient() object</param>
+		/// <param name="recipients">Destinations - ICollection<Recipient>()</param>
+		/// <param name="webhookCallbackURL">Webhook Callback URL</param>
+		/// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
+		/// <param name="sendMode">SendMode.Live or SendMode.Test</param>
+		/// <returns>MessageApiResult</returns>
+		[ComVisible(false)]
         public async Task<MessageApiResult> SendMessageAsync(
             string messageID = null,
             string reference = null,
@@ -552,7 +561,9 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             string callRouteMessageToOperators = null,
             string callRouteMessageOnWrongKey = null,
             int? numberOfOperators = null,
-            string callerID = null,
+			int? retryAttempts = null,
+			int? retryPeriod = null,
+			string callerID = null,
             TTSVoiceType? ttsVoiceType = null,
             string options = null,
             ICollection<Keypad> keypads = null,
@@ -579,7 +590,10 @@ namespace TNZAPI.NET.Api.Messaging.TTS
                 ChargeCode = chargeCode,
 
                 NumberOfOperators = numberOfOperators is not null ? (int)numberOfOperators : 0,
-                CallerID = callerID,
+				RetryAttempts = retryAttempts is not null ? (int)retryAttempts : 0,
+				RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
+
+				CallerID = callerID,
                 TTSVoice = ttsVoiceType is not null ? (TTSVoiceType)ttsVoiceType : TTSVoiceType.Female1,
                 Options = options,
 

@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
-		<VersionPrefix>2.3.0.2</VersionPrefix>
+		<VersionPrefix>2.3.0.3</VersionPrefix>
 		<AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
 		<FileVersion>$(VersionPrefix)</FileVersion>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
@@ -12,7 +12,7 @@
 	</PropertyGroup>
   
   <ItemGroup>
-    <None Include="..\readme.md" Pack="true" PackagePath="\"/>
+    <None Include="..\readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

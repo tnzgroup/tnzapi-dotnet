@@ -13,6 +13,8 @@ The documentation for the TNZ API can be found [here][apidocs].
 This library supports the following .NET implementations:
 
 * .NET6
+* .NET7
+* .NET8
 
 ## Getting Started
 

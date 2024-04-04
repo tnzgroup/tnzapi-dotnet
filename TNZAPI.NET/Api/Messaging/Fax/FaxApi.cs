@@ -1,19 +1,19 @@
 ﻿using System.Runtime.InteropServices;
 using System.Xml;
-using TNZAPI.NET.Api.Messaging.Common.Components.List;
+using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
+using TNZAPI.NET.Api.Messaging.Common.Components.List;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.Fax.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces.Messaging;
 using TNZAPI.NET.Helpers;
 using static TNZAPI.NET.Core.Enums;
-using TNZAPI.NET.Api.Messaging.Common.Dto;
-using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 
 namespace TNZAPI.NET.Api.Messaging.Fax
 {
-    [ComVisible(true)]
+	[ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     public class FaxApi : IFaxApi
     {
@@ -340,7 +340,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax
 		/// <param name="resolution">Hi/Low - Quality of the fax image. High for better quality, low for lower quality (faster delivery speed)</param>
 		/// <param name="csid">Called Subscriber Identification - Maximum 30 characters</param>
 		/// <param name="watermarkFolder">Directory/location of Watermark file to use</param>
-		/// <param name="watermarkFirstpage">Watermark file to apply to the first page only</param>
+		/// <param name="watermarkFirstPage">Watermark file to apply to the first page only</param>
 		/// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
 		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
 		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
@@ -372,7 +372,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             string resolution = null,
             string csid = null,
             string watermarkFolder = null,
-            string watermarkFirstpage = null,
+            string watermarkFirstPage = null,
             string watermarkAllPages = null,
             int? retryAttempts = null,
             int? retryPeriod = null,
@@ -410,7 +410,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax
                 CSID = csid,
 
                 WatermarkFolder = watermarkFolder,
-                WatermarkFirstPage = watermarkFirstpage,
+                WatermarkFirstPage = watermarkFirstPage,
                 WatermarkAllPages = watermarkAllPages,
 
                 RetryAttempts = retryAttempts is not null ? (int)retryAttempts : 3,
@@ -504,7 +504,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax
 		/// <param name="resolution">Hi/Low - Quality of the fax image. High for better quality, low for lower quality (faster delivery speed)</param>
 		/// <param name="csid">Called Subscriber Identification - Maximum 30 characters</param>
 		/// <param name="watermarkFolder">Directory/location of Watermark file to use</param>
-		/// <param name="watermarkFirstpage">Watermark file to apply to the first page only</param>
+		/// <param name="watermarkFirstPage">Watermark file to apply to the first page only</param>
 		/// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
 		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
 		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
@@ -536,7 +536,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             string resolution = null,
             string csid = null,
             string watermarkFolder = null,
-            string watermarkFirstpage = null,
+            string watermarkFirstPage = null,
             string watermarkAllPages = null,
             int? retryAttempts = null,
             int? retryPeriod = null,
@@ -574,7 +574,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax
                 CSID = csid,
 
                 WatermarkFolder = watermarkFolder,
-                WatermarkFirstPage = watermarkFirstpage,
+                WatermarkFirstPage = watermarkFirstPage,
                 WatermarkAllPages = watermarkAllPages,
 
                 RetryAttempts = retryAttempts is not null ? (int)retryAttempts : 3,
@@ -602,5 +602,129 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             });
         }
         #endregion
-    }
+
+        #region Deprecated
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public MessageApiResult SendMessage(
+            string messageID,
+            string reference = null,
+            DateTime? sendTime = null,
+            string timezone = null,
+            string subaccount = null,
+            string department = null,
+            string chargeCode = null,
+            string resolution = null,
+            string csid = null,
+            string watermarkFolder = null,
+            string watermarkFirstPage = null,
+            string watermarkAllPages = null,
+            int? retryAttempts = null,
+            int? retryPeriod = null,
+            string destination = null,
+            ICollection<string> destinations = null,
+            Recipient recipient = null,
+            ICollection<Recipient> recipients = null,
+            string file = null,
+            ICollection<string> files = null,
+            Attachment attachment = null,
+            ICollection<Attachment> attachments = null,
+            string webhookCallbackURL = null,
+            WebhookCallbackType? webhookCallbackFormat = null,
+            SendModeType? sendMode = null
+        )
+            =>
+                SendMessage(
+					messageID: new MessageID(messageID),        // MessageID object
+					reference: reference,
+					sendTime: sendTime,
+                    timezone: timezone,
+					subaccount: subaccount,
+					department: department,
+					chargeCode: chargeCode,
+					resolution: resolution,
+					csid: csid,
+					watermarkFolder: watermarkFolder,
+					watermarkFirstPage: watermarkFirstPage,
+					watermarkAllPages: watermarkAllPages,
+					retryAttempts: retryAttempts,
+					retryPeriod: retryPeriod,
+					groupID: null,                              // GroupID object
+					groupIDs: null,                             // ICollection<GroupID>
+					contactID: null,                            // ContactID object
+					contactIDs: null,                           // ICollection<ContactID>
+					destination: destination,
+					destinations: destinations,
+					recipient: recipient,
+					recipients: recipients,
+					file: file,
+					files: files,
+					attachment: attachment,
+					attachments: attachments,
+					webhookCallbackURL: webhookCallbackURL,
+					webhookCallbackFormat: webhookCallbackFormat,
+					sendMode: sendMode
+				);
+
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public async Task<MessageApiResult> SendMessageAsync(
+			string messageID,
+			string reference = null,
+			DateTime? sendTime = null,
+			string timezone = null,
+			string subaccount = null,
+			string department = null,
+			string chargeCode = null,
+			string resolution = null,
+			string csid = null,
+			string watermarkFolder = null,
+			string watermarkFirstPage = null,
+			string watermarkAllPages = null,
+			int? retryAttempts = null,
+			int? retryPeriod = null,
+			string destination = null,
+			ICollection<string> destinations = null,
+			Recipient recipient = null,
+			ICollection<Recipient> recipients = null,
+			string file = null,
+			ICollection<string> files = null,
+			Attachment attachment = null,
+			ICollection<Attachment> attachments = null,
+			string webhookCallbackURL = null,
+			WebhookCallbackType? webhookCallbackFormat = null,
+			SendModeType? sendMode = null
+		) 
+            =>
+				await SendMessageAsync(
+					messageID: new MessageID(messageID),        // MessageID object
+					reference: reference,
+					sendTime: sendTime,
+					timezone: timezone,
+					subaccount: subaccount,
+					department: department,
+					chargeCode: chargeCode,
+					resolution: resolution,
+					csid: csid,
+					watermarkFolder: watermarkFolder,
+					watermarkFirstPage: watermarkFirstPage,
+					watermarkAllPages: watermarkAllPages,
+					retryAttempts: retryAttempts,
+					retryPeriod: retryPeriod,
+					groupID: null,                              // GroupID object
+					groupIDs: null,                             // ICollection<GroupID>
+					contactID: null,                            // ContactID object
+					contactIDs: null,                           // ICollection<ContactID>
+					destination: destination,
+					destinations: destinations,
+					recipient: recipient,
+					recipients: recipients,
+					file: file,
+					files: files,
+					attachment: attachment,
+					attachments: attachments,
+					webhookCallbackURL: webhookCallbackURL,
+					webhookCallbackFormat: webhookCallbackFormat,
+					sendMode: sendMode
+				);
+		#endregion
+	}
 }

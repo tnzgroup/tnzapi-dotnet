@@ -11,6 +11,8 @@ using TNZAPI.NET.Helpers;
 using static TNZAPI.NET.Core.Enums;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace TNZAPI.NET.Api.Messaging.SMS
 {
@@ -571,5 +573,113 @@ namespace TNZAPI.NET.Api.Messaging.SMS
             });
         }
         #endregion
-    }
+
+        #region Deprecated
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public MessageApiResult SendMessage(
+            string messageID,
+            string reference = null,
+            DateTime? sendTime = null,
+            string timezone = null,
+            string subaccount = null,
+            string department = null,
+            string chargeCode = null,
+            string smsEmailReply = null,
+            string forceGSMChars = null,
+            string messageText = null,
+            string destination = null,
+            ICollection<string> destinations = null,
+            Recipient recipient = null,
+            ICollection<Recipient> recipients = null,
+            string file = null,
+            ICollection<string> files = null,
+            Attachment attachment = null,
+            ICollection<Attachment> attachments = null,
+            string webhookCallbackURL = null,
+            Enums.WebhookCallbackType? webhookCallbackFormat = null,
+            SendModeType? sendMode = null
+        )
+            =>
+                SendMessage(
+					messageID: new MessageID(messageID),        // MessageID object
+					reference: reference,
+					sendTime: sendTime,
+					timezone: timezone,
+					subaccount: subaccount,
+					department: department,
+					chargeCode: chargeCode,
+					smsEmailReply: smsEmailReply,
+					forceGSMChars: forceGSMChars,
+					messageText: messageText,
+					groupID: null,                              // GroupID object
+					groupIDs: null,                             // ICollection<GroupID>
+					contactID: null,                            // ContactID object
+					contactIDs: null,                           // ICollection<ContactID>
+					destination: destination,
+					destinations: destinations,
+					recipient: recipient,
+					recipients: recipients,
+					file: file,
+					files: files,
+					attachment: attachment,
+					attachments: attachments,
+					webhookCallbackURL: webhookCallbackURL,
+					webhookCallbackFormat: webhookCallbackFormat,
+					sendMode: sendMode
+				);
+
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public async Task<MessageApiResult> SendMessageAsync(
+			string messageID,
+			string reference = null,
+			DateTime? sendTime = null,
+			string timezone = null,
+			string subaccount = null,
+			string department = null,
+			string chargeCode = null,
+			string smsEmailReply = null,
+			string forceGSMChars = null,
+			string messageText = null,
+			string destination = null,
+			ICollection<string> destinations = null,
+			Recipient recipient = null,
+			ICollection<Recipient> recipients = null,
+			string file = null,
+			ICollection<string> files = null,
+			Attachment attachment = null,
+			ICollection<Attachment> attachments = null,
+			string webhookCallbackURL = null,
+			Enums.WebhookCallbackType? webhookCallbackFormat = null,
+			SendModeType? sendMode = null
+		)
+            =>
+				await SendMessageAsync(
+					messageID: new MessageID(messageID),        // MessageID object
+					reference: reference,
+					sendTime: sendTime,
+					timezone: timezone,
+					subaccount: subaccount,
+					department: department,
+					chargeCode: chargeCode,
+					smsEmailReply: smsEmailReply,
+					forceGSMChars: forceGSMChars,
+					messageText: messageText,
+					groupID: null,                              // GroupID object
+					groupIDs: null,                             // ICollection<GroupID>
+					contactID: null,                            // ContactID object
+					contactIDs: null,                           // ICollection<ContactID>
+					destination: destination,
+					destinations: destinations,
+					recipient: recipient,
+					recipients: recipients,
+					file: file,
+					files: files,
+					attachment: attachment,
+					attachments: attachments,
+					webhookCallbackURL: webhookCallbackURL,
+					webhookCallbackFormat: webhookCallbackFormat,
+					sendMode: sendMode
+				);
+		#endregion
+	}
 }

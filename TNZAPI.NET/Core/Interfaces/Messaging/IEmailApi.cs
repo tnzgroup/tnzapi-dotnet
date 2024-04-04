@@ -74,5 +74,65 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
 			WebhookCallbackType? webhookCallbackFormat = null,
 			SendModeType? sendMode = null
 		);
+
+		#region Deprecated
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		MessageApiResult SendMessage(
+			string messageID,
+			string emailSubject = null,
+			string messagePlain = null,
+			string messageHTML = null,
+			string reference = null,
+			DateTime? sendTime = null,
+			string timezone = null,
+			string subaccount = null,
+			string department = null,
+			string chargeCode = null,
+			string smtpFrom = null,
+			string fromName = null,
+			string fromEmail = null,
+			string replyTo = null,
+			string destination = null,
+			ICollection<string> destinations = null,
+			Recipient recipient = null,
+			ICollection<Recipient> recipients = null,
+			string file = null,
+			ICollection<string> files = null,
+			Attachment attachment = null,
+			ICollection<Attachment> attachments = null,
+			string webhookCallbackURL = null,
+			WebhookCallbackType? webhookCallbackFormat = null,
+			SendModeType? sendMode = null
+		);
+
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		Task<MessageApiResult> SendMessageAsync(
+			string messageID,
+			string emailSubject = null,
+			string messagePlain = null,
+			string messageHTML = null,
+			string reference = null,
+			DateTime? sendTime = null,
+			string timezone = null,
+			string subaccount = null,
+			string department = null,
+			string chargeCode = null,
+			string smtpFrom = null,
+			string fromName = null,
+			string fromEmail = null,
+			string replyTo = null,
+			string destination = null,
+			ICollection<string> destinations = null,
+			Recipient recipient = null,
+			ICollection<Recipient> recipients = null,
+			string file = null,
+			ICollection<string> files = null,
+			Attachment attachment = null,
+			ICollection<Attachment> attachments = null,
+			string webhookCallbackURL = null,
+			WebhookCallbackType? webhookCallbackFormat = null,
+			SendModeType? sendMode = null
+		);
+		#endregion
 	}
 }

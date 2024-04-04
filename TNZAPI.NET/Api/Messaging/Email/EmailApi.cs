@@ -13,7 +13,7 @@ using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.Email
 {
-    public class EmailApi : IEmailApi
+	public class EmailApi : IEmailApi
     {
         private ITNZAuth User = new TNZApiUser();
 
@@ -592,6 +592,130 @@ namespace TNZAPI.NET.Api.Messaging.Email
                 });
         }
 
+        #endregion
+
+        #region Deprecated
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public MessageApiResult SendMessage(
+			string messageID,
+			string emailSubject = null,
+			string messagePlain = null,
+			string messageHTML = null,
+			string reference = null,
+			DateTime? sendTime = null,
+			string timezone = null,
+			string subaccount = null,
+			string department = null,
+			string chargeCode = null,
+			string smtpFrom = null,
+			string fromName = null,
+			string fromEmail = null,
+			string replyTo = null,
+			string destination = null,
+			ICollection<string> destinations = null,
+			Recipient recipient = null,
+			ICollection<Recipient> recipients = null,
+			string file = null,
+			ICollection<string> files = null,
+			Attachment attachment = null,
+			ICollection<Attachment> attachments = null,
+			string webhookCallbackURL = null,
+			WebhookCallbackType? webhookCallbackFormat = null,
+			SendModeType? sendMode = null
+		)
+            =>
+                SendMessage(
+			        messageID: new MessageID(messageID),        // MessageID object
+			        emailSubject: emailSubject,
+					messagePlain: messagePlain,
+					messageHTML: messageHTML,
+					reference: reference,
+					sendTime: sendTime,
+			        timezone: timezone,
+			        subaccount: subaccount,
+			        department: department,
+			        chargeCode: chargeCode,
+			        smtpFrom: smtpFrom,
+			        fromName: fromName,
+		            fromEmail: fromEmail,
+			        replyTo: replyTo,
+                    groupID: null,                              // GroupID object
+				    groupIDs: null,                             // ICollection<GroupID>
+				    contactID: null,                            // ContactID object
+				    contactIDs: null,                           // ICollection<ContactID>
+				    destination: destination,
+			        destinations: destinations,
+			        recipient: recipient,
+			        recipients: recipients,
+			        file: file,
+			        files: files,
+			        attachment: attachment,
+			        attachments: attachments,
+					webhookCallbackURL: webhookCallbackURL,
+					webhookCallbackFormat: webhookCallbackFormat,
+					sendMode: sendMode
+				);
+
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public async Task<MessageApiResult> SendMessageAsync(
+			string messageID,
+			string emailSubject = null,
+			string messagePlain = null,
+			string messageHTML = null,
+			string reference = null,
+			DateTime? sendTime = null,
+			string timezone = null,
+			string subaccount = null,
+			string department = null,
+			string chargeCode = null,
+			string smtpFrom = null,
+			string fromName = null,
+			string fromEmail = null,
+			string replyTo = null,
+			string destination = null,
+			ICollection<string> destinations = null,
+			Recipient recipient = null,
+			ICollection<Recipient> recipients = null,
+			string file = null,
+			ICollection<string> files = null,
+			Attachment attachment = null,
+			ICollection<Attachment> attachments = null,
+			string webhookCallbackURL = null,
+			WebhookCallbackType? webhookCallbackFormat = null,
+			SendModeType? sendMode = null
+		) 
+            =>
+				await SendMessageAsync(
+					messageID: new MessageID(messageID),        // MessageID object
+					emailSubject: emailSubject,
+					messagePlain: messagePlain,
+					messageHTML: messageHTML,
+					reference: reference,
+					sendTime: sendTime,
+					timezone: timezone,
+					subaccount: subaccount,
+					department: department,
+					chargeCode: chargeCode,
+					smtpFrom: smtpFrom,
+					fromName: fromName,
+					fromEmail: fromEmail,
+					replyTo: replyTo,
+					groupID: null,                              // GroupID object
+					groupIDs: null,                             // ICollection<GroupID>
+					contactID: null,                            // ContactID object
+					contactIDs: null,                           // ICollection<ContactID>
+					destination: destination,
+					destinations: destinations,
+					recipient: recipient,
+					recipients: recipients,
+					file: file,
+					files: files,
+					attachment: attachment,
+					attachments: attachments,
+					webhookCallbackURL: webhookCallbackURL,
+					webhookCallbackFormat: webhookCallbackFormat,
+					sendMode: sendMode
+				);
 		#endregion
 	}
 }

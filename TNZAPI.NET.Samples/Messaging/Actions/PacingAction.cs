@@ -1,5 +1,6 @@
 ﻿using TNZAPI.NET.Api.Actions.Pacing;
 using TNZAPI.NET.Api.Actions.Pacing.Dto;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 
 namespace TNZAPI.NET.Samples.Messaging.Actions
@@ -18,8 +19,8 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
             var client = new TNZApiClient(apiUser);
 
             var response = client.Actions.Pacing.Submit(
-                messageID: "ID123456",      // MessageID
-                numberOfOperators: 1        // No. of operators
+                messageID: new MessageID("ID123456"),   // MessageID
+                numberOfOperators: 1                    // No. of operators
             );
 
             if (response.Result == Enums.ResultCode.Success)
@@ -53,7 +54,7 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
             var response = client.Actions.Pacing.Submit(
                 new PacingRequestOptions()
                 {
-                    MessageID = "ID123456",     // MessageID
+                    MessageID = new MessageID("ID123456"),     // MessageID
                     NumberOfOperators = 1,      // No. of operators
                 });
 

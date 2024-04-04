@@ -1,5 +1,6 @@
 ﻿using TNZAPI.NET.Api.Actions.Abort;
 using TNZAPI.NET.Api.Actions.Abort.Dto;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 
 namespace TNZAPI.NET.Samples.Messaging.Actions
@@ -21,7 +22,7 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
 
             var client = new TNZApiClient(apiUser);
 
-            var response = client.Actions.Abort.Submit("ID123456"); // MessageID
+            var response = client.Actions.Abort.Submit(new MessageID("ID123456")); // MessageID
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -86,7 +87,7 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
             var response = client.Actions.Abort.Submit(
                 new AbortRequestOptions()
                 {
-                    MessageID = "ID123456"      // MessageID
+                    MessageID = new MessageID("ID123456")      // MessageID
                 });
 
             if (response.Result == Enums.ResultCode.Success)

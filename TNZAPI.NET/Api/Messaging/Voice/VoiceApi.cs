@@ -1,5 +1,7 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Xml;
 using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Api.Messaging.Common;
@@ -681,5 +683,129 @@ namespace TNZAPI.NET.Api.Messaging.Voice
         }
 
         #endregion
-    }
+
+        #region Deprecated
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public MessageApiResult SendMessage(
+            string messageID,
+            string reference = null,
+            DateTime? sendTime = null,
+            string timezone = null,
+            string subaccount = null,
+            string department = null,
+            string chargeCode = null,
+            string messageToPeople = null,
+            string messageToAnswerPhones = null,
+            string callRouteMessageToPeople = null,
+            string callRouteMessageToOperators = null,
+            string callRouteMessageOnWrongKey = null,
+            int? numberOfOperators = null,
+            int? retryAttempts = null,
+            int? retryPeriod = null,
+            string callerID = null,
+            string options = null,
+            ICollection<Keypad> keypads = null,
+            string destination = null,
+            ICollection<string> destinations = null,
+            Recipient recipient = null,
+            ICollection<Recipient> recipients = null,
+            string webhookCallbackURL = null,
+            WebhookCallbackType? webhookCallbackFormat = null,
+            SendModeType? sendMode = null
+        )
+            =>
+                SendMessage(
+					messageID: new MessageID(messageID),        // MessageID object
+					reference: reference,
+					sendTime: sendTime,
+					timezone: timezone,
+					subaccount: subaccount,
+					department: department,
+					chargeCode: chargeCode,
+					messageToPeople: messageToPeople,
+					messageToAnswerPhones: messageToAnswerPhones,
+					callRouteMessageToPeople: callRouteMessageToPeople,
+					callRouteMessageToOperators: callRouteMessageToOperators,
+					callRouteMessageOnWrongKey: callRouteMessageOnWrongKey,
+					numberOfOperators: numberOfOperators,
+					retryAttempts: retryAttempts,
+					retryPeriod: retryPeriod,
+					callerID: callerID,
+					options: options,
+					keypads: keypads,
+					groupID: null,                              // GroupID object
+					groupIDs: null,                             // ICollection<GroupID>
+					contactID: null,                            // ContactID object
+					contactIDs: null,                           // ICollection<ContactID>
+					destination: destination,
+					destinations: destinations,
+					recipient: recipient,
+					recipients: recipients,
+					webhookCallbackURL: webhookCallbackURL,
+					webhookCallbackFormat: webhookCallbackFormat,
+					sendMode: sendMode
+				);
+
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public async Task<MessageApiResult> SendMessageAsync(
+			string messageID,
+			string reference = null,
+			DateTime? sendTime = null,
+			string timezone = null,
+			string subaccount = null,
+			string department = null,
+			string chargeCode = null,
+			string messageToPeople = null,
+			string messageToAnswerPhones = null,
+			string callRouteMessageToPeople = null,
+			string callRouteMessageToOperators = null,
+			string callRouteMessageOnWrongKey = null,
+			int? numberOfOperators = null,
+			int? retryAttempts = null,
+			int? retryPeriod = null,
+			string callerID = null,
+			string options = null,
+			ICollection<Keypad> keypads = null,
+			string destination = null,
+			ICollection<string> destinations = null,
+			Recipient recipient = null,
+			ICollection<Recipient> recipients = null,
+			string webhookCallbackURL = null,
+			WebhookCallbackType? webhookCallbackFormat = null,
+			SendModeType? sendMode = null
+		)
+            =>
+				await SendMessageAsync(
+					messageID: new MessageID(messageID),        // MessageID object
+					reference: reference,
+					sendTime: sendTime,
+					timezone: timezone,
+					subaccount: subaccount,
+					department: department,
+					chargeCode: chargeCode,
+					messageToPeople: messageToPeople,
+					messageToAnswerPhones: messageToAnswerPhones,
+					callRouteMessageToPeople: callRouteMessageToPeople,
+					callRouteMessageToOperators: callRouteMessageToOperators,
+					callRouteMessageOnWrongKey: callRouteMessageOnWrongKey,
+					numberOfOperators: numberOfOperators,
+					retryAttempts: retryAttempts,
+					retryPeriod: retryPeriod,
+					callerID: callerID,
+					options: options,
+					keypads: keypads,
+					groupID: null,                              // GroupID object
+					groupIDs: null,                             // ICollection<GroupID>
+					contactID: null,                            // ContactID object
+					contactIDs: null,                           // ICollection<ContactID>
+					destination: destination,
+					destinations: destinations,
+					recipient: recipient,
+					recipients: recipients,
+					webhookCallbackURL: webhookCallbackURL,
+					webhookCallbackFormat: webhookCallbackFormat,
+					sendMode: sendMode
+				);
+		#endregion
+	}
 }

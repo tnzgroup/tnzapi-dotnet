@@ -1,4 +1,5 @@
-﻿using TNZAPI.NET.Api.Reports.SMSReply;
+﻿using TNZAPI.NET.Api.Messaging.Common.Dto;
+using TNZAPI.NET.Api.Reports.SMSReply;
 using TNZAPI.NET.Api.Reports.Status.Dto;
 using TNZAPI.NET.Core;
 
@@ -13,13 +14,13 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             this.apiUser = apiUser;
         }
 
-        public StatusApiResult Basic(string? messageID = null)
+        public StatusApiResult Basic(MessageID? messageID = null)
         {
             var client = new TNZApiClient(apiUser);
 
             if (messageID is null)
             {
-                messageID = "ID123456";
+                messageID = new MessageID("ID123456");
             }
 
             var response = client.Reports.Status.Poll(messageID);
@@ -84,7 +85,7 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             return response;
         }
 
-        public StatusApiResult Simple(string? messageID = null) => Basic(messageID);        // Same as Basic
+        public StatusApiResult Simple(MessageID? messageID = null) => Basic(messageID);        // Same as Basic
 
         public StatusApiResult Builder(StatusRequestOptions? options = null)
         {
@@ -170,7 +171,7 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             {
                 options = new StatusRequestOptions()
                 {
-                    MessageID = "ID123456",
+                    MessageID = new MessageID("ID123456"),
                     RecordsPerPage = 50,
                     Page = 1
                 };

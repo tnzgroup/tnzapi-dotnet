@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Reports.Status.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
@@ -223,7 +224,7 @@ namespace TNZAPI.NET.Api.Reports.Status
         /// <param name="messageID">MessageID</param>
         /// <returns>StatusResult</returns>
         [ComVisible(false)]
-        public StatusApiResult Poll(string messageID)
+        public StatusApiResult Poll(MessageID messageID)
         {
             return Poll(new StatusRequestOptions()
             {
@@ -251,7 +252,7 @@ namespace TNZAPI.NET.Api.Reports.Status
         /// <param name="listOptions">IListRequestOptions</param>
         /// <returns></returns>
         [ComVisible(false)]
-        public StatusApiResult Poll(string messageID, IListRequestOptions listOptions = null)
+        public StatusApiResult Poll(MessageID messageID, IListRequestOptions listOptions = null)
         {
             if (messageID is not null)
             {
@@ -304,7 +305,7 @@ namespace TNZAPI.NET.Api.Reports.Status
         /// <param name="messageID">MessageID</param>
         /// <returns>Task<StatusResult></returns>
         [ComVisible(false)]
-        public async Task<StatusApiResult> PollAsync(string messageID)
+        public async Task<StatusApiResult> PollAsync(MessageID messageID)
         {
             return await PollAsync(new StatusRequestOptions()
             {
@@ -332,7 +333,7 @@ namespace TNZAPI.NET.Api.Reports.Status
         /// <param name="listOptions">IListRequestOptions</param>
         /// <returns></returns>
         [ComVisible(false)]
-        public async Task<StatusApiResult> PollAsync(string messageID, IListRequestOptions listOptions = null)
+        public async Task<StatusApiResult> PollAsync(MessageID messageID, IListRequestOptions listOptions = null)
         {
             if (messageID is not null)
             {
@@ -347,5 +348,19 @@ namespace TNZAPI.NET.Api.Reports.Status
             return await PollAsync();
         }
         #endregion Poll
-    }
+
+        #region Deprecated
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public StatusApiResult Poll(string messageID) => Poll(new MessageID(messageID));
+
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public StatusApiResult Poll(string messageID, IListRequestOptions listOptions = null) => Poll(new MessageID(messageID), listOptions);
+
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public async Task<StatusApiResult> PollAsync(string messageID) => await PollAsync(new MessageID(messageID));
+
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public async Task<StatusApiResult> PollAsync(string messageID, IListRequestOptions listOptions = null) => await PollAsync(new MessageID(messageID), listOptions);
+		#endregion
+	}
 }

@@ -1,8 +1,10 @@
-﻿namespace TNZAPI.NET.Core.Interfaces.Reports
+﻿using TNZAPI.NET.Api.Messaging.Common.Dto;
+
+namespace TNZAPI.NET.Core.Interfaces.Reports
 {
     public interface IReportRequestOptions
     {
-        public string MessageID { get; set; }
+        public MessageID MessageID { get; set; }
 
         public int RecordsPerPage { get; set; }
 

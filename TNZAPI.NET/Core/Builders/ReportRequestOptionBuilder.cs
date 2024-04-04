@@ -1,4 +1,5 @@
-﻿using TNZAPI.NET.Core.Interfaces.Reports;
+﻿using TNZAPI.NET.Api.Messaging.Common.Dto;
+using TNZAPI.NET.Core.Interfaces.Reports;
 
 namespace TNZAPI.NET.Core.Builders
 {
@@ -19,28 +20,52 @@ namespace TNZAPI.NET.Core.Builders
         {
             Entity = new T()
             {
-                MessageID = messageID
+                MessageID = new MessageID(messageID)
             };
         }
 
-        /// <summary>
-        /// Set Message ID
-        /// </summary>
-        /// <param name="messageID">MessageID</param>
-        /// <returns>ReportRequestOptionBuilder<T></returns>
-        public ReportRequestOptionBuilder<T> SetMessageID(string messageID)
+		/// <summary>
+		/// Construct with MessageID
+		/// </summary>
+		/// <param name="messageID">MessageID</param>
+		public ReportRequestOptionBuilder(MessageID messageID)
+		{
+			Entity = new T()
+			{
+				MessageID = messageID
+			};
+		}
+
+		/// <summary>
+		/// Set Message ID
+		/// </summary>
+		/// <param name="messageID">MessageID</param>
+		/// <returns>ReportRequestOptionBuilder<T></returns>
+		public ReportRequestOptionBuilder<T> SetMessageID(string messageID)
         {
-            Entity.MessageID = messageID;
+            Entity.MessageID = new MessageID(messageID);
 
             return this;
         }
 
-        /// <summary>
-        /// Set no. of records per page
-        /// </summary>
-        /// <param name="recordsPerPage">Records per page</param>
-        /// <returns>ReportRequestOptionBuilder<T></returns>
-        public ReportRequestOptionBuilder<T> SetRecordsPerPage(int recordsPerPage)
+		/// <summary>
+		/// Set Message ID
+		/// </summary>
+		/// <param name="messageID">MessageID</param>
+		/// <returns>ReportRequestOptionBuilder<T></returns>
+		public ReportRequestOptionBuilder<T> SetMessageID(MessageID messageID)
+		{
+			Entity.MessageID = messageID;
+
+			return this;
+		}
+
+		/// <summary>
+		/// Set no. of records per page
+		/// </summary>
+		/// <param name="recordsPerPage">Records per page</param>
+		/// <returns>ReportRequestOptionBuilder<T></returns>
+		public ReportRequestOptionBuilder<T> SetRecordsPerPage(int recordsPerPage)
         {
             Entity.RecordsPerPage = recordsPerPage;
 

@@ -40,12 +40,24 @@ namespace TNZAPI.NET.Api.Actions.Pacing
             return this;
         }
 
-        /// <summary>
-        /// Set number of operators - No. of concurrent calls
-        /// </summary>
-        /// <param name="numberOfOperators">no of operators</param>
-        /// <returns>PacingBuilder</returns>
-        public PacingBuilder SetNumberOfOperators(int numberOfOperators)
+		/// <summary>
+		/// Set Message ID
+		/// </summary>
+		/// <param name="messageID">MessageID</param>
+		/// <returns>PacingBuilder</returns>
+		public PacingBuilder SetMessageID(MessageID messageID)
+		{
+			Entity.MessageID = messageID;
+
+			return this;
+		}
+
+		/// <summary>
+		/// Set number of operators - No. of concurrent calls
+		/// </summary>
+		/// <param name="numberOfOperators">no of operators</param>
+		/// <returns>PacingBuilder</returns>
+		public PacingBuilder SetNumberOfOperators(int numberOfOperators)
         {
             Entity.NumberOfOperators = numberOfOperators;
 

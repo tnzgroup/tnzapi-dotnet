@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
 
@@ -8,7 +9,7 @@ namespace TNZAPI.NET.Api.Reports.Status.Dto
     public class StatusApiResult : IApiResult
     {
         public Enums.ResultCode Result { get; set; }
-        public string MessageID { get; set; } = "";
+        public MessageID MessageID { get; set; }
         public Enums.StatusCode Status { get; set; } = Enums.StatusCode.Unknown;
         public string JobNum { get; set; } = "";
         public string Account { get; set; } = "";

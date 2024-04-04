@@ -1,4 +1,5 @@
 ﻿using TNZAPI.NET.Api.Messaging.Common.Components;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 
 namespace TNZAPI.NET.Api.Messaging.Fax.Dto
@@ -11,7 +12,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax.Dto
 
         public Enums.SendModeType SendMode { get; set; } = Enums.SendModeType.Live;
 
-        public string MessageID { get; set; } = "";
+        public MessageID MessageID { get; set; }
         public string Reference { get; set; } = "";
         public DateTime SendTime { get; set; } = new DateTime();
         public string Timezone { get; set; } = "";

@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Reports.SMSReply.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
@@ -223,7 +224,7 @@ namespace TNZAPI.NET.Api.Reports.SMSReply
         /// <param name="messageID">MessageID</param>
         /// <returns>SMSReplyApiResult</returns>
         [ComVisible(false)]
-        public SMSReplyApiResult Poll(string messageID)
+        public SMSReplyApiResult Poll(MessageID messageID)
         {
             return Poll(new SMSReplyRequestOptions()
             {
@@ -251,7 +252,7 @@ namespace TNZAPI.NET.Api.Reports.SMSReply
         /// <param name="listOptions">IListRequestOptions</param>
         /// <returns>SMSReplyApiResult</returns>
         [ComVisible(false)]
-        public SMSReplyApiResult Poll(string messageID, IListRequestOptions listOptions = null)
+        public SMSReplyApiResult Poll(MessageID messageID, IListRequestOptions listOptions = null)
         {
             if (messageID is not null)
             {
@@ -305,7 +306,7 @@ namespace TNZAPI.NET.Api.Reports.SMSReply
         /// <param name="messageID">MessageID</param>
         /// <returns>Task<SMSReplyApiResult></returns>
         [ComVisible(false)]
-        public async Task<SMSReplyApiResult> PollAsync(string messageID)
+        public async Task<SMSReplyApiResult> PollAsync(MessageID messageID)
         {
             return await PollAsync(new SMSReplyRequestOptions()
             {
@@ -333,7 +334,7 @@ namespace TNZAPI.NET.Api.Reports.SMSReply
         /// <param name="listOptions">IListRequestOptions</param>
         /// <returns>SMSReplyApiResult</returns>
         [ComVisible(false)]
-        public async Task<SMSReplyApiResult> PollAsync(string messageID, IListRequestOptions listOptions = null)
+        public async Task<SMSReplyApiResult> PollAsync(MessageID messageID, IListRequestOptions listOptions = null)
         {
             if (messageID is not null)
             {
@@ -349,5 +350,19 @@ namespace TNZAPI.NET.Api.Reports.SMSReply
             return await PollAsync();
         }
         #endregion Poll
-    }
+
+        #region Deprecated
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public SMSReplyApiResult Poll(string messageID) => Poll(new MessageID(messageID));
+
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public SMSReplyApiResult Poll(string messageID, IListRequestOptions listOptions = null) => Poll(new MessageID(messageID), listOptions);
+
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public async Task<SMSReplyApiResult> PollAsync(string messageID) => await PollAsync(new MessageID(messageID));
+
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public async Task<SMSReplyApiResult> PollAsync(string messageID, IListRequestOptions listOptions = null) => await PollAsync(new MessageID(messageID), listOptions);
+		#endregion
+	}
 }

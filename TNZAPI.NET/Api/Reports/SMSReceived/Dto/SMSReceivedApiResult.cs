@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
 
@@ -23,7 +24,7 @@ namespace TNZAPI.NET.Api.Reports.SMSReceived.Dto
     public class SMSMessageReceived
     {
         public int ID { get; set; }
-        public string MessageID { get; set; }
+        public MessageID MessageID { get; set; }
         public string JobNum { get; set; }
         public string SubAccount { get; set; }
         public string Department { get; set; }

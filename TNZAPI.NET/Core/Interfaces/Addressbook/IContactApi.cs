@@ -71,7 +71,7 @@ namespace TNZAPI.NET.Core.Interfaces.Addressbook
         ContactApiResult Update(ContactModel entity);
 
         ContactApiResult Update(
-            string contactID = null,
+            object contactID = null,
             string attention = null,
             string title = null,
             string company = null,
@@ -104,7 +104,7 @@ namespace TNZAPI.NET.Core.Interfaces.Addressbook
         Task<ContactApiResult> UpdateAsync(ContactModel entity);
 
         Task<ContactApiResult> UpdateAsync(
-            string contactID = null,
+            object contactID = null,
             string attention = null,
             string title = null,
             string company = null,
@@ -135,16 +135,27 @@ namespace TNZAPI.NET.Core.Interfaces.Addressbook
         );
 
         ContactApiResult Delete(ContactModel entity);
+        ContactApiResult Delete(ContactID contactID);
         ContactApiResult DeleteById(string contactID);
+
         Task<ContactApiResult> DeleteAsync(ContactModel entity);
+        Task<ContactApiResult> DeleteAsync(ContactID contactID);
         Task<ContactApiResult> DeleteByIdAsync(string contactID);
+
         ContactApiResult Get(ContactModel entity);
+        ContactApiResult Get(ContactID contactID);
         ContactApiResult GetById(string contactID);
+
         Task<ContactApiResult> GetAsync(ContactModel entity);
+        Task<ContactApiResult> GetAsync(ContactID contactID);
         Task<ContactApiResult> GetByIdAsync(string contactID);
+
         ContactApiResult Read(ContactModel entity);
+        ContactApiResult Read(ContactID contactID);
         ContactApiResult ReadById(string contactId);
+
         Task<ContactApiResult> ReadAsync(ContactModel entity);
+        Task<ContactApiResult> ReadAsync(ContactID contactID);
         Task<ContactApiResult> ReadByIdAsync(string contactID);
         
 

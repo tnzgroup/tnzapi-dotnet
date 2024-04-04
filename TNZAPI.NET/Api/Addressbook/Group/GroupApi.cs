@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
+using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
@@ -123,7 +124,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group
                 case Action.Read:
                 case Action.Update:
                 case Action.Delete:
-                    requestUri.Append($"/{Entity.GroupCode}");
+                    requestUri.Append($"/{Entity.GroupID ?? Entity.GroupCode ?? ""}");
                     break;
                 case Action.Create:
                     break;
@@ -346,14 +347,14 @@ namespace TNZAPI.NET.Api.Addressbook.Group
 
             return Create();
         }
-        #endregion Update
+		#endregion Update
 
-        #region CreateAsync
-        /// <summary>
-        /// Create group (async)
-        /// </summary>
-        /// <returns>Task<GroupResult></returns>
-        [ComVisible(false)]
+		#region CreateAsync
+		/// <summary>
+		/// Create group (async)
+		/// </summary>
+		/// <returns>Task<GroupResult></returns>
+		[ComVisible(false)]
         private async Task<GroupApiResult> CreateAsync()
         {
             if (User.AuthToken.Equals(""))
@@ -424,7 +425,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             }
             return await CreateAsync();
         }
-        #endregion CreateAsync
+		#endregion CreateAsync
 
         #region Update
         /// <summary>
@@ -460,16 +461,18 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             return Update();
         }
 
-        /// <summary>
-        /// Update group
-        /// </summary>
-        /// <param name="groupCode">Specifies the code or identifier for the group. Leave empty if you want the system to generate the code from the group name.</param>
-        /// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
-        /// <param name="subAccount">Specifies the subaccount associated with the group.</param>
-        /// <param name="department">Specifies the department or division associated with the group.</param>
-        /// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
-        /// <returns>GroupResult</returns>
-        public GroupApiResult Update(
+		/// <summary>
+		/// Update group
+		/// </summary>
+		/// <param name="groupID">Specifies the identifier for the group.</param>
+		/// <param name="groupCode">Specifies the code or identifier for the group. Leave empty if you want the system to generate the code from the group name.</param>
+		/// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
+		/// <param name="subAccount">Specifies the subaccount associated with the group.</param>
+		/// <param name="department">Specifies the department or division associated with the group.</param>
+		/// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
+		/// <returns>GroupResult</returns>
+		public GroupApiResult Update(
+            string groupID = null,
             string groupCode = null, 
             string groupName = null, 
             string subAccount = null, 
@@ -477,6 +480,10 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             ViewEditByOptions? viewEditBy = null
         )
         {
+            if (groupID is not null)
+            {
+                Entity.GroupID = new GroupID(groupID);
+            }
             if (groupCode is not null)
             {
                 Entity.GroupCode = groupCode;
@@ -500,14 +507,61 @@ namespace TNZAPI.NET.Api.Addressbook.Group
 
             return Update();
         }
-        #endregion
 
-        #region UpdateAsync
-        /// <summary>
-        /// Update group (async)
-        /// </summary>
-        /// <returns>Task<GroupResult></returns>
-        [ComVisible(false)]
+		/// <summary>
+		/// Update group
+		/// </summary>
+		/// <param name="groupID">GroupID object, Specifies the identifier for the group.</param>
+		/// <param name="groupCode">GroupCode object, Specifies the code for the group. Leave empty if you want the system to generate the code from the group name.</param>
+		/// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
+		/// <param name="subAccount">Specifies the subaccount associated with the group.</param>
+		/// <param name="department">Specifies the department or division associated with the group.</param>
+		/// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
+		/// <returns>GroupResult</returns>
+		public GroupApiResult Update(
+			GroupID groupID = null,
+			string groupCode = null,
+			string groupName = null,
+			string subAccount = null,
+			string department = null,
+			ViewEditByOptions? viewEditBy = null
+		)
+		{
+			if (groupID is not null)
+			{
+				Entity.GroupID = groupID;
+			}
+			if (groupCode is not null)
+			{
+				Entity.GroupCode = groupCode;
+			}
+			if (groupName is not null)
+			{
+				Entity.GroupName = groupName;
+			}
+			if (subAccount is not null)
+			{
+				Entity.SubAccount = subAccount;
+			}
+			if (department is not null)
+			{
+				Entity.Department = department;
+			}
+			if (viewEditBy is not null)
+			{
+				Entity.ViewEditBy = viewEditBy;
+			}
+
+			return Update();
+		}
+		#endregion
+
+		#region UpdateAsync
+		/// <summary>
+		/// Update group (async)
+		/// </summary>
+		/// <returns>Task<GroupResult></returns>
+		[ComVisible(false)]
         private async Task<GroupApiResult> UpdateAsync()
         {
             if (User.AuthToken.Equals(""))
@@ -518,11 +572,11 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             {
                 return ResultHelper.RespondError<GroupApiResult>("Empty Group: Please specify any value");
             }
-            if (Entity.GroupCode is null || Entity.GroupCode == "")
-            {
-                return ResultHelper.RespondError<GroupApiResult>("Empty Group.GroupCode: Please specify contact ID");
-            }
-            return await SendXMLAsync(Action.Update);
+			if ((Entity.GroupID is null || Entity.GroupID == "") && (Entity.GroupCode is null || Entity.GroupCode == ""))
+			{
+				return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel.GroupID & GroupModel.GroupCode: Please specify identifier - GroupID or GroupCode");
+			}
+			return await SendXMLAsync(Action.Update);
         }
 
         /// <summary>
@@ -538,16 +592,18 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             return await UpdateAsync();
         }
 
-        /// <summary>
-        /// Update group (async)
-        /// </summary>
-        /// <param name="groupCode">Specifies the code or identifier for the group. Leave empty if you want the system to generate the code from the group name.</param>
-        /// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
-        /// <param name="subAccount">Specifies the subaccount associated with the group.</param>
-        /// <param name="department">Specifies the department or division associated with the group.</param>
-        /// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
-        /// <returns>Task<GroupApiResult></returns>
-        public async Task<GroupApiResult> UpdateAsync(
+		/// <summary>
+		/// Update group (async)
+		/// </summary>
+		/// <param name="groupID">Specifies the identifier for the group.</param>
+		/// <param name="groupCode">Specifies the code for the group. Leave empty if you want the system to generate the code from the group name.</param>
+		/// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
+		/// <param name="subAccount">Specifies the subaccount associated with the group.</param>
+		/// <param name="department">Specifies the department or division associated with the group.</param>
+		/// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
+		/// <returns>Task<GroupApiResult></returns>
+		public async Task<GroupApiResult> UpdateAsync(
+            string groupID = null,
             string groupCode = null, 
             string groupName = null, 
             string subAccount = null, 
@@ -555,6 +611,10 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             ViewEditByOptions? viewEditBy = null
         )
         {
+            if (groupID is not null)
+            {
+                Entity.GroupID = new GroupID(groupID);
+            }
             if (groupCode is not null)
             {
                 Entity.GroupCode = groupCode;
@@ -577,14 +637,60 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             }
             return await UpdateAsync();
         }
-        #endregion
 
-        #region Delete
-        /// <summary>
-        /// Delete group
-        /// </summary>
-        /// <returns>GroupResult</returns>
-        private GroupApiResult Delete()
+		/// <summary>
+		/// Update group (async)
+		/// </summary>
+		/// <param name="groupID">Specifies the identifier for the group.</param>
+		/// <param name="groupCode">Specifies the code for the group. Leave empty if you want the system to generate the code from the group name.</param>
+		/// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
+		/// <param name="subAccount">Specifies the subaccount associated with the group.</param>
+		/// <param name="department">Specifies the department or division associated with the group.</param>
+		/// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
+		/// <returns>Task<GroupApiResult></returns>
+		public async Task<GroupApiResult> UpdateAsync(
+			GroupID groupID = null,
+			string groupCode = null,
+			string groupName = null,
+			string subAccount = null,
+			string department = null,
+			ViewEditByOptions? viewEditBy = null
+		)
+		{
+			if (groupID is not null)
+			{
+				Entity.GroupID = groupID;
+			}
+			if (groupCode is not null)
+			{
+				Entity.GroupCode = groupCode;
+			}
+			if (groupName is not null)
+			{
+				Entity.GroupName = groupName;
+			}
+			if (subAccount is not null)
+			{
+				Entity.SubAccount = subAccount;
+			}
+			if (department is not null)
+			{
+				Entity.Department = department;
+			}
+			if (viewEditBy is not null)
+			{
+				Entity.ViewEditBy = viewEditBy;
+			}
+			return await UpdateAsync();
+		}
+		#endregion
+
+		#region Delete
+		/// <summary>
+		/// Delete group
+		/// </summary>
+		/// <returns>GroupResult</returns>
+		private GroupApiResult Delete()
         {
             if (User.AuthToken.Equals(""))
             {
@@ -594,11 +700,11 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             {
                 return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel: Please specify any value");
             }
-            if (Entity.GroupCode is null || Entity.GroupCode == "")
-            {
-                return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel.GroupCode: Please specify Group Code");
-            }
-            return SendXML(Action.Delete);
+			if ((Entity.GroupID is null || Entity.GroupID == "") && (Entity.GroupCode is null || Entity.GroupCode == ""))
+			{
+				return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel.GroupID & GroupModel.GroupCode: Please specify identifier - GroupID or GroupCode");
+			}
+			return SendXML(Action.Delete);
         }
 
         /// <summary>
@@ -613,6 +719,18 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             return Delete();
         }
 
+		/// <summary>
+		/// Delete group by GroupID
+		/// </summary>
+		/// <param name="groupID">GroupID</param>
+		/// <returns>GroupApiResult</returns>
+		public GroupApiResult Delete(GroupID groupID)
+        {
+            Entity.GroupID = groupID;
+
+            return Delete();
+        }
+
         /// <summary>
         /// Delete group
         /// </summary>
@@ -621,6 +739,18 @@ namespace TNZAPI.NET.Api.Addressbook.Group
         public GroupApiResult DeleteByGroupCode(string groupCode)
         {
             Entity.GroupCode = groupCode;
+
+            return Delete();
+        }
+
+        /// <summary>
+        /// Delete group by GroupID
+        /// </summary>
+        /// <param name="groupID">Group ID</param>
+        /// <returns></returns>
+        public GroupApiResult DeleteByGroupID(string groupID)
+        {
+            Entity.GroupID = new GroupID(groupID);
 
             return Delete();
         }
@@ -642,11 +772,11 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             {
                 return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel: Please specify any value");
             }
-            if (Entity.GroupCode is null || Entity.GroupCode == "")
-            {
-                return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel.GroupCode: Please specify Group Code");
-            }
-            return await SendXMLAsync(Action.Delete);
+			if ((Entity.GroupID is null || Entity.GroupID == "") && (Entity.GroupCode is null || Entity.GroupCode == ""))
+			{
+				return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel.GroupID & GroupModel.GroupCode: Please specify identifier - GroupID or GroupCode");
+			}
+			return await SendXMLAsync(Action.Delete);
         }
 
         /// <summary>
@@ -658,6 +788,19 @@ namespace TNZAPI.NET.Api.Addressbook.Group
         public async Task<GroupApiResult> DeleteAsync(GroupModel entity)
         {
             Entity = Mapper.Map(Entity, entity);
+
+            return await DeleteAsync();
+        }
+
+		/// <summary>
+		/// Delete group by GroupID (async)
+		/// </summary>
+		/// <param name="groupID">GroupID</param>
+		/// <returns>Task<GroupApiResult></returns>
+		[ComVisible(false)]
+        public async Task<GroupApiResult> DeleteAsync(GroupID groupID)
+        {
+            Entity.GroupID = groupID;
 
             return await DeleteAsync();
         }
@@ -674,14 +817,27 @@ namespace TNZAPI.NET.Api.Addressbook.Group
 
             return await DeleteAsync();
         }
-        #endregion
 
-        #region Read
-        /// <summary>
-        /// Read group
-        /// </summary>
-        /// <returns>GroupResult</returns>
-        private GroupApiResult Read()
+		/// <summary>
+		/// Delete group using GroupID
+		/// </summary>
+		/// <param name="groupID">Group ID</param>
+		/// <returns>Task<GroupResult></returns>
+		[ComVisible(false)]
+        public async Task<GroupApiResult> DeleteByGroupIDAsync(string groupID)
+        {
+            Entity.GroupID = new GroupID(groupID);
+
+            return await DeleteAsync();
+        }
+		#endregion
+
+		#region Read
+		/// <summary>
+		/// Read group
+		/// </summary>
+		/// <returns>GroupApiResult</returns>
+		private GroupApiResult Read()
         {
             if (User.AuthToken.Equals(""))
             {
@@ -691,64 +847,102 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             {
                 return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel: Please specify any value");
             }
-            if (Entity.GroupCode is null || Entity.GroupCode == "")
+            if ((Entity.GroupID is null || Entity.GroupID == "") && (Entity.GroupCode is null || Entity.GroupCode == ""))
             {
-                return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel.GroupCode: Please specify Group Code");
-            }
+				return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel.GroupID & GroupModel.GroupCode: Please specify identifier - GroupID or GroupCode");
+			}
             return SendXML(Action.Read);
         }
 
-        /// <summary>
-        /// Read group
-        /// </summary>
-        /// <param name="entity">GroupModel</param>
-        /// <returns>GroupResult</returns>
-        public GroupApiResult Read(GroupModel entity)
+		/// <summary>
+		/// Read group
+		/// </summary>
+		/// <param name="entity">GroupModel</param>
+		/// <returns>GroupApiResult</returns>
+		public GroupApiResult Read(GroupModel entity)
         {
             Entity = Mapper.Map(Entity, entity);
 
             return Read();
         }
 
-        /// <summary>
-        /// Read group using GroupCode
-        /// </summary>
-        /// <param name="groupCode">GroupCode</param>
-        /// <returns>GroupResult</returns>
-        public GroupApiResult ReadByGroupCode(string groupCode)
+		/// <summary>
+		/// Read group by GroupID
+		/// </summary>
+		/// <param name="groupID">GroupID</param>
+		/// <returns>GroupApiResult</returns>
+		public GroupApiResult Read(GroupID groupID)
+        {
+            Entity.GroupID = groupID;
+
+            return Read();
+        }
+
+		/// <summary>
+		/// Read group using GroupCode
+		/// </summary>
+		/// <param name="groupCode">Group Code</param>
+		/// <returns>GroupApiResult</returns>
+		public GroupApiResult ReadByGroupCode(string groupCode)
         {
             Entity.GroupCode = groupCode;
 
             return Read();
         }
 
-        /// <summary>
-        /// Read group
-        /// </summary>
-        /// <returns>GroupResult</returns>
-        public GroupApiResult Get() => Read();
+		/// <summary>
+		/// Read group using GroupID
+		/// </summary>
+		/// <param name="groupID">Group ID</param>
+		/// <returns></returns>
+		public GroupApiResult ReadByGroupID(string groupID)
+        {
+            Entity.GroupID = new GroupID(groupID);
 
-        /// <summary>
-        /// Read group
-        /// </summary>
-        /// <param name="entity">GroupModel</param>
-        /// <returns>GroupResult</returns>
-        public GroupApiResult Get(GroupModel entity) => Read(entity);
+            return Read();
+        }
 
-        /// <summary>
-        /// Read group
-        /// </summary>
-        /// <param name="groupCode">Group ID</param>
-        /// <returns>GroupResult</returns>
-        public GroupApiResult GetByGroupCode(string groupCode) => ReadByGroupCode(groupCode);
-        #endregion
+		/// <summary>
+		/// Read group
+		/// </summary>
+		/// <returns>GroupApiResult</returns>
+		public GroupApiResult Get() => Read();
 
-        #region ReadAsync
-        /// <summary>
-        /// Read group (async)
-        /// </summary>
-        /// <returns>Task<GroupResult></returns>
-        private async Task<GroupApiResult> ReadAsync()
+		/// <summary>
+		/// Read group
+		/// </summary>
+		/// <param name="entity">GroupModel</param>
+		/// <returns>GroupApiResult</returns>
+		public GroupApiResult Get(GroupModel entity) => Read(entity);
+
+		/// <summary>
+		/// Read group by GroupID
+		/// </summary>
+		/// <param name="groupID">GroupID</param>
+		/// <returns>GroupApiResult</returns>
+		public GroupApiResult Get(GroupID groupID) => Read(groupID);
+
+		/// <summary>
+		/// Read group
+		/// </summary>
+		/// <param name="groupCode">Group Code</param>
+		/// <returns>GroupApiResult</returns>
+		public GroupApiResult GetByGroupCode(string groupCode) => ReadByGroupCode(groupCode);
+
+		/// <summary>
+		/// Read group
+		/// </summary>
+		/// <param name="groupID">Group ID</param>
+		/// <returns>GroupApiResult</returns>
+		public GroupApiResult GetByGroupID(string groupID) => ReadByGroupID(groupID);
+		#endregion
+
+		#region ReadAsync
+		/// <summary>
+		/// Read group (async)
+		/// </summary>
+		/// <returns>Task<GroupApiResult></returns>
+		private async Task<GroupApiResult> ReadAsync()
         {
             if (User.AuthToken.Equals(""))
             {
@@ -758,56 +952,94 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             {
                 return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel: Please specify any value");
             }
-            if (Entity.GroupCode is null || Entity.GroupCode == "")
+            if ((Entity.GroupID is null || Entity.GroupID == "") && (Entity.GroupCode is null || Entity.GroupCode == ""))
             {
-                return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel.GroupCode: Please specify Group Code");
+                return ResultHelper.RespondError<GroupApiResult>("Empty GroupModel.GroupID & GroupModel.GroupCode: Please specify identifier - GroupID or GroupCode");
             }
             return await SendXMLAsync(Action.Read);
         }
 
-        /// <summary>
-        /// Read group (async)
-        /// </summary>
-        /// <param name="entity">GroupModel</param>
-        /// <returns>Task<GroupResult></returns>
-        public async Task<GroupApiResult> ReadAsync(GroupModel entity)
+		/// <summary>
+		/// Read group (async)
+		/// </summary>
+		/// <param name="entity">GroupModel</param>
+		/// <returns>Task<GroupApiResult></returns>
+		public async Task<GroupApiResult> ReadAsync(GroupModel entity)
         {
             Entity = Mapper.Map(Entity, entity);
 
             return await ReadAsync();
         }
 
-        /// <summary>
-        /// Read group (async)
-        /// </summary>
-        /// <param name="groupCode">Group Code</param>
-        /// <returns>Task<GroupResult></returns>
-        public async Task<GroupApiResult> ReadByGroupCodeAsync(string groupCode)
+		/// <summary>
+		/// Read group by GroupID (async)
+		/// </summary>
+		/// <param name="groupID">GroupID</param>
+		/// <returns>Task<GroupApiResult></returns>
+		public async Task<GroupApiResult> ReadAsync(GroupID groupID)
+        {
+            Entity.GroupID = groupID;
+
+            return await ReadAsync();
+        }
+
+		/// <summary>
+		/// Read group (async)
+		/// </summary>
+		/// <param name="groupCode">Group Code</param>
+		/// <returns>Task<GroupApiResult></returns>
+		public async Task<GroupApiResult> ReadByGroupCodeAsync(string groupCode)
         {
             Entity.GroupCode = groupCode;
 
             return await ReadAsync();
         }
 
-        /// <summary>
-        /// Read group (async)
-        /// </summary>
-        /// <returns>Task<GroupResult></returns>
-        public async Task<GroupApiResult> GetAsync() => await ReadAsync();
+		/// <summary>
+		/// Read group (async)
+		/// </summary>
+		/// <param name="groupID">Group ID</param>
+		/// <returns>Task<GroupApiResult></returns>
+		public async Task<GroupApiResult> ReadByGroupIDAsync(string groupID)
+        {
+            Entity.GroupID = new GroupID(groupID);
 
-        /// <summary>
-        /// Read group (async)
-        /// </summary>
-        /// <param name="entity">GroupModel</param>
-        /// <returns>Task<GroupResult></returns>
-        public async Task<GroupApiResult> GetAsync(GroupModel entity) => await ReadAsync(entity);
+            return await ReadAsync();
+        }
 
-        /// <summary>
-        /// Read group (async)
-        /// </summary>
-        /// <param name="groupCode">Group Code</param>
-        /// <returns>Task<GroupResult></returns>
-        public async Task<GroupApiResult> GetByGroupCodeAsync(string groupCode) => await ReadByGroupCodeAsync(groupCode);
+		/// <summary>
+		/// Read group (async)
+		/// </summary>
+		/// <returns>Task<GroupApiResult></returns>
+		public async Task<GroupApiResult> GetAsync() => await ReadAsync();
+
+		/// <summary>
+		/// Read group (async)
+		/// </summary>
+		/// <param name="entity">GroupModel</param>
+		/// <returns>Task<GroupApiResult></returns>
+		public async Task<GroupApiResult> GetAsync(GroupModel entity) => await ReadAsync(entity);
+
+		/// <summary>
+		/// Read group by GroupID (async)
+		/// </summary>
+		/// <param name="groupID">GroupID</param>
+		/// <returns>Task<GroupApiResult></returns>
+		public async Task<GroupApiResult> GetAsync(GroupID groupID) => await ReadAsync(groupID);
+
+		/// <summary>
+		/// Read group (async)
+		/// </summary>
+		/// <param name="groupCode">Group Code</param>
+		/// <returns>Task<GroupApiResult></returns>
+		public async Task<GroupApiResult> GetByGroupCodeAsync(string groupCode) => await ReadByGroupCodeAsync(groupCode);
+
+		/// <summary>
+		/// Read group (async)
+		/// </summary>
+		/// <param name="groupID">Group ID</param>
+		/// <returns>Task<GroupApiResult></returns>
+		public async Task<GroupApiResult> GetByGroupIDAsync(string groupID) => await ReadByGroupIDAsync(groupID);
         #endregion
 
         #region List

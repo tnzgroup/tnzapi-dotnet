@@ -1,5 +1,7 @@
-﻿using TNZAPI.NET.Api.Messaging.Common;
+﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.TTS.Dto;
 using static TNZAPI.NET.Core.Enums;
 
@@ -10,7 +12,8 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
         MessageApiResult SendMessage(TTSModel entity);
         MessageApiResult SendMessage(
             string messageID = null,
-            string reference = null,
+			MessageID MessageID = null,                 // MessageID object
+			string reference = null,
             DateTime? sendTime = null,
             string timezone = null,
             string subaccount = null,
@@ -28,7 +31,17 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
             Enums.TTSVoiceType? ttsVoiceType = null,
             string options = null,
             ICollection<Keypad> keypads = null,
-            string destination = null,
+			string groupCode = null,
+			ICollection<string> groupCodes = null,
+			string groupID = null,
+			ICollection<string> groupIDs = null,
+			GroupID GroupID = null,                     // GroupID object
+			ICollection<GroupID> GroupIDs = null,       // ICollection<GroupID>
+			string contactID = null,
+			ICollection<string> contactIDs = null,
+			ContactID ContactID = null,                 // ContactID object
+			ICollection<ContactID> ContactIDs = null,   // ICollection<ContactID>
+			string destination = null,
             ICollection<string> destinations = null,
             Recipient recipient = null,
             ICollection<Recipient> recipients = null,
@@ -40,7 +53,8 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
         Task<MessageApiResult> SendMessageAsync(TTSModel entity);
         Task<MessageApiResult> SendMessageAsync(
             string messageID = null,
-            string reference = null,
+			MessageID MessageID = null,                 // MessageID object
+			string reference = null,
             DateTime? sendTime = null,
             string timezone = null,
             string subaccount = null,
@@ -58,7 +72,17 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
             Enums.TTSVoiceType? ttsVoiceType = null,
             string options = null,
             ICollection<Keypad> keypads = null,
-            string destination = null,
+			string groupCode = null,
+			ICollection<string> groupCodes = null,
+			string groupID = null,
+			ICollection<string> groupIDs = null,
+			GroupID GroupID = null,                     // GroupID object
+			ICollection<GroupID> GroupIDs = null,       // ICollection<GroupID>
+			string contactID = null,
+			ICollection<string> contactIDs = null,
+			ContactID ContactID = null,                 // ContactID object
+			ICollection<ContactID> ContactIDs = null,   // ICollection<ContactID>
+			string destination = null,
             ICollection<string> destinations = null,
             Recipient recipient = null,
             ICollection<Recipient> recipients = null,

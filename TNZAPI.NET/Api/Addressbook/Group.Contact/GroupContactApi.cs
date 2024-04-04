@@ -124,7 +124,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             XmlNode rootNode = xmlDoc.CreateElement("AddContactRequest");
             xmlDoc.AppendChild(rootNode);
 
-            rootNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ContactID", Contact.ID));
+            rootNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ContactID", Contact.ContactID));
 
             return xmlDoc;
         }
@@ -139,7 +139,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             {
                 case Action.Read:
                 case Action.Remove:
-                    requestUri.Append($"/{Contact.ID}");
+                    requestUri.Append($"/{Contact.ContactID}");
                     break;
                 default:
                     break;
@@ -334,7 +334,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
 
             return Add();
@@ -361,7 +361,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
             
             if (group is not null)
@@ -441,7 +441,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
 
             return await AddAsync();
@@ -469,7 +469,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
 
             if (group is not null)
@@ -541,7 +541,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
 
             return Remove();
@@ -568,7 +568,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
 
             if (group is not null)
@@ -640,7 +640,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
 
             return await RemoveAsync();
@@ -667,7 +667,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
 
             if (group is not null)
@@ -740,7 +740,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
 
             return Read();
@@ -765,7 +765,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
 
             if (group is not null)
@@ -864,7 +864,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
 
             return await ReadAsync();
@@ -891,7 +891,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             }
             if (contactID is not null)
             {
-                Contact.ID = contactID;
+                Contact.ContactID = new ContactID(contactID);
             }
 
             if (group is null)

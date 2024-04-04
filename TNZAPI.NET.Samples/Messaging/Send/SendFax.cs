@@ -1,6 +1,7 @@
 ﻿using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.Fax;
 using TNZAPI.NET.Api.Messaging.Fax.Dto;
 using TNZAPI.NET.Core;
@@ -235,7 +236,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
                     ErrorEmailNotify = errorEmailNotify,                // Error Email Notify (Receive email when it errored)
 
-                    MessageID = "",                                     // MessageID - Leave blank to auto-generate
+                    MessageID = new MessageID(""),                      // MessageID - Leave blank to auto-generate
                     Reference = reference,                              // Reference
                     SubAccount = "",                                    // SubAccount
                     Department = "",                                    // Department

@@ -3,6 +3,7 @@ using static TNZAPI.NET.Core.Enums;
 using static TNZAPI.NET.Api.Messaging.TTS.Dto.TTSModel;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.TTS.Dto;
 
 namespace TNZAPI.NET.Api.Messaging.TTS
@@ -92,7 +93,7 @@ namespace TNZAPI.NET.Api.Messaging.TTS
         /// <returns>TTSBuilder</returns>
         public TTSBuilder SetMessageID(string messageID)
         {
-            Entity.MessageID = messageID;
+            Entity.MessageID = new MessageID(messageID);
 
             return this;
         }

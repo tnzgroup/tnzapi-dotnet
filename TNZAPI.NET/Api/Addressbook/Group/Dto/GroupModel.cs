@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Core;
 
 namespace TNZAPI.NET.Api.Addressbook.Group.Dto
@@ -6,6 +7,8 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Dto
     [XmlType(TypeName = "Group")]
     public class GroupModel
     {
+        public GroupID GroupID { get; set; }
+
         public string GroupCode { get; set; }
 
         public string GroupName { get; set; }

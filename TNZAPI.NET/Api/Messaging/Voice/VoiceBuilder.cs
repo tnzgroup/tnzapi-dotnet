@@ -3,6 +3,7 @@ using static TNZAPI.NET.Core.Enums;
 using static TNZAPI.NET.Api.Messaging.Voice.Dto.VoiceModel;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.Voice.Dto;
 
 namespace TNZAPI.NET.Api.Messaging.Voice
@@ -93,7 +94,7 @@ namespace TNZAPI.NET.Api.Messaging.Voice
         /// <returns>VoiceBuilder</returns>
         public VoiceBuilder SetMessageID(string messageID)
         {
-            Entity.MessageID = messageID;
+            Entity.MessageID = new MessageID(messageID);
 
             return this;
         }

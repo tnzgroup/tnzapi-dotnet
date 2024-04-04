@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
+using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Group.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Core;
@@ -225,7 +226,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
                 new GroupModel()
                 {
                     GroupCode = groupCode
-                },
+				},
                 recordsPerPage,
                 page
             );
@@ -242,7 +243,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
                 new GroupModel()
                 {
                     GroupCode = groupCode
-                },
+				},
                 options
             );
         }
@@ -323,7 +324,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
                 new GroupModel()
                 {
                     GroupCode = groupCode
-                },
+				},
                 recordsPerPage,
                 page
             );
@@ -341,7 +342,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
                 new GroupModel()
                 {
                     GroupCode = groupCode
-                },
+				},
                 options
             );
         }

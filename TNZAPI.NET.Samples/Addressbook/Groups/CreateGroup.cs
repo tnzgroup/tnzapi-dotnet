@@ -1,4 +1,5 @@
-﻿using TNZAPI.NET.Api.Addressbook.Group;
+﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Helpers;

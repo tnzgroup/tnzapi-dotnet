@@ -76,7 +76,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
                 }
                 if (response.Contact is not null)
                 {
-                    Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                    Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                     Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                     Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                     Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
@@ -144,7 +144,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
                 }
                 if (response.Contact is not null)
                 {
-                    Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                    Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                     Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                     Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                     Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
@@ -213,7 +213,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
                 }
                 if (response.Contact is not null)
                 {
-                    Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                    Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                     Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                     Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                     Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
@@ -264,11 +264,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             var response = client.Addressbook.GroupContact.Remove(
                 new GroupModel()
                 {
-                    GroupCode = "Test-Group"                        // Group Code
+                    GroupCode = "Test-Group"                                 // Group Code
                 },
                 new ContactModel()
                 {
-                    ID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"     // Contact ID
+                    ContactID = new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")       // Contact ID
                 });
 
             if (response.Result == Enums.ResultCode.Success)
@@ -286,7 +286,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
                 }
                 if (response.Contact is not null)
                 {
-                    Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                    Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                     Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                     Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                     Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");

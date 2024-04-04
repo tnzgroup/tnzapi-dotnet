@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.Email.Dto;
 using static TNZAPI.NET.Core.Enums;
 
@@ -93,7 +94,7 @@ namespace TNZAPI.NET.Api.Messaging.Email
         /// <returns>EmailBuilder</returns>
         public EmailBuilder SetMessageID(string messageID)
         {
-            Entity.MessageID = messageID;
+            Entity.MessageID = new MessageID(messageID);
 
             return this;
         }

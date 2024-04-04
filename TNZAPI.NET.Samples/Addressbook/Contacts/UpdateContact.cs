@@ -52,7 +52,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                 Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                 Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
@@ -114,7 +114,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                 Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                 Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
@@ -177,7 +177,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                 Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                 Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
@@ -227,7 +227,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             var response = client.Addressbook.Contact.Update(
                 new ContactModel()
                 {
-                    ID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD",        // Contact id
+                    ContactID = new("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),        // Contact id
                     Attention = "Person Attention",
                     Title = "Mr",
                     Company = "TNZ Group LTD.",
@@ -260,7 +260,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                 Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                 Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");

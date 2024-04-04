@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Helpers;
@@ -19,7 +20,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             Entity = new GroupModel()
             { 
                 GroupCode = groupCode
-            };
+			};
         }
 
         #region Dispose

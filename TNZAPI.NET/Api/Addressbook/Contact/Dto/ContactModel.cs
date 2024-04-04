@@ -6,7 +6,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Dto
     [XmlType(TypeName = "Contact")]
     public class ContactModel
     {
-        public string ID { get; set; }
+        public ContactID ContactID { get; set; }
 
         public string Owner { get; set; }
 

@@ -85,7 +85,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
         {
             var requestUri = new StringBuilder();
 
-            requestUri.Append($"{TNZApiConfig.Domain}/api/v{TNZApiConfig.Version}/addressbook/contact/{Options.Contact.ID}/group/list?recordsPerPage={Options.RecordsPerPage}&page={Options.Page}");
+            requestUri.Append($"{TNZApiConfig.Domain}/api/v{TNZApiConfig.Version}/addressbook/contact/{Options.Contact.ContactID}/group/list?recordsPerPage={Options.RecordsPerPage}&page={Options.Page}");
 
             return requestUri.ToString();
         }
@@ -178,7 +178,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             {
                 return ResultHelper.RespondError<ContactGroupListApiResult>("AuthToken required for this module.");
             }
-            if (Options.Contact is null || Options.Contact.ID == "")
+            if (Options.Contact is null || Options.Contact.ContactID == "")
             {
                 return ResultHelper.RespondError<ContactGroupListApiResult>("Empty Contact ID - Please specify Options.ContactID.");
             }
@@ -238,7 +238,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             return List(
                 new ContactModel()
                 {
-                    ID = contactID
+                    ContactID = new ContactID(contactID)
                 },
                 recordsPerPage,
                 page
@@ -256,7 +256,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             return List(
                 new ContactModel()
                 {
-                    ID = contactID
+                    ContactID = new ContactID(contactID)
                 },
                 options
             );
@@ -277,7 +277,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             {
                 return ResultHelper.RespondError<ContactGroupListApiResult>("AuthToken required for this module.");
             }
-            if (Options.Contact is null || Options.Contact.ID == "")
+            if (Options.Contact is null || Options.Contact.ContactID == "")
             {
                 return ResultHelper.RespondError<ContactGroupListApiResult>("Empty Contact ID - Please specify contact id.");
             }
@@ -341,8 +341,8 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             return await ListAsync(
                 new ContactModel()
                 {
-                    ID = contactID
-                },
+                    ContactID = new ContactID(contactID)
+				},
                 recordsPerPage,
                 page
             );
@@ -360,7 +360,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             return await ListAsync(
                 new ContactModel()
                 {
-                    ID = contactID
+                    ContactID = new ContactID(contactID)
                 },
                 options
             );

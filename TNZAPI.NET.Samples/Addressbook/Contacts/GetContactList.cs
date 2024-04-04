@@ -66,7 +66,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
 
                 foreach (var contact in response.Contacts)
                 {
-                    Console.WriteLine($"Contact details for ContactID={contact.ID}");
+                    Console.WriteLine($"Contact details for ContactID={contact.ContactID}");
                     Console.WriteLine($"    -> Owner: '{contact.Owner}'");
                     Console.WriteLine($"    -> Created: '{contact.Created}'");
                     Console.WriteLine($"    -> Updated: '{contact.Updated}'");
@@ -133,7 +133,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
 
                 foreach (var contact in response.Contacts)
                 {
-                    Console.WriteLine($"Contact details for ContactID={contact.ID}");
+                    Console.WriteLine($"Contact details for ContactID={contact.ContactID}");
                     Console.WriteLine($"    -> Owner: '{contact.Owner}'");
                     Console.WriteLine($"    -> Created: '{contact.Created}'");
                     Console.WriteLine($"    -> Updated: '{contact.Updated}'");
@@ -199,7 +199,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
 
                 foreach (var contact in response.Contacts)
                 {
-                    Console.WriteLine($"Contact details for ContactID={contact.ID}");
+                    Console.WriteLine($"Contact details for ContactID={contact.ContactID}");
                     Console.WriteLine($"    -> Owner: '{contact.Owner}'");
                     Console.WriteLine($"    -> Created: '{contact.Created}'");
                     Console.WriteLine($"    -> Updated: '{contact.Updated}'");

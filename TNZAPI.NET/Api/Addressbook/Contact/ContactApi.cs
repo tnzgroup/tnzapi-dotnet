@@ -170,7 +170,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
                 case Action.Read:
                 case Action.Update:
                 case Action.Delete:
-                    requestUri.Append($"/{Entity.ID}");
+                    requestUri.Append($"/{Entity.ContactID}");
                     break;
                 case Action.Create:
                     break;
@@ -323,14 +323,14 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         {
             User.APIKey = apiKey;
         }
-        #endregion
+		#endregion
 
-        #region Create
-        /// <summary>
-        /// Create Contact
-        /// </summary>
-        /// <returns>ContactResult</returns>
-        private ContactApiResult Create()
+		#region Create
+		/// <summary>
+		/// Create Contact
+		/// </summary>
+		/// <returns>ContactApiResult</returns>
+		private ContactApiResult Create()
         {
             if (User.AuthToken.Equals(""))
             {
@@ -343,12 +343,12 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
             return SendXML(Action.Create);
         }
 
-        /// <summary>
-        /// Create Contact
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <returns>ContactResult</returns>
-        public ContactApiResult Create(ContactModel entity)
+		/// <summary>
+		/// Create Contact
+		/// </summary>
+		/// <param name="entity">ContactModel</param>
+		/// <returns>ContactApiResult</returns>
+		public ContactApiResult Create(ContactModel entity)
         {
             Entity = Mapper.Map(Entity, entity);
 
@@ -448,14 +448,14 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
                 EditBy = editBy
             });
         }
-        #endregion
+		#endregion
 
-        #region CreateAsync
-        /// <summary>
-        /// Create Contact (async)
-        /// </summary>
-        /// <returns>Task<ContactResult></returns>
-        private async Task<ContactApiResult> CreateAsync()
+		#region CreateAsync
+		/// <summary>
+		/// Create Contact (async)
+		/// </summary>
+		/// <returns>Task<ContactApiResult></returns>
+		private async Task<ContactApiResult> CreateAsync()
         {
             if (User.AuthToken.Equals(""))
             {
@@ -468,12 +468,12 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
             return await SendXMLAsync(Action.Create);
         }
 
-        /// <summary>
-        /// Create Contact (async)
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <returns>Task<ContactResult></returns>
-        public async Task<ContactApiResult> CreateAsync(ContactModel entity)
+		/// <summary>
+		/// Create Contact (async)
+		/// </summary>
+		/// <param name="entity">ContactModel</param>
+		/// <returns>Task<ContactApiResult></returns>
+		public async Task<ContactApiResult> CreateAsync(ContactModel entity)
         {
             Entity = Mapper.Map(Entity, entity);
 
@@ -573,14 +573,14 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
                 EditBy = editBy
             });
         }
-        #endregion
+		#endregion
 
-        #region Update
-        /// <summary>
-        /// Update contact
-        /// </summary>
-        /// <returns>ContactResult</returns>
-        private ContactApiResult Update()
+		#region Update
+		/// <summary>
+		/// Update contact
+		/// </summary>
+		/// <returns>ContactApiResult</returns>
+		private ContactApiResult Update()
         {
             if (User.AuthToken.Equals(""))
             {
@@ -590,19 +590,19 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact: Please specify any value");
             }
-            if (Entity.ID is null || Entity.ID == "")
+            if (Entity.ContactID is null || Entity.ContactID == "")
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact.ID: Please specify contact ID");
             }
             return SendXML(Action.Update);
         }
 
-        /// <summary>
-        /// Update contact
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <returns>ContactResult</returns>
-        public ContactApiResult Update(ContactModel entity)
+		/// <summary>
+		/// Update contact
+		/// </summary>
+		/// <param name="entity">ContactModel</param>
+		/// <returns>ContactApiResult</returns>
+		public ContactApiResult Update(ContactModel entity)
         {
             Entity = Mapper.Map(Entity, entity);
 
@@ -644,7 +644,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <returns></returns>
         [ComVisible(false)]
         public ContactApiResult Update(
-            string contactID = null,
+            object contactID = null,
             string attention = null,
             string title = null,
             string company = null,
@@ -676,7 +676,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         {
             return Update(new ContactModel()
             {
-                ID = contactID,
+                ContactID = (contactID is ContactID) ? (ContactID)contactID : new ContactID(contactID.ToString()),
                 Attention = attention,
                 Title = title,
                 Company = company,
@@ -706,14 +706,14 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
                 EditBy = editBy
             });
         }
-        #endregion
+		#endregion
 
-        #region UpdateAsync
-        /// <summary>
-        /// Update contact (async)
-        /// </summary>
-        /// <returns>Task<ContactResult></returns>
-        [ComVisible(false)]
+		#region UpdateAsync
+		/// <summary>
+		/// Update contact (async)
+		/// </summary>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
         private async Task<ContactApiResult> UpdateAsync()
         {
             if (User.AuthToken.Equals(""))
@@ -724,19 +724,19 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact: Please specify any value");
             }
-            if (Entity.ID is null || Entity.ID == "")
+            if (Entity.ContactID is null || Entity.ContactID == "")
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact.ID: Please specify contact ID");
             }
             return await SendXMLAsync(Action.Update);
         }
 
-        /// <summary>
-        /// Update contact (async)
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <returns>Task<ContactResult></returns>
-        [ComVisible(false)]
+		/// <summary>
+		/// Update contact (async)
+		/// </summary>
+		/// <param name="entity">ContactModel</param>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
         public async Task<ContactApiResult> UpdateAsync(ContactModel entity)
         {
             Entity = Mapper.Map(Entity, entity);
@@ -779,7 +779,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <returns>Task<ContactApiResult></returns>
         [ComVisible(false)]
         public async Task<ContactApiResult> UpdateAsync(
-            string contactID = null,
+            object contactID = null,
             string attention = null,
             string title = null,
             string company = null,
@@ -811,7 +811,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         {
             return await UpdateAsync(new ContactModel()
             {
-                ID = contactID,
+                ContactID = (contactID is ContactID) ? (ContactID)contactID : new ContactID(contactID.ToString()),
                 Attention = attention,
                 Title = title,
                 Company = company,
@@ -841,14 +841,14 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
                 EditBy = editBy
             });
         }
-        #endregion
+		#endregion
 
-        #region Delete
-        /// <summary>
-        /// Delete contact
-        /// </summary>
-        /// <returns>ContactResult</returns>
-        private ContactApiResult Delete()
+		#region Delete
+		/// <summary>
+		/// Delete contact
+		/// </summary>
+		/// <returns>ContactApiResult</returns>
+		private ContactApiResult Delete()
         {
             if (User.AuthToken.Equals(""))
             {
@@ -858,21 +858,33 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact: Please specify any value");
             }
-            if (Entity.ID is null || Entity.ID == "")
+            if (Entity.ContactID is null || Entity.ContactID == "")
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact.ID: Please specify contact ID");
             }
             return SendXML(Action.Delete);
         }
 
-        /// <summary>
-        /// Delete contact
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <returns>ContactResult</returns>
-        public ContactApiResult Delete(ContactModel entity)
+		/// <summary>
+		/// Delete contact
+		/// </summary>
+		/// <param name="entity">ContactModel</param>
+		/// <returns>ContactApiResult</returns>
+		public ContactApiResult Delete(ContactModel entity)
         {
             Entity = Mapper.Map(Entity, entity);
+
+            return Delete();
+        }
+
+		/// <summary>
+		/// Delete contact
+		/// </summary>
+		/// <param name="contactID">ContactID</param>
+		/// <returns></returns>
+		public ContactApiResult Delete(ContactID contactID)
+        {
+            Entity.ContactID = contactID;
 
             return Delete();
         }
@@ -884,18 +896,18 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <returns></returns>
         public ContactApiResult DeleteById(string contactID)
         {
-            Entity = new ContactModel() { ID = contactID };
+            Entity = new ContactModel() { ContactID = new ContactID(contactID) };
 
             return Delete();
         }
-        #endregion
+		#endregion
 
-        #region DeleteAsync
-        /// <summary>
-        /// Delete contact (async)
-        /// </summary>
-        /// <returns>Task<ContactResult></returns>
-        [ComVisible(false)]
+		#region DeleteAsync
+		/// <summary>
+		/// Delete contact (async)
+		/// </summary>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
         private async Task<ContactApiResult> DeleteAsync()
         {
             if (User.AuthToken.Equals(""))
@@ -906,19 +918,19 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact: Please specify any value");
             }
-            if (Entity.ID is null || Entity.ID == "")
+            if (Entity.ContactID is null || Entity.ContactID == "")
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact.ID: Please specify contact ID");
             }
             return await SendXMLAsync(Action.Delete);
         }
 
-        /// <summary>
-        /// Delete contact (async)
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <returns></returns>
-        [ComVisible(false)]
+		/// <summary>
+		/// Delete contact (async)
+		/// </summary>
+		/// <param name="entity">ContactModel</param>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
         public async Task<ContactApiResult> DeleteAsync(ContactModel entity)
         {
             Entity = Mapper.Map(Entity, entity);
@@ -926,26 +938,39 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
             return await DeleteAsync();
         }
 
-        /// <summary>
-        /// Delete contact (async)
-        /// </summary>
-        /// <param name="contactID">Contact ID</param>
-        /// <returns>Task<ContactResult></returns>
-        [ComVisible(false)]
-        public async Task<ContactApiResult> DeleteByIdAsync(string contactID)
+		/// <summary>
+		/// Delete contact (async)
+		/// </summary>
+		/// <param name="contactID">ContactID</param>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
+		public async Task<ContactApiResult> DeleteAsync(ContactID contactID)
         {
-            Entity = new ContactModel() { ID = contactID };
+            Entity.ContactID = contactID;
 
             return await DeleteAsync();
         }
-        #endregion
 
-        #region Read
-        /// <summary>
-        /// Read contact
-        /// </summary>
-        /// <returns>ContactResult</returns>
-        private ContactApiResult Read()
+		/// <summary>
+		/// Delete contact (async)
+		/// </summary>
+		/// <param name="contactID">Contact ID</param>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
+        public async Task<ContactApiResult> DeleteByIdAsync(string contactID)
+        {
+            Entity = new ContactModel() { ContactID = new ContactID(contactID) };
+
+            return await DeleteAsync();
+        }
+		#endregion
+
+		#region Read
+		/// <summary>
+		/// Read contact
+		/// </summary>
+		/// <returns>ContactApiResult</returns>
+		private ContactApiResult Read()
         {
             if (User.AuthToken.Equals(""))
             {
@@ -955,64 +980,83 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact: Please specify any value");
             }
-            if (Entity.ID is null || Entity.ID == "")
+            if (Entity.ContactID is null || Entity.ContactID == "")
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact.ID: Please specify contact ID");
             }
             return SendXML(Action.Read);
         }
 
-        /// <summary>
-        /// Read contact
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <returns>ContactResult</returns>
-        public ContactApiResult Read(ContactModel entity)
+		/// <summary>
+		/// Read contact
+		/// </summary>
+		/// <param name="entity">ContactModel</param>
+		/// <returns>ContactApiResult</returns>
+		public ContactApiResult Read(ContactModel entity)
         {
             Entity = Mapper.Map(Entity, entity);
 
             return Read();
         }
 
-        /// <summary>
-        /// Read contact
-        /// </summary>
-        /// <param name="contactID">Contact ID</param>
-        /// <returns>ContactResult</returns>
-        public ContactApiResult ReadById(string contactID)
+		/// <summary>
+		/// Read contact
+		/// </summary>
+		/// <param name="contactID">ContactID</param>
+		/// <returns>ContactApiResult</returns>
+		public ContactApiResult Read(ContactID contactID)
         {
-            Entity = new ContactModel() { ID = contactID };
+            Entity.ContactID = contactID;
 
             return Read();
         }
 
-        /// <summary>
-        /// Read contact
-        /// </summary>
-        /// <returns>ContactResult</returns>
-        public ContactApiResult Get() => Read();
+		/// <summary>
+		/// Read contact
+		/// </summary>
+		/// <param name="contactID">Contact ID</param>
+		/// <returns>ContactApiResult</returns>
+		public ContactApiResult ReadById(string contactID)
+        {
+            Entity = new ContactModel() { ContactID = new ContactID(contactID) };
 
-        /// <summary>
-        /// Read contact
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <returns>ContactResult</returns>
-        public ContactApiResult Get(ContactModel entity) => Read(entity);
+            return Read();
+        }
 
-        /// <summary>
-        /// Read contact
-        /// </summary>
-        /// <param name="contactID">Contact ID</param>
-        /// <returns>ContactResult</returns>
-        public ContactApiResult GetById(string contactID) => ReadById(contactID);
-        #endregion
+		/// <summary>
+		/// Read contact
+		/// </summary>
+		/// <returns>ContactApiResult</returns>
+		public ContactApiResult Get() => Read();
 
-        #region ReadAsync
-        /// <summary>
-        /// Read contact (async)
-        /// </summary>
-        /// <returns>Task<ContactResult></returns>
-        [ComVisible(false)]
+		/// <summary>
+		/// Read contact
+		/// </summary>
+		/// <param name="entity">ContactModel</param>
+		/// <returns>ContactApiResult</returns>
+		public ContactApiResult Get(ContactModel entity) => Read(entity);
+
+		/// <summary>
+		/// Read contact
+		/// </summary>
+		/// <param name="contactID">ContactID</param>
+		/// <returns>ContactApiResult</returns>
+		public ContactApiResult Get(ContactID contactID) => Read(contactID);
+
+		/// <summary>
+		/// Read contact
+		/// </summary>
+		/// <param name="contactID">Contact ID</param>
+		/// <returns>ContactApiResult</returns>
+		public ContactApiResult GetById(string contactID) => ReadById(contactID);
+		#endregion
+
+		#region ReadAsync
+		/// <summary>
+		/// Read contact (async)
+		/// </summary>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
         private async Task<ContactApiResult> ReadAsync()
         {
             if (User.AuthToken.Equals(""))
@@ -1023,19 +1067,19 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact: Please specify any value");
             }
-            if (Entity.ID is null || Entity.ID == "")
+            if (Entity.ContactID is null || Entity.ContactID == "")
             {
                 return ResultHelper.RespondError<ContactApiResult>("Empty Contact.ID: Please specify contact ID");
             }
             return await SendXMLAsync(Action.Read);
         }
 
-        /// <summary>
-        /// Read contact (async)
-        /// </summary>
-        /// <param name="entity">ContactModel</param>
-        /// <returns>Task<ContactResult></returns>
-        [ComVisible(false)]
+		/// <summary>
+		/// Read contact (async)
+		/// </summary>
+		/// <param name="entity">ContactModel</param>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
         public async Task<ContactApiResult> ReadAsync(ContactModel entity)
         {
             Entity = Mapper.Map(Entity, entity);
@@ -1043,40 +1087,61 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
             return await ReadAsync();
         }
 
-        /// <summary>
-        /// Read contact (async)
-        /// </summary>
-        /// <param name="contactID">Contact ID</param>
-        /// <returns>Task<ContactResult></returns>
-        [ComVisible(false)]
-        public async Task<ContactApiResult> ReadByIdAsync(string contactID)
+		/// <summary>
+		/// Read contact (async)
+		/// </summary>
+		/// <param name="contactID">ContactID</param>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
+        public async Task<ContactApiResult> ReadAsync(ContactID contactID)
         {
-            Entity = new ContactModel() { ID = contactID };
+            Entity.ContactID = contactID;
 
             return await ReadAsync();
         }
 
-        /// <summary>
-        /// Read contact (async)
-        /// </summary>
-        /// <returns>Task<ContactResult></returns>
-        [ComVisible(false)]
+		/// <summary>
+		/// Read contact (async)
+		/// </summary>
+		/// <param name="contactID">Contact ID</param>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
+        public async Task<ContactApiResult> ReadByIdAsync(string contactID)
+        {
+            Entity = new ContactModel() { ContactID = new ContactID(contactID) };
+
+            return await ReadAsync();
+        }
+
+		/// <summary>
+		/// Read contact (async)
+		/// </summary>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
         public async Task<ContactApiResult> GetAsync() => await ReadAsync();
 
-        /// <summary>
-        /// Read contact (async)
-        /// </summary>
-        /// <param name="contactModel">ContactModel</param>
-        /// <returns>Task<ContactResult></returns>
-        [ComVisible(false)]
+		/// <summary>
+		/// Read contact (async)
+		/// </summary>
+		/// <param name="contactModel">ContactModel</param>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
         public async Task<ContactApiResult> GetAsync(ContactModel entity) => await ReadAsync(entity);
 
-        /// <summary>
-        /// Read contact (async)
-        /// </summary>
-        /// <param name="contactID">ContactModel</param>
-        /// <returns>Task<ContactResult></returns>
-        [ComVisible(false)]
+		/// <summary>
+		/// Read contact (async)
+		/// </summary>
+		/// <param name="contactID">ContactID</param>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
+        public async Task<ContactApiResult> GetAsync(ContactID contactID) => await ReadAsync(contactID);
+
+		/// <summary>
+		/// Read contact (async)
+		/// </summary>
+		/// <param name="contactID">ContactModel</param>
+		/// <returns>Task<ContactApiResult></returns>
+		[ComVisible(false)]
         public async Task<ContactApiResult> GetByIdAsync(string contactID) => await ReadByIdAsync(contactID);
         #endregion
 

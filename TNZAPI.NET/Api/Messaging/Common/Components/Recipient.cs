@@ -1,4 +1,6 @@
-﻿namespace TNZAPI.NET.Api.Messaging.Common.Components
+﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+
+namespace TNZAPI.NET.Api.Messaging.Common.Components
 {
     public class Recipient
     {
@@ -12,6 +14,10 @@
         public string Custom3 { get; set; }
         public string Custom4 { get; set; }
         public string Custom5 { get; set; }
+
+        public GroupID GroupID { get; set; }
+        public string GroupCode { get; set; }
+        public ContactID ContactID { get; set; }
 
         public string MobileNumber { get; set; }
         public string FaxNumber { get; set; }

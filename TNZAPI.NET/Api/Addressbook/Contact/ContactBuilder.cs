@@ -18,7 +18,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         {
             Entity = new ContactModel()
             { 
-                ID = contactID
+                ContactID = new ContactID(contactID)
             };
 
         }

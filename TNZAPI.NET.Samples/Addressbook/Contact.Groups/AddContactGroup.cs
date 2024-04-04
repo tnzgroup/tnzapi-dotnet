@@ -63,7 +63,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                 Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                 Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
@@ -129,7 +129,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                 Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                 Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
@@ -199,7 +199,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                 Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                 Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");
@@ -261,7 +261,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
             var response = client.Addressbook.ContactGroup.Add(
                 contact: new ContactModel()                             // ContactModel
                 {
-                    ID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"
+                    ContactID = new("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
                 }, 
                 group: new GroupModel()                                 // GroupModel
                 {
@@ -271,7 +271,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Contact details for ContactID={response.Contact.ID}");
+                Console.WriteLine($"Contact details for ContactID={response.Contact.ContactID}");
                 Console.WriteLine($"    -> Owner: '{response.Contact.Owner}'");
                 Console.WriteLine($"    -> Created: '{response.Contact.Created}'");
                 Console.WriteLine($"    -> Updated: '{response.Contact.Updated}'");

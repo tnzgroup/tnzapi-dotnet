@@ -1,4 +1,5 @@
-﻿using TNZAPI.NET.Api.Addressbook.Group;
+﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group;
 using TNZAPI.NET.Api.Addressbook.Group.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Core;
@@ -74,7 +75,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
 
                 foreach (var contact in response.Contacts)
                 {
-                    Console.WriteLine($"Contact details for ContactID={contact.ID}");
+                    Console.WriteLine($"Contact details for ContactID={contact.ContactID}");
                     Console.WriteLine($"    -> Owner: '{contact.Owner}'");
                     Console.WriteLine($"    -> Created: '{contact.Created}'");
                     Console.WriteLine($"    -> Updated: '{contact.Updated}'");
@@ -141,7 +142,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
 
                 foreach (var contact in response.Contacts)
                 {
-                    Console.WriteLine($"Contact details for ContactID={contact.ID}");
+                    Console.WriteLine($"Contact details for ContactID={contact.ContactID}");
                     Console.WriteLine($"    -> Owner: '{contact.Owner}'");
                     Console.WriteLine($"    -> Created: '{contact.Created}'");
                     Console.WriteLine($"    -> Updated: '{contact.Updated}'");
@@ -212,7 +213,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
 
                 foreach (var contact in response.Contacts)
                 {
-                    Console.WriteLine($"Contact details for ContactID={contact.ID}");
+                    Console.WriteLine($"Contact details for ContactID={contact.ContactID}");
                     Console.WriteLine($"    -> Owner: '{contact.Owner}'");
                     Console.WriteLine($"    -> Created: '{contact.Created}'");
                     Console.WriteLine($"    -> Updated: '{contact.Updated}'");
@@ -263,7 +264,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             var response = client.Addressbook.GroupContactList.List(
                 new GroupModel()            // Group
                 {
-                    GroupCode = "Test-Group"    
+                    GroupCode = "Test-Group"
                 },                      
                 new ListRequestOptions()
                 {
@@ -283,7 +284,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
 
                 foreach (var contact in response.Contacts)
                 {
-                    Console.WriteLine($"Contact details for ContactID={contact.ID}");
+                    Console.WriteLine($"Contact details for ContactID={contact.ContactID}");
                     Console.WriteLine($"    -> Owner: '{contact.Owner}'");
                     Console.WriteLine($"    -> Created: '{contact.Created}'");
                     Console.WriteLine($"    -> Updated: '{contact.Updated}'");

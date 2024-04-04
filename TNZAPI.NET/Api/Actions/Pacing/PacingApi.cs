@@ -2,6 +2,7 @@
 using System.Text;
 using System.Xml;
 using TNZAPI.NET.Api.Actions.Pacing.Dto;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces.Actions;
 using TNZAPI.NET.Helpers;
@@ -209,8 +210,8 @@ namespace TNZAPI.NET.Api.Actions.Pacing
                     return ResultHelper.RespondError<PacingApiResult>("Empty API key: Please specify APIKey");
                 }
             }
-            if (Options.MessageID.Equals(""))
-            {
+			if (Options.MessageID is null || Options.MessageID.Equals(""))
+			{
                 return ResultHelper.RespondError<PacingApiResult>("Empty Message ID: Please specify MessageID");
             }
             if (Options.NumberOfOperators.Equals(""))
@@ -227,7 +228,7 @@ namespace TNZAPI.NET.Api.Actions.Pacing
         /// <param name="numberOfOperators"></param>
         /// <returns>PacingResult</returns>
 
-        public PacingApiResult Submit(string messageID, int numberOfOperators)
+        public PacingApiResult Submit(MessageID messageID, int numberOfOperators)
         {
             Options = new PacingRequestOptions
             {
@@ -271,7 +272,7 @@ namespace TNZAPI.NET.Api.Actions.Pacing
                     return ResultHelper.RespondError<PacingApiResult>("Empty API key: Please specify APIKey");
                 }
             }
-            if (Options.MessageID.Equals(""))
+            if (Options.MessageID is null || Options.MessageID.Equals(""))
             {
                 return ResultHelper.RespondError<PacingApiResult>("Empty Message ID: Please specify MessageID");
             }
@@ -289,7 +290,7 @@ namespace TNZAPI.NET.Api.Actions.Pacing
         /// <param name="numberOfOperators"></param>
         /// <returns></returns>
         [ComVisible(false)]
-        public async Task<PacingApiResult> SubmitAsync(string messageID, int numberOfOperators)
+        public async Task<PacingApiResult> SubmitAsync(MessageID messageID, int numberOfOperators)
         {
             Options = new PacingRequestOptions
             {
@@ -312,6 +313,20 @@ namespace TNZAPI.NET.Api.Actions.Pacing
 
             return await SubmitAsync();
         }
-        #endregion Poll
-    }
+		#endregion Poll
+
+		#region Deprecated
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public PacingApiResult Submit(string messageID, int numberOfOperators)
+		{
+			return Submit(new MessageID(messageID), numberOfOperators);
+		}
+
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public async Task<PacingApiResult> SubmitAsync(string messageID, int numberOfOperators)
+		{
+			return await SubmitAsync(new MessageID(messageID), numberOfOperators);
+		}
+		#endregion
+	}
 }

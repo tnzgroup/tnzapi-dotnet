@@ -2,6 +2,7 @@
 using System.Text;
 using System.Xml;
 using TNZAPI.NET.Api.Actions.Resubmit.Dto;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces.Actions;
 using TNZAPI.NET.Helpers;
@@ -216,7 +217,7 @@ namespace TNZAPI.NET.Api.Actions.Resubmit
                     return ResultHelper.RespondError<ResubmitApiResult>("Empty API key: Please specify APIKey");
                 }
             }
-            if (Options.MessageID.Equals(""))
+            if (Options.MessageID is null || Options.MessageID.Equals(""))
             {
                 return ResultHelper.RespondError<ResubmitApiResult>("Empty Message ID: Please specify MessageID");
             }
@@ -228,7 +229,7 @@ namespace TNZAPI.NET.Api.Actions.Resubmit
         /// </summary>
         /// <param name="messageID">Message ID</param>
         /// <returns>ResubmitResult</returns>
-        public ResubmitApiResult Submit(string messageID)
+        public ResubmitApiResult Submit(MessageID messageID)
         {
             Options = new ResubmitRequestOptions
             {
@@ -245,7 +246,7 @@ namespace TNZAPI.NET.Api.Actions.Resubmit
         /// <param name="sendTime">Date/Time</param>
         /// <returns></returns>
         [ComVisible(false)]
-        public ResubmitApiResult Submit(string messageID, DateTime sendTime, string timezone = null)
+        public ResubmitApiResult Submit(MessageID messageID, DateTime sendTime, string timezone = null)
         {
             Options = new ResubmitRequestOptions
             {
@@ -290,7 +291,7 @@ namespace TNZAPI.NET.Api.Actions.Resubmit
                     return ResultHelper.RespondError<ResubmitApiResult>("Empty API key: Please specify APIKey");
                 }
             }
-            if (Options.MessageID.Equals(""))
+            if (Options.MessageID is null || Options.MessageID.Equals(""))
             {
                 return ResultHelper.RespondError<ResubmitApiResult>("Empty Message ID: Please specify MessageID");
             }
@@ -303,7 +304,7 @@ namespace TNZAPI.NET.Api.Actions.Resubmit
         /// <param name="messageID">Message ID</param>
         /// <returns></returns>
         [ComVisible(false)]
-        public async Task<ResubmitApiResult> SubmitAsync(string messageID)
+        public async Task<ResubmitApiResult> SubmitAsync(MessageID messageID)
         {
             Options = new ResubmitRequestOptions
             {
@@ -320,7 +321,7 @@ namespace TNZAPI.NET.Api.Actions.Resubmit
         /// <param name="sendTime">Date/Time</param>
         /// <returns></returns>
         [ComVisible(false)]
-        public async Task<ResubmitApiResult> SubmitAsync(string messageID, DateTime sendTime, string timezone = null)
+        public async Task<ResubmitApiResult> SubmitAsync(MessageID messageID, DateTime sendTime, string timezone = null)
         {
             Options = new ResubmitRequestOptions
             {
@@ -345,5 +346,17 @@ namespace TNZAPI.NET.Api.Actions.Resubmit
             return await SubmitAsync();
         }
         #endregion SubmitAsync
-    }
+
+        #region Deprecated
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public ResubmitApiResult Submit(string messageID) => Submit(new MessageID(messageID));
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public ResubmitApiResult Submit(string messageID, DateTime sendTime, string timezone = null) => Submit(new MessageID(messageID), sendTime, timezone);
+
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public async Task<ResubmitApiResult> SubmitAsync(string messageID) => await SubmitAsync(new MessageID(messageID));
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public async Task<ResubmitApiResult> SubmitAsync(string messageID, DateTime sendTime, string timezone = null) => await SubmitAsync(new MessageID(messageID), sendTime, timezone);
+		#endregion
+	}
 }

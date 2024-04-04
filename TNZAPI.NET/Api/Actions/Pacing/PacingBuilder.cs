@@ -1,4 +1,5 @@
 ﻿using TNZAPI.NET.Api.Actions.Pacing.Dto;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 
 namespace TNZAPI.NET.Api.Actions.Pacing
 {
@@ -15,6 +16,14 @@ namespace TNZAPI.NET.Api.Actions.Pacing
         {
             Entity = new PacingRequestOptions()
             {
+                MessageID = new MessageID(messageID)
+            };
+        }
+
+        public PacingBuilder(MessageID messageID)
+        {
+            Entity = new PacingRequestOptions()
+            {
                 MessageID = messageID
             };
         }
@@ -26,7 +35,7 @@ namespace TNZAPI.NET.Api.Actions.Pacing
         /// <returns>PacingBuilder</returns>
         public PacingBuilder SetMessageID(string messageID)
         {
-            Entity.MessageID = messageID;
+            Entity.MessageID = new MessageID(messageID);
             
             return this;
         }

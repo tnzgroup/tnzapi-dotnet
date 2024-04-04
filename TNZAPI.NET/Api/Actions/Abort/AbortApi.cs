@@ -2,6 +2,7 @@
 using System.Text;
 using System.Xml;
 using TNZAPI.NET.Api.Actions.Abort.Dto;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces.Actions;
 using TNZAPI.NET.Helpers;
@@ -207,8 +208,8 @@ namespace TNZAPI.NET.Api.Actions.Abort
                     return ResultHelper.RespondError<AbortApiResult>("Empty API key: Please specify APIKey");
                 }
             }
-            if (Options.MessageID.Equals(""))
-            {
+			if (Options.MessageID is null || Options.MessageID.Equals(""))
+			{
                 return ResultHelper.RespondError<AbortApiResult>("Empty Message ID: Please specify MessageID");
             }
             return SendXML();
@@ -220,7 +221,7 @@ namespace TNZAPI.NET.Api.Actions.Abort
         /// <param name="messageID">Message ID</param>
         /// <returns>AbortResult</returns>
         [ComVisible(false)]
-        public AbortApiResult Submit(string messageID)
+        public AbortApiResult Submit(MessageID messageID)
         {
             Options = new AbortRequestOptions
             {
@@ -263,8 +264,8 @@ namespace TNZAPI.NET.Api.Actions.Abort
                     return ResultHelper.RespondError<AbortApiResult>("Empty API key: Please specify APIKey");
                 }
             }
-            if (Options.MessageID.Equals(""))
-            {
+			if (Options.MessageID is null || Options.MessageID.Equals(""))
+			{
                 return ResultHelper.RespondError<AbortApiResult>("Empty Message ID: Please specify MessageID");
             }
             return await SendXMLAsync();
@@ -276,7 +277,7 @@ namespace TNZAPI.NET.Api.Actions.Abort
         /// <param name="messageID">Message ID</param>
         /// <returns></returns>
         [ComVisible(false)]
-        public async Task<AbortApiResult> SubmitAsync(string messageID)
+        public async Task<AbortApiResult> SubmitAsync(MessageID messageID)
         {
             Options = new AbortRequestOptions
             {
@@ -298,6 +299,20 @@ namespace TNZAPI.NET.Api.Actions.Abort
 
             return await SubmitAsync();
         }
-        #endregion SubmitAsync
-    }
+		#endregion SubmitAsync
+
+		#region Deprecated
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public AbortApiResult Submit(string messageID)
+        {
+            return Submit(new MessageID(messageID));
+        }
+
+		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+		public async Task<AbortApiResult> SubmitAsync(string messageID)
+        {
+            return await SubmitAsync(new MessageID(messageID));
+        }
+		#endregion
+	}
 }

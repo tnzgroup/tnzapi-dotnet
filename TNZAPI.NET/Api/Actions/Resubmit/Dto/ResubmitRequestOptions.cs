@@ -1,8 +1,10 @@
-﻿namespace TNZAPI.NET.Api.Actions.Resubmit.Dto
+﻿using TNZAPI.NET.Api.Messaging.Common.Dto;
+
+namespace TNZAPI.NET.Api.Actions.Resubmit.Dto
 {
     public class ResubmitRequestOptions
     {
-        public string MessageID { get; set; } = "";
+        public MessageID MessageID { get; set; }
 
         public DateTime SendTime { get; set; } = DateTime.Now;
 

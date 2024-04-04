@@ -1,7 +1,9 @@
-﻿namespace TNZAPI.NET.Api.Actions.Abort.Dto
+﻿using TNZAPI.NET.Api.Messaging.Common.Dto;
+
+namespace TNZAPI.NET.Api.Actions.Abort.Dto
 {
     public class AbortRequestOptions
     {
-        public string MessageID { get; set; } = "";
+        public MessageID MessageID { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 using TNZAPI.NET.Api.Actions.Reschedule.Dto;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces.Actions;
 using TNZAPI.NET.Helpers;
@@ -217,7 +218,7 @@ namespace TNZAPI.NET.Api.Actions.Reschedule
                     return ResultHelper.RespondError<RescheduleApiResult>("Empty API key: Please specify APIKey");
                 }
             }
-            if (Options.MessageID.Equals(""))
+            if (Options.MessageID is null || Options.MessageID.Equals(""))
             {
                 return ResultHelper.RespondError<RescheduleApiResult>("Empty Message ID: Please specify MessageID");
             }
@@ -235,7 +236,7 @@ namespace TNZAPI.NET.Api.Actions.Reschedule
         /// <param name="sendTime">Scheduled for</param>
         /// <param name="timezone">Timezone for sendTime (optional)</param>
         /// <returns>RescheduleResult</returns>
-        public RescheduleApiResult Submit(string messageID, DateTime sendTime, string timezone = null)
+        public RescheduleApiResult Submit(MessageID messageID, DateTime sendTime, string timezone = null)
         {
             Options = new RescheduleRequestOptions
             {
@@ -280,7 +281,7 @@ namespace TNZAPI.NET.Api.Actions.Reschedule
                     return ResultHelper.RespondError<RescheduleApiResult>("Empty API key: Please specify APIKey");
                 }
             }
-            if (Options.MessageID.Equals(""))
+            if (Options.MessageID is null || Options.MessageID.Equals(""))
             {
                 return ResultHelper.RespondError<RescheduleApiResult>("Empty Message ID: Please specify MessageID");
             }
@@ -300,7 +301,7 @@ namespace TNZAPI.NET.Api.Actions.Reschedule
         /// <param name="timezone">Timezone for sendTime (optional)</param>
         /// <returns>Task<RescheduleResult></returns>
         [ComVisible(false)]
-        public async Task<RescheduleApiResult> SubmitAsync(string messageID, DateTime sendTime, string timezone = null)
+        public async Task<RescheduleApiResult> SubmitAsync(MessageID messageID, DateTime sendTime, string timezone = null)
         {
             Options = new RescheduleRequestOptions
             {
@@ -325,5 +326,13 @@ namespace TNZAPI.NET.Api.Actions.Reschedule
             return await SubmitAsync();
         }
         #endregion Submit
-    }
+
+        #region Deprecated
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public RescheduleApiResult Submit(string messageID, DateTime sendTime, string timezone = null) => Submit(new MessageID(messageID), sendTime, timezone);
+
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public async Task<RescheduleApiResult> SubmitAsync(string messageID, DateTime sendTime, string timezone = null) => await SubmitAsync(new MessageID(messageID), sendTime, timezone);
+		#endregion
+	}
 }

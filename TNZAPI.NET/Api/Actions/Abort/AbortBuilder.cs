@@ -1,4 +1,5 @@
 ﻿using TNZAPI.NET.Api.Actions.Abort.Dto;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 
 namespace TNZAPI.NET.Api.Actions.Abort
 {
@@ -15,27 +16,47 @@ namespace TNZAPI.NET.Api.Actions.Abort
         {
             Entity = new AbortRequestOptions()
             {
-                MessageID = messageID
+                MessageID = new MessageID(messageID)
             };
         }
 
+        public AbortBuilder(MessageID messageID)
+        {
+			Entity = new AbortRequestOptions()
+			{
+				MessageID = messageID
+			};
+		}
+
         /// <summary>
-        /// Set message id
+        /// Sets message id
         /// </summary>
         /// <param name="messageID">MessageID</param>
         /// <returns>AbortBuilder</returns>
         public AbortBuilder SetMessageID(string messageID)
         {
-            Entity.MessageID = messageID;
+            Entity.MessageID = new MessageID(messageID);
 
             return this;
         }
 
-        /// <summary>
-        /// Build AbortRequestOptions
-        /// </summary>
-        /// <returns>AbortRequestOptions</returns>
-        public AbortRequestOptions Build()
+		/// <summary>
+		/// Sets message id
+		/// </summary>
+		/// <param name="messageID">MessageID</param>
+		/// <returns>AbortBuilder</returns>
+		public AbortBuilder SetMessageID(MessageID messageID)
+		{
+			Entity.MessageID = messageID;
+
+			return this;
+		}
+
+		/// <summary>
+		/// Build AbortRequestOptions
+		/// </summary>
+		/// <returns>AbortRequestOptions</returns>
+		public AbortRequestOptions Build()
         {
             return Entity;
         }

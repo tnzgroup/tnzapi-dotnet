@@ -1,4 +1,5 @@
 ﻿using TNZAPI.NET.Api.Actions.Reschedule.Dto;
+using TNZAPI.NET.Api.Messaging.Common.Dto;
 
 namespace TNZAPI.NET.Api.Actions.Reschedule
 {
@@ -15,28 +16,48 @@ namespace TNZAPI.NET.Api.Actions.Reschedule
         {
             Entity = new RescheduleRequestOptions()
             {
-                MessageID = messageID
+                MessageID = new MessageID(messageID)
             };
         }
 
-        /// <summary>
-        /// Set message id
-        /// </summary>
-        /// <param name="messageID">MessageID</param>
-        /// <returns>RescheduleBuilder</returns>
-        public RescheduleBuilder SetMessageID(string messageID)
+		public RescheduleBuilder(MessageID messageID)
+		{
+			Entity = new RescheduleRequestOptions()
+			{
+				MessageID = messageID
+			};
+		}
+
+		/// <summary>
+		/// Set message id
+		/// </summary>
+		/// <param name="messageID">MessageID</param>
+		/// <returns>RescheduleBuilder</returns>
+		public RescheduleBuilder SetMessageID(string messageID)
         {
-            Entity.MessageID = messageID;
+            Entity.MessageID = new MessageID(messageID);
 
             return this;
         }
 
-        /// <summary>
-        /// Set send time
-        /// </summary>
-        /// <param name="sendTime">DateTime value</param>
-        /// <returns>RescheduleBuilder</returns>
-        public RescheduleBuilder SetSendTime(DateTime sendTime)
+		/// <summary>
+		/// Set message id
+		/// </summary>
+		/// <param name="messageID">MessageID</param>
+		/// <returns>RescheduleBuilder</returns>
+		public RescheduleBuilder SetMessageID(MessageID messageID)
+		{
+			Entity.MessageID = messageID;
+
+			return this;
+		}
+
+		/// <summary>
+		/// Set send time
+		/// </summary>
+		/// <param name="sendTime">DateTime value</param>
+		/// <returns>RescheduleBuilder</returns>
+		public RescheduleBuilder SetSendTime(DateTime sendTime)
         {
             Entity.SendTime = sendTime;
 

@@ -55,11 +55,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var groupCode = "Test-Group";
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
+			var contactID = new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var response = client.Addressbook.GroupContact.Remove(groupCode, contactID);
+            var response = client.Addressbook.GroupContact.Remove(groupID, contactID);
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -125,8 +125,8 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             var client = new TNZApiClient(apiUser);
 
             var response = client.Addressbook.GroupContact.Remove(
-                groupCode: "Test-Group",                                // Group Code
-                contactID: "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"       // Contact ID
+                groupID: new GroupID("EEEEEEEE-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),       // Group Code
+                contactID: new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")    // Contact ID
             );
 
             if (response.Result == Enums.ResultCode.Success)

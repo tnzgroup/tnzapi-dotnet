@@ -86,7 +86,7 @@ namespace TNZAPI.NET.Api.Messaging.SMS
         }
 
         /// <summary>
-        /// Sets MessageID of the email
+        /// Sets MessageID of the message
         /// </summary>
         /// <param name="messageID">Message ID</param>
         /// <returns>SMSBuilder</returns>
@@ -97,12 +97,24 @@ namespace TNZAPI.NET.Api.Messaging.SMS
             return this;
         }
 
-        /// <summary>
-        /// Sets Reference of the email
-        /// </summary>
-        /// <param name="reference"></param>
-        /// <returns>SMSBuilder</returns>
-        public SMSBuilder SetReference(string reference)
+		/// <summary>
+		/// Sets MessageID of the message
+		/// </summary>
+		/// <param name="messageID">MessageID</param>
+		/// <returns>SMSBuilder</returns>
+		public SMSBuilder SetMessageID(MessageID messageID)
+		{
+			Entity.MessageID = messageID;
+
+			return this;
+		}
+
+		/// <summary>
+		/// Sets Reference of the message
+		/// </summary>
+		/// <param name="reference"></param>
+		/// <returns>SMSBuilder</returns>
+		public SMSBuilder SetReference(string reference)
         {
             Entity.Reference = reference;
 
@@ -110,7 +122,7 @@ namespace TNZAPI.NET.Api.Messaging.SMS
         }
 
         /// <summary>
-        /// Sets Send Time of the email
+        /// Sets Send Time of the message
         /// </summary>
         /// <param name="sendTime">DateTime</param>
         /// <returns>SMSBuilder</returns>
@@ -134,7 +146,7 @@ namespace TNZAPI.NET.Api.Messaging.SMS
         }
 
         /// <summary>
-        /// Sets SubAccount value of the email
+        /// Sets SubAccount value of the message
         /// </summary>
         /// <param name="subaccount">SubAccount value</param>
         /// <returns>SMSBuilder</returns>
@@ -146,7 +158,7 @@ namespace TNZAPI.NET.Api.Messaging.SMS
         }
 
         /// <summary>
-        /// Sets Department value of the email
+        /// Sets Department value of the message
         /// </summary>
         /// <param name="department">Department value</param>
         /// <returns>SMSBuilder</returns>
@@ -158,7 +170,7 @@ namespace TNZAPI.NET.Api.Messaging.SMS
         }
 
         /// <summary>
-        /// Sets ChargeCode value of the email
+        /// Sets ChargeCode value of the message
         /// </summary>
         /// <param name="chargeCode">Charge Code Value</param>
         /// <returns>SMSBuilder</returns>

@@ -45,9 +45,9 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-            var groupCode = "Test-Group";
+			var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var response = client.Addressbook.Group.GetByGroupCode(groupCode);
+			var response = client.Addressbook.Group.Get(groupID);
 
             if (response.Result == Enums.ResultCode.Success)
             {

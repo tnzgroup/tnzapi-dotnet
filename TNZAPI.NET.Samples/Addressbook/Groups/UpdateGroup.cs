@@ -45,10 +45,10 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-            var groupCode = "Test-Group";
+			var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var response = client.Addressbook.Group.Update(
-                groupCode: groupCode,
+			var response = client.Addressbook.Group.Update(
+				groupID: groupID,
                 groupName: "Test Group"
             );
 

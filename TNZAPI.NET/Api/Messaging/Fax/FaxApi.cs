@@ -344,18 +344,10 @@ namespace TNZAPI.NET.Api.Messaging.Fax
 		/// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
 		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
 		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
-		/// <param name="groupCode">Sets the recipient group by group code (from TNZ Addressbook)</param>
-		/// <param name="groupCodes">Sets the list of recipient groups by list of group codes (from TNZ Addressbook)</param>
-		/// <param name="GroupCode">GroupCode object, Sets the recipient group by group code (from TNZ Addressbook)</param>
-		/// <param name="GroupCodes">List of GroupCode objects, Sets the list of recipient groups by list of group codes (from TNZ Addressbook)</param>
-		/// <param name="groupID">Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="groupIDs">Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="GroupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="GroupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="contactID">Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="contactIDs">Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-		/// <param name="ContactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="ContactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+		/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+		/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+		/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+		/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
 		/// <param name="destination">Sets the email destination</param>
 		/// <param name="destinations">Sets the list of email addresses</param>
 		/// <param name="recipient">Sets the email recipient - Recipient() object</param>
@@ -370,8 +362,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax
 		/// <returns>MessageApiResult</returns>
 		[ComVisible(false)]
         public MessageApiResult SendMessage(
-            string messageID = null,
-			MessageID MessageID = null,                     // MessageID object
+			MessageID messageID = null,                     // MessageID object
 			string reference = null,
             DateTime? sendTime = null,
             string timezone = null,
@@ -385,16 +376,10 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             string watermarkAllPages = null,
             int? retryAttempts = null,
             int? retryPeriod = null,
-			string groupCode = null,
-			ICollection<string> groupCodes = null,
-			string groupID = null,
-			ICollection<string> groupIDs = null,
-			GroupID GroupID = null,                         // GroupID object
-			ICollection<GroupID> GroupIDs = null,           // ICollection<GroupID>
-			string contactID = null,
-			ICollection<string> contactIDs = null,
-			ContactID ContactID = null,                     // ContactID object
-			ICollection<ContactID> ContactIDs = null,       // ICollection<ContactID>
+			GroupID groupID = null,                         // GroupID object
+			ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
+			ContactID contactID = null,                     // ContactID object
+			ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
 			string destination = null,
             ICollection<string> destinations = null,
             Recipient recipient = null,
@@ -410,7 +395,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax
         {
             var message = new FaxModel()
             {
-				MessageID = MessageID ?? new MessageID(messageID),
+				MessageID = messageID,
 
 				WebhookCallbackURL = webhookCallbackURL,
                 WebhookCallbackFormat = webhookCallbackFormat is not null ? (WebhookCallbackType)webhookCallbackFormat : WebhookCallbackType.JSON,
@@ -432,14 +417,10 @@ namespace TNZAPI.NET.Api.Messaging.Fax
                 RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
 
                 Recipients = new RecipientList()
-							.Add(groupID != null ? new GroupID(groupID) : null)
-							.Add(groupIDs != null ? groupIDs.Select(str => new GroupID(str)).ToList() : null)
-							.Add(contactID != null ? new ContactID(contactID) : null)
-							.Add(contactIDs != null ? contactIDs.Select(str => new ContactID(str)).ToList() : null)
-							.Add(GroupID)
-							.Add(GroupIDs)
-							.Add(ContactID)
-							.Add(ContactIDs)
+							.Add(groupID)
+							.Add(groupIDs)
+							.Add(contactID)
+							.Add(contactIDs)
 							.Add(destination)
                             .Add(destinations)
                             .Add(recipient)
@@ -527,18 +508,10 @@ namespace TNZAPI.NET.Api.Messaging.Fax
 		/// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
 		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
 		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
-		/// <param name="groupCode">Sets the recipient group by group code (from TNZ Addressbook)</param>
-		/// <param name="groupCodes">Sets the list of recipient groups by list of group codes (from TNZ Addressbook)</param>
-		/// <param name="GroupCode">GroupCode object, Sets the recipient group by group code (from TNZ Addressbook)</param>
-		/// <param name="GroupCodes">List of GroupCode objects, Sets the list of recipient groups by list of group codes (from TNZ Addressbook)</param>
-		/// <param name="groupID">Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="groupIDs">Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="GroupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="GroupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="contactID">Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="contactIDs">Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-		/// <param name="ContactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="ContactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+		/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+		/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+		/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+		/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
 		/// <param name="destination">Sets the email destination</param>
 		/// <param name="destinations">Sets the list of email addresses</param>
 		/// <param name="recipient">Sets the email recipient - Recipient() object</param>
@@ -553,8 +526,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax
 		/// <returns>Task<MessageApiResult></returns>
 		[ComVisible(false)]
         public async Task<MessageApiResult> SendMessageAsync(
-            string messageID = null,
-			MessageID MessageID = null,                     // MessageID object
+			MessageID messageID = null,                     // MessageID object
 			string reference = null,
             DateTime? sendTime = null,
             string timezone = null,
@@ -568,16 +540,10 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             string watermarkAllPages = null,
             int? retryAttempts = null,
             int? retryPeriod = null,
-			string groupCode = null,
-			ICollection<string> groupCodes = null,
-			string groupID = null,
-			ICollection<string> groupIDs = null,
-			GroupID GroupID = null,                         // GroupID object
-			ICollection<GroupID> GroupIDs = null,           // ICollection<GroupID>
-			string contactID = null,
-			ICollection<string> contactIDs = null,
-			ContactID ContactID = null,                     // ContactID object
-			ICollection<ContactID> ContactIDs = null,       // ICollection<ContactID>
+			GroupID groupID = null,                         // GroupID object
+			ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
+			ContactID contactID = null,                     // ContactID object
+			ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
 			string destination = null,
             ICollection<string> destinations = null,
             Recipient recipient = null,
@@ -593,7 +559,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax
         {
             return await SendMessageAsync(new FaxModel()
             {
-				MessageID = MessageID ?? new MessageID(messageID),
+				MessageID = messageID,
 
 				WebhookCallbackURL = webhookCallbackURL,
                 WebhookCallbackFormat = webhookCallbackFormat is not null ? (WebhookCallbackType)webhookCallbackFormat : WebhookCallbackType.JSON,
@@ -615,14 +581,10 @@ namespace TNZAPI.NET.Api.Messaging.Fax
                 RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
 
                 Recipients = new RecipientList()
-							.Add(groupID != null ? new GroupID(groupID) : null)
-							.Add(groupIDs != null ? groupIDs.Select(str => new GroupID(str)).ToList() : null)
-							.Add(contactID != null ? new ContactID(contactID) : null)
-							.Add(contactIDs != null ? contactIDs.Select(str => new ContactID(str)).ToList() : null)
-							.Add(GroupID)
-							.Add(GroupIDs)
-							.Add(ContactID)
-							.Add(ContactIDs)
+							.Add(groupID)
+							.Add(groupIDs)
+							.Add(contactID)
+							.Add(contactIDs)
 							.Add(destination)
                             .Add(destinations)
                             .Add(recipient)

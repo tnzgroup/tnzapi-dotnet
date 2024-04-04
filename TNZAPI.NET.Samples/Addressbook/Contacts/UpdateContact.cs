@@ -44,11 +44,12 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
+			var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var response = client.Addressbook.Contact.Update(
+			var response = client.Addressbook.Contact.Update(
                 contactID: contactID,           // Contact ID (required)
-                attention: "Test Person");
+                attention: "Test Person"
+            );
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -99,8 +100,10 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var response = client.Addressbook.Contact.Update(
-                contactID: "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD",      // Contact ID (required)
+			var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+			var response = client.Addressbook.Contact.Update(
+                contactID: contactID,      // Contact ID (required)
                 attention: "Test Person",
                 firstName: "Test",
                 lastName: "Person",

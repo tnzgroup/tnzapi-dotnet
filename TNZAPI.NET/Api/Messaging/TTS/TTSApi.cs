@@ -359,8 +359,7 @@ namespace TNZAPI.NET.Api.Messaging.TTS
 		/// <summary>
 		/// Send TextToSpeech Message
 		/// </summary>
-		/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-		/// <param name="MessageID">MessageID object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+		/// <param name="messageID">MessageID object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
 		/// <param name="reference">Tracking ID or message description</param>
 		/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
 		/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
@@ -379,18 +378,10 @@ namespace TNZAPI.NET.Api.Messaging.TTS
 		/// <param name="ttsVoiceType">Text-to-Speech voice to use (Male1, Female1, Female2, Female3, Female4)</param>
 		/// <param name="options">Customisable field</param>
 		/// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
-		/// <param name="groupCode">Sets the recipient group by group code (from TNZ Addressbook)</param>
-		/// <param name="groupCodes">Sets the list of recipient groups by list of group codes (from TNZ Addressbook)</param>
-		/// <param name="GroupCode">GroupCode object, Sets the recipient group by group code (from TNZ Addressbook)</param>
-		/// <param name="GroupCodes">List of GroupCode objects, Sets the list of recipient groups by list of group codes (from TNZ Addressbook)</param>
-		/// <param name="groupID">Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="groupIDs">Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="GroupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="GroupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="contactID">Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="contactIDs">Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-		/// <param name="ContactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="ContactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+		/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+		/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+		/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+		/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
 		/// <param name="destination">Destination - string value</param>
 		/// <param name="destinations">Desitnations - ICollection<string>()</param>
 		/// <param name="recipient">Destination - Recipient() object</param>
@@ -401,8 +392,7 @@ namespace TNZAPI.NET.Api.Messaging.TTS
 		/// <returns>MessageApiResult</returns>
 		[ComVisible(false)]
         public MessageApiResult SendMessage(
-            string messageID = null,
-			MessageID MessageID = null,                     // MessageID object
+			MessageID messageID = null,                     // MessageID object
 			string reference = null,
             DateTime? sendTime = null,
             string timezone = null,
@@ -421,16 +411,10 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             TTSVoiceType? ttsVoiceType = null,
             string options = null,
             ICollection<Keypad> keypads = null,
-			string groupCode = null,
-			ICollection<string> groupCodes = null,
-			string groupID = null,
-			ICollection<string> groupIDs = null,
-			GroupID GroupID = null,                         // GroupID object
-			ICollection<GroupID> GroupIDs = null,           // ICollection<GroupID>
-			string contactID = null,
-			ICollection<string> contactIDs = null,
-			ContactID ContactID = null,                     // ContactID object
-			ICollection<ContactID> ContactIDs = null,       // ICollection<ContactID>
+			GroupID groupID = null,                         // GroupID object
+			ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
+			ContactID contactID = null,                     // ContactID object
+			ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
 			string destination = null,
             ICollection<string> destinations = null,
             Recipient recipient = null,
@@ -442,7 +426,7 @@ namespace TNZAPI.NET.Api.Messaging.TTS
         {
             return SendMessage(new TTSModel()
             {
-				MessageID = MessageID ?? new MessageID(messageID),
+				MessageID = messageID,
 
 				WebhookCallbackURL = webhookCallbackURL,
                 WebhookCallbackFormat = webhookCallbackFormat is not null ? (WebhookCallbackType)webhookCallbackFormat : WebhookCallbackType.JSON,
@@ -473,14 +457,10 @@ namespace TNZAPI.NET.Api.Messaging.TTS
                             .ToList(),
 
                 Recipients = new RecipientList()
-							.Add(groupID != null ? new GroupID(groupID) : null)
-							.Add(groupIDs != null ? groupIDs.Select(str => new GroupID(str)).ToList() : null)
-							.Add(contactID != null ? new ContactID(contactID) : null)
-							.Add(contactIDs != null ? contactIDs.Select(str => new ContactID(str)).ToList() : null)
-							.Add(GroupID)
-							.Add(GroupIDs)
-							.Add(ContactID)
-							.Add(ContactIDs)
+							.Add(groupID)
+							.Add(groupIDs)
+							.Add(contactID)
+							.Add(contactIDs)
 							.Add(destination)
                             .Add(destinations)
                             .Add(recipient)
@@ -554,8 +534,7 @@ namespace TNZAPI.NET.Api.Messaging.TTS
 		/// <summary>
 		/// Send TextToSpeech Message
 		/// </summary>
-		/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-		/// <param name="MessageID">MessageID object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+		/// <param name="messageID">MessageID object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
 		/// <param name="reference">Tracking ID or message description</param>
 		/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
 		/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
@@ -574,18 +553,10 @@ namespace TNZAPI.NET.Api.Messaging.TTS
 		/// <param name="ttsVoiceType">Text-to-Speech voice to use (Male1, Female1, Female2, Female3, Female4)</param>
 		/// <param name="options">Customisable field</param>
 		/// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
-		/// <param name="groupCode">Sets the recipient group by group code (from TNZ Addressbook)</param>
-		/// <param name="groupCodes">Sets the list of recipient groups by list of group codes (from TNZ Addressbook)</param>
-		/// <param name="GroupCode">GroupCode object, Sets the recipient group by group code (from TNZ Addressbook)</param>
-		/// <param name="GroupCodes">List of GroupCode objects, Sets the list of recipient groups by list of group codes (from TNZ Addressbook)</param>
-		/// <param name="groupID">Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="groupIDs">Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="GroupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="GroupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="contactID">Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="contactIDs">Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-		/// <param name="ContactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="ContactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+		/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+		/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+		/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+		/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
 		/// <param name="destination">Destination - string value</param>
 		/// <param name="destinations">Desitnations - ICollection<string>()</param>
 		/// <param name="recipient">Destination - Recipient() object</param>
@@ -596,8 +567,7 @@ namespace TNZAPI.NET.Api.Messaging.TTS
 		/// <returns>MessageApiResult</returns>
 		[ComVisible(false)]
         public async Task<MessageApiResult> SendMessageAsync(
-            string messageID = null,
-			MessageID MessageID = null,                     // MessageID object
+			MessageID messageID = null,                     // MessageID object
 			string reference = null,
             DateTime? sendTime = null,
             string timezone = null,
@@ -616,16 +586,10 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             TTSVoiceType? ttsVoiceType = null,
             string options = null,
             ICollection<Keypad> keypads = null,
-			string groupCode = null,
-			ICollection<string> groupCodes = null,
-			string groupID = null,
-			ICollection<string> groupIDs = null,
-			GroupID GroupID = null,                         // GroupID object
-			ICollection<GroupID> GroupIDs = null,           // ICollection<GroupID>
-			string contactID = null,
-			ICollection<string> contactIDs = null,
-			ContactID ContactID = null,                     // ContactID object
-			ICollection<ContactID> ContactIDs = null,       // ICollection<ContactID>
+			GroupID groupID = null,                         // GroupID object
+			ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
+			ContactID contactID = null,                     // ContactID object
+			ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
 			string destination = null,
             ICollection<string> destinations = null,
             Recipient recipient = null,
@@ -637,7 +601,7 @@ namespace TNZAPI.NET.Api.Messaging.TTS
         {
             return await SendMessageAsync(new TTSModel()
             {
-				MessageID = MessageID ?? new MessageID(messageID),
+				MessageID = messageID,
 
 				WebhookCallbackURL = webhookCallbackURL,
                 WebhookCallbackFormat = webhookCallbackFormat is not null ? (WebhookCallbackType)webhookCallbackFormat : WebhookCallbackType.JSON,
@@ -668,14 +632,10 @@ namespace TNZAPI.NET.Api.Messaging.TTS
                             .ToListAsync(),
 
                 Recipients = new RecipientList()
-							.Add(groupID != null ? new GroupID(groupID) : null)
-							.Add(groupIDs != null ? groupIDs.Select(str => new GroupID(str)).ToList() : null)
-							.Add(contactID != null ? new ContactID(contactID) : null)
-							.Add(contactIDs != null ? contactIDs.Select(str => new ContactID(str)).ToList() : null)
-							.Add(GroupID)
-							.Add(GroupIDs)
-							.Add(ContactID)
-							.Add(ContactIDs)
+							.Add(groupID)
+							.Add(groupIDs)
+							.Add(contactID)
+							.Add(contactIDs)
 							.Add(destination)
                             .Add(destinations)
                             .Add(recipient)

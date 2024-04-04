@@ -11,8 +11,7 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
     {
         MessageApiResult SendMessage(VoiceModel entity);
         MessageApiResult SendMessage(
-            string messageID = null,
-			MessageID MessageID = null,                 // MessageID object
+			MessageID messageID = null,                 // MessageID object
 			string reference = null,
             DateTime? sendTime = null,
             string timezone = null,
@@ -30,16 +29,10 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
 			string callerID = null,
             string options = null,
             ICollection<Keypad> keypads = null,
-			string groupCode = null,
-			ICollection<string> groupCodes = null,
-			string groupID = null,
-			ICollection<string> groupIDs = null,
-			GroupID GroupID = null,                     // GroupID object
-			ICollection<GroupID> GroupIDs = null,       // ICollection<GroupID>
-			string contactID = null,
-			ICollection<string> contactIDs = null,
-			ContactID ContactID = null,                 // ContactID object
-			ICollection<ContactID> ContactIDs = null,   // ICollection<ContactID>
+			GroupID groupID = null,                     // GroupID object
+			ICollection<GroupID> groupIDs = null,       // ICollection<GroupID>
+			ContactID contactID = null,                 // ContactID object
+			ICollection<ContactID> contactIDs = null,   // ICollection<ContactID>
 			string destination = null,
             ICollection<string> destinations = null,
             Recipient recipient = null,
@@ -51,8 +44,7 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
 
         Task<MessageApiResult> SendMessageAsync(VoiceModel entity);
         Task<MessageApiResult> SendMessageAsync(
-            string messageID = null,
-			MessageID MessageID = null,                 // MessageID object
+			MessageID messageID = null,                 // MessageID object
 			string reference = null,
             DateTime? sendTime = null,
             string timezone = null,
@@ -70,16 +62,10 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
 			string callerID = null,
             string options = null,
             ICollection<Keypad> keypads = null,
-			string groupCode = null,
-			ICollection<string> groupCodes = null,
-			string groupID = null,
-			ICollection<string> groupIDs = null,
-			GroupID GroupID = null,                     // GroupID object
-			ICollection<GroupID> GroupIDs = null,       // ICollection<GroupID>
-			string contactID = null,
-			ICollection<string> contactIDs = null,
-			ContactID ContactID = null,                 // ContactID object
-			ICollection<ContactID> ContactIDs = null,   // ICollection<ContactID>
+			GroupID groupID = null,                     // GroupID object
+			ICollection<GroupID> groupIDs = null,       // ICollection<GroupID>
+			ContactID contactID = null,                 // ContactID object
+			ICollection<ContactID> contactIDs = null,   // ICollection<ContactID>
 			string destination = null,
             ICollection<string> destinations = null,
             Recipient recipient = null,

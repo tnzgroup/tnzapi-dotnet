@@ -50,9 +50,9 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-            var groupCode = "Test-Group";
+			var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var response = client.Addressbook.Group.DeleteByGroupCode(groupCode);
+			var response = client.Addressbook.Group.Delete(groupID);
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -82,9 +82,9 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-            var groupCode = "Test-Group";
+			var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var response = client.Addressbook.Group.DeleteByGroupCode(groupCode);
+			var response = client.Addressbook.Group.Delete(groupID);
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -146,11 +146,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-            var response = client.Addressbook.Group.Delete(
+			var response = client.Addressbook.Group.Delete(
                 new GroupModel()
                 {
-                    GroupCode = "Test-Group"
-                }
+                    GroupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+				}
             );
 
             if (response.Result == Enums.ResultCode.Success)

@@ -44,7 +44,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var response = client.Addressbook.Contact.DeleteById("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+            var response = client.Addressbook.Contact.Delete(new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD"));
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -95,7 +95,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var response = client.Addressbook.Contact.DeleteById("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+            var response = client.Addressbook.Contact.Delete(new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD"));
 
             if (response.Result == Enums.ResultCode.Success)
             {

@@ -1,14 +1,13 @@
 ﻿using System.Runtime.InteropServices;
-using static TNZAPI.NET.Core.Enums;
-using static TNZAPI.NET.Api.Messaging.Voice.Dto.VoiceModel;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.Voice.Dto;
+using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.Voice
 {
-    public class VoiceBuilder : IDisposable
+	public class VoiceBuilder : IDisposable
     {
         private VoiceModel Entity { get; set; }
 
@@ -88,7 +87,7 @@ namespace TNZAPI.NET.Api.Messaging.Voice
         }
 
         /// <summary>
-        /// Sets MessageID of the email
+        /// Sets MessageID of the message
         /// </summary>
         /// <param name="messageID">Message ID</param>
         /// <returns>VoiceBuilder</returns>
@@ -99,12 +98,24 @@ namespace TNZAPI.NET.Api.Messaging.Voice
             return this;
         }
 
-        /// <summary>
-        /// Sets Reference of the email
-        /// </summary>
-        /// <param name="reference"></param>
-        /// <returns>VoiceBuilder</returns>
-        public VoiceBuilder SetReference(string reference)
+		/// <summary>
+		/// Sets MessageID of the message
+		/// </summary>
+		/// <param name="messageID">MessageID</param>
+		/// <returns>VoiceBuilder</returns>
+		public VoiceBuilder SetMessageID(MessageID messageID)
+		{
+			Entity.MessageID = messageID;
+
+			return this;
+		}
+
+		/// <summary>
+		/// Sets Reference of the message
+		/// </summary>
+		/// <param name="reference"></param>
+		/// <returns>VoiceBuilder</returns>
+		public VoiceBuilder SetReference(string reference)
         {
             Entity.Reference = reference;
 
@@ -112,7 +123,7 @@ namespace TNZAPI.NET.Api.Messaging.Voice
         }
 
         /// <summary>
-        /// Sets Send Time of the email
+        /// Sets Send Time of the message
         /// </summary>
         /// <param name="TTSBuilder">DateTime</param>
         /// <returns>VoiceBuilder</returns>
@@ -136,7 +147,7 @@ namespace TNZAPI.NET.Api.Messaging.Voice
         }
 
         /// <summary>
-        /// Sets SubAccount value of the email
+        /// Sets SubAccount value of the message
         /// </summary>
         /// <param name="subaccount">SubAccount value</param>
         /// <returns>VoiceBuilder</returns>
@@ -148,7 +159,7 @@ namespace TNZAPI.NET.Api.Messaging.Voice
         }
 
         /// <summary>
-        /// Sets Department value of the email
+        /// Sets Department value of the message
         /// </summary>
         /// <param name="department">Department value</param>
         /// <returns>VoiceBuilder</returns>
@@ -160,7 +171,7 @@ namespace TNZAPI.NET.Api.Messaging.Voice
         }
 
         /// <summary>
-        /// Sets ChargeCode value of the email
+        /// Sets ChargeCode value of the message
         /// </summary>
         /// <param name="chargeCode">Charge Code Value</param>
         /// <returns>VoiceBuilder</returns>

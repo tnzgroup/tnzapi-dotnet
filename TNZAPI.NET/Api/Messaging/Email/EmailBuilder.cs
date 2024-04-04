@@ -7,7 +7,7 @@ using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.Email
 {
-    public sealed class EmailBuilder : IDisposable
+	public sealed class EmailBuilder : IDisposable
     {
 
         private EmailModel Entity { get; set; }
@@ -88,7 +88,7 @@ namespace TNZAPI.NET.Api.Messaging.Email
         }
 
         /// <summary>
-        /// Sets MessageID of the email
+        /// Sets MessageID of the message
         /// </summary>
         /// <param name="messageID">Message ID</param>
         /// <returns>EmailBuilder</returns>
@@ -99,8 +99,20 @@ namespace TNZAPI.NET.Api.Messaging.Email
             return this;
         }
 
+		/// <summary>
+		/// Sets MessageID of the message
+		/// </summary>
+		/// <param name="messageID">MessageID</param>
+		/// <returns>EmailBuilder</returns>
+		public EmailBuilder SetMessageID(MessageID messageID)
+        {
+            Entity.MessageID = messageID;
+
+            return this;
+        }
+
         /// <summary>
-        /// Sets Reference of the email
+        /// Sets Reference of the message
         /// </summary>
         /// <param name="reference"></param>
         /// <returns>EmailBuilder</returns>
@@ -112,7 +124,7 @@ namespace TNZAPI.NET.Api.Messaging.Email
         }
 
         /// <summary>
-        /// Sets Send Time of the email
+        /// Sets Send Time of the message
         /// </summary>
         /// <param name="sendTime">DateTime</param>
         /// <returns>EmailBuilder</returns>
@@ -136,7 +148,7 @@ namespace TNZAPI.NET.Api.Messaging.Email
         }
 
         /// <summary>
-        /// Sets SubAccount value of the email
+        /// Sets SubAccount value of the message
         /// </summary>
         /// <param name="subaccount">SubAccount value</param>
         /// <returns>EmailBuilder</returns>
@@ -148,7 +160,7 @@ namespace TNZAPI.NET.Api.Messaging.Email
         }
 
         /// <summary>
-        /// Sets Department value of the email
+        /// Sets Department value of the message
         /// </summary>
         /// <param name="department">Department value</param>
         /// <returns>EmailBuilder</returns>
@@ -160,7 +172,7 @@ namespace TNZAPI.NET.Api.Messaging.Email
         }
 
         /// <summary>
-        /// Sets ChargeCode value of the email
+        /// Sets ChargeCode value of the message
         /// </summary>
         /// <param name="chargeCode">Charge Code Value</param>
         /// <returns>EmailBuilder</returns>

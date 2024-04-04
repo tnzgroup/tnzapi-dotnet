@@ -472,7 +472,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group
 		/// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
 		/// <returns>GroupResult</returns>
 		public GroupApiResult Update(
-            string groupID = null,
+            GroupID groupID = null,
             string groupCode = null, 
             string groupName = null, 
             string subAccount = null, 
@@ -482,7 +482,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group
         {
             if (groupID is not null)
             {
-                Entity.GroupID = new GroupID(groupID);
+                Entity.GroupID = groupID;
             }
             if (groupCode is not null)
             {
@@ -507,53 +507,6 @@ namespace TNZAPI.NET.Api.Addressbook.Group
 
             return Update();
         }
-
-		/// <summary>
-		/// Update group
-		/// </summary>
-		/// <param name="groupID">GroupID object, Specifies the identifier for the group.</param>
-		/// <param name="groupCode">GroupCode object, Specifies the code for the group. Leave empty if you want the system to generate the code from the group name.</param>
-		/// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
-		/// <param name="subAccount">Specifies the subaccount associated with the group.</param>
-		/// <param name="department">Specifies the department or division associated with the group.</param>
-		/// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
-		/// <returns>GroupResult</returns>
-		public GroupApiResult Update(
-			GroupID groupID = null,
-			string groupCode = null,
-			string groupName = null,
-			string subAccount = null,
-			string department = null,
-			ViewEditByOptions? viewEditBy = null
-		)
-		{
-			if (groupID is not null)
-			{
-				Entity.GroupID = groupID;
-			}
-			if (groupCode is not null)
-			{
-				Entity.GroupCode = groupCode;
-			}
-			if (groupName is not null)
-			{
-				Entity.GroupName = groupName;
-			}
-			if (subAccount is not null)
-			{
-				Entity.SubAccount = subAccount;
-			}
-			if (department is not null)
-			{
-				Entity.Department = department;
-			}
-			if (viewEditBy is not null)
-			{
-				Entity.ViewEditBy = viewEditBy;
-			}
-
-			return Update();
-		}
 		#endregion
 
 		#region UpdateAsync
@@ -603,7 +556,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group
 		/// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
 		/// <returns>Task<GroupApiResult></returns>
 		public async Task<GroupApiResult> UpdateAsync(
-            string groupID = null,
+            GroupID groupID = null,
             string groupCode = null, 
             string groupName = null, 
             string subAccount = null, 
@@ -613,7 +566,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group
         {
             if (groupID is not null)
             {
-                Entity.GroupID = new GroupID(groupID);
+                Entity.GroupID = groupID;
             }
             if (groupCode is not null)
             {
@@ -637,52 +590,6 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             }
             return await UpdateAsync();
         }
-
-		/// <summary>
-		/// Update group (async)
-		/// </summary>
-		/// <param name="groupID">Specifies the identifier for the group.</param>
-		/// <param name="groupCode">Specifies the code for the group. Leave empty if you want the system to generate the code from the group name.</param>
-		/// <param name="groupName">Specifies the name of the group. If GroupCode is not specified, TNZ API will take group name and replace white space into underscore.</param>
-		/// <param name="subAccount">Specifies the subaccount associated with the group.</param>
-		/// <param name="department">Specifies the department or division associated with the group.</param>
-		/// <param name="viewEditBy">Specifies the visibility and edit permissions for the group. Values can be "Account", "SubAccount", "Department" or "No" permission option.</param>
-		/// <returns>Task<GroupApiResult></returns>
-		public async Task<GroupApiResult> UpdateAsync(
-			GroupID groupID = null,
-			string groupCode = null,
-			string groupName = null,
-			string subAccount = null,
-			string department = null,
-			ViewEditByOptions? viewEditBy = null
-		)
-		{
-			if (groupID is not null)
-			{
-				Entity.GroupID = groupID;
-			}
-			if (groupCode is not null)
-			{
-				Entity.GroupCode = groupCode;
-			}
-			if (groupName is not null)
-			{
-				Entity.GroupName = groupName;
-			}
-			if (subAccount is not null)
-			{
-				Entity.SubAccount = subAccount;
-			}
-			if (department is not null)
-			{
-				Entity.Department = department;
-			}
-			if (viewEditBy is not null)
-			{
-				Entity.ViewEditBy = viewEditBy;
-			}
-			return await UpdateAsync();
-		}
 		#endregion
 
 		#region Delete
@@ -727,30 +634,6 @@ namespace TNZAPI.NET.Api.Addressbook.Group
 		public GroupApiResult Delete(GroupID groupID)
         {
             Entity.GroupID = groupID;
-
-            return Delete();
-        }
-
-        /// <summary>
-        /// Delete group
-        /// </summary>
-        /// <param name="groupCode">Group Code</param>
-        /// <returns></returns>
-        public GroupApiResult DeleteByGroupCode(string groupCode)
-        {
-            Entity.GroupCode = groupCode;
-
-            return Delete();
-        }
-
-        /// <summary>
-        /// Delete group by GroupID
-        /// </summary>
-        /// <param name="groupID">Group ID</param>
-        /// <returns></returns>
-        public GroupApiResult DeleteByGroupID(string groupID)
-        {
-            Entity.GroupID = new GroupID(groupID);
 
             return Delete();
         }
@@ -804,32 +687,6 @@ namespace TNZAPI.NET.Api.Addressbook.Group
 
             return await DeleteAsync();
         }
-
-        /// <summary>
-        /// Delete group using GroupCode
-        /// </summary>
-        /// <param name="groupCode">Group Code</param>
-        /// <returns>Task<GroupResult></returns>
-        [ComVisible(false)]
-        public async Task<GroupApiResult> DeleteByGroupCodeAsync(string groupCode)
-        {
-            Entity.GroupCode = groupCode;
-
-            return await DeleteAsync();
-        }
-
-		/// <summary>
-		/// Delete group using GroupID
-		/// </summary>
-		/// <param name="groupID">Group ID</param>
-		/// <returns>Task<GroupResult></returns>
-		[ComVisible(false)]
-        public async Task<GroupApiResult> DeleteByGroupIDAsync(string groupID)
-        {
-            Entity.GroupID = new GroupID(groupID);
-
-            return await DeleteAsync();
-        }
 		#endregion
 
 		#region Read
@@ -879,30 +736,6 @@ namespace TNZAPI.NET.Api.Addressbook.Group
         }
 
 		/// <summary>
-		/// Read group using GroupCode
-		/// </summary>
-		/// <param name="groupCode">Group Code</param>
-		/// <returns>GroupApiResult</returns>
-		public GroupApiResult ReadByGroupCode(string groupCode)
-        {
-            Entity.GroupCode = groupCode;
-
-            return Read();
-        }
-
-		/// <summary>
-		/// Read group using GroupID
-		/// </summary>
-		/// <param name="groupID">Group ID</param>
-		/// <returns></returns>
-		public GroupApiResult ReadByGroupID(string groupID)
-        {
-            Entity.GroupID = new GroupID(groupID);
-
-            return Read();
-        }
-
-		/// <summary>
 		/// Read group
 		/// </summary>
 		/// <returns>GroupApiResult</returns>
@@ -921,20 +754,6 @@ namespace TNZAPI.NET.Api.Addressbook.Group
 		/// <param name="groupID">GroupID</param>
 		/// <returns>GroupApiResult</returns>
 		public GroupApiResult Get(GroupID groupID) => Read(groupID);
-
-		/// <summary>
-		/// Read group
-		/// </summary>
-		/// <param name="groupCode">Group Code</param>
-		/// <returns>GroupApiResult</returns>
-		public GroupApiResult GetByGroupCode(string groupCode) => ReadByGroupCode(groupCode);
-
-		/// <summary>
-		/// Read group
-		/// </summary>
-		/// <param name="groupID">Group ID</param>
-		/// <returns>GroupApiResult</returns>
-		public GroupApiResult GetByGroupID(string groupID) => ReadByGroupID(groupID);
 		#endregion
 
 		#region ReadAsync
@@ -986,30 +805,6 @@ namespace TNZAPI.NET.Api.Addressbook.Group
 		/// <summary>
 		/// Read group (async)
 		/// </summary>
-		/// <param name="groupCode">Group Code</param>
-		/// <returns>Task<GroupApiResult></returns>
-		public async Task<GroupApiResult> ReadByGroupCodeAsync(string groupCode)
-        {
-            Entity.GroupCode = groupCode;
-
-            return await ReadAsync();
-        }
-
-		/// <summary>
-		/// Read group (async)
-		/// </summary>
-		/// <param name="groupID">Group ID</param>
-		/// <returns>Task<GroupApiResult></returns>
-		public async Task<GroupApiResult> ReadByGroupIDAsync(string groupID)
-        {
-            Entity.GroupID = new GroupID(groupID);
-
-            return await ReadAsync();
-        }
-
-		/// <summary>
-		/// Read group (async)
-		/// </summary>
 		/// <returns>Task<GroupApiResult></returns>
 		public async Task<GroupApiResult> GetAsync() => await ReadAsync();
 
@@ -1027,19 +822,6 @@ namespace TNZAPI.NET.Api.Addressbook.Group
 		/// <returns>Task<GroupApiResult></returns>
 		public async Task<GroupApiResult> GetAsync(GroupID groupID) => await ReadAsync(groupID);
 
-		/// <summary>
-		/// Read group (async)
-		/// </summary>
-		/// <param name="groupCode">Group Code</param>
-		/// <returns>Task<GroupApiResult></returns>
-		public async Task<GroupApiResult> GetByGroupCodeAsync(string groupCode) => await ReadByGroupCodeAsync(groupCode);
-
-		/// <summary>
-		/// Read group (async)
-		/// </summary>
-		/// <param name="groupID">Group ID</param>
-		/// <returns>Task<GroupApiResult></returns>
-		public async Task<GroupApiResult> GetByGroupIDAsync(string groupID) => await ReadByGroupIDAsync(groupID);
         #endregion
 
         #region List

@@ -382,10 +382,11 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <returns>Task<ContactModel></returns>
         public async Task<ContactModel> BuildAsync()
         {
-            await Task.Delay(0);
-
-            return Entity;
-        }
+			return await Task.Run(() =>
+			{
+				return Entity;
+			});
+		}
         #endregion Build / BuildAsync
     }
 }

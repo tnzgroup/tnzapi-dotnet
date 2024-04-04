@@ -11,8 +11,7 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
 	{
 		MessageApiResult SendMessage(EmailModel entity);
 		MessageApiResult SendMessage(
-			string messageID = null,
-			MessageID MessageID = null,					// MessageID object
+			MessageID messageID = null,					// MessageID object
 			string emailSubject = null,
 			string messagePlain = null,
 			string messageHTML = null,
@@ -26,16 +25,10 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
 			string fromName = null,
 			string fromEmail = null,
 			string replyTo = null,
-			string groupCode = null,
-			ICollection<string> groupCodes = null,
-			string groupID = null,
-			ICollection<string> groupIDs = null,
-			GroupID GroupID = null,						// GroupID object
-			ICollection<GroupID> GroupIDs = null,		// ICollection<GroupID>
-			string contactID = null,
-			ICollection<string> contactIDs = null,
-			ContactID ContactID = null,					// ContactID object
-			ICollection<ContactID> ContactIDs = null,	// ICollection<ContactID>
+			GroupID groupID = null,						// GroupID object
+			ICollection<GroupID> groupIDs = null,		// ICollection<GroupID>
+			ContactID contactID = null,					// ContactID object
+			ICollection<ContactID> contactIDs = null,	// ICollection<ContactID>
 			string destination = null,
 			ICollection<string> destinations = null,
 			Recipient recipient = null,
@@ -51,8 +44,7 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
 
 		Task<MessageApiResult> SendMessageAsync(EmailModel entity);
 		Task<MessageApiResult> SendMessageAsync(
-			string messageID = null,
-			MessageID MessageID = null,					// MessageID object
+			MessageID messageID = null,					// MessageID object
 			string emailSubject = null,
 			string messagePlain = null,
 			string messageHTML = null,
@@ -66,14 +58,8 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
 			string fromName = null,
 			string fromEmail = null,
 			string replyTo = null,
-			string groupCode = null,
-			ICollection<string> groupCodes = null,
-			string groupID = null,
-			ICollection<string> groupIDs = null,
 			GroupID GroupID = null,						// GroupID object
 			ICollection<GroupID> GroupIDs = null,		// ICollection<GroupID>
-			string contactID = null,
-			ICollection<string> contactIDs = null,
 			ContactID ContactID = null,					// ContactID object
 			ICollection<ContactID> ContactIDs = null,	// ICollection<ContactID>
 			string destination = null,

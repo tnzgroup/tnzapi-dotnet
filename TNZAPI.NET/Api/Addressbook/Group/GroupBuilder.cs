@@ -6,7 +6,7 @@ using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Api.Addressbook.Group
 {
-    public class GroupBuilder : IDisposable
+	public class GroupBuilder : IDisposable
     {
         private GroupModel Entity { get; set; }
 
@@ -15,11 +15,11 @@ namespace TNZAPI.NET.Api.Addressbook.Group
             Entity = new GroupModel();
         }
 
-        public GroupBuilder(string groupCode)
+        public GroupBuilder(string groupID)
         {
             Entity = new GroupModel()
             { 
-                GroupCode = groupCode
+                GroupID = new GroupID(groupID)
 			};
         }
 

@@ -55,9 +55,9 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var groupCode = "Test-Group";
+            var groupCode = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
             var response = client.Addressbook.GroupContact.Add(groupCode, contactID);
 
@@ -124,12 +124,12 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var groupCode = "Test-Group";
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
             var response = client.Addressbook.GroupContact.Add(
-                groupCode: groupCode,
+                groupID: groupID,
                 contactID: contactID
             );
 

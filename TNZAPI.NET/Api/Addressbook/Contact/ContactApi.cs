@@ -644,7 +644,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <returns></returns>
         [ComVisible(false)]
         public ContactApiResult Update(
-            object contactID = null,
+            ContactID contactID = null,
             string attention = null,
             string title = null,
             string company = null,
@@ -676,7 +676,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         {
             return Update(new ContactModel()
             {
-                ContactID = (contactID is ContactID) ? (ContactID)contactID : new ContactID(contactID.ToString()),
+                ContactID = contactID,
                 Attention = attention,
                 Title = title,
                 Company = company,
@@ -779,7 +779,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         /// <returns>Task<ContactApiResult></returns>
         [ComVisible(false)]
         public async Task<ContactApiResult> UpdateAsync(
-            object contactID = null,
+            ContactID contactID = null,
             string attention = null,
             string title = null,
             string company = null,
@@ -811,7 +811,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
         {
             return await UpdateAsync(new ContactModel()
             {
-                ContactID = (contactID is ContactID) ? (ContactID)contactID : new ContactID(contactID.ToString()),
+                ContactID = contactID,
                 Attention = attention,
                 Title = title,
                 Company = company,
@@ -888,18 +888,6 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
 
             return Delete();
         }
-
-        /// <summary>
-        /// Delete contact
-        /// </summary>
-        /// <param name="contactID">Contact ID</param>
-        /// <returns></returns>
-        public ContactApiResult DeleteById(string contactID)
-        {
-            Entity = new ContactModel() { ContactID = new ContactID(contactID) };
-
-            return Delete();
-        }
 		#endregion
 
 		#region DeleteAsync
@@ -947,19 +935,6 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
 		public async Task<ContactApiResult> DeleteAsync(ContactID contactID)
         {
             Entity.ContactID = contactID;
-
-            return await DeleteAsync();
-        }
-
-		/// <summary>
-		/// Delete contact (async)
-		/// </summary>
-		/// <param name="contactID">Contact ID</param>
-		/// <returns>Task<ContactApiResult></returns>
-		[ComVisible(false)]
-        public async Task<ContactApiResult> DeleteByIdAsync(string contactID)
-        {
-            Entity = new ContactModel() { ContactID = new ContactID(contactID) };
 
             return await DeleteAsync();
         }
@@ -1014,18 +989,6 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
 		/// <summary>
 		/// Read contact
 		/// </summary>
-		/// <param name="contactID">Contact ID</param>
-		/// <returns>ContactApiResult</returns>
-		public ContactApiResult ReadById(string contactID)
-        {
-            Entity = new ContactModel() { ContactID = new ContactID(contactID) };
-
-            return Read();
-        }
-
-		/// <summary>
-		/// Read contact
-		/// </summary>
 		/// <returns>ContactApiResult</returns>
 		public ContactApiResult Get() => Read();
 
@@ -1042,13 +1005,6 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
 		/// <param name="contactID">ContactID</param>
 		/// <returns>ContactApiResult</returns>
 		public ContactApiResult Get(ContactID contactID) => Read(contactID);
-
-		/// <summary>
-		/// Read contact
-		/// </summary>
-		/// <param name="contactID">Contact ID</param>
-		/// <returns>ContactApiResult</returns>
-		public ContactApiResult GetById(string contactID) => ReadById(contactID);
 		#endregion
 
 		#region ReadAsync
@@ -1103,19 +1059,6 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
 		/// <summary>
 		/// Read contact (async)
 		/// </summary>
-		/// <param name="contactID">Contact ID</param>
-		/// <returns>Task<ContactApiResult></returns>
-		[ComVisible(false)]
-        public async Task<ContactApiResult> ReadByIdAsync(string contactID)
-        {
-            Entity = new ContactModel() { ContactID = new ContactID(contactID) };
-
-            return await ReadAsync();
-        }
-
-		/// <summary>
-		/// Read contact (async)
-		/// </summary>
 		/// <returns>Task<ContactApiResult></returns>
 		[ComVisible(false)]
         public async Task<ContactApiResult> GetAsync() => await ReadAsync();
@@ -1135,14 +1078,6 @@ namespace TNZAPI.NET.Api.Addressbook.Contact
 		/// <returns>Task<ContactApiResult></returns>
 		[ComVisible(false)]
         public async Task<ContactApiResult> GetAsync(ContactID contactID) => await ReadAsync(contactID);
-
-		/// <summary>
-		/// Read contact (async)
-		/// </summary>
-		/// <param name="contactID">ContactModel</param>
-		/// <returns>Task<ContactApiResult></returns>
-		[ComVisible(false)]
-        public async Task<ContactApiResult> GetByIdAsync(string contactID) => await ReadByIdAsync(contactID);
         #endregion
 
         #region List

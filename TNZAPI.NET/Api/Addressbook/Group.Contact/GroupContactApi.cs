@@ -320,21 +320,21 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             return Add();
         }
 
-        /// <summary>
-        /// Add group contact
-        /// </summary>
-        /// <param name="groupCode">Group Code</param>
-        /// <param name="contactID">Contact ID</param>
-        /// <returns>GroupContactApiResult</returns>
-        public GroupContactApiResult Add(string groupCode, string contactID)
+		/// <summary>
+		/// Add group contact
+		/// </summary>
+		/// <param name="groupID">GroupID</param>
+		/// <param name="contactID">ContactID</param>
+		/// <returns>GroupContactApiResult</returns>
+		public GroupContactApiResult Add(GroupID groupID, ContactID contactID)
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupID = groupID;
             }
             if (contactID is not null)
             {
-                Contact.ContactID = new ContactID(contactID);
+                Contact.ContactID = contactID;
             }
 
             return Add();
@@ -345,23 +345,23 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// </summary>
         /// <param name="group">GroupModel</param>
         /// <param name="contact">ContactModel</param>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>GroupContactApiResult</returns>
         public GroupContactApiResult Add(
             GroupModel group = null,
             ContactModel contact = null,
-            string groupCode = null,
-            string contactID = null
+            GroupID groupID = null,
+            ContactID contactID = null
         )
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupCode = groupID;
             }
             if (contactID is not null)
             {
-                Contact.ContactID = new ContactID(contactID);
+                Contact.ContactID = contactID;
             }
             
             if (group is not null)
@@ -427,21 +427,19 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <summary>
         /// Add group contact (async)
         /// </summary>
-        /// <param name="group">GroupModel</param>
-        /// <param name="contact">ContactModel</param>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>Task<GroupContactApiResult></returns>
         [ComVisible(false)]
-        public async Task<GroupContactApiResult> AddAsync(string groupCode, string contactID)
+        public async Task<GroupContactApiResult> AddAsync(GroupID groupID, ContactID contactID)
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupID = groupID;
             }
             if (contactID is not null)
             {
-                Contact.ContactID = new ContactID(contactID);
+                Contact.ContactID = contactID;
             }
 
             return await AddAsync();
@@ -452,24 +450,24 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// </summary>
         /// <param name="group">GroupModel</param>
         /// <param name="contact">ContactModel</param>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>Task<GroupContactApiResult></returns>
         [ComVisible(false)]
         public async Task<GroupContactApiResult> AddAsync(
             GroupModel group = null,
             ContactModel contact = null,
-            string groupCode = null,
-            string contactID = null
+            GroupID groupID = null,
+            ContactID contactID = null
         )
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupCode = groupID;
             }
             if (contactID is not null)
             {
-                Contact.ContactID = new ContactID(contactID);
+                Contact.ContactID = contactID;
             }
 
             if (group is not null)
@@ -530,18 +528,18 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <summary>
         /// Remove group contact
         /// </summary>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>GroupContactApiResult</returns>
-        public GroupContactApiResult Remove(string groupCode, string contactID)
+        public GroupContactApiResult Remove(GroupID groupID, ContactID contactID)
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupID = groupID;
             }
             if (contactID is not null)
             {
-                Contact.ContactID = new ContactID(contactID);
+                Contact.ContactID = contactID;
             }
 
             return Remove();
@@ -552,23 +550,23 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// </summary>
         /// <param name="contact">ContactModel</param>
         /// <param name="group">GroupModel</param>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>GroupContactApiResult</returns>
         public GroupContactApiResult Remove(
             GroupModel group = null, 
             ContactModel contact = null,
-            string groupCode = null,
-            string contactID = null
+            GroupID groupID = null,
+            ContactID contactID = null
         )
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupID = groupID;
             }
             if (contactID is not null)
             {
-                Contact.ContactID = new ContactID(contactID);
+                Contact.ContactID = contactID;
             }
 
             if (group is not null)
@@ -629,18 +627,18 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <summary>
         /// Remove group contact (async)
         /// </summary>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>Task<GroupContactApiResult></returns>
-        public async Task<GroupContactApiResult> RemoveAsync(string groupCode, string contactID)
+        public async Task<GroupContactApiResult> RemoveAsync(GroupID groupID, ContactID contactID)
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupID = groupID;
             }
             if (contactID is not null)
             {
-                Contact.ContactID = new ContactID(contactID);
+                Contact.ContactID = contactID;
             }
 
             return await RemoveAsync();
@@ -651,23 +649,23 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// </summary>
         /// <param name="group">GroupModel</param>
         /// <param name="contact">ContactModel</param>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>Task<GroupContactApiResult></returns>
         public async Task<GroupContactApiResult> RemoveAsync(
             GroupModel group = null,
             ContactModel contact = null,
-            string groupCode = null,
-            string contactID = null
+            GroupID groupID = null,
+            ContactID contactID = null
         )
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupID = groupID;
             }
             if (contactID is not null)
             {
-                Contact.ContactID = new ContactID(contactID);
+                Contact.ContactID = contactID;
             }
 
             if (group is not null)
@@ -729,43 +727,45 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <summary>
         /// Read group contact
         /// </summary>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>GroupContactApiResult</returns>
-        public GroupContactApiResult Read(string groupCode, string contactID)
+        public GroupContactApiResult Read(GroupID groupID, ContactID contactID)
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupCode = groupID;
             }
             if (contactID is not null)
             {
-                Contact.ContactID = new ContactID(contactID);
+                Contact.ContactID = contactID;
             }
 
             return Read();
         }
 
-        /// <summary>
-        /// Read group contact
-        /// </summary>
-        /// <param name="group">GroupModel</param>
-        /// <param name="contact">ContactModel</param>
-        /// <returns>GroupContactApiResult</returns>
-        public GroupContactApiResult Read(
+		/// <summary>
+		/// Read group contact
+		/// </summary>
+		/// <param name="group">GroupModel</param>
+		/// <param name="contact">ContactModel</param>
+		/// <param name="groupID">Group ID</param>
+		/// <param name="contactID">Contact ID</param>
+		/// <returns>GroupContactApiResult</returns>
+		public GroupContactApiResult Read(
             GroupModel group = null, 
             ContactModel contact = null, 
-            string groupCode = null,
-            string contactID = null
+            GroupID groupID = null,
+            ContactID contactID = null
         )
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupCode = groupID;
             }
             if (contactID is not null)
             {
-                Contact.ContactID = new ContactID(contactID);
+                Contact.ContactID = contactID;
             }
 
             if (group is not null)
@@ -791,20 +791,20 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <summary>
         /// Read group contact
         /// </summary>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>GroupContactApiResult</returns>
-        public GroupContactApiResult Get(string groupCode, string contactID) => Read(groupCode, contactID);
+        public GroupContactApiResult Get(GroupID groupID, ContactID contactID) => Read(groupID, contactID);
 
         /// <summary>
         /// Read group contact
         /// </summary>
         /// <param name="group">GroupModel</param>
         /// <param name="contact">ContactModel</param>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>GroupContactApiResult</returns>
-        public GroupContactApiResult Get(GroupModel group = null, ContactModel contact = null, string groupCode = null, string contactID = null) => Read(group, contact, groupCode, contactID);
+        public GroupContactApiResult Get(GroupModel group = null, ContactModel contact = null, GroupID groupID = null, ContactID contactID = null) => Read(group, contact, groupID, contactID);
 
         #endregion
 
@@ -853,18 +853,18 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <summary>
         /// Read group contact (async)
         /// </summary>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>Task<GroupContactApiResult></returns>
-        public async Task<GroupContactApiResult> ReadAsync(string groupCode, string contactID)
+        public async Task<GroupContactApiResult> ReadAsync(GroupID groupID, ContactID contactID)
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupID = groupID;
             }
             if (contactID is not null)
             {
-                Contact.ContactID = new ContactID(contactID);
+                Contact.ContactID = contactID;
             }
 
             return await ReadAsync();
@@ -875,19 +875,19 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// </summary>
         /// <param name="group">GroupModel</param>
         /// <param name="contact">ContactModel</param>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>Task<GroupContactApiResult></returns>
         public async Task<GroupContactApiResult> ReadAsync(
             GroupModel group = null,
             ContactModel contact = null,
-            string groupCode = null,
-            string contactID = null
+            GroupID groupID = null,
+            ContactID contactID = null
         )
         {
-            if (groupCode is not null)
+            if (groupID is not null)
             {
-                Group.GroupCode = groupCode;
+                Group.GroupID = groupID;
             }
             if (contactID is not null)
             {
@@ -917,20 +917,20 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <summary>
         /// Read group contact (async)
         /// </summary>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>Task<GroupContactApiResult></returns>
-        public async Task<GroupContactApiResult> GetAsync(string groupCode, string contactID) => await ReadAsync(groupCode, contactID);
+        public async Task<GroupContactApiResult> GetAsync(GroupID groupID, ContactID contactID) => await ReadAsync(groupID, contactID);
 
         /// <summary>
         /// Read group contact (async)
         /// </summary>
         /// <param name="group">GroupModel</param>
         /// <param name="contact">ContactModel</param>
-        /// <param name="groupCode">Group Code</param>
+        /// <param name="groupID">Group ID</param>
         /// <param name="contactID">Contact ID</param>
         /// <returns>Task<GroupContactApiResult></returns>
-        public async Task<GroupContactApiResult> GetAsync(GroupModel group = null, ContactModel contact = null, string groupCode = null, string contactID = null) => await ReadAsync(group, contact, groupCode, contactID);
+        public async Task<GroupContactApiResult> GetAsync(GroupModel group = null, ContactModel contact = null, GroupID groupID = null, ContactID contactID = null) => await ReadAsync(group, contact, groupID, contactID);
 
         #endregion
     }

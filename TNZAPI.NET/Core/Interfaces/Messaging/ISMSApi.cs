@@ -1,4 +1,5 @@
 ﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
@@ -11,8 +12,8 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
     {
         MessageApiResult SendMessage(SMSModel entity);
         MessageApiResult SendMessage(
-			MessageID messageID = null,                 // MessageID object
-			string reference = null,
+			      MessageID messageID = null,                 // MessageID object
+			      string reference = null,
             DateTime? sendTime = null,
             string timezone = null,
             string subaccount = null,
@@ -21,11 +22,15 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
             string smsEmailReply = null,
             string forceGSMChars = null,
             string messageText = null,
-			GroupID groupID = null,                     // GroupID object
-			ICollection<GroupID> groupIDs = null,       // ICollection<GroupID>
-			ContactID contactID = null,                 // ContactID object
-			ICollection<ContactID> contactIDs = null,   // ICollection<ContactID>
-			string destination = null,
+            GroupModel group = null,                        // GroupModel object
+            ICollection<GroupModel> groups = null,          // ICollection<GroupModel>
+            GroupID groupID = null,                         // GroupID object
+            ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
+            ContactModel contact = null,                    // ContactModel object
+            ICollection<ContactModel> contacts = null,      // ICollection<ContactModel>
+            ContactID contactID = null,                     // ContactID object
+            ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
+            string destination = null,
             ICollection<string> destinations = null,
             Recipient recipient = null,
             ICollection<Recipient> recipients = null,
@@ -40,8 +45,8 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
 
         Task<MessageApiResult> SendMessageAsync(SMSModel entity);
         Task<MessageApiResult> SendMessageAsync(
-			MessageID messageID = null,                 // MessageID object
-			string reference = null,
+			      MessageID messageID = null,                 // MessageID object
+			      string reference = null,
             DateTime? sendTime = null,
             string timezone = null,
             string subaccount = null,
@@ -50,11 +55,15 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
             string smsEmailReply = null,
             string forceGSMChars = null,
             string messageText = null,
-			GroupID groupID = null,                     // GroupID object
-			ICollection<GroupID> groupIDs = null,       // ICollection<GroupID>
-			ContactID contactID = null,                 // ContactID object
-			ICollection<ContactID> contactIDs = null,   // ICollection<ContactID>
-			string destination = null,
+            GroupModel group = null,                        // GroupModel object
+            ICollection<GroupModel> groups = null,          // ICollection<GroupModel>
+            GroupID groupID = null,                         // GroupID object
+            ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
+            ContactModel contact = null,                    // ContactModel object
+            ICollection<ContactModel> contacts = null,      // ICollection<ContactModel>
+            ContactID contactID = null,                     // ContactID object
+            ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
+            string destination = null,
             ICollection<string> destinations = null,
             Recipient recipient = null,
             ICollection<Recipient> recipients = null,

@@ -44,12 +44,12 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-			var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-			var response = client.Addressbook.Contact.Update(
-                contactID: contactID,           // Contact ID (required)
-                attention: "Test Person"
-            );
+            var response = client.Addressbook.Contact.Update(
+                      contactID: contactID,           // Contact ID (required)
+                      attention: "Test Person"
+                  );
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -100,20 +100,20 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-			var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-			var response = client.Addressbook.Contact.Update(
-                contactID: contactID,      // Contact ID (required)
-                attention: "Test Person",
-                firstName: "Test",
-                lastName: "Person",
-                mainPhone: "+6495005001",
-                mobilePhone: "+6421000001",
-                emailAddress: "recipient.one@example.com",
-                faxNumber: "+6495005002",
-                viewBy: Enums.ViewEditByOptions.Account,
-                editBy: Enums.ViewEditByOptions.Account
-                );
+            var response = client.Addressbook.Contact.Update(
+                      contactID: contactID,      // ContactID (required)
+                      attention: "Test Person",
+                      firstName: "Test",
+                      lastName: "Person",
+                      mainPhone: "+6495005001",
+                      mobilePhone: "+6421000001",
+                      emailAddress: "recipient.one@example.com",
+                      faxNumber: "+6495005002",
+                      viewBy: Enums.ViewEditByOptions.Account,
+                      editBy: Enums.ViewEditByOptions.Account
+                      );
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -164,7 +164,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")    // Initiate builder with contact id
+            var contact = new ContactBuilder(new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"))    // Initiate builder with ContactID
                             .SetAttention("Test Person")
                             .SetFirstName("Test")
                             .SetLastName("Person")
@@ -230,7 +230,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             var response = client.Addressbook.Contact.Update(
                 new ContactModel()
                 {
-                    ContactID = new("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),        // Contact id
+                    ContactID = new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),        // ContactID (Required)
                     Attention = "Person Attention",
                     Title = "Mr",
                     Company = "TNZ Group LTD.",

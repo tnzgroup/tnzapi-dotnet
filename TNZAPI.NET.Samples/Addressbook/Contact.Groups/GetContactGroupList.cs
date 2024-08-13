@@ -71,9 +71,9 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-            var contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
+            var contactID = new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var response = client.Addressbook.ContactGroupList.ListById(
+            var response = client.Addressbook.ContactGroupList.List(
                 contactID,              // ContactID
                 page: 1                 // Page number
             );
@@ -115,60 +115,13 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
             return response;
         }
 
-        public ContactGroupListApiResult Simple()
-        {
-            var client = new TNZApiClient(apiUser);
-
-            var contactID = "AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD";
-
-            var response = client.Addressbook.ContactGroupList.ListById(
-                contactID,              // ContactID
-                recordsPerPage: 10,     // Record per page
-                page: 1                 // Page number
-            );
-
-            if (response.Result == Enums.ResultCode.Success)
-            {
-                Console.WriteLine($"Contact list details");
-                Console.WriteLine($"    -> Contact ID: {response.Contact.ContactID}");
-                Console.WriteLine($"    -> Total Records: {response.TotalRecords}");
-                Console.WriteLine($"    -> Records Per Page: {response.RecordsPerPage}");
-                Console.WriteLine($"    -> Page Count: {response.PageCount}");
-                Console.WriteLine($"    -> Page: {response.Page}");
-
-                if (response.Groups is not null)
-                {
-                    foreach (var group in response.Groups)
-                    {
-                        Console.WriteLine($"Group details for GroupCode={group.GroupCode}");
-                        Console.WriteLine($"    -> GroupCode: '{group.GroupCode}'");
-                        Console.WriteLine($"    -> GroupName: '{group.GroupName}'");
-                        Console.WriteLine($"    -> SubAccount: '{group.SubAccount}'");
-                        Console.WriteLine($"    -> Department: '{group.Department}'");
-                        Console.WriteLine($"    -> ViewEditBy: '{group.ViewEditBy}'");
-                        Console.WriteLine($"    -> Owner: '{group.Owner}'");
-                        Console.WriteLine($"-------------------------");
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("Error occurred while processing.");
-
-                foreach (var error in response.ErrorMessage)
-                {
-                    Console.WriteLine($"- Error={error}");
-                }
-            }
-
-            return response;
-        }
+        public ContactGroupListApiResult Simple() => Basic();
 
         public ContactGroupListApiResult Builder()
         {
             var client = new TNZApiClient(apiUser);
 
-            var contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+            var contact = new ContactBuilder(new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"))
                             .Build();
 
             var listOptions = new ListRequestOptionBuilder()
@@ -225,7 +178,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
             var response = client.Addressbook.ContactGroupList.List(
                 new ContactModel()              // ContactModel
                 {
-                    ContactID = new("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+                    ContactID = new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
                 },
                 new ListRequestOptions()
                 {

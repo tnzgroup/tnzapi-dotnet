@@ -133,7 +133,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         {
             var requestUri = new StringBuilder();
 
-            requestUri.Append($"{TNZApiConfig.Domain}/api/v{TNZApiConfig.Version}/addressbook/group/{Group.GroupCode}/contact");
+            requestUri.Append($"{TNZApiConfig.Domain}/api/v{TNZApiConfig.Version}/addressbook/group/{Group.GroupID ?? Group.GroupCode}/contact");
 
             switch (action)
             {
@@ -320,13 +320,13 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             return Add();
         }
 
-		/// <summary>
-		/// Add group contact
-		/// </summary>
-		/// <param name="groupID">GroupID</param>
-		/// <param name="contactID">ContactID</param>
-		/// <returns>GroupContactApiResult</returns>
-		public GroupContactApiResult Add(GroupID groupID, ContactID contactID)
+        /// <summary>
+        /// Add group contact
+        /// </summary>
+        /// <param name="groupID">GroupID</param>
+        /// <param name="contactID">ContactID</param>
+        /// <returns>GroupContactApiResult</returns>
+        public GroupContactApiResult Add(GroupID groupID, ContactID contactID)
         {
             if (groupID is not null)
             {
@@ -363,7 +363,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             {
                 Contact.ContactID = contactID;
             }
-            
+
             if (group is not null)
             {
                 Group = Mapper.Map(Group, group);
@@ -372,7 +372,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             {
                 Contact = Mapper.Map(Contact, contact);
             }
-            
+
             return Add();
         }
 
@@ -478,7 +478,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             {
                 Contact = Mapper.Map(Contact, contact);
             }
-            
+
             return await AddAsync();
         }
         #endregion
@@ -554,7 +554,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
         /// <param name="contactID">Contact ID</param>
         /// <returns>GroupContactApiResult</returns>
         public GroupContactApiResult Remove(
-            GroupModel group = null, 
+            GroupModel group = null,
             ContactModel contact = null,
             GroupID groupID = null,
             ContactID contactID = null
@@ -577,7 +577,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             {
                 Contact = Mapper.Map(Contact, contact);
             }
-            
+
             return Remove();
         }
         #endregion
@@ -676,7 +676,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             {
                 Contact = Mapper.Map(Contact, contact);
             }
-            
+
             return await RemoveAsync();
         }
 
@@ -744,20 +744,20 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             return Read();
         }
 
-		/// <summary>
-		/// Read group contact
-		/// </summary>
-		/// <param name="group">GroupModel</param>
-		/// <param name="contact">ContactModel</param>
-		/// <param name="groupID">Group ID</param>
-		/// <param name="contactID">Contact ID</param>
-		/// <returns>GroupContactApiResult</returns>
-		public GroupContactApiResult Read(
-            GroupModel group = null, 
-            ContactModel contact = null, 
-            GroupID groupID = null,
-            ContactID contactID = null
-        )
+        /// <summary>
+        /// Read group contact
+        /// </summary>
+        /// <param name="group">GroupModel</param>
+        /// <param name="contact">ContactModel</param>
+        /// <param name="groupID">Group ID</param>
+        /// <param name="contactID">Contact ID</param>
+        /// <returns>GroupContactApiResult</returns>
+        public GroupContactApiResult Read(
+                GroupModel group = null,
+                ContactModel contact = null,
+                GroupID groupID = null,
+                ContactID contactID = null
+            )
         {
             if (groupID is not null)
             {
@@ -776,7 +776,7 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Contact
             {
                 Contact = Mapper.Map(Contact, contact);
             }
-            
+
             return Read();
         }
 

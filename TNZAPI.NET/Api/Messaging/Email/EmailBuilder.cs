@@ -1,13 +1,16 @@
 ﻿using System.Runtime.InteropServices;
+using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.Email.Dto;
+using TNZAPI.NET.Helpers;
 using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.Email
 {
-	public sealed class EmailBuilder : IDisposable
+    public sealed class EmailBuilder : IDisposable
     {
 
         private EmailModel Entity { get; set; }
@@ -99,12 +102,12 @@ namespace TNZAPI.NET.Api.Messaging.Email
             return this;
         }
 
-		/// <summary>
-		/// Sets MessageID of the message
-		/// </summary>
-		/// <param name="messageID">MessageID</param>
-		/// <returns>EmailBuilder</returns>
-		public EmailBuilder SetMessageID(MessageID messageID)
+        /// <summary>
+        /// Sets MessageID of the message
+        /// </summary>
+        /// <param name="messageID">MessageID</param>
+        /// <returns>EmailBuilder</returns>
+        public EmailBuilder SetMessageID(MessageID messageID)
         {
             Entity.MessageID = messageID;
 
@@ -361,6 +364,114 @@ namespace TNZAPI.NET.Api.Messaging.Email
         }
 
         #endregion Add Recipients
+
+        #region Add Recipients using TNZ Addressbook
+
+        /// <summary>
+        /// Adding recipient using ContactModel (TNZ Addressbook)
+        /// </summary>
+        /// <param name="contact">ContactModel</param>
+        /// <returns>EmailBuilder</returns>
+        [ComVisible(false)]
+        public EmailBuilder AddRecipient(ContactModel contact)
+        {
+            Recipients.Add(contact);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipient using ContactID (TNZ Addressbook)
+        /// </summary>
+        /// <param name="contactID">ContactID</param>
+        /// <returns>EmailBuilder</returns>
+        [ComVisible(false)]
+        public EmailBuilder AddRecipient(ContactID contactID)
+        {
+            Recipients.Add(contactID);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using GroupModel (TNZ Addressbook)
+        /// </summary>
+        /// <param name="group">GroupModel</param>
+        /// <returns>EmailBuilder</returns>
+        [ComVisible(false)]
+        public EmailBuilder AddRecipients(GroupModel group)
+        {
+            Recipients.Add(group);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using GroupID (TNZ Addressbook)
+        /// </summary>
+        /// <param name="groupID">GroupID</param>
+        /// <returns>EmailBuilder</returns>
+        [ComVisible(false)]
+        public EmailBuilder AddRecipients(GroupID groupID)
+        {
+            Recipients.Add(groupID);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using list of ContactModels (TNZ Addressbook)
+        /// </summary>
+        /// <param name="contacts">ICollection<ContactModel></param>
+        /// <returns>EmailBuilder</returns>
+        [ComVisible(false)]
+        public EmailBuilder AddRecipients(ICollection<ContactModel> contacts)
+        {
+            Recipients.Add(contacts);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using list of ContactIDs (TNZ Addressbook)
+        /// </summary>
+        /// <param name="contactIDs">ICollection<ContactID></param>
+        /// <returns>EmailBuilder</returns>
+        [ComVisible(false)]
+        public EmailBuilder AddRecipients(ICollection<ContactID> contactIDs)
+        {
+            Recipients.Add(contactIDs);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using list of GroupModels (TNZ Addressbook)
+        /// </summary>
+        /// <param name="groups">ICollection<GroupModel></param>
+        /// <returns>EmailBuilder</returns>
+        [ComVisible(false)]
+        public EmailBuilder AddRecipients(ICollection<GroupModel> groups)
+        {
+            Recipients.Add(groups);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using list of GroupIDs (TNZ Addressbook)
+        /// </summary>
+        /// <param name="groupIDs">ICollection<GroupID></param>
+        /// <returns>EmailBuilder</returns>
+        [ComVisible(false)]
+        public EmailBuilder AddRecipients(ICollection<GroupID> groupIDs)
+        {
+            Recipients.Add(groupIDs);
+
+            return this;
+        }
+
+        #endregion Add Recipients using TNZ Addressbook
 
         #region AddAttachment
         /// <summary>

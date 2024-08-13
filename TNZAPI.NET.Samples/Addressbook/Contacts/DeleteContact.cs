@@ -146,7 +146,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+            var contact = new ContactBuilder(new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD"))
                             .Build();
 
             var response = client.Addressbook.Contact.Delete(contact);
@@ -203,7 +203,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contacts
             var response = client.Addressbook.Contact.Delete(
                 new ContactModel()
                 {
-                    ContactID = new("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+                    ContactID = new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
                 }
             );
 

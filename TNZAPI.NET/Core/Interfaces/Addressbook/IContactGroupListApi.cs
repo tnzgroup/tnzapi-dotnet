@@ -8,11 +8,17 @@ namespace TNZAPI.NET.Core.Interfaces.Addressbook
         ContactGroupListApiResult List(ContactModel entity, int? recordsPerPage = null, int? page = null);
         ContactGroupListApiResult List(ContactModel entity, IListRequestOptions options);
 
+        ContactGroupListApiResult List(ContactID contactID, int? recordsPerPage = null, int? page = null);
+        ContactGroupListApiResult List(ContactID contactID, IListRequestOptions options);
+
         ContactGroupListApiResult ListById(string contactID, int? recordsPerPage = null, int? page = null);
         ContactGroupListApiResult ListById(string contactID, IListRequestOptions options);
 
         Task<ContactGroupListApiResult> ListAsync(ContactModel entity, int? recordsPerPage = null, int? page = null);
         Task<ContactGroupListApiResult> ListAsync(ContactModel entity, IListRequestOptions options);
+
+        Task<ContactGroupListApiResult> ListAsync(ContactID contactID, int? recordsPerPage = null, int? page = null);
+        Task<ContactGroupListApiResult> ListAsync(ContactID contactID, IListRequestOptions options);
 
         Task<ContactGroupListApiResult> ListByIdAsync(string contactID, int? recordsPerPage = null, int? page = null);
         Task<ContactGroupListApiResult> ListByIdAsync(string contactID, IListRequestOptions options);

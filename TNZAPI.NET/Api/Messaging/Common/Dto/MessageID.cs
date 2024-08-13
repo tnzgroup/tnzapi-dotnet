@@ -18,7 +18,7 @@ namespace TNZAPI.NET.Api.Messaging.Common.Dto
         {
         }
 
-        public static implicit operator string(MessageID messageID) => messageID.Value;
+        public static implicit operator string(MessageID messageID) => messageID?.Value;
 
         public override string ToString()
         {

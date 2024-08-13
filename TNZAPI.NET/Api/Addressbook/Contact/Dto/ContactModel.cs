@@ -1,5 +1,6 @@
 ﻿using System.Xml.Serialization;
 using TNZAPI.NET.Core;
+using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Api.Addressbook.Contact.Dto
 {
@@ -11,13 +12,28 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Dto
         public string Owner { get; set; }
 
         // readonly
-        public DateTime? Created { get; set; }
+        public DateTime Created 
+        {
+            get
+            {
+                return CreatedUTC.ChangeToLocalDateTime();
+            }
+        }
 
-        public DateTime? CreatedUTC { get; set; }
+        [XmlElement("CreatedTimeUTC_RFC3339")]
+        public DateTime CreatedUTC { get; set; }
 
         // readonly
-        public DateTime? Updated { get; set; }
-        public DateTime? UpdatedUTC { get; set; }
+        public DateTime Updated
+        {
+            get
+            {
+                return UpdatedUTC.ChangeToLocalDateTime();
+            }
+        }
+
+        [XmlElement("UpdatedTimeUTC_RFC3339")]
+        public DateTime UpdatedUTC { get; set; }
 
         public string Timezone { get; set; }
 

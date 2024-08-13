@@ -1,4 +1,6 @@
-﻿using TNZAPI.NET.Api.Messaging.Common;
+﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
+using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
@@ -51,13 +53,26 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
         public MessageApiResult Simple()
         {
-            const string recipient = "+64211111111";
-
-            const string file = "D:\\File1.wav";
 
             var client = new TNZApiClient(apiUser);
 
+            var recipient = "+64211111111";
+
+            var file = "D:\\File1.wav";
+
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
             var response = client.Messaging.Voice.SendMessage(
+                groupIDs: new List<GroupID>()           // List of Addressbook Group IDs
+                {
+                    groupID
+                },
+                contactIDs: new List<ContactID>()       // List of Addressbook Contact IDs
+                {
+                    contactID
+                },
                 destination: recipient,                 // Recipient
                 messageToPeople: file,                  // WAV format, 16-bit, 8000hz
                 sendMode: Enums.SendModeType.Test       // TEST Mode - Remove this to send live traffic
@@ -88,8 +103,14 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
             var client = new TNZApiClient(apiUser);
 
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
             var message = new VoiceBuilder()
                             .SetMessageToPeople("D:\\File1.wav")    // Message to People file name - WAV format, 16-bit, 8000hz
+                            .AddRecipients(groupID)                 // Add Recipients by GroupID using TNZ Addressbook 
+                            .AddRecipient(contactID)                // Add Recipient by ContactID using TNZ Addressbook 
                             .AddRecipient("+64211111111")           // Recipient
                             .SetSendMode(Enums.SendModeType.Test)   // TEST/Live mode
                             .Build();                               // Build TTS() object
@@ -115,37 +136,39 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
         public MessageApiResult Advanced()
         {
-            const string reference = "Test Voice - Advanced version";
+            var client = new TNZApiClient(apiUser);
 
-            const string webhookCallbackURL = "https://example.com/webhook";
-            const Enums.WebhookCallbackType webhookCallbackFormat = Enums.WebhookCallbackType.XML;
-            const string errorEmailNotify = "notify@example.com";
+            var reference = "Test Voice - Advanced version";
 
-            const string callerId = "+6499999999";
-            const string billingAccount = "TEST BILLING ACCOUNT";
-            const string reportTo = "report@example.com";
+            var webhookCallbackURL = "https://example.com/webhook";
+            var webhookCallbackFormat = Enums.WebhookCallbackType.XML;
+            var errorEmailNotify = "notify@example.com";
 
-            const string recipient1 = "+64211111111";
-            const string recipient2 = "+64212222222";
-            const string recipient3 = "+64213333333";
-            const string recipient4 = "+64214444444";
+            var callerId = "+6499999999";
+            var billingAccount = "TEST BILLING ACCOUNT";
+            var reportTo = "report@example.com";
 
-            const string messageToPeople = "D:\\File1.wav";                // WAV format, 16-bit, 8000hz
-            const string messageToAnswerphones = "D:\\File2.wav";          // WAV format, 16-bit, 8000hz
-            const string callRouteMessageToPeople = "D:\\File3.wav";       // WAV format, 16-bit, 8000hz
-            const string callRouteMessageToOperators = "D:\\File4.wav";    // WAV format, 16-bit, 8000hz
-            const string callRouteMessageOnWrongKey = "D:\\File5.wav";     // WAV format, 16-bit, 8000hz
+            var recipient1 = "+64211111111";
+            var recipient2 = "+64212222222";
+            var recipient3 = "+64213333333";
+            var recipient4 = "+64214444444";
 
-            const int numberOfOperators = 1;
-            const int retryAttempts = 2;
-            const int retryPeriod = 5;
+            var messageToPeople = "D:\\File1.wav";                // WAV format, 16-bit, 8000hz
+            var messageToAnswerphones = "D:\\File2.wav";          // WAV format, 16-bit, 8000hz
+            var callRouteMessageToPeople = "D:\\File3.wav";       // WAV format, 16-bit, 8000hz
+            var callRouteMessageToOperators = "D:\\File4.wav";    // WAV format, 16-bit, 8000hz
+            var callRouteMessageOnWrongKey = "D:\\File5.wav";     // WAV format, 16-bit, 8000hz
 
-            const string keypad1Route = "+6491111111";
-            const string keypad2Route = "+6492222222";
-            const string keypad3Route = "+6493333333";
-            const string keypad4Route = "+6494444444";
+            var numberOfOperators = 1;
+            var retryAttempts = 2;
+            var retryPeriod = 5;
 
-            const KeypadPlaySection keypad9PlaySection = KeypadPlaySection.Main;
+            var keypad1Route = "+6491111111";
+            var keypad2Route = "+6492222222";
+            var keypad3Route = "+6493333333";
+            var keypad4Route = "+6494444444";
+
+            var keypad9PlaySection = KeypadPlaySection.Main;
 
             #region Add Keypads
 
@@ -164,14 +187,14 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             //
             // Add Keypad Method 3 - AddKeypad(new List<IKeypad>())
             //
-            List<Keypad> keypad_list = new List<Keypad>();
+            var keypad_list = new List<Keypad>();
 
             keypad_list.Add(new Keypad(3, keypad3Route));
 
             //
             // Add Keypad Method 4 - AddKeypad(new List()) using Keypad objects
             //
-            Keypad keypad4 = new Keypad();
+            var keypad4 = new Keypad();
             keypad4.Tone = 4;
             keypad4.RouteNumber = keypad4Route;
 
@@ -180,7 +203,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             //
             // Add Keypad Method 5 - Add Play (Wave Data)
             //
-            Keypad keypad5 = new Keypad();
+            var keypad5 = new Keypad();
             keypad5.Tone = 5;
             keypad5.PlayFile = "D:\\File1.wav";
 
@@ -222,34 +245,79 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             recipient.Custom4 = "Custom4";                  // Custom4
             recipient.Custom5 = "Custom5";                  // Custom5
 
-            //VoiceMessage.AddRecipient(recipient);
+            recipients.Add(recipient);
 
             //
-            // Add Recipient Method 3 - AddRecipients(new List<IRecipient>()); using simple destination
+            // Add Recipient Method 3 - AddRecipients(new List<string>()); using simple destination
             //
 
-            List<Recipient> recipientList = new List<Recipient>();
-
-            recipientList.Add(new Recipient(recipient3));
+            recipients.Add(new List<string>() { recipient3 });
 
             //
             // Add Recipient Method 4 - AddRecipients(new List<Recipient>()) using Recipient objects
             //
 
-            recipientList.Add(new Recipient(
-                recipient4,             // Recipient
-                "Test Company",         // Company Name
-                "Test Recipient 4",     // Attention
-                "Custom1",              // Custom1
-                "Custom2",              // Custom2
-                "Custom3",              // Custom3
-                "Custom4",              // Custom4
-                "Custom5"               // Custom5
-            ));
-
-            recipients.Add(recipientList);
+            recipients.Add(
+                new List<Recipient>()
+                {
+                    new Recipient(
+                        recipient4,             // Recipient
+                        "Test Company",         // Company Name
+                        "Test Recipient 3",     // Attention
+                        "Custom1",              // Custom1
+                        "Custom2",              // Custom2
+                        "Custom3",              // Custom3
+                        "Custom4",              // Custom4
+                        "Custom5"               // Custom5
+                    )
+                }
+            );
 
             #endregion Add Recipients
+
+            #region Add Recipients using TNZ Addressbook
+
+            //
+            // Add Recipient Method 5 - Add Recipients using GroupID
+            //
+
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            recipients.Add(groupID);
+
+            //
+            // Add Recipient Method 6 - Add Recipients using list of GroupIDs
+            //
+
+            var groupIDs = new List<GroupID>()
+            {
+                new GroupID("HHHHHHHH-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),
+                new GroupID("IIIIIIII-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+            };
+
+            recipients.Add(groupIDs);
+
+            //
+            // Add Recipient Method 7 - Add Recipient using ContactID 
+            //
+
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            recipients.Add(contactID);
+
+            //
+            // Add Recipient Method 8 - Add Recipients using list of ContactIDs
+            //
+
+            var contactIDs = new List<ContactID>()
+            {
+                new ContactID("DDDDDDDD-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),
+                new ContactID("EEEEEEEE-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+            };
+
+            recipients.Add(contactIDs);
+
+            #endregion
 
             #region Attach Voicefiles
 
@@ -263,8 +331,6 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             };
 
             #endregion
-
-            var client = new TNZApiClient(apiUser);
 
             var response = client.Messaging.Voice.SendMessage(
                 new VoiceModel()

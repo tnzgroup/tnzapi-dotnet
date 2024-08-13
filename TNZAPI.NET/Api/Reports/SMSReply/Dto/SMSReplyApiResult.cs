@@ -2,6 +2,7 @@
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
+using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Api.Reports.SMSReply.Dto
 {
@@ -16,10 +17,24 @@ namespace TNZAPI.NET.Api.Reports.SMSReply.Dto
         public string SubAccount { get; set; } = "";
         public string Department { get; set; } = "";
         public string Reference { get; set; } = "";
-        public DateTime Created { get; set; } = new DateTime();
-        public DateTime CreatedUTC { get; set; } = new DateTime();
-        public DateTime Delayed { get; set; } = new DateTime();
-        public DateTime DelayedUTC { get; set; } = new DateTime();
+        public DateTime Created
+        {
+            get
+            {
+                return CreatedUTC.ChangeToLocalDateTime();
+            }
+        }
+        [XmlElement("CreatedTimeUTC_RFC3339")]
+        public DateTime CreatedUTC { get; set; }
+        public DateTime Delayed
+        {
+            get
+            {
+                return DelayedUTC.ChangeToLocalDateTime();
+            }
+        }
+        [XmlElement("DelayedTimeUTC_RFC3339")]
+        public DateTime DelayedUTC { get; set; }
         public string Timezone { get; set; } = "New Zealand";
         public int Count { get; set; } = 0;
         public int Complete { get; set; } = 0;
@@ -58,7 +73,15 @@ namespace TNZAPI.NET.Api.Reports.SMSReply.Dto
         public string MessageText { get; set; }
         public Enums.ResultCode Status { get; set; }
         public string Result { get; set; }
-        public DateTime SentDate { get; set; }
+        public DateTime SentDate 
+        {
+            get
+            {
+                return SentDateUTC.ChangeToLocalDateTime();
+            }
+        }
+        [XmlElement("SentTimeUTC_RFC3339")]
+        public DateTime SentDateUTC { get; set; }
         public string Attention { get; set; }
         public string Company { get; set; }
         public string Custom1 { get; set; }
@@ -79,7 +102,15 @@ namespace TNZAPI.NET.Api.Reports.SMSReply.Dto
 
     public class SMSReply
     {
-        public DateTime Date { get; set; }
+        public DateTime Date
+        {
+            get
+            {
+                return DateUTC.ChangeToLocalDateTime();
+            }
+        }
+
+        [XmlElement("ReceivedTimeUTC_RFC3339")]
         public DateTime DateUTC { get; set; }
         public string From { get; set; }
         public string MessageText { get; set; }

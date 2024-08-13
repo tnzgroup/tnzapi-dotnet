@@ -134,7 +134,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             XmlNode rootNode = xmlDoc.CreateElement("AddGroupRequest");
             xmlDoc.AppendChild(rootNode);
 
-            rootNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "GroupCode", Group.GroupCode));
+            rootNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "GroupID", Group.GroupID ?? Group.GroupCode));
 
             return xmlDoc;
         }
@@ -318,13 +318,13 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             return Add();
         }
 
-		/// <summary>
-		/// Add contact group
-		/// </summary>
-		/// <param name="contactID">ContactID</param>
-		/// <param name="groupID">GroupID</param>
-		/// <returns>ContactGroupApiResult</returns>
-		public ContactGroupApiResult Add(ContactID contactID, GroupID groupID)
+        /// <summary>
+        /// Add contact group
+        /// </summary>
+        /// <param name="contactID">ContactID</param>
+        /// <param name="groupID">GroupID</param>
+        /// <returns>ContactGroupApiResult</returns>
+        public ContactGroupApiResult Add(ContactID contactID, GroupID groupID)
         {
             if (contactID is not null)
             {
@@ -338,30 +338,30 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             return Add();
         }
 
-		/// <summary>
-		/// Add contact group
-		/// </summary>
-		/// <param name="contact">ContactModel</param>
-		/// <param name="group">GroupModel</param>
-		/// <param name="contactID">ContactID</param>
-		/// <param name="groupID">GroupID</param>
-		/// <param name="groupCode">GroupCode</param>
-		/// <returns>ContactGroupApiResult</returns>
-		public ContactGroupApiResult Add(
-            ContactModel contact = null,
-            GroupModel group = null,
-            ContactID contactID = null,
-            GroupID groupID = null
-        )
+        /// <summary>
+        /// Add contact group
+        /// </summary>
+        /// <param name="contact">ContactModel</param>
+        /// <param name="group">GroupModel</param>
+        /// <param name="contactID">ContactID</param>
+        /// <param name="groupID">GroupID</param>
+        /// <param name="groupCode">GroupCode</param>
+        /// <returns>ContactGroupApiResult</returns>
+        public ContactGroupApiResult Add(
+                ContactModel contact = null,
+                GroupModel group = null,
+                ContactID contactID = null,
+                GroupID groupID = null
+            )
         {
             if (contactID is not null)
             {
                 Contact.ContactID = contactID;
             }
-			if (groupID is not null)
-			{
-				Group.GroupID = groupID;
-			}
+            if (groupID is not null)
+            {
+                Group.GroupID = groupID;
+            }
 
             if (contact is not null)
             {
@@ -418,50 +418,50 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             return await AddAsync();
         }
 
-		/// <summary>
-		/// Add Contact Group (async)
-		/// </summary>
-		/// <param name="contactID">ContactID</param>
-		/// <param name="groupID">GroupID</param>
-		/// <returns></returns>
-		public async Task<ContactGroupApiResult> AddAsync(ContactID contactID, GroupID groupID)
-		{
-			if (contactID is not null)
-			{
-				Contact.ContactID = contactID;
-			}
-			if (groupID is not null)
-			{
-                Group.GroupID = groupID;
-			}
-
-			return await AddAsync();
-		}
-
-		/// <summary>
-		/// Add Contact Group (async)
-		/// </summary>
-		/// <param name="contact">ContactModel</param>
-		/// <param name="group">GroupModel</param>
-		/// <param name="contactID">ContactID</param>
-		/// <param name="groupID">GroupID</param>
-		/// <param name="groupCode">GroupCode</param>
-		/// <returns>Task<ContactGroupResult></returns>
-		public async Task<ContactGroupApiResult> AddAsync(
-            ContactModel contact = null,
-            GroupModel group = null,
-            ContactID contactID = null,
-            GroupID groupID = null
-        )
+        /// <summary>
+        /// Add Contact Group (async)
+        /// </summary>
+        /// <param name="contactID">ContactID</param>
+        /// <param name="groupID">GroupID</param>
+        /// <returns></returns>
+        public async Task<ContactGroupApiResult> AddAsync(ContactID contactID, GroupID groupID)
         {
             if (contactID is not null)
             {
                 Contact.ContactID = contactID;
             }
-			if (groupID is not null)
-			{
-				Group.GroupID = groupID;
-			}
+            if (groupID is not null)
+            {
+                Group.GroupID = groupID;
+            }
+
+            return await AddAsync();
+        }
+
+        /// <summary>
+        /// Add Contact Group (async)
+        /// </summary>
+        /// <param name="contact">ContactModel</param>
+        /// <param name="group">GroupModel</param>
+        /// <param name="contactID">ContactID</param>
+        /// <param name="groupID">GroupID</param>
+        /// <param name="groupCode">GroupCode</param>
+        /// <returns>Task<ContactGroupResult></returns>
+        public async Task<ContactGroupApiResult> AddAsync(
+                ContactModel contact = null,
+                GroupModel group = null,
+                ContactID contactID = null,
+                GroupID groupID = null
+            )
+        {
+            if (contactID is not null)
+            {
+                Contact.ContactID = contactID;
+            }
+            if (groupID is not null)
+            {
+                Group.GroupID = groupID;
+            }
 
             if (contact is not null)
             {
@@ -518,50 +518,50 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             return Remove();
         }
 
-		/// <summary>
-		/// Remove contact group
-		/// </summary>
-		/// <param name="contactID">ContactID</param>
-		/// <param name="groupID">GroupID</param>
-		/// <returns>ContactGroupApiResult</returns>
-		public ContactGroupApiResult Remove(ContactID contactID, GroupID groupID)
-		{
-			if (contactID is not null)
-			{
-				Contact.ContactID = contactID;
-			}
-			if (groupID is not null)
-			{
-                Group.GroupID = groupID;
-			}
-
-			return Remove();
-		}
-
-		/// <summary>
-		/// Remove contact group
-		/// </summary>
-		/// <param name="contact">ContactModel</param>
-		/// <param name="group">GroupModel</param>
-		/// <param name="contactID">Contact ID</param>
-		/// <param name="groupID">Group ID</param>
-		/// <returns>ContactGroupResult</returns>
-		public ContactGroupApiResult Remove(
-            ContactModel contact = null,
-            GroupModel group = null,
-            ContactID contactID = null,
-            GroupID groupID = null
-        )
+        /// <summary>
+        /// Remove contact group
+        /// </summary>
+        /// <param name="contactID">ContactID</param>
+        /// <param name="groupID">GroupID</param>
+        /// <returns>ContactGroupApiResult</returns>
+        public ContactGroupApiResult Remove(ContactID contactID, GroupID groupID)
         {
             if (contactID is not null)
             {
                 Contact.ContactID = contactID;
             }
-			if (groupID is not null)
-			{
-				Group.GroupID = groupID;
-			}
-            
+            if (groupID is not null)
+            {
+                Group.GroupID = groupID;
+            }
+
+            return Remove();
+        }
+
+        /// <summary>
+        /// Remove contact group
+        /// </summary>
+        /// <param name="contact">ContactModel</param>
+        /// <param name="group">GroupModel</param>
+        /// <param name="contactID">Contact ID</param>
+        /// <param name="groupID">Group ID</param>
+        /// <returns>ContactGroupResult</returns>
+        public ContactGroupApiResult Remove(
+                ContactModel contact = null,
+                GroupModel group = null,
+                ContactID contactID = null,
+                GroupID groupID = null
+            )
+        {
+            if (contactID is not null)
+            {
+                Contact.ContactID = contactID;
+            }
+            if (groupID is not null)
+            {
+                Group.GroupID = groupID;
+            }
+
             if (contact is not null)
             {
                 Contact = Mapper.Map(Contact, contact);
@@ -570,7 +570,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             {
                 Group = Mapper.Map(Group, group);
             }
-            
+
             return Remove();
         }
         #endregion
@@ -617,51 +617,51 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             return await RemoveAsync();
         }
 
-		/// <summary>
-		/// Remove contact group (async)
-		/// </summary>
-		/// <param name="contactID">ContactID</param>
-		/// <param name="groupID">GroupID</param>
-		/// <returns>Task<ContactGroupApiResult></returns>
-		public async Task<ContactGroupApiResult> RemoveAsync(ContactID contactID, GroupID groupID)
-		{
-			if (contactID is not null)
-			{
-                Contact.ContactID = contactID;
-			}
-			if (groupID is not null)
-			{
-                Group.GroupID = groupID;
-			}
-
-			return await RemoveAsync();
-		}
-
-		/// <summary>
-		/// Remove contact group (async)
-		/// </summary>
-		/// <param name="contact">ContactModel</param>
-		/// <param name="group">GroupModel</param>
-		/// <param name="contactID">Contact ID</param>
-		/// <param name="groupID">Group ID</param>
-		/// <param name="groupCode">Group Code</param>
-		/// <returns>Task<ContactGroupResult></returns>
-		public async Task<ContactGroupApiResult> RemoveAsync(
-            ContactModel contact = null, 
-            GroupModel group = null,
-            ContactID contactID = null,
-            GroupID groupID = null
-        )
+        /// <summary>
+        /// Remove contact group (async)
+        /// </summary>
+        /// <param name="contactID">ContactID</param>
+        /// <param name="groupID">GroupID</param>
+        /// <returns>Task<ContactGroupApiResult></returns>
+        public async Task<ContactGroupApiResult> RemoveAsync(ContactID contactID, GroupID groupID)
         {
             if (contactID is not null)
             {
                 Contact.ContactID = contactID;
             }
-			if (groupID is not null)
-			{
-				Group.GroupID = groupID;
-			}
-            
+            if (groupID is not null)
+            {
+                Group.GroupID = groupID;
+            }
+
+            return await RemoveAsync();
+        }
+
+        /// <summary>
+        /// Remove contact group (async)
+        /// </summary>
+        /// <param name="contact">ContactModel</param>
+        /// <param name="group">GroupModel</param>
+        /// <param name="contactID">Contact ID</param>
+        /// <param name="groupID">Group ID</param>
+        /// <param name="groupCode">Group Code</param>
+        /// <returns>Task<ContactGroupResult></returns>
+        public async Task<ContactGroupApiResult> RemoveAsync(
+                ContactModel contact = null,
+                GroupModel group = null,
+                ContactID contactID = null,
+                GroupID groupID = null
+            )
+        {
+            if (contactID is not null)
+            {
+                Contact.ContactID = contactID;
+            }
+            if (groupID is not null)
+            {
+                Group.GroupID = groupID;
+            }
+
             if (contact is not null)
             {
                 Contact = Mapper.Map(Contact, contact);
@@ -670,7 +670,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             {
                 Group = Mapper.Map(Group, group);
             }
-            
+
             return await RemoveAsync();
         }
 
@@ -718,41 +718,41 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             return Read();
         }
 
-		/// <summary>
-		/// Read contact group
-		/// </summary>
-		/// <param name="contactID">ContactID</param>
-		/// <param name="groupID">GroupID</param>
-		/// <returns></returns>
-		public ContactGroupApiResult Read(ContactID contactID, GroupID groupID)
-		{
-			if (contactID is not null)
-			{
+        /// <summary>
+        /// Read contact group
+        /// </summary>
+        /// <param name="contactID">ContactID</param>
+        /// <param name="groupID">GroupID</param>
+        /// <returns></returns>
+        public ContactGroupApiResult Read(ContactID contactID, GroupID groupID)
+        {
+            if (contactID is not null)
+            {
                 Contact.ContactID = contactID;
-			}
-			if (groupID is not null)
-			{
-				Group.GroupID = groupID;
-			}
+            }
+            if (groupID is not null)
+            {
+                Group.GroupID = groupID;
+            }
 
-			return Read();
-		}
+            return Read();
+        }
 
-		/// <summary>
-		/// Read contact group
-		/// </summary>
-		/// <param name="contactID">Contact ID</param>
-		/// <param name="groupID">Group ID</param>
-		/// <param name="groupCode">Group Code</param>
-		/// <param name="contact">ContactModel</param>
-		/// <param name="group">GroupModel</param>
-		/// <returns>ContactGroupResult</returns>
-		public ContactGroupApiResult Read(
-            ContactModel contact = null, 
-            GroupModel group = null, 
-            ContactID contactID = null, 
-            GroupID groupID = null
-        )
+        /// <summary>
+        /// Read contact group
+        /// </summary>
+        /// <param name="contactID">Contact ID</param>
+        /// <param name="groupID">Group ID</param>
+        /// <param name="groupCode">Group Code</param>
+        /// <param name="contact">ContactModel</param>
+        /// <param name="group">GroupModel</param>
+        /// <returns>ContactGroupResult</returns>
+        public ContactGroupApiResult Read(
+                ContactModel contact = null,
+                GroupModel group = null,
+                ContactID contactID = null,
+                GroupID groupID = null
+            )
         {
             if (contactID is not null)
             {
@@ -771,7 +771,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             {
                 Group = Mapper.Map(Group, group);
             }
-            
+
             return Read();
         }
 
@@ -783,13 +783,13 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
         /// <returns>ContactGroupResult</returns>
         public ContactGroupApiResult Get(ContactModel contact, GroupModel group) => Read(contact, group);
 
-		/// <summary>
-		/// Read contact group
-		/// </summary>
-		/// <param name="contactID">ContactID</param>
-		/// <param name="groupID">GroupID</param>
-		/// <returns>ContactGroupApiResult</returns>
-		public ContactGroupApiResult Get(ContactID contactID, GroupID groupID) => Read(contactID, groupID);
+        /// <summary>
+        /// Read contact group
+        /// </summary>
+        /// <param name="contactID">ContactID</param>
+        /// <param name="groupID">GroupID</param>
+        /// <returns>ContactGroupApiResult</returns>
+        public ContactGroupApiResult Get(ContactID contactID, GroupID groupID) => Read(contactID, groupID);
 
         /// <summary>
         /// Read contact group
@@ -845,51 +845,51 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             return await ReadAsync();
         }
 
-		/// <summary>
-		/// Read contact group (async)
-		/// </summary>
-		/// <param name="contactID"></param>
-		/// <param name="groupID"></param>
-		/// <returns>Task<ContactGroupApiResult></returns>
-		public async Task<ContactGroupApiResult> ReadAsync(ContactID contactID, GroupID groupID)
-		{
-			if (contactID is not null)
-			{
-				Contact.ContactID = contactID;
-			}
-			if (groupID is not null)
-			{
-				Group.GroupID = groupID;
-			}
-
-			return await ReadAsync();
-		}
-
-		/// <summary>
-		/// Read contact group (async)
-		/// </summary>
-		/// <param name="contactID">Contact ID</param>
-		/// <param name="groupID">Group ID</param>
-		/// <param name="groupCode">Group Code</param>
-		/// <param name="contact">ContactModel</param>
-		/// <param name="group">GroupModel</param>
-		/// <returns>Task<ContactGroupResult></returns>
-		public async Task<ContactGroupApiResult> ReadAsync(
-            ContactModel contact = null, 
-            GroupModel group = null, 
-            ContactID contactID = null, 
-            GroupID groupID = null
-        )
+        /// <summary>
+        /// Read contact group (async)
+        /// </summary>
+        /// <param name="contactID"></param>
+        /// <param name="groupID"></param>
+        /// <returns>Task<ContactGroupApiResult></returns>
+        public async Task<ContactGroupApiResult> ReadAsync(ContactID contactID, GroupID groupID)
         {
             if (contactID is not null)
             {
                 Contact.ContactID = contactID;
             }
-			if (groupID is not null)
-			{
-				Group.GroupID = groupID;
-			}
-            
+            if (groupID is not null)
+            {
+                Group.GroupID = groupID;
+            }
+
+            return await ReadAsync();
+        }
+
+        /// <summary>
+        /// Read contact group (async)
+        /// </summary>
+        /// <param name="contactID">Contact ID</param>
+        /// <param name="groupID">Group ID</param>
+        /// <param name="groupCode">Group Code</param>
+        /// <param name="contact">ContactModel</param>
+        /// <param name="group">GroupModel</param>
+        /// <returns>Task<ContactGroupResult></returns>
+        public async Task<ContactGroupApiResult> ReadAsync(
+                ContactModel contact = null,
+                GroupModel group = null,
+                ContactID contactID = null,
+                GroupID groupID = null
+            )
+        {
+            if (contactID is not null)
+            {
+                Contact.ContactID = contactID;
+            }
+            if (groupID is not null)
+            {
+                Group.GroupID = groupID;
+            }
+
             if (contact is not null)
             {
                 Contact = Mapper.Map(Contact, contact);
@@ -898,7 +898,7 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
             {
                 Group = Mapper.Map(Group, group);
             }
-            
+
             return await ReadAsync();
         }
 
@@ -910,13 +910,13 @@ namespace TNZAPI.NET.Api.Addressbook.Contact.Group
         /// <returns>Task<ContactGroupResult></returns>
         public async Task<ContactGroupApiResult> GetAsync(ContactModel contact, GroupModel group) => await ReadAsync(contact, group);
 
-		/// <summary>
-		/// Read contact group (async)
-		/// </summary>
-		/// <param name="contactID">ContactID</param>
-		/// <param name="groupID">GroupID</param>
-		/// <returns>Task<ContactGroupApiResult></returns>
-		public async Task<ContactGroupApiResult> GetAsync(ContactID contactID, GroupID groupID) => await ReadAsync(contactID, groupID);
+        /// <summary>
+        /// Read contact group (async)
+        /// </summary>
+        /// <param name="contactID">ContactID</param>
+        /// <param name="groupID">GroupID</param>
+        /// <returns>Task<ContactGroupApiResult></returns>
+        public async Task<ContactGroupApiResult> GetAsync(ContactID contactID, GroupID groupID) => await ReadAsync(contactID, groupID);
 
         /// <summary>
         /// Read contact group (async)

@@ -1,5 +1,4 @@
-﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
-using TNZAPI.NET.Api.Addressbook.Group;
+﻿using TNZAPI.NET.Api.Addressbook.Group;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Helpers;
@@ -51,7 +50,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+                Console.WriteLine($"Group details for GroupID={response.Group.GroupID}");
                 Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
                 Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
                 Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
@@ -87,7 +86,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+                Console.WriteLine($"Group details for GroupID={response.Group.GroupID}");
                 Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
                 Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
                 Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
@@ -125,7 +124,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+                Console.WriteLine($"Group details for GroupID={response.Group.GroupID}");
                 Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
                 Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
                 Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
@@ -162,7 +161,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+                Console.WriteLine($"Group details for GroupID={response.Group.GroupID}");
                 Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
                 Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
                 Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");

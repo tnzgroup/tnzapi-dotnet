@@ -14,14 +14,11 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             this.apiUser = apiUser;
         }
 
-        public StatusApiResult Basic(MessageID? messageID = null)
+        public StatusApiResult Basic()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (messageID is null)
-            {
-                messageID = new MessageID("ID123456");
-            }
+            var messageID = new MessageID("ID123456");
 
             var response = client.Reports.Status.Poll(messageID);
 
@@ -85,19 +82,16 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             return response;
         }
 
-        public StatusApiResult Simple(MessageID? messageID = null) => Basic(messageID);        // Same as Basic
+        public StatusApiResult Simple() => Basic();        // Same as Basic
 
-        public StatusApiResult Builder(StatusRequestOptions? options = null)
+        public StatusApiResult Builder()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (options is null)
-            {
-                options = new StatusBuilder("ID123456")
-                                .SetRecordsPerPage(50)
-                                .SetPage(1)
-                                .Build();                        
-            }
+            var options = new StatusBuilder(new MessageID("ID123456"))
+                            .SetRecordsPerPage(50)
+                            .SetPage(1)
+                            .Build();
 
             var response = client.Reports.Status.Poll(options);
 
@@ -161,21 +155,18 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             return response;
         }
 
-        public void Advanced(StatusRequestOptions? options = null)
+        public void Advanced()
         {
             // Sample code use StatusRequestBuilder()
 
             var client = new TNZApiClient(apiUser);
 
-            if (options is null)
+            var options = new StatusRequestOptions()
             {
-                options = new StatusRequestOptions()
-                {
-                    MessageID = new MessageID("ID123456"),
-                    RecordsPerPage = 50,
-                    Page = 1
-                };
-            }
+                MessageID = new MessageID("ID123456"),
+                RecordsPerPage = 50,
+                Page = 1
+            };
 
             var response = client.Reports.Status.Poll(options);
 

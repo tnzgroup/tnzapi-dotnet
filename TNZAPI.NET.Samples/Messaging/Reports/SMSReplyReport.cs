@@ -14,14 +14,11 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             this.apiUser = apiUser;
         }
 
-        public SMSReplyApiResult Basic(MessageID? messageID = null)
+        public SMSReplyApiResult Basic()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (messageID is null)
-            {
-                messageID = new MessageID("ID123456");
-            }
+            var messageID = new MessageID("ID123456");
 
             var response = client.Reports.SMSReply.Poll(messageID);
 
@@ -96,19 +93,16 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             return response;
         }
 
-        public SMSReplyApiResult Simple(MessageID? messageID = null) => Basic(messageID);        // Same as Basic
+        public SMSReplyApiResult Simple() => Basic();        // Same as Basic
 
-        public SMSReplyApiResult Builder(SMSReplyRequestOptions? options = null)
+        public SMSReplyApiResult Builder()
         {
             var client = new TNZApiClient(apiUser);
             
-            if (options is null)
-            {
-                options = new SMSReplyBuilder("ID123456")
-                                .SetRecordsPerPage(50)
-                                .SetPage(1)
-                                .Build();
-            }
+            var options = new SMSReplyBuilder(new MessageID("ID123456"))
+                            .SetRecordsPerPage(50)
+                            .SetPage(1)
+                            .Build();
 
             var response = client.Reports.SMSReply.Poll(options);
 
@@ -183,19 +177,16 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             return response;
         }
 
-        public void Advanced(SMSReplyRequestOptions? options = null)
+        public void Advanced()
         {
             var client = new TNZApiClient(apiUser);
 
-            if (options is null)
+            var options = new SMSReplyRequestOptions()
             {
-                options = new SMSReplyRequestOptions()
-                {
-                    MessageID = new MessageID("ID123456"),
-                    RecordsPerPage = 50,
-                    Page = 1
-                };
-            }
+                MessageID = new MessageID("ID123456"),
+                RecordsPerPage = 50,
+                Page = 1
+            };
 
             var response = client.Reports.SMSReply.Poll(options);
 

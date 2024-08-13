@@ -51,7 +51,7 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
             var client = new TNZApiClient(apiUser);
 
             var options = new AbortBuilder()
-                                .SetMessageID("ID123456")
+                                .SetMessageID(new MessageID("ID123456"))
                                 .Build();
 
             var response = client.Actions.Abort.Submit(options);

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
-using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Core;
+using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Api.Addressbook.Group.Dto
 {
@@ -16,6 +16,17 @@ namespace TNZAPI.NET.Api.Addressbook.Group.Dto
         public string SubAccount { get; set; }
 
         public string Department { get; set; }
+
+        public DateTime Created 
+        {
+            get
+            {
+                return CreatedUTC.ChangeToLocalDateTime();
+            }
+        }
+
+        [XmlElement("CreatedTimeUTC_RFC3339")]
+        public DateTime CreatedUTC { get; set; }
 
         public Enums.ViewEditByOptions? ViewEditBy { get; set; }
 

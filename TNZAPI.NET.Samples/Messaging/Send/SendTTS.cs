@@ -1,4 +1,6 @@
-﻿using TNZAPI.NET.Api.Messaging.Common;
+﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
+using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
@@ -53,13 +55,25 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
         public MessageApiResult Simple()
         {
-            const string recipient = "+64211111111";                // Recipient
-
-            const string messageToPeople = "Hello, this is a call from test. This is relevant information.";
-
             var client = new TNZApiClient(apiUser);
 
+            var recipient = "+64211111111";                // Recipient
+
+            var messageToPeople = "Hello, this is a call from test. This is relevant information.";
+
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
             var response = client.Messaging.TTS.SendMessage(
+                groupIDs: new List<GroupID>()           // List of Addressbook Group IDs
+                {
+                    groupID
+                },
+                contactIDs: new List<ContactID>()       // List of Addressbook Contact IDs
+                {
+                    contactID
+                },
                 destination: recipient,                 // Recipient
                 messageToPeople: messageToPeople,       // Message to people
                 sendMode: Enums.SendModeType.Test       // TEST Mode - Remove this to send live traffic
@@ -90,8 +104,14 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
             var client = new TNZApiClient(apiUser);
 
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
             var message = new TTSBuilder()
                             .SetMessageToPeople("Hello, this is a call from test. This is relevant information.")   // Message to People
+                            .AddRecipients(groupID)                 // Add Recipients by GroupID using TNZ Addressbook 
+                            .AddRecipient(contactID)                // Add Recipient by ContactID using TNZ Addressbook 
                             .AddRecipient("+64211111111")           // Recipient
                             .SetSendMode(Enums.SendModeType.Test)   // TEST/Live mode
                             .Build();                               // Build TTS() object
@@ -121,42 +141,42 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
             #region Declarations
 
-            const string reference = "Test TTS - Advanced version";
+            var reference = "Test TTS - Advanced version";
 
-            const string webhookCallbackURL = "https://example.com/webhook";
-            const Enums.WebhookCallbackType webhookCallbackFormat = Enums.WebhookCallbackType.XML;
-            const string errorEmailNotify = "notify@example.com";
+            var webhookCallbackURL = "https://example.com/webhook";
+            var webhookCallbackFormat = Enums.WebhookCallbackType.XML;
+            var errorEmailNotify = "notify@example.com";
 
-            const string callerId = "+6499999999";
-            const string billingAccount = "TEST BILLING ACCOUNT";
-            const string reportTo = "report@example.com";
+            var callerId = "+6499999999";
+            var billingAccount = "TEST BILLING ACCOUNT";
+            var reportTo = "report@example.com";
 
-            const string recipient1 = "+64211111111";
-            const string recipient2 = "+64212222222";
-            const string recipient3 = "+64213333333";
-            const string recipient4 = "+64214444444";
+            var recipient1 = "+64211111111";
+            var recipient2 = "+64212222222";
+            var recipient3 = "+64213333333";
+            var recipient4 = "+64214444444";
 
-            const string messageToPeople = "Hello, this is a call from Department01. This is relevant information. Press one to be connected to our call centre.";
-            const string messageToAnswerphones = "Hello, sorry we missed you. This is a call from Department 01. Please contact us on 0800 123123.";
-            const string callRouteMessageToPeople = "Connecting you now.";
-            const string callRouteMessageToOperators = "Incoming Text To Speech call.";
-            const string callRouteMessageOnWrongKey = "Sorry, you have pressed an invalid key. Please try again.";
+            var messageToPeople = "Hello, this is a call from Department01. This is relevant information. Press one to be connected to our call centre.";
+            var messageToAnswerphones = "Hello, sorry we missed you. This is a call from Department 01. Please contact us on 0800 123123.";
+            var callRouteMessageToPeople = "Connecting you now.";
+            var callRouteMessageToOperators = "Incoming Text To Speech call.";
+            var callRouteMessageOnWrongKey = "Sorry, you have pressed an invalid key. Please try again.";
 
-            const int numberOfOperators = 1;
-            const int retryAttempts = 3;
-            const int retryPeriod = 1;
+            var numberOfOperators = 1;
+            var retryAttempts = 3;
+            var retryPeriod = 1;
 
-            const TTSVoiceType ttsVoice = TTSVoiceType.Female1;
+            var ttsVoice = TTSVoiceType.Female1;
 
-            const string keypad1Route = "+6491111111";
-            const string keypad2Route = "+6492222222";
-            const string keypad3Play = "Hello, you have pressed 3.";
-            const string keypad4Route = "+6493333333";
-            const string keypad5Route = "+6494444444";
-            const string keypad6Play = "Hello, you have pressed 5.";
-            const string keypad7Route = "+6497777777";
-            const string keypad7Play = "Hello, you have pressed 6.";
-            const KeypadPlaySection keypad9PlaySection = KeypadPlaySection.Main;
+            var keypad1Route = "+6491111111";
+            var keypad2Route = "+6492222222";
+            var keypad3Play = "Hello, you have pressed 3.";
+            var keypad4Route = "+6493333333";
+            var keypad5Route = "+6494444444";
+            var keypad6Play = "Hello, you have pressed 5.";
+            var keypad7Route = "+6497777777";
+            var keypad7Play = "Hello, you have pressed 6.";
+            var keypad9PlaySection = KeypadPlaySection.Main;
 
             #endregion
 
@@ -241,7 +261,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             // Add Recipient Method 2 - AddRecipient(new Recipient())
             //
 
-            Recipient recipient = new Recipient(recipient2);
+            var recipient = new Recipient(recipient2);
             recipient.CompanyName = "Test Company";         // Company Name
             recipient.Attention = "Test Recipient 2";       // Attention
             recipient.Custom1 = "Custom1";                  // Custom1
@@ -253,31 +273,76 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             recipients.Add(recipient);
 
             //
-            // Add Recipient Method 3 - AddRecipients(new List<Recipient>()); using simple destination
+            // Add Recipient Method 3 - AddRecipients(new List<string>()); using simple destination
             //
 
-            var recipientList = new List<Recipient>();
-
-            recipientList.Add(new Recipient(recipient3));
+            recipients.Add(new List<string>() { recipient3 });
 
             //
             // Add Recipient Method 4 - AddRecipients(new List<Recipient>()) using Recipient objects
             //
 
-            recipientList.Add(new Recipient(
-                recipient4,             // Recipient
-                "Test Company",         // Company Name
-                "Test Recipient 4",     // Attention
-                "Custom1",              // Custom1
-                "Custom2",              // Custom2
-                "Custom3",              // Custom3
-                "Custom4",              // Custom4
-                "Custom5"               // Custom5
-            ));
-
-            recipients.Add(recipientList);
+            recipients.Add(
+                new List<Recipient>()
+                {
+                    new Recipient(
+                        recipient4,             // Recipient
+                        "Test Company",         // Company Name
+                        "Test Recipient 3",     // Attention
+                        "Custom1",              // Custom1
+                        "Custom2",              // Custom2
+                        "Custom3",              // Custom3
+                        "Custom4",              // Custom4
+                        "Custom5"               // Custom5
+                    )
+                }
+            );
 
             #endregion Add Recipients
+
+            #region Add Recipients using TNZ Addressbook
+
+            //
+            // Add Recipient Method 5 - Add Recipients using GroupID
+            //
+
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            recipients.Add(groupID);
+
+            //
+            // Add Recipient Method 6 - Add Recipients using list of GroupIDs
+            //
+
+            var groupIDs = new List<GroupID>()
+            {
+                new GroupID("HHHHHHHH-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),
+                new GroupID("IIIIIIII-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+            };
+
+            recipients.Add(groupIDs);
+
+            //
+            // Add Recipient Method 7 - Add Recipient using ContactID 
+            //
+
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            recipients.Add(contactID);
+
+            //
+            // Add Recipient Method 8 - Add Recipients using list of ContactIDs
+            //
+
+            var contactIDs = new List<ContactID>()
+            {
+                new ContactID("DDDDDDDD-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),
+                new ContactID("EEEEEEEE-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+            };
+
+            recipients.Add(contactIDs);
+
+            #endregion
 
             var response = client.Messaging.TTS.SendMessage(
                 new TTSModel()

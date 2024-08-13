@@ -1,5 +1,4 @@
-﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
-using TNZAPI.NET.Api.Addressbook.Group;
+﻿using TNZAPI.NET.Api.Addressbook.Group;
 using TNZAPI.NET.Api.Addressbook.Group.Contact.Dto;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Core;
@@ -57,16 +56,17 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var groupCode = "Test-Group";
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var response = client.Addressbook.GroupContactList.ListByGroupCode(
-                groupCode,              // Group
+            var response = client.Addressbook.GroupContactList.List(
+                groupID,                // GroupID
                 page: 1                 // Current location
             );
 
             if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Group Contact list details");
+                Console.WriteLine($"    -> GroupID: {response.Group.GroupID}");
                 Console.WriteLine($"    -> GroupCode: {response.Group.GroupCode}");
                 Console.WriteLine($"    -> Total Records: {response.TotalRecords}");
                 Console.WriteLine($"    -> Records Per Page: {response.RecordsPerPage}");
@@ -123,10 +123,10 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var groupCode = "Test-Group";
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            var response = client.Addressbook.GroupContactList.ListByGroupCode(
-                groupCode,              // Group
+            var response = client.Addressbook.GroupContactList.List(
+                groupID,              // Group
                 recordsPerPage: 10,     // Number of records for this request
                 page: 1                 // Current location
             );
@@ -134,6 +134,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Group Contact list details");
+                Console.WriteLine($"    -> GroupID: {response.Group.GroupID}");
                 Console.WriteLine($"    -> GroupCode: {response.Group.GroupCode}");
                 Console.WriteLine($"    -> Total Records: {response.TotalRecords}");
                 Console.WriteLine($"    -> Records Per Page: {response.RecordsPerPage}");
@@ -190,7 +191,8 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var group = new GroupBuilder("Test-Group").Build();
+            var group = new GroupBuilder(new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD"))
+                            .Build();
 
             var listOptions = new ListRequestOptionBuilder()
                 .SetRecordsPerPage(50)          // Number of records for this request
@@ -205,6 +207,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Group Contact list details");
+                Console.WriteLine($"    -> GroupID: {response.Group.GroupID}");
                 Console.WriteLine($"    -> GroupCode: {response.Group.GroupCode}");
                 Console.WriteLine($"    -> Total Records: {response.TotalRecords}");
                 Console.WriteLine($"    -> Records Per Page: {response.RecordsPerPage}");
@@ -264,7 +267,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             var response = client.Addressbook.GroupContactList.List(
                 new GroupModel()            // Group
                 {
-                    GroupCode = "Test-Group"
+                    GroupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
                 },                      
                 new ListRequestOptions()
                 {
@@ -276,6 +279,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             if (response.Result == Enums.ResultCode.Success)
             {
                 Console.WriteLine($"Group Contact list details");
+                Console.WriteLine($"    -> GroupID: {response.Group.GroupID}");
                 Console.WriteLine($"    -> GroupCode: {response.Group.GroupCode}");
                 Console.WriteLine($"    -> Total Records: {response.TotalRecords}");
                 Console.WriteLine($"    -> Records Per Page: {response.RecordsPerPage}");

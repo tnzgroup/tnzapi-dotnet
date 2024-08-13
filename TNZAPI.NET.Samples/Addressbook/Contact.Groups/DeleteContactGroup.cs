@@ -26,7 +26,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
             {
                 contact = new ContactModel()
                 {
-                    ContactID = new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+                    ContactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
                 };
             }
 
@@ -34,23 +34,23 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
             {
                 group = new GroupModel()
                 {
-                    GroupCode = "Test-Group"
+                    GroupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
                 };
             }
 
             var response = client.Addressbook.ContactGroup.Remove(
-                contact: contact,
-                group: group
+                contact,
+                group
             );
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                response.Contact.Dump();
+                Console.WriteLine(response.Contact.Dump());
                 Console.WriteLine($"-------------------------");
 
                 if (response.Group is not null)
                 {
-                    response.Group.Dump();
+                    Console.WriteLine(response.Group.Dump());
                     Console.WriteLine($"-------------------------");
                 }
             }
@@ -72,10 +72,10 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-			var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
-			var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");      // ContactID
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");          // GroupID
 
-			var response = client.Addressbook.ContactGroup.Remove(contactID, groupID);
+            var response = client.Addressbook.ContactGroup.Remove(contactID, groupID);
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -111,7 +111,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
 
                 if (response.Group is not null)
                 {
-                    Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+                    Console.WriteLine($"Group details for GroupCode={response.Group.GroupID}");
                     Console.WriteLine($"    -> GroupCode: '{response.Group.GroupCode}'");
                     Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
                     Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
@@ -139,9 +139,9 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
             var client = new TNZApiClient(apiUser);
 
             var response = client.Addressbook.ContactGroup.Remove(
-                contactID: new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),   // Contact ID
-                groupID: new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD")        // Group ID
-			);
+                contactID: new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),   // ContactID
+                groupID: new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD")        // GroupID
+            );
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -204,9 +204,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-            var contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD").Build();
+            var contact = new ContactBuilder(new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD"))
+                            .Build();
 
-            var group = new GroupBuilder("Test-Group").Build();
+            var group = new GroupBuilder(new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD"))
+                            .Build();
 
             var response = client.Addressbook.ContactGroup.Remove(
               contact: contact,
@@ -277,11 +279,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Contact.Groups
             var response = client.Addressbook.ContactGroup.Remove(
                 contact: new ContactModel()
                 {
-                    ContactID = new("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+                    ContactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
                 },
                 group: new GroupModel()
                 {
-                    GroupCode = "Test-Group"
+                    GroupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
                 }
             );
 

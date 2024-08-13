@@ -1,9 +1,10 @@
 ﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Api.Messaging.Common.Components.List
 {
-	public class RecipientList : IDisposable
+    public class RecipientList : IDisposable
     {
         private ICollection<Recipient> Recipients { get; set; }
 
@@ -12,119 +13,124 @@ namespace TNZAPI.NET.Api.Messaging.Common.Components.List
             Recipients = new List<Recipient>();
         }
 
-		#region Add() Functions
-		public RecipientList Add(string recipient)
-		{
-			if (recipient is null || recipient == "")
-			{
-				return this;
-			}
+        #region Add() Functions
+        public RecipientList Add(string recipient)
+        {
+            if (recipient is null || recipient == "")
+            {
+                return this;
+            }
 
-			Recipients.Add(new Recipient(recipient));
+            Recipients.Add(new Recipient(recipient));
 
-			return this;
-		}
+            return this;
+        }
 
-		public RecipientList Add(Recipient recipient)
-		{
-			if (recipient is null)
-			{
-				return this;
-			}
+        public RecipientList Add(Recipient recipient)
+        {
+            if (recipient is null)
+            {
+                return this;
+            }
 
-			Recipients.Add(recipient);
+            Recipients.Add(recipient);
 
-			return this;
-		}
+            return this;
+        }
 
-		public RecipientList Add(GroupID groupID)
-		{
-			if (groupID is null || groupID == "")
-			{
-				return this;
-			}
+        public RecipientList Add(GroupModel group)
+        {
+            if (group is null)
+            {
+                return this;
+            }
 
-			Recipients.Add(new Recipient()
-			{
-				GroupID = groupID
-			});
+            Recipients.Add(Mapper.Map<Recipient>(group));
 
-			return this;
-		}
+            return this;
+        }
 
-		public RecipientList Add(ContactID contactID)
-		{
-			if (contactID is null || contactID == "")
-			{
-				return this;
-			}
+        public RecipientList Add(GroupID groupID)
+        {
+            if (groupID is null || groupID == "")
+            {
+                return this;
+            }
 
-			Recipients.Add(new Recipient()
-			{
-				ContactID = contactID
-			});
+            Recipients.Add(new Recipient()
+            {
+                GroupID = groupID
+            });
 
-			return this;
-		}
+            return this;
+        }
 
-		public RecipientList Add<T>(T recipient)
-		{
-			if (recipient is null || recipient.ToString() == "")
-			{
-				return this;
-			}
+        public RecipientList Add(ContactModel contact)
+        {
+            if (contact is null)
+            {
+                return this;
+            }
 
-			switch (recipient)
-			{
-				case Recipient _:
-					return Add(Mapper.Map<Recipient>(recipient));
-				case GroupID _:
-					return Add(Mapper.Map<GroupID>(recipient));
-				case ContactID _:
-					return Add(Mapper.Map<ContactID>(recipient));
-				case string _:
-					return Add(recipient.ToString());
-				default:
-					throw new Exception($"Unsupported Recipient Type '{typeof(T).Name}'.");
-			}
+            Recipients.Add(Mapper.Map<Recipient>(contact));
 
-			//if (typeof(T) == typeof(Recipient))
-			//{
-			//	return Add(Mapper.Map<Recipient>(recipient));
-			//}
-			//if (typeof(T) == typeof(GroupID))
-			//{
-			//	return Add(Mapper.Map<GroupID>(recipient));
-			//}
-			//if (typeof(T) == typeof(GroupCode))
-			//{
-			//	return Add(Mapper.Map<GroupCode>(recipient));
-			//}
-			//if (typeof(T) == typeof(ContactID))
-			//{
-			//	return Add(Mapper.Map<ContactID>(recipient));
-			//}
+            return this;
+        }
 
-			//return Add(recipient.ToString());
-		}
+        public RecipientList Add(ContactID contactID)
+        {
+            if (contactID is null || contactID == "")
+            {
+                return this;
+            }
 
-		public RecipientList Add<T>(ICollection<T> recipients)
-		{
-			if (recipients is null || recipients.Count() == 0)
-			{
-				return this;
-			}
+            Recipients.Add(new Recipient()
+            {
+                ContactID = contactID
+            });
 
-			foreach (var recipient in recipients)
-			{
-				Add(recipient);
-			}
+            return this;
+        }
 
-			return this;
-		}
-		#endregion
+        public RecipientList Add<T>(ICollection<T> recipients)
+        {
+            if (recipients is null || recipients.Count() == 0)
+            {
+                return this;
+            }
 
-		public ICollection<Recipient> ToList()
+            foreach (var recipient in recipients)
+            {
+                switch (recipient)
+                {
+                    case Recipient _:
+                        Add(Mapper.Map<Recipient>(recipient));
+                        break;
+                    case GroupModel _:
+                        Add(Mapper.Map<GroupModel>(recipient));
+                        break;
+                    case GroupID _:
+                        Add(Mapper.Map<GroupID>(recipient));
+                        break;
+                    case ContactModel _:
+                        Add(Mapper.Map<ContactModel>(recipient));
+                        break;
+                    case ContactID _:
+                        Add(Mapper.Map<ContactID>(recipient));
+                        break;
+                    case string _:
+                        Add(recipient.ToString());
+                        break;
+                    default:
+                        throw new Exception($"Unsupported Recipient Type '{typeof(T).Name}'.");
+                }
+            }
+
+            return this;
+        }
+        #endregion
+
+        public ICollection<Recipient> ToList()
         {
             if (Recipients is null)
             {

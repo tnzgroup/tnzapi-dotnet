@@ -57,7 +57,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
 
             var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-			var contactID = new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
             var response = client.Addressbook.GroupContact.Remove(groupID, contactID);
 
@@ -125,8 +125,8 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             var client = new TNZApiClient(apiUser);
 
             var response = client.Addressbook.GroupContact.Remove(
-                groupID: new GroupID("EEEEEEEE-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),       // Group Code
-                contactID: new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")    // Contact ID
+                groupID: new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),       // GroupID
+                contactID: new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD")    // ContactID
             );
 
             if (response.Result == Enums.ResultCode.Success)
@@ -192,9 +192,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
         {
             var client = new TNZApiClient(apiUser);
 
-            var group = new GroupBuilder("Test-Group").Build();
+            var group = new GroupBuilder(new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD"))
+                            .Build();
 
-            var contact = new ContactBuilder("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD").Build();
+            var contact = new ContactBuilder(new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD"))
+                            .Build();
 
             var response = client.Addressbook.GroupContact.Remove(group, contact);
 
@@ -264,11 +266,11 @@ namespace TNZAPI.NET.Samples.Addressbook.Group.Contacts
             var response = client.Addressbook.GroupContact.Remove(
                 new GroupModel()
                 {
-                    GroupCode = "Test-Group"                                 // Group Code
+                    GroupCode = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD")         // Group Code
                 },
                 new ContactModel()
                 {
-                    ContactID = new ContactID("AAAAAAAA-BBBB-BBBB-CCCC-DDDDDDDDDDDD")       // Contact ID
+                    ContactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD")       // Contact ID
                 });
 
             if (response.Result == Enums.ResultCode.Success)

@@ -13,18 +13,18 @@ namespace TNZAPI.NET.Core.Interfaces.Reports
         Task<StatusApiResult> PollAsync(StatusRequestOptions options);
         Task<StatusApiResult> PollAsync(MessageID messageID, IListRequestOptions listOptions = null);
 
-		#region Deprecated
-		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
-		StatusApiResult Poll(string messageID);
+        #region Deprecated
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        StatusApiResult Poll(string messageID);
 
-		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
-		StatusApiResult Poll(string messageID, IListRequestOptions listOptions = null);
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        StatusApiResult Poll(string messageID, IListRequestOptions listOptions = null);
 
-		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
-		Task<StatusApiResult> PollAsync(string messageID);
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        Task<StatusApiResult> PollAsync(string messageID);
 
-		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
-		Task<StatusApiResult> PollAsync(string messageID, IListRequestOptions listOptions = null);
-		#endregion
-	}
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        Task<StatusApiResult> PollAsync(string messageID, IListRequestOptions listOptions = null);
+        #endregion
+    }
 }

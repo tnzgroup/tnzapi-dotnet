@@ -1,4 +1,6 @@
-﻿using TNZAPI.NET.Api.Messaging.Common;
+﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
+using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
@@ -60,15 +62,28 @@ namespace TNZAPI.NET.Samples.Messaging.Send
         {
             var client = new TNZApiClient(apiUser);
 
-            const string recipient = "+64211111111";
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-            const string message = "Hello, this is a test SMS from test.";
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            var message = "Hello, this is a test SMS from test.";
 
             var response = client.Messaging.SMS.SendMessage(
-                destination: recipient,                     // Recipient
+                groupIDs: new List<GroupID>()               // List of Addressbook Group IDs
+                {
+                    groupID
+                },
+                contactIDs: new List<ContactID>()           // List of Addressbook Contact IDs
+                {
+                    contactID
+                },
+                destinations: new List<string>() {
+                    "+64211111111",                         // Recipient 1
+                    "+64222222222"                          // Recipient 2
+                },
                 messageText: message,                       // SMS Message
                 sendMode: Enums.SendModeType.Test           // TEST Mode - Remove this to send live traffic
-                );
+            );
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -95,13 +110,22 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
             var client = new TNZApiClient(apiUser);
 
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
             var message = new SMSBuilder()
                             .SetMessageText("Test SMS")             // SMS Message
+                            .AddRecipients(groupID)                 // Add Recipients by GroupID using TNZ Addressbook 
+                            .AddRecipient(contactID)                // Add Recipient by ContactID using TNZ Addressbook
                             .AddRecipient("+64211111111")           // Recipient
+                            .AddRecipients(new List<Recipient>())
                             .SetSendMode(Enums.SendModeType.Test)   // TEST/Live mode
                             .Build();                               // Build SMS() object
 
             var response = client.Messaging.SMS.SendMessage(message);
+
+            DebugUtil.Dump(response);
 
             if (response.Result == Enums.ResultCode.Success)
             {
@@ -126,26 +150,26 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
             #region Declarations
 
-            const string reference = "Test SMS - Advanced version";
+            var reference = "Test SMS - Advanced version";
 
-            const string webhookCallbackURL = "https://example.com/webhook";
-            const Enums.WebhookCallbackType webhookCallbackFormat = Enums.WebhookCallbackType.XML;
-            const string errorEmailNotify = "notify@example.com";
+            var webhookCallbackURL = "https://example.com/webhook";
+            var webhookCallbackFormat = Enums.WebhookCallbackType.XML;
+            var errorEmailNotify = "notify@example.com";
 
-            const string smsEmailReply = "reply@test.com";
-            const string forceGSMChars = "True";
+            var smsEmailReply = "reply@test.com";
+            var forceGSMChars = "True";
 
-            const string recipient1 = "+64211111111";
-            const string recipient2 = "+64212222222";
-            const string recipient3 = "+64213333333";
-            const string recipient4 = "+64214444444";
+            var recipient1 = "+64211111111";
+            var recipient2 = "+64212222222";
+            var recipient3 = "+64213333333";
+            var recipient4 = "+64214444444";
 
-            const string file1 = "D:\\file1.pdf";
-            const string file2 = "D:\\file2.pdf";
-            const string file3 = "D:\\file3.pdf";
-            const string file4 = "D:\\file4.pdf";
+            var file1 = "D:\\file1.pdf";
+            var file2 = "D:\\file2.pdf";
+            var file3 = "D:\\file3.pdf";
+            var file4 = "D:\\file4.pdf";
 
-            const string messageText = "Test SMS Message [[File1]] | [[File2]] | [[File3]] | [[File4]]";
+            var messageText = "Test SMS Message [[File1]] | [[File2]] | [[File3]] | [[File4]]";
 
             #endregion Declarations
 
@@ -174,27 +198,76 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             recipients.Add(recipient);
 
             //
-            // Add Recipient Method 3 - using simple destination
+            // Add Recipient Method 3 - AddRecipients(new List<string>()); using simple destination
             //
 
-            recipients.Add(new Recipient(recipient3));
+            recipients.Add(new List<string>() { recipient3 });
 
             //
-            // Add Recipient Method 4 - using Recipient objects
+            // Add Recipient Method 4 - AddRecipients(new List<Recipient>()) using Recipient objects
             //
 
-            recipients.Add(new Recipient(
-                recipient4,             // Recipient
-                "Test Company",         // Company Name
-                "Test Recipient 4",     // Attention
-                "Custom1",              // Custom1
-                "Custom2",              // Custom2
-                "Custom3",              // Custom3
-                "Custom4",              // Custom4
-                "Custom5"               // Custom5
-            ));
+            recipients.Add(
+                new List<Recipient>()
+                {
+                    new Recipient(
+                        recipient4,             // Recipient
+                        "Test Company",         // Company Name
+                        "Test Recipient 3",     // Attention
+                        "Custom1",              // Custom1
+                        "Custom2",              // Custom2
+                        "Custom3",              // Custom3
+                        "Custom4",              // Custom4
+                        "Custom5"               // Custom5
+                    )
+                }
+            );
 
             #endregion Add Recipients
+
+            #region Add Recipients using TNZ Addressbook
+
+            //
+            // Add Recipient Method 5 - Add Recipients using GroupID
+            //
+
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            recipients.Add(groupID);
+
+            //
+            // Add Recipient Method 6 - Add Recipients using list of GroupIDs
+            //
+
+            var groupIDs = new List<GroupID>()
+            {
+                new GroupID("HHHHHHHH-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),
+                new GroupID("IIIIIIII-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+            };
+
+            recipients.Add(groupIDs);
+
+            //
+            // Add Recipient Method 7 - Add Recipient using ContactID 
+            //
+
+            var contactID = new ContactID("CCCCCCCC-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+
+            recipients.Add(contactID);
+
+            //
+            // Add Recipient Method 8 - Add Recipients using list of ContactIDs
+            //
+
+            var contactIDs = new List<ContactID>()
+            {
+                new ContactID("DDDDDDDD-BBBB-BBBB-CCCC-DDDDDDDDDDDD"),
+                new ContactID("EEEEEEEE-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
+            };
+
+            recipients.Add(contactIDs);
+
+            #endregion
 
             #region Add Attachments
             /*
@@ -216,7 +289,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             // Add Attachment Method 2 - AddAttachment(new Attachment());
             //
 
-            Attachment attachment = new Attachment();
+            var attachment = new Attachment();
             attachment.FileName = FileHandlers.GetFileName(file2);
             attachment.FileContent = FileHandlers.GetFileContents(file2);
 
@@ -232,10 +305,12 @@ namespace TNZAPI.NET.Samples.Messaging.Send
             // Add Attachment Method 4 - AddAttachments(new List<IAttachment>()) using Attachment objects
             //
 
-            attachments.Add(new Attachment(
-                FileHandlers.GetFileName(file4),
-                FileHandlers.GetFileContents(file4)
-                ));
+            attachments.Add(
+                new Attachment(
+                    FileHandlers.GetFileName(file4),
+                    FileHandlers.GetFileContents(file4)
+                )
+            );
 
             #endregion Add Attachments
 
@@ -247,7 +322,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
                     ErrorEmailNotify = errorEmailNotify,                // Error Email Notify (Receive email when it errored)
 
-                    MessageID = new MessageID(""),                      // MessageID - Leave blank to auto-generate
+                    MessageID = new MessageID("ABCD12345"),             // MessageID - Leave blank to auto-generate
                     Reference = reference,                              // Reference
                     SubAccount = "",                                    // SubAccount
                     Department = "",                                    // Department

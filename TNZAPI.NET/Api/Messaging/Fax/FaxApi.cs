@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Xml;
 using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
@@ -13,7 +14,7 @@ using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.Fax
 {
-	[ComVisible(true)]
+    [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     public class FaxApi : IFaxApi
     {
@@ -327,77 +328,85 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             return SendMessage();
         }
 
-		/// <summary>
-		/// Send Fax Message
-		/// </summary>
-		/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-		/// <param name="reference">Tracking ID or message description</param>
-		/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-		/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-		/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-		/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-		/// <param name="chargeCode">Cost allocation for billing</param>
-		/// <param name="resolution">Hi/Low - Quality of the fax image. High for better quality, low for lower quality (faster delivery speed)</param>
-		/// <param name="csid">Called Subscriber Identification - Maximum 30 characters</param>
-		/// <param name="watermarkFolder">Directory/location of Watermark file to use</param>
-		/// <param name="watermarkFirstPage">Watermark file to apply to the first page only</param>
-		/// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
-		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
-		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
-		/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-		/// <param name="destination">Sets the email destination</param>
-		/// <param name="destinations">Sets the list of email addresses</param>
-		/// <param name="recipient">Sets the email recipient - Recipient() object</param>
-		/// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
-		/// <param name="file">Sets the attachment (file location)</param>
-		/// <param name="files">Sets the list of attachments (file locations)</param>
-		/// <param name="attachment">Sets the attachment - Attachment() object</param>
-		/// <param name="attachments">Sets the list of attachments</param>
-		/// <param name="webhookCallbackURL">Webhook callback URL</param>
-		/// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
-		/// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
-		/// <returns>MessageApiResult</returns>
-		[ComVisible(false)]
+        /// <summary>
+        /// Send Fax Message
+        /// </summary>
+        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+        /// <param name="reference">Tracking ID or message description</param>
+        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+        /// <param name="chargeCode">Cost allocation for billing</param>
+        /// <param name="resolution">Hi/Low - Quality of the fax image. High for better quality, low for lower quality (faster delivery speed)</param>
+        /// <param name="csid">Called Subscriber Identification - Maximum 30 characters</param>
+        /// <param name="watermarkFolder">Directory/location of Watermark file to use</param>
+        /// <param name="watermarkFirstPage">Watermark file to apply to the first page only</param>
+        /// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
+        /// <param name="retryAttempts">Number of retries (retry_period required)</param>
+        /// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
+        /// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+        /// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
+        /// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+        /// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+        /// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+        /// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+        /// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+        /// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+        /// <param name="destination">Sets the email destination</param>
+        /// <param name="destinations">Sets the list of email addresses</param>
+        /// <param name="recipient">Sets the email recipient - Recipient() object</param>
+        /// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
+        /// <param name="file">Sets the attachment (file location)</param>
+        /// <param name="files">Sets the list of attachments (file locations)</param>
+        /// <param name="attachment">Sets the attachment - Attachment() object</param>
+        /// <param name="attachments">Sets the list of attachments</param>
+        /// <param name="webhookCallbackURL">Webhook callback URL</param>
+        /// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
+        /// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
+        /// <returns>MessageApiResult</returns>
+        [ComVisible(false)]
         public MessageApiResult SendMessage(
-			MessageID messageID = null,                     // MessageID object
-			string reference = null,
-            DateTime? sendTime = null,
-            string timezone = null,
-            string subaccount = null,
-            string department = null,
-            string chargeCode = null,
-            string resolution = null,
-            string csid = null,
-            string watermarkFolder = null,
-            string watermarkFirstPage = null,
-            string watermarkAllPages = null,
-            int? retryAttempts = null,
-            int? retryPeriod = null,
-			GroupID groupID = null,                         // GroupID object
-			ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
-			ContactID contactID = null,                     // ContactID object
-			ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
-			string destination = null,
-            ICollection<string> destinations = null,
-            Recipient recipient = null,
-            ICollection<Recipient> recipients = null,
-            string file = null,
-            ICollection<string> files = null,
-            Attachment attachment = null,
-            ICollection<Attachment> attachments = null,
-            string webhookCallbackURL = null,
-            WebhookCallbackType? webhookCallbackFormat = null,
-            SendModeType? sendMode = null
-        )
+                MessageID messageID = null,                     // MessageID object
+                string reference = null,
+                DateTime? sendTime = null,
+                string timezone = null,
+                string subaccount = null,
+                string department = null,
+                string chargeCode = null,
+                string resolution = null,
+                string csid = null,
+                string watermarkFolder = null,
+                string watermarkFirstPage = null,
+                string watermarkAllPages = null,
+                int? retryAttempts = null,
+                int? retryPeriod = null,
+                GroupModel group = null,                        // GroupModel object
+                ICollection<GroupModel> groups = null,          // ICollection<GroupModel>
+                GroupID groupID = null,                         // GroupID object
+                ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
+                ContactModel contact = null,                    // ContactModel object
+                ICollection<ContactModel> contacts = null,      // ICollection<ContactModel>
+                ContactID contactID = null,                     // ContactID object
+                ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
+                string destination = null,
+                ICollection<string> destinations = null,
+                Recipient recipient = null,
+                ICollection<Recipient> recipients = null,
+                string file = null,
+                ICollection<string> files = null,
+                Attachment attachment = null,
+                ICollection<Attachment> attachments = null,
+                string webhookCallbackURL = null,
+                WebhookCallbackType? webhookCallbackFormat = null,
+                SendModeType? sendMode = null
+            )
         {
             var message = new FaxModel()
             {
-				MessageID = messageID,
+                MessageID = messageID,
 
-				WebhookCallbackURL = webhookCallbackURL,
+                WebhookCallbackURL = webhookCallbackURL,
                 WebhookCallbackFormat = webhookCallbackFormat is not null ? (WebhookCallbackType)webhookCallbackFormat : WebhookCallbackType.JSON,
 
                 Reference = reference,
@@ -417,22 +426,26 @@ namespace TNZAPI.NET.Api.Messaging.Fax
                 RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
 
                 Recipients = new RecipientList()
-							.Add(groupID)
-							.Add(groupIDs)
-							.Add(contactID)
-							.Add(contactIDs)
-							.Add(destination)
-                            .Add(destinations)
-                            .Add(recipient)
-                            .Add(recipients)
-                            .ToList(),
+                    .Add(group)
+                    .Add(groups)
+                    .Add(groupID)
+                    .Add(groupIDs)
+                    .Add(contact)
+                    .Add(contacts)
+                    .Add(contactID)
+                    .Add(contactIDs)
+                    .Add(destination)
+                    .Add(destinations)
+                    .Add(recipient)
+                    .Add(recipients)
+                    .ToList(),
 
                 Attachments = new AttachmentList()
-                            .Add(file)
-                            .Add(files)
-                            .Add(attachment)
-                            .Add(attachments)
-                            .ToList(),
+                    .Add(file)
+                    .Add(files)
+                    .Add(attachment)
+                    .Add(attachments)
+                    .ToList(),
 
                 SendMode = sendMode is not null ? (SendModeType)sendMode : SendModeType.Live
             };
@@ -491,77 +504,85 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             return await SendMessageAsync();
         }
 
-		/// <summary>
-		/// Send Fax Message (async)
-		/// </summary>
-		/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-		/// <param name="reference">Tracking ID or message description</param>
-		/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-		/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-		/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-		/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-		/// <param name="chargeCode">Cost allocation for billing</param>
-		/// <param name="resolution">Hi/Low - Quality of the fax image. High for better quality, low for lower quality (faster delivery speed)</param>
-		/// <param name="csid">Called Subscriber Identification - Maximum 30 characters</param>
-		/// <param name="watermarkFolder">Directory/location of Watermark file to use</param>
-		/// <param name="watermarkFirstPage">Watermark file to apply to the first page only</param>
-		/// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
-		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
-		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
-		/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-		/// <param name="destination">Sets the email destination</param>
-		/// <param name="destinations">Sets the list of email addresses</param>
-		/// <param name="recipient">Sets the email recipient - Recipient() object</param>
-		/// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
-		/// <param name="file">Sets the attachment (file location)</param>
-		/// <param name="files">Sets the list of attachments (file locations)</param>
-		/// <param name="attachment">Sets the attachment - Attachment() object</param>
-		/// <param name="attachments">Sets the list of attachments</param>
-		/// <param name="webhookCallbackURL">Webhook callback URL</param>
-		/// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
-		/// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
-		/// <returns>Task<MessageApiResult></returns>
-		[ComVisible(false)]
+        /// <summary>
+        /// Send Fax Message (async)
+        /// </summary>
+        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+        /// <param name="reference">Tracking ID or message description</param>
+        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+        /// <param name="chargeCode">Cost allocation for billing</param>
+        /// <param name="resolution">Hi/Low - Quality of the fax image. High for better quality, low for lower quality (faster delivery speed)</param>
+        /// <param name="csid">Called Subscriber Identification - Maximum 30 characters</param>
+        /// <param name="watermarkFolder">Directory/location of Watermark file to use</param>
+        /// <param name="watermarkFirstPage">Watermark file to apply to the first page only</param>
+        /// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
+        /// <param name="retryAttempts">Number of retries (retry_period required)</param>
+        /// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
+        /// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+        /// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
+        /// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+        /// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+        /// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+        /// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+        /// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+        /// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+        /// <param name="destination">Sets the email destination</param>
+        /// <param name="destinations">Sets the list of email addresses</param>
+        /// <param name="recipient">Sets the email recipient - Recipient() object</param>
+        /// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
+        /// <param name="file">Sets the attachment (file location)</param>
+        /// <param name="files">Sets the list of attachments (file locations)</param>
+        /// <param name="attachment">Sets the attachment - Attachment() object</param>
+        /// <param name="attachments">Sets the list of attachments</param>
+        /// <param name="webhookCallbackURL">Webhook callback URL</param>
+        /// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
+        /// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
+        /// <returns>Task<MessageApiResult></returns>
+        [ComVisible(false)]
         public async Task<MessageApiResult> SendMessageAsync(
-			MessageID messageID = null,                     // MessageID object
-			string reference = null,
-            DateTime? sendTime = null,
-            string timezone = null,
-            string subaccount = null,
-            string department = null,
-            string chargeCode = null,
-            string resolution = null,
-            string csid = null,
-            string watermarkFolder = null,
-            string watermarkFirstPage = null,
-            string watermarkAllPages = null,
-            int? retryAttempts = null,
-            int? retryPeriod = null,
-			GroupID groupID = null,                         // GroupID object
-			ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
-			ContactID contactID = null,                     // ContactID object
-			ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
-			string destination = null,
-            ICollection<string> destinations = null,
-            Recipient recipient = null,
-            ICollection<Recipient> recipients = null,
-            string file = null,
-            ICollection<string> files = null,
-            Attachment attachment = null,
-            ICollection<Attachment> attachments = null,
-            string webhookCallbackURL = null,
-            WebhookCallbackType? webhookCallbackFormat = null,
-            SendModeType? sendMode = null
-        )
+                MessageID messageID = null,                     // MessageID object
+                string reference = null,
+                DateTime? sendTime = null,
+                string timezone = null,
+                string subaccount = null,
+                string department = null,
+                string chargeCode = null,
+                string resolution = null,
+                string csid = null,
+                string watermarkFolder = null,
+                string watermarkFirstPage = null,
+                string watermarkAllPages = null,
+                int? retryAttempts = null,
+                int? retryPeriod = null,
+                GroupModel group = null,                        // GroupModel object
+                ICollection<GroupModel> groups = null,          // ICollection<GroupModel>
+                GroupID groupID = null,                         // GroupID object
+                ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
+                ContactModel contact = null,                    // ContactModel object
+                ICollection<ContactModel> contacts = null,      // ICollection<ContactModel>
+                ContactID contactID = null,                     // ContactID object
+                ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
+                string destination = null,
+                ICollection<string> destinations = null,
+                Recipient recipient = null,
+                ICollection<Recipient> recipients = null,
+                string file = null,
+                ICollection<string> files = null,
+                Attachment attachment = null,
+                ICollection<Attachment> attachments = null,
+                string webhookCallbackURL = null,
+                WebhookCallbackType? webhookCallbackFormat = null,
+                SendModeType? sendMode = null
+            )
         {
             return await SendMessageAsync(new FaxModel()
             {
-				MessageID = messageID,
+                MessageID = messageID,
 
-				WebhookCallbackURL = webhookCallbackURL,
+                WebhookCallbackURL = webhookCallbackURL,
                 WebhookCallbackFormat = webhookCallbackFormat is not null ? (WebhookCallbackType)webhookCallbackFormat : WebhookCallbackType.JSON,
 
                 Reference = reference,
@@ -581,22 +602,26 @@ namespace TNZAPI.NET.Api.Messaging.Fax
                 RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
 
                 Recipients = new RecipientList()
-							.Add(groupID)
-							.Add(groupIDs)
-							.Add(contactID)
-							.Add(contactIDs)
-							.Add(destination)
-                            .Add(destinations)
-                            .Add(recipient)
-                            .Add(recipients)
-                            .ToList(),
+                    .Add(group)
+                    .Add(groups)
+                    .Add(groupID)
+                    .Add(groupIDs)
+                    .Add(contact)
+                    .Add(contacts)
+                    .Add(contactID)
+                    .Add(contactIDs)
+                    .Add(destination)
+                    .Add(destinations)
+                    .Add(recipient)
+                    .Add(recipients)
+                    .ToList(),
 
                 Attachments = await new AttachmentList()
-                            .Add(file)
-                            .Add(files)
-                            .Add(attachment)
-                            .Add(attachments)
-                            .ToListAsync(),
+                    .Add(file)
+                    .Add(files)
+                    .Add(attachment)
+                    .Add(attachments)
+                    .ToListAsync(),
 
                 SendMode = sendMode is not null ? (SendModeType)sendMode : SendModeType.Live
             });
@@ -634,97 +659,97 @@ namespace TNZAPI.NET.Api.Messaging.Fax
         )
             =>
                 SendMessage(
-					messageID: new MessageID(messageID),        // MessageID object
-					reference: reference,
-					sendTime: sendTime,
+          messageID: new MessageID(messageID),        // MessageID object
+          reference: reference,
+          sendTime: sendTime,
                     timezone: timezone,
-					subaccount: subaccount,
-					department: department,
-					chargeCode: chargeCode,
-					resolution: resolution,
-					csid: csid,
-					watermarkFolder: watermarkFolder,
-					watermarkFirstPage: watermarkFirstPage,
-					watermarkAllPages: watermarkAllPages,
-					retryAttempts: retryAttempts,
-					retryPeriod: retryPeriod,
-					groupID: null,                              // GroupID object
-					groupIDs: null,                             // ICollection<GroupID>
-					contactID: null,                            // ContactID object
-					contactIDs: null,                           // ICollection<ContactID>
-					destination: destination,
-					destinations: destinations,
-					recipient: recipient,
-					recipients: recipients,
-					file: file,
-					files: files,
-					attachment: attachment,
-					attachments: attachments,
-					webhookCallbackURL: webhookCallbackURL,
-					webhookCallbackFormat: webhookCallbackFormat,
-					sendMode: sendMode
-				);
+          subaccount: subaccount,
+          department: department,
+          chargeCode: chargeCode,
+          resolution: resolution,
+          csid: csid,
+          watermarkFolder: watermarkFolder,
+          watermarkFirstPage: watermarkFirstPage,
+          watermarkAllPages: watermarkAllPages,
+          retryAttempts: retryAttempts,
+          retryPeriod: retryPeriod,
+          groupID: null,                              // GroupID object
+          groupIDs: null,                             // ICollection<GroupID>
+          contactID: null,                            // ContactID object
+          contactIDs: null,                           // ICollection<ContactID>
+          destination: destination,
+          destinations: destinations,
+          recipient: recipient,
+          recipients: recipients,
+          file: file,
+          files: files,
+          attachment: attachment,
+          attachments: attachments,
+          webhookCallbackURL: webhookCallbackURL,
+          webhookCallbackFormat: webhookCallbackFormat,
+          sendMode: sendMode
+        );
 
-		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
-		public async Task<MessageApiResult> SendMessageAsync(
-			string messageID,
-			string reference = null,
-			DateTime? sendTime = null,
-			string timezone = null,
-			string subaccount = null,
-			string department = null,
-			string chargeCode = null,
-			string resolution = null,
-			string csid = null,
-			string watermarkFolder = null,
-			string watermarkFirstPage = null,
-			string watermarkAllPages = null,
-			int? retryAttempts = null,
-			int? retryPeriod = null,
-			string destination = null,
-			ICollection<string> destinations = null,
-			Recipient recipient = null,
-			ICollection<Recipient> recipients = null,
-			string file = null,
-			ICollection<string> files = null,
-			Attachment attachment = null,
-			ICollection<Attachment> attachments = null,
-			string webhookCallbackURL = null,
-			WebhookCallbackType? webhookCallbackFormat = null,
-			SendModeType? sendMode = null
-		) 
-            =>
-				await SendMessageAsync(
-					messageID: new MessageID(messageID),        // MessageID object
-					reference: reference,
-					sendTime: sendTime,
-					timezone: timezone,
-					subaccount: subaccount,
-					department: department,
-					chargeCode: chargeCode,
-					resolution: resolution,
-					csid: csid,
-					watermarkFolder: watermarkFolder,
-					watermarkFirstPage: watermarkFirstPage,
-					watermarkAllPages: watermarkAllPages,
-					retryAttempts: retryAttempts,
-					retryPeriod: retryPeriod,
-					groupID: null,                              // GroupID object
-					groupIDs: null,                             // ICollection<GroupID>
-					contactID: null,                            // ContactID object
-					contactIDs: null,                           // ICollection<ContactID>
-					destination: destination,
-					destinations: destinations,
-					recipient: recipient,
-					recipients: recipients,
-					file: file,
-					files: files,
-					attachment: attachment,
-					attachments: attachments,
-					webhookCallbackURL: webhookCallbackURL,
-					webhookCallbackFormat: webhookCallbackFormat,
-					sendMode: sendMode
-				);
-		#endregion
-	}
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public async Task<MessageApiResult> SendMessageAsync(
+          string messageID,
+          string reference = null,
+          DateTime? sendTime = null,
+          string timezone = null,
+          string subaccount = null,
+          string department = null,
+          string chargeCode = null,
+          string resolution = null,
+          string csid = null,
+          string watermarkFolder = null,
+          string watermarkFirstPage = null,
+          string watermarkAllPages = null,
+          int? retryAttempts = null,
+          int? retryPeriod = null,
+          string destination = null,
+          ICollection<string> destinations = null,
+          Recipient recipient = null,
+          ICollection<Recipient> recipients = null,
+          string file = null,
+          ICollection<string> files = null,
+          Attachment attachment = null,
+          ICollection<Attachment> attachments = null,
+          string webhookCallbackURL = null,
+          WebhookCallbackType? webhookCallbackFormat = null,
+          SendModeType? sendMode = null
+        )
+                =>
+            await SendMessageAsync(
+              messageID: new MessageID(messageID),        // MessageID object
+              reference: reference,
+              sendTime: sendTime,
+              timezone: timezone,
+              subaccount: subaccount,
+              department: department,
+              chargeCode: chargeCode,
+              resolution: resolution,
+              csid: csid,
+              watermarkFolder: watermarkFolder,
+              watermarkFirstPage: watermarkFirstPage,
+              watermarkAllPages: watermarkAllPages,
+              retryAttempts: retryAttempts,
+              retryPeriod: retryPeriod,
+              groupID: null,                              // GroupID object
+              groupIDs: null,                             // ICollection<GroupID>
+              contactID: null,                            // ContactID object
+              contactIDs: null,                           // ICollection<ContactID>
+              destination: destination,
+              destinations: destinations,
+              recipient: recipient,
+              recipients: recipients,
+              file: file,
+              files: files,
+              attachment: attachment,
+              attachments: attachments,
+              webhookCallbackURL: webhookCallbackURL,
+              webhookCallbackFormat: webhookCallbackFormat,
+              sendMode: sendMode
+            );
+        #endregion
+    }
 }

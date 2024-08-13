@@ -1,4 +1,5 @@
 ﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
 
 namespace TNZAPI.NET.Api.Messaging.Common.Components
 {

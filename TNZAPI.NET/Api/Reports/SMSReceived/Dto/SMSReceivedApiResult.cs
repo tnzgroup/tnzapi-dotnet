@@ -2,6 +2,7 @@
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
+using TNZAPI.NET.Helpers;
 
 namespace TNZAPI.NET.Api.Reports.SMSReceived.Dto
 {
@@ -28,7 +29,14 @@ namespace TNZAPI.NET.Api.Reports.SMSReceived.Dto
         public string JobNum { get; set; }
         public string SubAccount { get; set; }
         public string Department { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Date 
+        {
+            get 
+            {
+                return DateUTC.ChangeToLocalDateTime();
+            }
+        }
+        [XmlElement("ReceivedTimeUTC_RFC3339")]
         public DateTime DateUTC { get; set; }
         public string From { get; set; }
         public string MessageText { get; set; }

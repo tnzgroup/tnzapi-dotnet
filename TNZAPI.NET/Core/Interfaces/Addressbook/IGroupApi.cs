@@ -1,5 +1,4 @@
-﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
-using TNZAPI.NET.Api.Addressbook.Group.Dto;
+﻿using TNZAPI.NET.Api.Addressbook.Group.Dto;
 
 namespace TNZAPI.NET.Core.Interfaces.Addressbook
 {

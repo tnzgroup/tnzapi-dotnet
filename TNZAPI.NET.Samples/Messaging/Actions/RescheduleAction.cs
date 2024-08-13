@@ -49,8 +49,8 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
         {
             var client = new TNZApiClient(apiUser);
 
-            var options = new RescheduleBuilder("ID123456")                             // MessageID
-                                .SetSendTime(DateTime.Parse("2023-12-31T12:00:00"))     // Set send time
+            var options = new RescheduleBuilder(new MessageID("ID123456"))              // MessageID
+                                .SetSendTime(DateTime.Parse("2024-12-31T12:00:00"))     // Set send time
                                 .SetTimezone("New Zealand")                             // Timezone (optional)
                                 .Build();
 
@@ -88,7 +88,7 @@ namespace TNZAPI.NET.Samples.Messaging.Actions
                 new RescheduleRequestOptions()
                 {
                     MessageID = new MessageID("ID123456"),                             // MessageID
-                    SendTime = DateTime.Parse("2023-12-31T12:00:00"),   // Set send time
+                    SendTime = DateTime.Parse("2024-12-31T12:00:00"),   // Set send time
                     Timezone = "New Zealand"                            // Timezone (optional)
                 });
 

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Xml;
 using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Api.Messaging.Common;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
@@ -16,7 +15,7 @@ using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.Voice
 {
-	[ComVisible(true)]
+    [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     public class VoiceApi : IVoiceApi
     {
@@ -387,85 +386,93 @@ namespace TNZAPI.NET.Api.Messaging.Voice
             return SendMessage();
         }
 
-		/// <summary>
-		/// Send Voice Message
-		/// </summary>
-		/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-		/// <param name="reference">Tracking ID or message description</param>
-		/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-		/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-		/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-		/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-		/// <param name="chargeCode">Cost allocation for billing</param>
-		/// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
-		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
-		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
-		/// <param name="messageToPeople">The recorded message content played if the call is answered by a human</param>
-		/// <param name="messageToAnswerPhones">The recorded message content played when the call is answered by an answering machine/voicemail service</param>
-		/// <param name="callRouteMessageToPeople">recorded message content message played when a keypad option is pressed</param>
-		/// <param name="callRouteMessageToOperators">recorded message content message played to the call centre representative answering the connected call</param>
-		/// <param name="callRouteMessageOnWrongKey">recorded message content message played when an unregistered keypad button is pressed</param>
-		/// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
-		/// <param name="options">Customisable field</param>
-		/// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
-		/// <param name="groupCode">Sets the recipient group by group code (from TNZ Addressbook)</param>
-		/// <param name="groupCodes">Sets the list of recipient groups by list of group codes (from TNZ Addressbook)</param>
-		/// <param name="GroupCode">GroupCode object, Sets the recipient group by group code (from TNZ Addressbook)</param>
-		/// <param name="GroupCodes">List of GroupCode objects, Sets the list of recipient groups by list of group codes (from TNZ Addressbook)</param>
-		/// <param name="groupID">Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="groupIDs">Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="contactID">Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="contactIDs">Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-		/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-		/// <param name="destination">Destination - string value</param>
-		/// <param name="destinations">Desitnations - ICollection<string>()</param>
-		/// <param name="recipient">Destination - Recipient() object</param>
-		/// <param name="recipients">Destinations - ICollection<Recipient>()</param>
-		/// <param name="webhookCallbackURL">Webhook Callback URL</param>
-		/// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
-		/// <param name="sendMode">SendMode.Live or SendMode.Test</param>
-		/// <returns>MessageApiResult</returns>
-		[ComVisible(false)]
+        /// <summary>
+        /// Send Voice Message
+        /// </summary>
+        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+        /// <param name="reference">Tracking ID or message description</param>
+        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+        /// <param name="chargeCode">Cost allocation for billing</param>
+        /// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
+        /// <param name="retryAttempts">Number of retries (retry_period required)</param>
+        /// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
+        /// <param name="messageToPeople">The recorded message content played if the call is answered by a human</param>
+        /// <param name="messageToAnswerPhones">The recorded message content played when the call is answered by an answering machine/voicemail service</param>
+        /// <param name="callRouteMessageToPeople">recorded message content message played when a keypad option is pressed</param>
+        /// <param name="callRouteMessageToOperators">recorded message content message played to the call centre representative answering the connected call</param>
+        /// <param name="callRouteMessageOnWrongKey">recorded message content message played when an unregistered keypad button is pressed</param>
+        /// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
+        /// <param name="options">Customisable field</param>
+        /// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
+        /// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+        /// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
+        /// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+        /// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+        /// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+        /// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+        /// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+        /// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+        /// <param name="groupID">Sets the recipient group by group id (from TNZ Addressbook)</param>
+        /// <param name="groupIDs">Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+        /// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+        /// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+        /// <param name="contactID">Sets the recipient by contact id (from TNZ Addressbook)</param>
+        /// <param name="contactIDs">Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+        /// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+        /// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+        /// <param name="destination">Destination - string value</param>
+        /// <param name="destinations">Desitnations - ICollection<string>()</param>
+        /// <param name="recipient">Destination - Recipient() object</param>
+        /// <param name="recipients">Destinations - ICollection<Recipient>()</param>
+        /// <param name="webhookCallbackURL">Webhook Callback URL</param>
+        /// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
+        /// <param name="sendMode">SendMode.Live or SendMode.Test</param>
+        /// <returns>MessageApiResult</returns>
+        [ComVisible(false)]
         public MessageApiResult SendMessage(
-			MessageID messageID = null,                     // MessageID object
-			string reference = null,
-            DateTime? sendTime = null,
-            string timezone = null,
-            string subaccount = null,
-            string department = null,
-            string chargeCode = null,
-            string messageToPeople = null,
-            string messageToAnswerPhones = null,
-            string callRouteMessageToPeople = null,
-            string callRouteMessageToOperators = null,
-            string callRouteMessageOnWrongKey = null,
-            int? numberOfOperators = null,
-			int? retryAttempts = null,
-			int? retryPeriod = null,
-			string callerID = null,
-            string options = null,
-            ICollection<Keypad> keypads = null,
-			GroupID groupID = null,                         // GroupID object
-			ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
-			ContactID contactID = null,                     // ContactID object
-			ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
-			string destination = null,
-            ICollection<string> destinations = null,
-            Recipient recipient = null,
-            ICollection<Recipient> recipients = null,
-            string webhookCallbackURL = null,
-            WebhookCallbackType? webhookCallbackFormat = null,
-            SendModeType? sendMode = null
-        )
+          MessageID messageID = null,                     // MessageID object
+          string reference = null,
+                DateTime? sendTime = null,
+                string timezone = null,
+                string subaccount = null,
+                string department = null,
+                string chargeCode = null,
+                string messageToPeople = null,
+                string messageToAnswerPhones = null,
+                string callRouteMessageToPeople = null,
+                string callRouteMessageToOperators = null,
+                string callRouteMessageOnWrongKey = null,
+                int? numberOfOperators = null,
+                int? retryAttempts = null,
+                int? retryPeriod = null,
+                string callerID = null,
+                string options = null,
+                ICollection<Keypad> keypads = null,
+                GroupModel group = null,                        // GroupModel object
+                ICollection<GroupModel> groups = null,          // ICollection<GroupModel>
+                GroupID groupID = null,                         // GroupID object
+                ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
+                ContactModel contact = null,                    // ContactModel object
+                ICollection<ContactModel> contacts = null,      // ICollection<ContactModel>
+                ContactID contactID = null,                     // ContactID object
+                ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
+                string destination = null,
+                ICollection<string> destinations = null,
+                Recipient recipient = null,
+                ICollection<Recipient> recipients = null,
+                string webhookCallbackURL = null,
+                WebhookCallbackType? webhookCallbackFormat = null,
+                SendModeType? sendMode = null
+            )
         {
             return SendMessage(new VoiceModel()
             {
-				MessageID = messageID,
+                MessageID = messageID,
 
-				WebhookCallbackURL = webhookCallbackURL,
+                WebhookCallbackURL = webhookCallbackURL,
                 WebhookCallbackFormat = webhookCallbackFormat is not null ? (WebhookCallbackType)webhookCallbackFormat : WebhookCallbackType.JSON,
 
                 Reference = reference,
@@ -476,10 +483,10 @@ namespace TNZAPI.NET.Api.Messaging.Voice
                 ChargeCode = chargeCode,
 
                 NumberOfOperators = numberOfOperators is not null ? (int)numberOfOperators : 0,
-				RetryAttempts = retryAttempts is not null ? (int)retryAttempts : 0,
-				RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
+                RetryAttempts = retryAttempts is not null ? (int)retryAttempts : 0,
+                RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
 
-				CallerID = callerID,
+                CallerID = callerID,
                 Options = options,
 
                 MessageData = new Dictionary<MessageDataType, string>()
@@ -492,19 +499,23 @@ namespace TNZAPI.NET.Api.Messaging.Voice
                 },
 
                 Keypads = new KeypadList()
-                            .Add(keypads)
-                            .ToList(),
+                    .Add(keypads)
+                    .ToList(),
 
                 Recipients = new RecipientList()
-							.Add(groupID)
-							.Add(groupIDs)
-							.Add(contactID)
-							.Add(contactIDs)
-							.Add(destination)
-                            .Add(destinations)
-                            .Add(recipient)
-                            .Add(recipients)
-                            .ToList(),
+                    .Add(group)
+                    .Add(groups)
+                    .Add(groupID)
+                    .Add(groupIDs)
+                    .Add(contact)
+                    .Add(contacts)
+                    .Add(contactID)
+                    .Add(contactIDs)
+                    .Add(destination)
+                    .Add(destinations)
+                    .Add(recipient)
+                    .Add(recipients)
+                    .ToList(),
 
                 SendMode = sendMode is not null ? (SendModeType)sendMode : SendModeType.Live
             });
@@ -568,76 +579,84 @@ namespace TNZAPI.NET.Api.Messaging.Voice
             return await SendMessageAsync();
         }
 
-		/// <summary>
-		/// Send Voice Message
-		/// </summary>
-		/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-		/// <param name="reference">Tracking ID or message description</param>
-		/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-		/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-		/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-		/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-		/// <param name="chargeCode">Cost allocation for billing</param>
-		/// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
-		/// <param name="retryAttempts">Number of retries (retry_period required)</param>
-		/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
-		/// <param name="messageToPeople">The recorded message content played if the call is answered by a human</param>
-		/// <param name="messageToAnswerPhones">The recorded message content played when the call is answered by an answering machine/voicemail service</param>
-		/// <param name="callRouteMessageToPeople">recorded message content message played when a keypad option is pressed</param>
-		/// <param name="callRouteMessageToOperators">recorded message content message played to the call centre representative answering the connected call</param>
-		/// <param name="callRouteMessageOnWrongKey">recorded message content message played when an unregistered keypad button is pressed</param>
-		/// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
-		/// <param name="options">Customisable field</param>
-		/// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
-		/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-		/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-		/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-		/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-		/// <param name="destination">Destination - string value</param>
-		/// <param name="destinations">Desitnations - ICollection<string>()</param>
-		/// <param name="recipient">Destination - Recipient() object</param>
-		/// <param name="recipients">Destinations - ICollection<Recipient>()</param>
-		/// <param name="webhookCallbackURL">Webhook Callback URL</param>
-		/// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
-		/// <param name="sendMode">SendMode.Live or SendMode.Test</param>
-		/// <returns>MessageApiResult</returns>
-		public async Task<MessageApiResult> SendMessageAsync(
-			MessageID messageID = null,                     // MessageID object
-			string reference = null,
-            DateTime? sendTime = null,
-            string timezone = null,
-            string subaccount = null,
-            string department = null,
-            string chargeCode = null,
-            string messageToPeople = null,
-            string messageToAnswerPhones = null,
-            string callRouteMessageToPeople = null,
-            string callRouteMessageToOperators = null,
-            string callRouteMessageOnWrongKey = null,
-            int? numberOfOperators = null,
-			int? retryAttempts = null,
-			int? retryPeriod = null,
-			string callerID = null,
-            string options = null,
-            ICollection<Keypad> keypads = null,
-			GroupID groupID = null,                         // GroupID object
-			ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
-			ContactID contactID = null,                     // ContactID object
-			ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
-			string destination = null,
-            ICollection<string> destinations = null,
-            Recipient recipient = null,
-            ICollection<Recipient> recipients = null,
-            string webhookCallbackURL = null,
-            WebhookCallbackType? webhookCallbackFormat = null,
-            SendModeType? sendMode = null
-        )
+        /// <summary>
+        /// Send Voice Message
+        /// </summary>
+        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+        /// <param name="reference">Tracking ID or message description</param>
+        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+        /// <param name="chargeCode">Cost allocation for billing</param>
+        /// <param name="numberOfOperators">Limits the maximum simultaneous calls (where multiple 'Destinations' are listed)</param>
+        /// <param name="retryAttempts">Number of retries (retry_period required)</param>
+        /// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
+        /// <param name="messageToPeople">The recorded message content played if the call is answered by a human</param>
+        /// <param name="messageToAnswerPhones">The recorded message content played when the call is answered by an answering machine/voicemail service</param>
+        /// <param name="callRouteMessageToPeople">recorded message content message played when a keypad option is pressed</param>
+        /// <param name="callRouteMessageToOperators">recorded message content message played to the call centre representative answering the connected call</param>
+        /// <param name="callRouteMessageOnWrongKey">recorded message content message played when an unregistered keypad button is pressed</param>
+        /// <param name="callerID">Sets the Caller ID used on the call (must be E.164 format)</param>
+        /// <param name="options">Customisable field</param>
+        /// <param name="keypads">Keypads - ICollection<Keypad>() object</param>
+        /// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+        /// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
+        /// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+        /// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+        /// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+        /// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+        /// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+        /// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+        /// <param name="destination">Destination - string value</param>
+        /// <param name="destinations">Desitnations - ICollection<string>()</param>
+        /// <param name="recipient">Destination - Recipient() object</param>
+        /// <param name="recipients">Destinations - ICollection<Recipient>()</param>
+        /// <param name="webhookCallbackURL">Webhook Callback URL</param>
+        /// <param name="webhookCallbackFormat">Webhook Callback Format (XML/JSON)</param>
+        /// <param name="sendMode">SendMode.Live or SendMode.Test</param>
+        /// <returns>MessageApiResult</returns>
+        public async Task<MessageApiResult> SendMessageAsync(
+                MessageID messageID = null,                     // MessageID object
+                string reference = null,
+                DateTime? sendTime = null,
+                string timezone = null,
+                string subaccount = null,
+                string department = null,
+                string chargeCode = null,
+                string messageToPeople = null,
+                string messageToAnswerPhones = null,
+                string callRouteMessageToPeople = null,
+                string callRouteMessageToOperators = null,
+                string callRouteMessageOnWrongKey = null,
+                int? numberOfOperators = null,
+                int? retryAttempts = null,
+                int? retryPeriod = null,
+                string callerID = null,
+                string options = null,
+                ICollection<Keypad> keypads = null,
+                GroupModel group = null,                        // GroupModel object
+                ICollection<GroupModel> groups = null,          // ICollection<GroupModel>
+                GroupID groupID = null,                         // GroupID object
+                ICollection<GroupID> groupIDs = null,           // ICollection<GroupID>
+                ContactModel contact = null,                    // ContactModel object
+                ICollection<ContactModel> contacts = null,      // ICollection<ContactModel>
+                ContactID contactID = null,                     // ContactID object
+                ICollection<ContactID> contactIDs = null,       // ICollection<ContactID>
+                string destination = null,
+                ICollection<string> destinations = null,
+                Recipient recipient = null,
+                ICollection<Recipient> recipients = null,
+                string webhookCallbackURL = null,
+                WebhookCallbackType? webhookCallbackFormat = null,
+                SendModeType? sendMode = null
+            )
         {
             return await SendMessageAsync(new VoiceModel()
             {
-				MessageID = messageID ?? new MessageID(messageID),
+                MessageID = messageID ?? new MessageID(messageID),
 
-				WebhookCallbackURL = webhookCallbackURL,
+                WebhookCallbackURL = webhookCallbackURL,
                 WebhookCallbackFormat = webhookCallbackFormat is not null ? (WebhookCallbackType)webhookCallbackFormat : WebhookCallbackType.JSON,
 
                 Reference = reference,
@@ -648,10 +667,10 @@ namespace TNZAPI.NET.Api.Messaging.Voice
                 ChargeCode = chargeCode,
 
                 NumberOfOperators = numberOfOperators is not null ? (int)numberOfOperators : 0,
-				RetryAttempts = retryAttempts is not null ? (int)retryAttempts : 0,
-				RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
+                RetryAttempts = retryAttempts is not null ? (int)retryAttempts : 0,
+                RetryPeriod = retryPeriod is not null ? (int)retryPeriod : 1,
 
-				CallerID = callerID,
+                CallerID = callerID,
                 Options = options,
 
                 MessageData = new Dictionary<MessageDataType, string>()
@@ -664,19 +683,23 @@ namespace TNZAPI.NET.Api.Messaging.Voice
                 },
 
                 Keypads = await new KeypadList()
-                            .Add(keypads)
-                            .ToListAsync(),
+                    .Add(keypads)
+                    .ToListAsync(),
 
                 Recipients = new RecipientList()
-							.Add(groupID)
-							.Add(groupIDs)
-							.Add(contactID)
-							.Add(contactIDs)
-							.Add(destination)
-                            .Add(destinations)
-                            .Add(recipient)
-                            .Add(recipients)
-                            .ToList(),
+                    .Add(group)
+                    .Add(groups)
+                    .Add(groupID)
+                    .Add(groupIDs)
+                    .Add(contact)
+                    .Add(contacts)
+                    .Add(contactID)
+                    .Add(contactIDs)
+                    .Add(destination)
+                    .Add(destinations)
+                    .Add(recipient)
+                    .Add(recipients)
+                    .ToList(),
 
                 SendMode = sendMode is not null ? (SendModeType)sendMode : SendModeType.Live
             });
@@ -715,97 +738,97 @@ namespace TNZAPI.NET.Api.Messaging.Voice
         )
             =>
                 SendMessage(
-					messageID: new MessageID(messageID),        // MessageID object
-					reference: reference,
-					sendTime: sendTime,
-					timezone: timezone,
-					subaccount: subaccount,
-					department: department,
-					chargeCode: chargeCode,
-					messageToPeople: messageToPeople,
-					messageToAnswerPhones: messageToAnswerPhones,
-					callRouteMessageToPeople: callRouteMessageToPeople,
-					callRouteMessageToOperators: callRouteMessageToOperators,
-					callRouteMessageOnWrongKey: callRouteMessageOnWrongKey,
-					numberOfOperators: numberOfOperators,
-					retryAttempts: retryAttempts,
-					retryPeriod: retryPeriod,
-					callerID: callerID,
-					options: options,
-					keypads: keypads,
-					groupID: null,                              // GroupID object
-					groupIDs: null,                             // ICollection<GroupID>
-					contactID: null,                            // ContactID object
-					contactIDs: null,                           // ICollection<ContactID>
-					destination: destination,
-					destinations: destinations,
-					recipient: recipient,
-					recipients: recipients,
-					webhookCallbackURL: webhookCallbackURL,
-					webhookCallbackFormat: webhookCallbackFormat,
-					sendMode: sendMode
-				);
+          messageID: new MessageID(messageID),        // MessageID object
+          reference: reference,
+          sendTime: sendTime,
+          timezone: timezone,
+          subaccount: subaccount,
+          department: department,
+          chargeCode: chargeCode,
+          messageToPeople: messageToPeople,
+          messageToAnswerPhones: messageToAnswerPhones,
+          callRouteMessageToPeople: callRouteMessageToPeople,
+          callRouteMessageToOperators: callRouteMessageToOperators,
+          callRouteMessageOnWrongKey: callRouteMessageOnWrongKey,
+          numberOfOperators: numberOfOperators,
+          retryAttempts: retryAttempts,
+          retryPeriod: retryPeriod,
+          callerID: callerID,
+          options: options,
+          keypads: keypads,
+          groupID: null,                              // GroupID object
+          groupIDs: null,                             // ICollection<GroupID>
+          contactID: null,                            // ContactID object
+          contactIDs: null,                           // ICollection<ContactID>
+          destination: destination,
+          destinations: destinations,
+          recipient: recipient,
+          recipients: recipients,
+          webhookCallbackURL: webhookCallbackURL,
+          webhookCallbackFormat: webhookCallbackFormat,
+          sendMode: sendMode
+        );
 
-		[Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
-		public async Task<MessageApiResult> SendMessageAsync(
-			string messageID,
-			string reference = null,
-			DateTime? sendTime = null,
-			string timezone = null,
-			string subaccount = null,
-			string department = null,
-			string chargeCode = null,
-			string messageToPeople = null,
-			string messageToAnswerPhones = null,
-			string callRouteMessageToPeople = null,
-			string callRouteMessageToOperators = null,
-			string callRouteMessageOnWrongKey = null,
-			int? numberOfOperators = null,
-			int? retryAttempts = null,
-			int? retryPeriod = null,
-			string callerID = null,
-			string options = null,
-			ICollection<Keypad> keypads = null,
-			string destination = null,
-			ICollection<string> destinations = null,
-			Recipient recipient = null,
-			ICollection<Recipient> recipients = null,
-			string webhookCallbackURL = null,
-			WebhookCallbackType? webhookCallbackFormat = null,
-			SendModeType? sendMode = null
-		)
-            =>
-				await SendMessageAsync(
-					messageID: new MessageID(messageID),        // MessageID object
-					reference: reference,
-					sendTime: sendTime,
-					timezone: timezone,
-					subaccount: subaccount,
-					department: department,
-					chargeCode: chargeCode,
-					messageToPeople: messageToPeople,
-					messageToAnswerPhones: messageToAnswerPhones,
-					callRouteMessageToPeople: callRouteMessageToPeople,
-					callRouteMessageToOperators: callRouteMessageToOperators,
-					callRouteMessageOnWrongKey: callRouteMessageOnWrongKey,
-					numberOfOperators: numberOfOperators,
-					retryAttempts: retryAttempts,
-					retryPeriod: retryPeriod,
-					callerID: callerID,
-					options: options,
-					keypads: keypads,
-					groupID: null,                              // GroupID object
-					groupIDs: null,                             // ICollection<GroupID>
-					contactID: null,                            // ContactID object
-					contactIDs: null,                           // ICollection<ContactID>
-					destination: destination,
-					destinations: destinations,
-					recipient: recipient,
-					recipients: recipients,
-					webhookCallbackURL: webhookCallbackURL,
-					webhookCallbackFormat: webhookCallbackFormat,
-					sendMode: sendMode
-				);
-		#endregion
-	}
+        [Obsolete("The messageID of type 'string' is no longer supported. Please switch to using type 'MessageID' instead.")]
+        public async Task<MessageApiResult> SendMessageAsync(
+          string messageID,
+          string reference = null,
+          DateTime? sendTime = null,
+          string timezone = null,
+          string subaccount = null,
+          string department = null,
+          string chargeCode = null,
+          string messageToPeople = null,
+          string messageToAnswerPhones = null,
+          string callRouteMessageToPeople = null,
+          string callRouteMessageToOperators = null,
+          string callRouteMessageOnWrongKey = null,
+          int? numberOfOperators = null,
+          int? retryAttempts = null,
+          int? retryPeriod = null,
+          string callerID = null,
+          string options = null,
+          ICollection<Keypad> keypads = null,
+          string destination = null,
+          ICollection<string> destinations = null,
+          Recipient recipient = null,
+          ICollection<Recipient> recipients = null,
+          string webhookCallbackURL = null,
+          WebhookCallbackType? webhookCallbackFormat = null,
+          SendModeType? sendMode = null
+        )
+                =>
+            await SendMessageAsync(
+              messageID: new MessageID(messageID),        // MessageID object
+              reference: reference,
+              sendTime: sendTime,
+              timezone: timezone,
+              subaccount: subaccount,
+              department: department,
+              chargeCode: chargeCode,
+              messageToPeople: messageToPeople,
+              messageToAnswerPhones: messageToAnswerPhones,
+              callRouteMessageToPeople: callRouteMessageToPeople,
+              callRouteMessageToOperators: callRouteMessageToOperators,
+              callRouteMessageOnWrongKey: callRouteMessageOnWrongKey,
+              numberOfOperators: numberOfOperators,
+              retryAttempts: retryAttempts,
+              retryPeriod: retryPeriod,
+              callerID: callerID,
+              options: options,
+              keypads: keypads,
+              groupID: null,                              // GroupID object
+              groupIDs: null,                             // ICollection<GroupID>
+              contactID: null,                            // ContactID object
+              contactIDs: null,                           // ICollection<ContactID>
+              destination: destination,
+              destinations: destinations,
+              recipient: recipient,
+              recipients: recipients,
+              webhookCallbackURL: webhookCallbackURL,
+              webhookCallbackFormat: webhookCallbackFormat,
+              sendMode: sendMode
+            );
+        #endregion
+    }
 }

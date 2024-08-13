@@ -72,7 +72,26 @@ namespace TNZAPI.NET.Helpers
         {
             var workingNode = xmlDoc.CreateElement("Destination");
 
-            if (dest_type.ToUpper().Equals("SMS"))
+            if (recipient.GroupID is not null && recipient.GroupID != "")
+            {
+				workingNode.AppendChild(addChildNode(xmlDoc, "GroupID", recipient.GroupID));
+
+                return workingNode;
+			}
+			if (recipient.GroupCode is not null && recipient.GroupCode != "")
+			{
+				workingNode.AppendChild(addChildNode(xmlDoc, "GroupCode", recipient.GroupCode));
+
+				return workingNode;
+			}
+			if (recipient.ContactID is not null && recipient.ContactID != "")
+			{
+				workingNode.AppendChild(addChildNode(xmlDoc, "ContactID", recipient.ContactID));
+
+				return workingNode;
+			}
+
+			if (dest_type.ToUpper().Equals("SMS"))
                 workingNode.AppendChild(addChildNode(xmlDoc, "Recipient", recipient.MobileNumber));
             if (dest_type.ToUpper().Equals("EMAIL"))
                 workingNode.AppendChild(addChildNode(xmlDoc, "Recipient", recipient.EmailAddress));

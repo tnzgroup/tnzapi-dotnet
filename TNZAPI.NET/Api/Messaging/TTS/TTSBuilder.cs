@@ -1,13 +1,16 @@
 ﻿using System.Runtime.InteropServices;
+using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.TTS.Dto;
+using TNZAPI.NET.Helpers;
 using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.TTS
 {
-	public class TTSBuilder : IDisposable
+    public class TTSBuilder : IDisposable
     {
         private TTSModel Entity { get; set; }
 
@@ -97,24 +100,24 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             return this;
         }
 
-		/// <summary>
-		/// Sets MessageID of the message
-		/// </summary>
-		/// <param name="messageID">MessageID</param>
-		/// <returns>TTSBuilder</returns>
-		public TTSBuilder SetMessageID(MessageID messageID)
-		{
-			Entity.MessageID = messageID;
+        /// <summary>
+        /// Sets MessageID of the message
+        /// </summary>
+        /// <param name="messageID">MessageID</param>
+        /// <returns>TTSBuilder</returns>
+        public TTSBuilder SetMessageID(MessageID messageID)
+        {
+            Entity.MessageID = messageID;
 
-			return this;
-		}
+            return this;
+        }
 
-		/// <summary>
-		/// Sets Reference of the message
-		/// </summary>
-		/// <param name="reference"></param>
-		/// <returns>TTSBuilder</returns>
-		public TTSBuilder SetReference(string reference)
+        /// <summary>
+        /// Sets Reference of the message
+        /// </summary>
+        /// <param name="reference"></param>
+        /// <returns>TTSBuilder</returns>
+        public TTSBuilder SetReference(string reference)
         {
             Entity.Reference = reference;
 
@@ -415,6 +418,112 @@ namespace TNZAPI.NET.Api.Messaging.TTS
         }
 
         #endregion Add Recipients
+
+        #region Add Recipients using TNZ Addressbook
+
+        /// <summary>
+        /// Adding recipient using ContactModel (TNZ Addressbook)
+        /// </summary>
+        /// <param name="contact">ContactModel</param>
+        /// <returns>TTSBuilder</returns>
+        [ComVisible(false)]
+        public TTSBuilder AddRecipient(ContactModel contact)
+        {
+            Recipients.Add(contact);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipient using ContactID (TNZ Addressbook)
+        /// </summary>
+        /// <param name="contactID">ContactID</param>
+        /// <returns>TTSBuilder</returns>
+        [ComVisible(false)]
+        public TTSBuilder AddRecipient(ContactID contactID)
+        {
+            Recipients.Add(contactID);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using GroupModel (TNZ Addressbook)
+        /// </summary>
+        /// <param name="group">GroupModel</param>
+        /// <returns>TTSBuilder</returns>
+        [ComVisible(false)]
+        public TTSBuilder AddRecipients(GroupModel group)
+        {
+            Recipients.Add(group);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using GroupID (TNZ Addressbook)
+        /// </summary>
+        /// <param name="groupID">GroupID</param>
+        /// <returns>TTSBuilder</returns>
+        [ComVisible(false)]
+        public TTSBuilder AddRecipients(GroupID groupID)
+        {
+            Recipients.Add(groupID);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using list of ContactModels (TNZ Addressbook)
+        /// </summary>
+        /// <param name="contacts">ICollection<ContactModel></param>
+        /// <returns>TTSBuilder</returns>
+        [ComVisible(false)]
+        public TTSBuilder AddRecipients(ICollection<ContactModel> contacts)
+        {
+            Recipients.Add(contacts);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using list of ContactIDs (TNZ Addressbook)
+        /// </summary>
+        /// <param name="contactIDs">ICollection<ContactID></param>
+        /// <returns>TTSBuilder</returns>
+        public TTSBuilder AddRecipients(ICollection<ContactID> contactIDs)
+        {
+            Recipients.Add(contactIDs);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using list of GroupModels (TNZ Addressbook)
+        /// </summary>
+        /// <param name="groups">ICollection<GroupModel></param>
+        /// <returns>TTSBuilder</returns>
+        [ComVisible(false)]
+        public TTSBuilder AddRecipients(ICollection<GroupModel> groups)
+        {
+            Recipients.Add(groups);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adding recipients using list of GroupIDs (TNZ Addressbook)
+        /// </summary>
+        /// <param name="groupIDs">ICollection<GroupID></param>
+        /// <returns>TTSBuilder</returns>
+        public TTSBuilder AddRecipients(ICollection<GroupID> groupIDs)
+        {
+            Recipients.Add(groupIDs);
+
+            return this;
+        }
+
+        #endregion Add Recipients using TNZ Addressbook
 
         #region Build / BuildAsync
 

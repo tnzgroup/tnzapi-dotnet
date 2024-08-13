@@ -66,7 +66,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
 
                 foreach (var group in response.Groups)
                 {
-                    Console.WriteLine($"Group details for GroupCode={group.GroupCode}");
+                    Console.WriteLine($"Group details for GroupID={group.GroupID}");
                     Console.WriteLine($"    -> GroupCode: '{group.GroupCode}'");
                     Console.WriteLine($"    -> GroupName: '{group.GroupName}'");
                     Console.WriteLine($"    -> SubAccount: '{group.SubAccount}'");
@@ -108,7 +108,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
 
                 foreach (var group in response.Groups)
                 {
-                    Console.WriteLine($"Group details for GroupCode={group.GroupCode}");
+                    Console.WriteLine($"Group details for GroupID={group.GroupID}");
                     Console.WriteLine($"    -> GroupCode: '{group.GroupCode}'");
                     Console.WriteLine($"    -> GroupName: '{group.GroupName}'");
                     Console.WriteLine($"    -> SubAccount: '{group.SubAccount}'");
@@ -152,7 +152,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
 
                 foreach (var group in response.Groups)
                 {
-                    Console.WriteLine($"Group details for GroupCode={group.GroupCode}");
+                    Console.WriteLine($"Group details for GroupID={group.GroupID}");
                     Console.WriteLine($"    -> GroupCode: '{group.GroupCode}'");
                     Console.WriteLine($"    -> GroupName: '{group.GroupName}'");
                     Console.WriteLine($"    -> SubAccount: '{group.SubAccount}'");
@@ -197,7 +197,7 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
 
                 foreach (var group in response.Groups)
                 {
-                    Console.WriteLine($"Group details for GroupCode={group.GroupCode}");
+                    Console.WriteLine($"Group details for GroupID={group.GroupID}");
                     Console.WriteLine($"    -> GroupCode: '{group.GroupCode}'");
                     Console.WriteLine($"    -> GroupName: '{group.GroupName}'");
                     Console.WriteLine($"    -> SubAccount: '{group.SubAccount}'");

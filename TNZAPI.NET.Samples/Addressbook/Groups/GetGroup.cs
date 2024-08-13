@@ -1,5 +1,4 @@
-﻿using TNZAPI.NET.Api.Addressbook.Contact.Dto;
-using TNZAPI.NET.Api.Addressbook.Group;
+﻿using TNZAPI.NET.Api.Addressbook.Group;
 using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Helpers;
@@ -45,13 +44,13 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-			var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
+            var groupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD");
 
-			var response = client.Addressbook.Group.Get(groupID);
+            var response = client.Addressbook.Group.Get(groupID);
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+                Console.WriteLine($"Group details for GroupID={response.Group.GroupID}");
                 Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
                 Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
                 Console.WriteLine($"    -> Department: '{response.Group.Department}'");
@@ -78,13 +77,14 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
         {
             var client = new TNZApiClient(apiUser);
 
-            var group = new GroupBuilder("Test-Group").Build();
+            var group = new GroupBuilder(new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD"))
+                            .Build();
 
             var response = client.Addressbook.Group.Get(group);
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+                Console.WriteLine($"Group details for GroupID={response.Group.GroupID}");
                 Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
                 Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
                 Console.WriteLine($"    -> Department: '{response.Group.Department}'");
@@ -112,13 +112,13 @@ namespace TNZAPI.NET.Samples.Addressbook.Groups
             var response = client.Addressbook.Group.Get(
                 new GroupModel()
                 {
-                    GroupCode = "Test-Group"
+                    GroupID = new GroupID("GGGGGGGG-BBBB-BBBB-CCCC-DDDDDDDDDDDD")
                 }
             );
 
             if (response.Result == Enums.ResultCode.Success)
             {
-                Console.WriteLine($"Group details for GroupCode={response.Group.GroupCode}");
+                Console.WriteLine($"Group details for GroupID={response.Group.GroupID}");
                 Console.WriteLine($"    -> GroupName: '{response.Group.GroupName}'");
                 Console.WriteLine($"    -> SubAccount: '{response.Group.SubAccount}'");
                 Console.WriteLine($"    -> Department: '{response.Group.Department}'");

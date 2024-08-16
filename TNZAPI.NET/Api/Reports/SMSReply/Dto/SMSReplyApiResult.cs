@@ -40,7 +40,7 @@ namespace TNZAPI.NET.Api.Reports.SMSReply.Dto
         public int Complete { get; set; } = 0;
         public int Success { get; set; } = 0;
         public int Failed { get; set; } = 0;
-        public double Price { get; set; } = 0;
+        public double? Price { get; set; } = 0;
 
         public int TotalRecords { get; set; } = 0;
         public int RecordsPerPage { get; set; } = 0;
@@ -94,7 +94,7 @@ namespace TNZAPI.NET.Api.Reports.SMSReply.Dto
         public string Custom8 { get; set; }
         public string Custom9 { get; set; }
         public string RemoteID { get; set; }
-        public double Price { get; set; }
+        public double? Price { get; set; }
 
         public List<SMSReply> SMSReplies { get; set; }
 

@@ -39,7 +39,7 @@ namespace TNZAPI.NET.Api.Reports.Status.Dto
         public int Complete { get; set; } = 0;
         public int Success { get; set; } = 0;
         public int Failed { get; set; } = 0;
-        public double Price { get; set; } = 0;
+        public double? Price { get; set; } = 0;
 
         public int TotalRecords { get; set; } = 0;
         public int RecordsPerPage { get; set; } = 0;
@@ -71,7 +71,20 @@ namespace TNZAPI.NET.Api.Reports.Status.Dto
         public string Destination { get; set; }
         public Enums.ResultCode Status { get; set; }
         public string Result { get; set; }
-        public DateTime SentDate { get; set; }
+
+        [Obsolete("The SentDate is no longer supported. Please switch to using 'SentTime' instead.")]
+        public DateTime SentDate => SentTime;
+
+        public DateTime SentTime
+        {
+            get
+            {
+                return SentTimeUTC.ChangeToLocalDateTime();
+            }
+        }
+
+        [XmlElement("SentTimeUTC_RFC3339")]
+        public DateTime SentTimeUTC { get; set; } = new DateTime();
         public string Attention { get; set; }
         public string Company { get; set; }
         public string Custom1 { get; set; }
@@ -84,7 +97,7 @@ namespace TNZAPI.NET.Api.Reports.Status.Dto
         public string Custom8 { get; set; }
         public string Custom9 { get; set; }
         public string RemoteID { get; set; }
-        public double Price { get; set; }
+        public double? Price { get; set; }
 
     }
 

@@ -65,7 +65,7 @@ namespace TNZAPI.NET.Helpers
                 }
 
                 // XMLParser.ParseXML<T> scans assembly and find method based on matching return type
-                //return (T)Convert.ChangeType(XMLParser.ParseXML<T>(result.ToString()), typeof(T));
+                //return (T)Convert.ChangeType(XMLParser.ParseXML<T>(result.ToString()), typeof(T));                
 
                 return XMLHelpers.Deserialize<T>(result.ToString());
             }

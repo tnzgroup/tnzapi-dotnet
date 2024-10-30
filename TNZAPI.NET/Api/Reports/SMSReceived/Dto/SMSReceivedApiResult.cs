@@ -24,6 +24,7 @@ namespace TNZAPI.NET.Api.Reports.SMSReceived.Dto
     [XmlType(TypeName = "Message")]
     public class SMSMessageReceived
     {
+        [XmlElement("ReceivedID")]
         public int ID { get; set; }
         public MessageID MessageID { get; set; }
         public string JobNum { get; set; }

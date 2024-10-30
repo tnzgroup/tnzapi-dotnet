@@ -27,11 +27,14 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             {
                 foreach (var received in response.Messages)
                 {
-                    Console.WriteLine("======================================");
-                    Console.WriteLine(" => MessageReceived");
-                    Console.WriteLine("    -> Date: '" + received.Date.ToString("yyyy-MM-dd hh:mm:ss") + "'");
-                    Console.WriteLine("    -> From: '" + received.From + "'");
-                    Console.WriteLine("    -> MessageText: '" + received.MessageText.Replace("'", "\'") + "'");
+                    Console.WriteLine($"======================================");
+                    Console.WriteLine($" => MessageReceived");
+										Console.WriteLine($"    -> ReceivedID: '{received.ReceivedID}'");
+										Console.WriteLine($"    -> MessageID: '{received.MessageID}'");
+										Console.WriteLine($"    -> ContactID: '{received.ContactID}'");
+										Console.WriteLine($"    -> Date: '{received.Date.ToString("yyyy-MM-dd hh:mm:ss")}'");
+                    Console.WriteLine($"    -> From: '{received.From}'");
+                    Console.WriteLine($"    -> MessageText: '{received.MessageText.Replace("'", "\'")}'");
                 }
 
             }
@@ -62,11 +65,14 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
             {
                 foreach (var received in response.Messages)
                 {
-                    Console.WriteLine("======================================");
-                    Console.WriteLine(" => MessageReceived");
-                    Console.WriteLine("    -> Date: '" + received.Date.ToString("yyyy-MM-dd hh:mm:ss") + "'");
-                    Console.WriteLine("    -> From: '" + received.From + "'");
-                    Console.WriteLine("    -> MessageText: '" + received.MessageText.Replace("'", "\'") + "'");
+                    Console.WriteLine($"======================================");
+                    Console.WriteLine($" => MessageReceived");
+										Console.WriteLine($"    -> ReceivedID: '{received.ReceivedID}'");
+										Console.WriteLine($"    -> MessageID: '{received.MessageID}'");
+										Console.WriteLine($"    -> ContactID: '{received.ContactID}'");
+										Console.WriteLine($"    -> Date: '{received.Date.ToString("yyyy-MM-dd hh:mm:ss")}'");
+                    Console.WriteLine($"    -> From: '{received.From}'");
+                    Console.WriteLine($"    -> MessageText: '{received.MessageText.Replace("'", "\'")}'");
                 }
 
             }
@@ -105,11 +111,14 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
 
                 foreach (var received in response.Messages)
                 {
-                    Console.WriteLine("======================================");
-                    Console.WriteLine(" => MessageReceived");
-                    Console.WriteLine("    -> Date: '" + received.Date.ToString("yyyy-MM-dd hh:mm:ss") + "'");
-                    Console.WriteLine("    -> From: '" + received.From + "'");
-                    Console.WriteLine("    -> MessageText: '" + received.MessageText.Replace("'", "\'") + "'");
+                    Console.WriteLine($"======================================");
+                    Console.WriteLine($" => MessageReceived");
+										Console.WriteLine($"    -> ReceivedID: '{received.ReceivedID}'");
+										Console.WriteLine($"    -> MessageID: '{received.MessageID}'");
+										Console.WriteLine($"    -> ContactID: '{received.ContactID}'");
+										Console.WriteLine($"    -> Date: '{received.Date.ToString("yyyy-MM-dd hh:mm:ss")}'");
+                    Console.WriteLine($"    -> From: '{received.From}'");
+                    Console.WriteLine($"    -> MessageText: '{received.MessageText.Replace("'", "\'")}'");
                 }
 
             }
@@ -149,11 +158,14 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
 
                 foreach (var received in response.Messages)
                 {
-                    Console.WriteLine("======================================");
-                    Console.WriteLine(" => MessageReceived");
-                    Console.WriteLine("    -> Date: '" + received.Date.ToString("yyyy-MM-dd hh:mm:ss") + "'");
-                    Console.WriteLine("    -> From: '" + received.From + "'");
-                    Console.WriteLine("    -> MessageText: '" + received.MessageText.Replace("'", "\'") + "'");
+                    Console.WriteLine($"======================================");
+                    Console.WriteLine($" => MessageReceived");
+										Console.WriteLine($"    -> ReceivedID: '{received.ReceivedID}'");
+										Console.WriteLine($"    -> MessageID: '{received.MessageID}'");
+										Console.WriteLine($"    -> ContactID: '{received.ContactID}'");
+										Console.WriteLine($"    -> Date: '{received.Date.ToString("yyyy-MM-dd hh:mm:ss")}'");
+                    Console.WriteLine($"    -> From: '{received.From}'");
+                    Console.WriteLine($"    -> MessageText: '{received.MessageText.Replace("'", "\'")}'");
                 }
             }
             else

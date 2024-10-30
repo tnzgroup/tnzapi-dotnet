@@ -51,7 +51,9 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     Console.WriteLine($"    -> Type: '{message.Type}'");
                     Console.WriteLine($"    -> DestSeq: '{message.DestSeq}'");
                     Console.WriteLine($"    -> Destination: '{message.Destination}'");
-                    Console.WriteLine($"    -> MessageText: '{message.MessageText}'");
+										Console.WriteLine($"    -> ContactID: '{message.ContactID}'");
+										Console.WriteLine($"    -> GroupID: '{message.GroupID}'");
+										Console.WriteLine($"    -> MessageText: '{message.MessageText}'");
                     Console.WriteLine($"    -> Status: '{message.Status}'");
                     Console.WriteLine($"    -> Result: '{message.Result}'");
                     Console.WriteLine($"    -> SentDate: '{message.SentDate}'");
@@ -73,7 +75,8 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     {
                         Console.WriteLine($"======================================");
                         Console.WriteLine($" => SMS Reply");
-                        Console.WriteLine($"    -> Date: '{reply.Date}'");
+												Console.WriteLine($"    -> ReceivedID: '{reply.ReceivedID}'");
+												Console.WriteLine($"    -> Date: '{reply.Date}'");
                         Console.WriteLine($"    -> DateUTC: '{reply.DateUTC}'");
                         Console.WriteLine($"    -> From: '{reply.From}'");
                         Console.WriteLine($"    -> MessageText: '{reply.MessageText}'");
@@ -135,7 +138,9 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     Console.WriteLine($"    -> Type: '{message.Type}'");
                     Console.WriteLine($"    -> DestSeq: '{message.DestSeq}'");
                     Console.WriteLine($"    -> Destination: '{message.Destination}'");
-                    Console.WriteLine($"    -> MessageText: '{message.MessageText}'");
+										Console.WriteLine($"    -> ContactID: '{message.ContactID}'");
+										Console.WriteLine($"    -> GroupID: '{message.GroupID}'");
+										Console.WriteLine($"    -> MessageText: '{message.MessageText}'");
                     Console.WriteLine($"    -> Status: '{message.Status}'");
                     Console.WriteLine($"    -> Result: '{message.Result}'");
                     Console.WriteLine($"    -> SentDate: '{message.SentDate}'");
@@ -157,7 +162,8 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     {
                         Console.WriteLine($"======================================");
                         Console.WriteLine($" => SMS Reply");
-                        Console.WriteLine($"    -> Date: '{reply.Date}'");
+												Console.WriteLine($"    -> ReceivedID: '{reply.ReceivedID}'");
+												Console.WriteLine($"    -> Date: '{reply.Date}'");
                         Console.WriteLine($"    -> DateUTC: '{reply.DateUTC}'");
                         Console.WriteLine($"    -> From: '{reply.From}'");
                         Console.WriteLine($"    -> MessageText: '{reply.MessageText}'");
@@ -219,7 +225,9 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     Console.WriteLine($"    -> Type: '{message.Type}'");
                     Console.WriteLine($"    -> DestSeq: '{message.DestSeq}'");
                     Console.WriteLine($"    -> Destination: '{message.Destination}'");
-                    Console.WriteLine($"    -> MessageText: '{message.MessageText}'");
+										Console.WriteLine($"    -> ContactID: '{message.ContactID}'");
+										Console.WriteLine($"    -> GroupID: '{message.GroupID}'");
+										Console.WriteLine($"    -> MessageText: '{message.MessageText}'");
                     Console.WriteLine($"    -> Status: '{message.Status}'");
                     Console.WriteLine($"    -> Result: '{message.Result}'");
                     Console.WriteLine($"    -> SentDate: '{message.SentDate}'");
@@ -241,7 +249,8 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     {
                         Console.WriteLine($"======================================");
                         Console.WriteLine($" => SMS Reply");
-                        Console.WriteLine($"    -> Date: '{reply.Date}'");
+												Console.WriteLine($"    -> ReceivedID: '{reply.ReceivedID}'");
+												Console.WriteLine($"    -> Date: '{reply.Date}'");
                         Console.WriteLine($"    -> DateUTC: '{reply.DateUTC}'");
                         Console.WriteLine($"    -> From: '{reply.From}'");
                         Console.WriteLine($"    -> MessageText: '{reply.MessageText}'");

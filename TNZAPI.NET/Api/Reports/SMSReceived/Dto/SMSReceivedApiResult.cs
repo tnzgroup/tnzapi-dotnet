@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using TNZAPI.NET.Api.Addressbook.Contact.Dto;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
@@ -24,10 +25,12 @@ namespace TNZAPI.NET.Api.Reports.SMSReceived.Dto
     [XmlType(TypeName = "Message")]
     public class SMSMessageReceived
     {
-        [XmlElement("ReceivedID")]
-        public int ID { get; set; }
-        public MessageID MessageID { get; set; }
-        public string JobNum { get; set; }
+				[Obsolete("The ID is no longer supported. Please switch to using 'ReceivedID' instead.")]
+				public int ID { get; set; }
+        public ReceivedID ReceivedID { get; set; }
+				public MessageID MessageID { get; set; }
+				public ContactID ContactID { get; set; }
+				public string JobNum { get; set; }
         public string SubAccount { get; set; }
         public string Department { get; set; }
         public DateTime Date 

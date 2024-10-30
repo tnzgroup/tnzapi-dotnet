@@ -1,4 +1,6 @@
 ﻿using System.Xml.Serialization;
+using TNZAPI.NET.Api.Addressbook.Contact.Dto;
+using TNZAPI.NET.Api.Addressbook.Group.Dto;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Core;
 using TNZAPI.NET.Core.Interfaces;
@@ -69,6 +71,8 @@ namespace TNZAPI.NET.Api.Reports.SMSReply.Dto
     {
         public Enums.MessageType Type { get; set; }
         public string DestSeq { get; set; }
+        public ContactID ContactID { get; set; }
+        public GroupID GroupID { get; set; }
         public string Destination { get; set; }
         public string MessageText { get; set; }
         public Enums.ResultCode Status { get; set; }
@@ -102,6 +106,8 @@ namespace TNZAPI.NET.Api.Reports.SMSReply.Dto
 
     public class SMSReply
     {
+        public ReceivedID ReceivedID { get; set; }
+
         public DateTime Date
         {
             get

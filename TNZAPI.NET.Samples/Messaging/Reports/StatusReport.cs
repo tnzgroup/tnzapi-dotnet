@@ -53,7 +53,7 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     Console.WriteLine($"    -> Destination: '{message.Destination}'");
                     Console.WriteLine($"    -> Status: '{message.Status}'");
                     Console.WriteLine($"    -> Result: '{message.Result}'");
-                    Console.WriteLine($"    -> SentDate: '{message.SentDate}'");
+                    Console.WriteLine($"    -> SentDate: '{message.SentTime}'");
                     Console.WriteLine($"    -> Attention: '{message.Attention}'");
                     Console.WriteLine($"    -> Company: '{message.Company}'");
                     Console.WriteLine($"    -> Custom1: '{message.Custom1}'");
@@ -126,7 +126,7 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     Console.WriteLine($"    -> Destination: '{message.Destination}'");
                     Console.WriteLine($"    -> Status: '{message.Status}'");
                     Console.WriteLine($"    -> Result: '{message.Result}'");
-                    Console.WriteLine($"    -> SentDate: '{message.SentDate}'");
+                    Console.WriteLine($"    -> SentDate: '{message.SentTime}'");
                     Console.WriteLine($"    -> Attention: '{message.Attention}'");
                     Console.WriteLine($"    -> Company: '{message.Company}'");
                     Console.WriteLine($"    -> Custom1: '{message.Custom1}'");
@@ -201,7 +201,7 @@ namespace TNZAPI.NET.Samples.Messaging.Reports
                     Console.WriteLine($"    -> Destination: '{message.Destination}'");
                     Console.WriteLine($"    -> Status: '{message.Status}'");
                     Console.WriteLine($"    -> Result: '{message.Result}'");
-                    Console.WriteLine($"    -> SentDate: '{message.SentDate}'");
+                    Console.WriteLine($"    -> SentDate: '{message.SentTime}'");
                     Console.WriteLine($"    -> Attention: '{message.Attention}'");
                     Console.WriteLine($"    -> Company: '{message.Company}'");
                     Console.WriteLine($"    -> Custom1: '{message.Custom1}'");

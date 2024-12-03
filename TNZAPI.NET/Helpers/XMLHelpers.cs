@@ -5,197 +5,205 @@ using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Helpers
 {
-    public class XMLHelpers
-    {
-        #region XmlSerialize
+		public class XMLHelpers
+		{
+				#region XmlSerialize
 
-        public static T Deserialize<T>(string input) where T : class
-        {
-            XmlSerializer ser = new XmlSerializer(typeof(T));
+				public static T Deserialize<T>(string input) where T : class
+				{
+						XmlSerializer ser = new XmlSerializer(typeof(T));
 
-            using (StringReader sr = new StringReader(input))
-            {
-                return (T)ser.Deserialize(sr);
-            }
-        }
+						using (StringReader sr = new StringReader(input))
+						{
+								return (T)ser.Deserialize(sr);
+						}
+				}
 
-        internal static string Serialize<T>(T ObjectToSerialize)
-        {
-            XmlSerializer xmlSerializer = new XmlSerializer(ObjectToSerialize.GetType());
+				internal static string Serialize<T>(T ObjectToSerialize)
+				{
+						XmlSerializer xmlSerializer = new XmlSerializer(ObjectToSerialize.GetType());
 
-            using (StringWriter textWriter = new StringWriter())
-            {
-                xmlSerializer.Serialize(textWriter, ObjectToSerialize);
-                return textWriter.ToString();
-            }
-        }
-        #endregion XMLSerialize
+						using (StringWriter textWriter = new StringWriter())
+						{
+								xmlSerializer.Serialize(textWriter, ObjectToSerialize);
+								return textWriter.ToString();
+						}
+				}
+				#endregion XMLSerialize
 
-        internal static XmlNode addChildNode(XmlDocument xmlDoc, string name, string val)
-        {
-            XmlNode workingNode = xmlDoc.CreateElement(name);
+				internal static XmlNode addChildNode(XmlDocument xmlDoc, string name, string val)
+				{
+						XmlNode workingNode = xmlDoc.CreateElement(name);
 
-            workingNode.InnerText = val;
+						workingNode.InnerText = val;
 
-            return workingNode;
-        }
+						return workingNode;
+				}
 
-        internal static XmlNode addChildNodeCDATA(XmlDocument xmlDoc, string name, string val)
-        {
-            XmlNode workingNode = xmlDoc.CreateElement(name);
+				internal static XmlNode addChildNodeCDATA(XmlDocument xmlDoc, string name, string val)
+				{
+						XmlNode workingNode = xmlDoc.CreateElement(name);
 
-            workingNode.InnerXml = @"<![CDATA[" + val + "]]>";
+						workingNode.InnerXml = @"<![CDATA[" + val + "]]>";
 
-            return workingNode;
-        }
+						return workingNode;
+				}
 
 
-        #region Destinations
-        public static XmlNode BuildXmlDestinationsNode(XmlDocument xmlDoc, ICollection<Recipient> recipients, string dest_type)
-        {
-            if (recipients.Count > 0)
-            {
-                var destNode = xmlDoc.CreateElement("Destinations");
+				#region Destinations
+				public static XmlNode BuildXmlDestinationsNode(XmlDocument xmlDoc, ICollection<Recipient> recipients, string dest_type)
+				{
+						if (recipients.Count > 0)
+						{
+								var destNode = xmlDoc.CreateElement("Destinations");
 
-                foreach (var recipient in recipients)
-                {
-                    destNode.AppendChild(BuildXmlDestinationNode(xmlDoc, recipient, dest_type));
-                }
+								foreach (var recipient in recipients)
+								{
+										destNode.AppendChild(BuildXmlDestinationNode(xmlDoc, recipient, dest_type));
+								}
 
-                return destNode;
-            }
+								return destNode;
+						}
 
-            return null;
-        }
+						return null;
+				}
 
-        public static XmlNode BuildXmlDestinationNode(XmlDocument xmlDoc, Recipient recipient, string dest_type)
-        {
-            var workingNode = xmlDoc.CreateElement("Destination");
+				public static XmlNode BuildXmlDestinationNode(XmlDocument xmlDoc, Recipient recipient, string dest_type)
+				{
+						var workingNode = xmlDoc.CreateElement("Destination");
 
-            if (recipient.GroupID is not null && recipient.GroupID != "")
-            {
-				workingNode.AppendChild(addChildNode(xmlDoc, "GroupID", recipient.GroupID));
+						if (recipient.GroupID is not null && recipient.GroupID != "")
+						{
+								workingNode.AppendChild(addChildNode(xmlDoc, "GroupID", recipient.GroupID));
 
-                return workingNode;
-			}
-			if (recipient.GroupCode is not null && recipient.GroupCode != "")
-			{
-				workingNode.AppendChild(addChildNode(xmlDoc, "GroupCode", recipient.GroupCode));
+								return workingNode;
+						}
+						if (recipient.GroupCode is not null && recipient.GroupCode != "")
+						{
+								workingNode.AppendChild(addChildNode(xmlDoc, "GroupCode", recipient.GroupCode));
 
-				return workingNode;
-			}
-			if (recipient.ContactID is not null && recipient.ContactID != "")
-			{
-				workingNode.AppendChild(addChildNode(xmlDoc, "ContactID", recipient.ContactID));
+								return workingNode;
+						}
+						if (recipient.ContactID is not null && recipient.ContactID != "")
+						{
+								workingNode.AppendChild(addChildNode(xmlDoc, "ContactID", recipient.ContactID));
 
-				return workingNode;
-			}
+								return workingNode;
+						}
 
-			if (dest_type.ToUpper().Equals("SMS"))
-                workingNode.AppendChild(addChildNode(xmlDoc, "Recipient", recipient.MobileNumber));
-            if (dest_type.ToUpper().Equals("EMAIL"))
-                workingNode.AppendChild(addChildNode(xmlDoc, "Recipient", recipient.EmailAddress));
-            if (dest_type.ToUpper().Equals("FAX"))
-                workingNode.AppendChild(addChildNode(xmlDoc, "Recipient", recipient.FaxNumber));
-            if (dest_type.ToUpper().Equals("VOICE") || dest_type.ToUpper().Equals("TTS"))
-                workingNode.AppendChild(addChildNode(xmlDoc, "Recipient", recipient.PhoneNumber));
+						if (dest_type.ToUpper().Equals("SMS"))
+								workingNode.AppendChild(addChildNode(xmlDoc, "Recipient", recipient.MobileNumber));
+						if (dest_type.ToUpper().Equals("EMAIL"))
+								workingNode.AppendChild(addChildNode(xmlDoc, "Recipient", recipient.EmailAddress));
+						if (dest_type.ToUpper().Equals("FAX"))
+								workingNode.AppendChild(addChildNode(xmlDoc, "Recipient", recipient.FaxNumber));
+						if (dest_type.ToUpper().Equals("VOICE") || dest_type.ToUpper().Equals("TTS"))
+								workingNode.AppendChild(addChildNode(xmlDoc, "Recipient", recipient.PhoneNumber));
 
-            if (recipient.Attention != null)
-                workingNode.AppendChild(addChildNode(xmlDoc, "Attention", recipient.Attention));
-            if (recipient.CompanyName != null)
-                workingNode.AppendChild(addChildNode(xmlDoc, "Company", recipient.CompanyName));
-            if (recipient.FirstName != null)
-                workingNode.AppendChild(addChildNode(xmlDoc, "FirstName", recipient.FirstName));
-            if (recipient.LastName != null)
-                workingNode.AppendChild(addChildNode(xmlDoc, "LastName", recipient.LastName));
-            if (recipient.Custom1 != null)
-                workingNode.AppendChild(addChildNode(xmlDoc, "Custom1", recipient.Custom1));
-            if (recipient.Custom2 != null)
-                workingNode.AppendChild(addChildNode(xmlDoc, "Custom2", recipient.Custom2));
-            if (recipient.Custom3 != null)
-                workingNode.AppendChild(addChildNode(xmlDoc, "Custom3", recipient.Custom3));
-            if (recipient.Custom4 != null)
-                workingNode.AppendChild(addChildNode(xmlDoc, "Custom4", recipient.Custom4));
-            if (recipient.Custom5 != null)
-                workingNode.AppendChild(addChildNode(xmlDoc, "Custom5", recipient.Custom5));
+						if (recipient.Attention != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "Attention", recipient.Attention));
+						if (recipient.CompanyName != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "Company", recipient.CompanyName));
+						if (recipient.FirstName != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "FirstName", recipient.FirstName));
+						if (recipient.LastName != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "LastName", recipient.LastName));
+						if (recipient.Custom1 != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "Custom1", recipient.Custom1));
+						if (recipient.Custom2 != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "Custom2", recipient.Custom2));
+						if (recipient.Custom3 != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "Custom3", recipient.Custom3));
+						if (recipient.Custom4 != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "Custom4", recipient.Custom4));
+						if (recipient.Custom5 != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "Custom5", recipient.Custom5));
+						if (recipient.Custom6 != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "Custom6", recipient.Custom6));
+						if (recipient.Custom7 != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "Custom7", recipient.Custom7));
+						if (recipient.Custom8 != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "Custom8", recipient.Custom8));
+						if (recipient.Custom9 != null)
+								workingNode.AppendChild(addChildNode(xmlDoc, "Custom9", recipient.Custom9));
 
-            return workingNode;
-        }
-        #endregion
+						return workingNode;
+				}
+				#endregion
 
-        #region Files
-        public static XmlNode BuildXmlFilesNode(XmlDocument xmlDoc, ICollection<Attachment> attachments)
-        {
-            if (attachments.Count > 0)
-            {
-                var filesNode = xmlDoc.CreateElement("Files");
+				#region Files
+				public static XmlNode BuildXmlFilesNode(XmlDocument xmlDoc, ICollection<Attachment> attachments)
+				{
+						if (attachments.Count > 0)
+						{
+								var filesNode = xmlDoc.CreateElement("Files");
 
-                foreach (var attachment in attachments)
-                {
-                    filesNode.AppendChild(BuildXmlFileNode(xmlDoc, attachment));
-                }
+								foreach (var attachment in attachments)
+								{
+										filesNode.AppendChild(BuildXmlFileNode(xmlDoc, attachment));
+								}
 
-                return filesNode;
-            }
+								return filesNode;
+						}
 
-            return null;
-        }
+						return null;
+				}
 
-        public static XmlNode BuildXmlFileNode(XmlDocument xmlDoc, Attachment attachment)
-        {
-            var workingNode = xmlDoc.CreateElement("File");
-            workingNode.AppendChild(addChildNode(xmlDoc, "Name", attachment.FileName));
-            workingNode.AppendChild(addChildNode(xmlDoc, "Data", attachment.FileContent));
+				public static XmlNode BuildXmlFileNode(XmlDocument xmlDoc, Attachment attachment)
+				{
+						var workingNode = xmlDoc.CreateElement("File");
+						workingNode.AppendChild(addChildNode(xmlDoc, "Name", attachment.FileName));
+						workingNode.AppendChild(addChildNode(xmlDoc, "Data", attachment.FileContent));
 
-            return workingNode;
-        }
-        #endregion
+						return workingNode;
+				}
+				#endregion
 
-        #region Keypads
-        public static XmlNode BuildXmlKeypadsNode(XmlDocument xmlDoc, ICollection<Keypad> keypads)
-        {
-            if (keypads.Count > 0)
-            {
-                var keypadsNode = xmlDoc.CreateElement("Keypads");
+				#region Keypads
+				public static XmlNode BuildXmlKeypadsNode(XmlDocument xmlDoc, ICollection<Keypad> keypads)
+				{
+						if (keypads.Count > 0)
+						{
+								var keypadsNode = xmlDoc.CreateElement("Keypads");
 
-                foreach (var keypad in keypads)
-                {
-                    keypadsNode.AppendChild(BuildXmlKeypadNode(xmlDoc, keypad));
-                }
+								foreach (var keypad in keypads)
+								{
+										keypadsNode.AppendChild(BuildXmlKeypadNode(xmlDoc, keypad));
+								}
 
-                return keypadsNode;
-            }
+								return keypadsNode;
+						}
 
-            return null;
-        }
+						return null;
+				}
 
-        public static XmlNode BuildXmlKeypadNode(XmlDocument xmlDoc, Keypad keypad)
-        {
-            var workingNode = xmlDoc.CreateElement("Keypad");
-            workingNode.AppendChild(addChildNode(xmlDoc, "Tone", keypad.Tone.ToString()));
-            if (keypad.RouteNumber != null && !keypad.RouteNumber.Equals(""))
-            {
-                workingNode.AppendChild(addChildNode(xmlDoc, "RouteNumber", keypad.RouteNumber));
-            }
-            if (keypad.Play != null && !keypad.Play.Equals(""))
-            {
-                workingNode.AppendChild(addChildNode(xmlDoc, "Play", keypad.Play));
-            }
-            //if (keypad.PlayFile != null && !keypad.PlayFile.Equals(""))
-            //{
-            //    workingNode.AppendChild(addChildNode(xmlDoc, "Play", FileHandlers.GetFileContents(keypad.PlayFile)));
-            //}
-            if (keypad.PlaySection != KeypadPlaySection.None )
-            {
-                workingNode.AppendChild(addChildNode(xmlDoc, "PlaySection", keypad.PlaySection.ToString()));
-            }
-            if (keypad.PlayFileData != null)
-            {
-                workingNode.AppendChild(addChildNode(xmlDoc, "PlayFile", keypad.PlayFileData.FileContent));
-            }
+				public static XmlNode BuildXmlKeypadNode(XmlDocument xmlDoc, Keypad keypad)
+				{
+						var workingNode = xmlDoc.CreateElement("Keypad");
+						workingNode.AppendChild(addChildNode(xmlDoc, "Tone", keypad.Tone.ToString()));
+						if (keypad.RouteNumber != null && !keypad.RouteNumber.Equals(""))
+						{
+								workingNode.AppendChild(addChildNode(xmlDoc, "RouteNumber", keypad.RouteNumber));
+						}
+						if (keypad.Play != null && !keypad.Play.Equals(""))
+						{
+								workingNode.AppendChild(addChildNode(xmlDoc, "Play", keypad.Play));
+						}
+						//if (keypad.PlayFile != null && !keypad.PlayFile.Equals(""))
+						//{
+						//    workingNode.AppendChild(addChildNode(xmlDoc, "Play", FileHandlers.GetFileContents(keypad.PlayFile)));
+						//}
+						if (keypad.PlaySection != KeypadPlaySection.None)
+						{
+								workingNode.AppendChild(addChildNode(xmlDoc, "PlaySection", keypad.PlaySection.ToString()));
+						}
+						if (keypad.PlayFileData != null)
+						{
+								workingNode.AppendChild(addChildNode(xmlDoc, "PlayFile", keypad.PlayFileData.FileContent));
+						}
 
-            return workingNode;
-        }
-        #endregion
-    }
+						return workingNode;
+				}
+				#endregion
+		}
 }

@@ -183,7 +183,6 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "CallRouteMessageOnWrongKey", Entity.CallRouteMessageOnWrongKey));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "NumberOfOperators", Entity.NumberOfOperators.ToString()));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "CallerID", Entity.CallerID));
-            //messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Voice", Enum.GetName(typeof(TTSVoiceType), Entity.TTSVoice)));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Voice", Entity.TTSVoice.GetDescription()));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Options", Entity.Options));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "NumberOfOperators", Entity.NumberOfOperators.ToString()));
@@ -193,7 +192,7 @@ namespace TNZAPI.NET.Api.Messaging.TTS
                 messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "RetryPeriod", Entity.RetryPeriod.ToString()));
             }
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ReportTo", Entity.ReportTo.ToString()));
-            messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ErrorEmailNotify", Entity.ErrorEmailNotify));
+            //messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ErrorEmailNotify", Entity.ErrorEmailNotify));
 
             // Set Keypads
             if (Entity.Keypads.Count > 0)

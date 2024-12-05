@@ -39,16 +39,29 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             Attachments = null;
         }
 
-        #region General
+				#region General
+
+				/// <summary>
+				/// Sets ErrorEmailNotify, email address to get error notifications
+				/// </summary>
+				/// <param name="emailAddress">Your email address</param>
+				/// <returns>FaxBuilder</returns>
+				[Obsolete("Use SetReportTo() instead of SetErrorEmailNotify()")]
+				public FaxBuilder SetErrorEmailNotify(string emailAddress)
+        {
+            Entity.ErrorEmailNotify = emailAddress;
+
+            return this;
+        }
 
         /// <summary>
-        /// Sets ErrorEmailNotify, email address to get error notifications
+        /// Sets ReportTo, email address to get reports
         /// </summary>
         /// <param name="emailAddress">Your email address</param>
         /// <returns>FaxBuilder</returns>
-        public FaxBuilder SetErrorEmailNotify(string emailAddress)
+        public FaxBuilder SetReportTo(string emailAddress)
         {
-            Entity.ErrorEmailNotify = emailAddress;
+            Entity.ReportTo = emailAddress;
 
             return this;
         }

@@ -5,12 +5,11 @@ using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.Email.Dto;
-using TNZAPI.NET.Helpers;
 using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.Email
 {
-    public sealed class EmailBuilder : IDisposable
+		public sealed class EmailBuilder : IDisposable
     {
 
         private EmailModel Entity { get; set; }
@@ -40,16 +39,29 @@ namespace TNZAPI.NET.Api.Messaging.Email
             Attachments = null;
         }
 
-        #region General
+				#region General
+
+				/// <summary>
+				/// Sets ErrorEmailNotify, email address to get error notifications
+				/// </summary>
+				/// <param name="emailAddress">Your email address</param>
+				/// <returns>EmailBuilder</returns>
+				[Obsolete("Use SetReportTo() instead of SetErrorEmailNotify()")]
+				public EmailBuilder SetErrorEmailNotify(string emailAddress)
+        {
+            Entity.ErrorEmailNotify = emailAddress;
+
+            return this;
+        }
 
         /// <summary>
-        /// Sets ErrorEmailNotify, email address to get error notifications
+        /// Sets ReportTo, email address to get reports
         /// </summary>
-        /// <param name="email">Your email address</param>
+        /// <param name="emailAddress">Your email address</param>
         /// <returns>EmailBuilder</returns>
-        public EmailBuilder SetErrorEmailNotify(string email)
+        public EmailBuilder SetReportTo(string emailAddress)
         {
-            Entity.ErrorEmailNotify = email;
+            Entity.ReportTo = emailAddress;
 
             return this;
         }

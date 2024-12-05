@@ -5,12 +5,11 @@ using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.Voice.Dto;
-using TNZAPI.NET.Helpers;
 using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.Voice
 {
-    public class VoiceBuilder : IDisposable
+		public class VoiceBuilder : IDisposable
     {
         private VoiceModel Entity { get; set; }
 
@@ -39,26 +38,39 @@ namespace TNZAPI.NET.Api.Messaging.Voice
             Keypads = null;
         }
 
-        #region General
+				#region General
 
-        /// <summary>
-        /// Sets ErrorEmailNotify, email address to get error notifications
-        /// </summary>
-        /// <param name="emailAddress">Your email address</param>
-        /// <returns>VoiceBuilder</returns>
-        public VoiceBuilder SetErrorEmailNotify(string emailAddress)
+				/// <summary>
+				/// Sets ErrorEmailNotify, email address to get error notifications
+				/// </summary>
+				/// <param name="emailAddress">Your email address</param>
+				/// <returns>VoiceBuilder</returns>
+				[Obsolete("Use SetReportTo() instead of SetErrorEmailNotify()")]
+				public VoiceBuilder SetErrorEmailNotify(string emailAddress)
         {
             Entity.ErrorEmailNotify = emailAddress;
 
             return this;
         }
 
-        /// <summary>
-        /// Sets Webhook Callback URL to receive webhooks
-        /// </summary>
-        /// <param name="url">Your URL to receive webhooks</param>
-        /// <returns>VoiceBuilder</returns>
-        public VoiceBuilder SetWebhookCallbackURL(string url)
+				/// <summary>
+				/// Sets report to email address
+				/// </summary>
+				/// <param name="emailAddress">Email address</param>
+				/// <returns>VoiceBuilder</returns>
+				public VoiceBuilder SetReportTo(string emailAddress)
+				{
+						Entity.ReportTo = emailAddress;
+
+						return this;
+				}
+
+				/// <summary>
+				/// Sets Webhook Callback URL to receive webhooks
+				/// </summary>
+				/// <param name="url">Your URL to receive webhooks</param>
+				/// <returns>VoiceBuilder</returns>
+				public VoiceBuilder SetWebhookCallbackURL(string url)
         {
             Entity.WebhookCallbackURL = url;
 
@@ -197,18 +209,6 @@ namespace TNZAPI.NET.Api.Messaging.Voice
         public VoiceBuilder SetCallerID(string callerID)
         {
             Entity.CallerID = callerID;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets report to email address
-        /// </summary>
-        /// <param name="emailAddress">Email address</param>
-        /// <returns>VoiceBuilder</returns>
-        public VoiceBuilder SetReportTo(string emailAddress)
-        {
-            Entity.ReportTo = emailAddress;
 
             return this;
         }

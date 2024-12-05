@@ -160,8 +160,9 @@ namespace TNZAPI.NET.Api.Messaging.Email
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "SubAccount", Entity.SubAccount));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Department", Entity.Department));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ChargeCode", Entity.ChargeCode));
-            messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ErrorEmailNotify", Entity.ErrorEmailNotify));
-            messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "EmailSubject", Entity.EmailSubject));
+						//messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ErrorEmailNotify", Entity.ErrorEmailNotify));
+						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ReportTo", Entity.ReportTo));
+						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "EmailSubject", Entity.EmailSubject));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "SMTPFrom", Entity.SMTPFrom));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "From", Entity.From));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "FromEmail", Entity.FromEmail));

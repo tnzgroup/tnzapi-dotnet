@@ -8,8 +8,11 @@ namespace TNZAPI.NET.Api.Messaging.Voice.Dto
 {
     public class VoiceModel
     {
-        public string ErrorEmailNotify { get; set; } = "";
-        public string WebhookCallbackURL { get; set; } = "";
+				[Obsolete("Use ReportTo instead of ErrorEmailNotify.")]
+				public string ErrorEmailNotify { get; set; } = "";
+				public string ReportTo { get; set; } = "";
+
+				public string WebhookCallbackURL { get; set; } = "";
         public Enums.WebhookCallbackType WebhookCallbackFormat { get; set; } = Enums.WebhookCallbackType.JSON;
 
         public Enums.SendModeType SendMode { get; set; } = Enums.SendModeType.Live;
@@ -26,7 +29,6 @@ namespace TNZAPI.NET.Api.Messaging.Voice.Dto
 
         public string CallerID { get; set; } = "";
         public string Options { get; set; } = "";
-        public string ReportTo { get; set; } = "";
 
         public int NumberOfOperators { get; set; } = 0;
         public int RetryAttempts { get; set; } = 0; // number of retries

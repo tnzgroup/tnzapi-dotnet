@@ -167,8 +167,9 @@ namespace TNZAPI.NET.Api.Messaging.SMS
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ChargeCode", Entity.ChargeCode));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "FromNumber", Entity.FromNumber));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "SMSEmailReply", Entity.SMSEmailReply));
-            messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ErrorEmailNotify", Entity.ErrorEmailNotify));
-            messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Message", Entity.MessageText));
+						//messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ErrorEmailNotify", Entity.ErrorEmailNotify));
+						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ReportTo", Entity.ReportTo));
+						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Message", Entity.MessageText));
 
             // Set Destinations
             messageDataNode.AppendChild(XMLHelpers.BuildXmlDestinationsNode(xmlDoc, Entity.Recipients, "SMS"));

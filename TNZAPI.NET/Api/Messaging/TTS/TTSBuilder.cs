@@ -5,12 +5,11 @@ using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.TTS.Dto;
-using TNZAPI.NET.Helpers;
 using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.TTS
 {
-    public class TTSBuilder : IDisposable
+		public class TTSBuilder : IDisposable
     {
         private TTSModel Entity { get; set; }
 
@@ -38,26 +37,39 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             Keypads = null;
         }
 
-        #region General
+				#region General
 
-        /// <summary>
-        /// Sets ErrorEmailNotify, email address to get error notifications
-        /// </summary>
-        /// <param name="emailAddress">Your email address</param>
-        /// <returns>TTSBuilder</returns>
-        public TTSBuilder SetErrorEmailNotify(string emailAddress)
+				/// <summary>
+				/// Sets ErrorEmailNotify, email address to get error notifications
+				/// </summary>
+				/// <param name="emailAddress">Your email address</param>
+				/// <returns>TTSBuilder</returns>
+				[Obsolete("Use SetReportTo() instead of SetErrorEmailNotify()")]
+				public TTSBuilder SetErrorEmailNotify(string emailAddress)
         {
             Entity.ErrorEmailNotify = emailAddress;
 
             return this;
         }
 
-        /// <summary>
-        /// Sets Webhook Callback URL to receive webhooks
-        /// </summary>
-        /// <param name="url">Your URL to receive webhooks</param>
-        /// <returns>TTSBuilder</returns>
-        public TTSBuilder SetWebhookCallbackURL(string url)
+				/// <summary>
+				/// Sets report to email address
+				/// </summary>
+				/// <param name="emailAddress">Email address</param>
+				/// <returns>TTSBuilder</returns>
+				public TTSBuilder SetReportTo(string emailAddress)
+				{
+						Entity.ReportTo = emailAddress;
+
+						return this;
+				}
+
+				/// <summary>
+				/// Sets Webhook Callback URL to receive webhooks
+				/// </summary>
+				/// <param name="url">Your URL to receive webhooks</param>
+				/// <returns>TTSBuilder</returns>
+				public TTSBuilder SetWebhookCallbackURL(string url)
         {
             Entity.WebhookCallbackURL = url;
 
@@ -238,18 +250,6 @@ namespace TNZAPI.NET.Api.Messaging.TTS
         public TTSBuilder SetTTSVoice(TTSVoiceType ttsVoiceType)
         {
             Entity.TTSVoice = ttsVoiceType;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets report to email address
-        /// </summary>
-        /// <param name="emailAddress">Email address</param>
-        /// <returns>TTSBuilder</returns>
-        public TTSBuilder SetReportTo(string emailAddress)
-        {
-            Entity.ReportTo = emailAddress;
 
             return this;
         }

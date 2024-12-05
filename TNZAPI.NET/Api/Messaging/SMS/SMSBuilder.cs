@@ -5,12 +5,11 @@ using TNZAPI.NET.Api.Messaging.Common.Components;
 using TNZAPI.NET.Api.Messaging.Common.Components.List;
 using TNZAPI.NET.Api.Messaging.Common.Dto;
 using TNZAPI.NET.Api.Messaging.SMS.Dto;
-using TNZAPI.NET.Helpers;
 using static TNZAPI.NET.Core.Enums;
 
 namespace TNZAPI.NET.Api.Messaging.SMS
 {
-    public sealed class SMSBuilder : IDisposable
+		public sealed class SMSBuilder : IDisposable
     {
         private SMSModel Entity { get; set; }
 
@@ -45,9 +44,22 @@ namespace TNZAPI.NET.Api.Messaging.SMS
         /// </summary>
         /// <param name="emailAddress">Your email address</param>
         /// <returns>SMSBuilder</returns>
+        [Obsolete("Use SetReportTo() instead of SetErrorEmailNotify()")]
         public SMSBuilder SetErrorEmailNotify(string emailAddress)
         {
             Entity.ErrorEmailNotify = emailAddress;
+
+            return this;
+        }
+
+				/// <summary>
+				/// Sets ReportTo, email address to get reports
+				/// </summary>
+				/// <param name="emailAddress">Your email address</param>
+				/// <returns>SMSBuilder</returns>
+				public SMSBuilder SetReportTo(string emailAddress)
+        {
+            Entity.ReportTo = emailAddress;
 
             return this;
         }

@@ -6,8 +6,10 @@ namespace TNZAPI.NET.Api.Messaging.Fax.Dto
 {
     public class FaxModel
     {
-        public string ErrorEmailNotify { get; set; } = "";
-        public string WebhookCallbackURL { get; set; } = "";
+				[Obsolete("Use ReportTo instead of ErrorEmailNotify.")]
+				public string ErrorEmailNotify { get; set; } = "";
+				public string ReportTo { get; set; } = "";
+				public string WebhookCallbackURL { get; set; } = "";
         public Enums.WebhookCallbackType WebhookCallbackFormat { get; set; } = Enums.WebhookCallbackType.JSON;
 
         public Enums.SendModeType SendMode { get; set; } = Enums.SendModeType.Live;

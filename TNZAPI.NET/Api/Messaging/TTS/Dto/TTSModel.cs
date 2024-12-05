@@ -8,8 +8,11 @@ namespace TNZAPI.NET.Api.Messaging.TTS.Dto
 {
     public class TTSModel
     {
-        public string ErrorEmailNotify { get; set; } = "";
-        public string WebhookCallbackURL { get; set; } = "";
+				[Obsolete("Use ReportTo instead of ErrorEmailNotify.")]
+				public string ErrorEmailNotify { get; set; } = "";
+				public string ReportTo { get; set; } = "";
+
+				public string WebhookCallbackURL { get; set; } = "";
         public Enums.WebhookCallbackType WebhookCallbackFormat { get; set; } = Enums.WebhookCallbackType.JSON;
 
         public Enums.SendModeType SendMode { get; set; } = Enums.SendModeType.Live;
@@ -24,7 +27,6 @@ namespace TNZAPI.NET.Api.Messaging.TTS.Dto
 
         public string CallerID { get; set; } = "";
         public TTSVoiceType TTSVoice { get; set; } = TTSVoiceType.Female1;
-        public string ReportTo { get; set; } = "";
         public string Options { get; set; } = "";
 
         public int NumberOfOperators { get; set; } = 0;

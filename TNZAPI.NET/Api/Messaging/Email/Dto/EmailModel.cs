@@ -6,7 +6,10 @@ namespace TNZAPI.NET.Api.Messaging.Email.Dto
 {
     public class EmailModel
     {
+        [Obsolete("Use ReportTo instead of ErrorEmailNotify.")]
         public string ErrorEmailNotify { get; set; } = "";
+        public string ReportTo { get; set; } = "";
+
         public string WebhookCallbackURL { get; set; } = "";
         public Enums.WebhookCallbackType WebhookCallbackFormat { get; set; } = Enums.WebhookCallbackType.JSON;
 

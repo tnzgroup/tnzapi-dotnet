@@ -8,6 +8,10 @@
 		<AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
 		<FileVersion>$(VersionPrefix)</FileVersion>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://www.tnz.co.nz/Docs/dotNetLib/</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Copyright>Copyright © TNZ Group Ltd. 2025</Copyright>
 	</PropertyGroup>
   

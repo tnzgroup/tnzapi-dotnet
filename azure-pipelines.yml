@@ -11,28 +11,48 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  
+jobs:
+- job: BuildAndTest
+  displayName: 'Build and Test for multiple frameworks'
+  strategy:
+    matrix:
+      net6:
+        targetFramework: 'net6.0'
+      net7:
+        targetFramework: 'net7.0'
+      net8:
+        targetFramework: 'net8.0'
+      net9:
+        targetFramework: 'net9.0'
 
-steps:
-- task: UseDotNet@2
-  displayName: 'Install .NET Core SDK'
-  inputs:
-    version: 9.x
-    performMultiLevelLookup: true
-    
-- script: dotnet build TNZAPI.NET/*.csproj -c $(buildConfiguration)
-  displayName: 'dotnet build TNZAPI.NET/*.csproj $(buildConfiguration)'
+  steps:
+  - task: UseDotNet@2
+    displayName: 'Install .NET Core SDK'
+    inputs:
+      version: 9.x
+      performMultiLevelLookup: true
+  
+  - script: dotnet build TNZAPI.NET/*.csproj -c $(buildConfiguration) -f $(targetFramework)
+    displayName: 'Build for $(targetFramework)'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'pack'
-    packDirectory: "$(Build.ArtifactStagingDirectory)/packages"
-    packagesToPack: 'TNZAPI.NET/*.csproj;'
-    versioningScheme: 'off'
-  displayName: 'Create package'
+- job: PackageAndPublish
+  displayName: 'Package and Publish NuGet'
+  dependsOn: BuildAndTest
+  condition: succeeded()
 
-- task: NuGetCommand@2
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/packages/*.*nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'TNZAPI.NET.Nuget'
+  steps:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'pack'
+      packDirectory: "$(Build.ArtifactStagingDirectory)/packages"
+      packagesToPack: 'TNZAPI.NET/*.csproj'
+      versioningScheme: 'off'
+    displayName: 'Create package'
+
+  - task: NuGetCommand@2
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/packages/*.*nupkg'
+      nuGetFeedType: 'external'
+      publishFeedCredentials: 'TNZAPI.NET.Nuget'

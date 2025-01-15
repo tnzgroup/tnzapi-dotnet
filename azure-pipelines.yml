@@ -42,13 +42,13 @@ jobs:
   condition: succeeded()
 
   steps:
+  
   - task: UseDotNet@2
     displayName: 'Install .NET Core SDK'
     inputs:
       version: 9.x
       performMultiLevelLookup: true
-
-  steps:
+      
   - task: DotNetCoreCLI@2
     inputs:
       command: 'pack'

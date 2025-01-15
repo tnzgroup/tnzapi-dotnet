@@ -27,12 +27,22 @@ jobs:
         targetFramework: 'net9.0'
 
   steps:
+  - task: NuGetToolInstaller@1
+    inputs:
+      versionSpec: '5.x'
+
   - task: UseDotNet@2
     displayName: 'Install .NET Core SDK'
     inputs:
       version: 9.x
       performMultiLevelLookup: true
-  
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore Dependencies'
+    inputs:
+      command: 'restore'
+      projects: 'TNZAPI.NET/*.csproj'
+
   - script: dotnet build TNZAPI.NET/*.csproj -c $(buildConfiguration) -f $(targetFramework)
     displayName: 'Build for $(targetFramework)'
 
@@ -42,24 +52,17 @@ jobs:
   condition: succeeded()
 
   steps:
-  
-  - task: UseDotNet@2
-    displayName: 'Install .NET Core SDK'
-    inputs:
-      version: 9.x
-      performMultiLevelLookup: true
-      
   - task: DotNetCoreCLI@2
+    displayName: 'Create NuGet Package'
     inputs:
       command: 'pack'
       packDirectory: "$(Build.ArtifactStagingDirectory)/packages"
-      packagesToPack: 'TNZAPI.NET/*.csproj'
-      versioningScheme: 'off'
-    displayName: 'Create package'
+      projects: 'TNZAPI.NET/*.csproj'
 
   - task: NuGetCommand@2
+    displayName: 'Publish NuGet Package'
     inputs:
       command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/packages/*.*nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/packages/*.nupkg'
       nuGetFeedType: 'external'
       publishFeedCredentials: 'TNZAPI.NET.Nuget'

@@ -27,8 +27,16 @@
                 using (FileStream reader = new FileStream(file_location, FileMode.Open))
                 {
                     byte[] buffer = new byte[reader.Length];
+
+#if NET7_0_OR_GREATER
+										reader.ReadExactly(buffer);
+#else
                     reader.Read(buffer, 0, (int)reader.Length);
-                    string strContent = Convert.ToBase64String(buffer);
+#endif
+
+
+
+										string strContent = Convert.ToBase64String(buffer);
 
                     System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
                     return System.Text.Encoding.ASCII.GetString(encoding.GetBytes(strContent));
@@ -51,8 +59,12 @@
             using (FileStream reader = new FileStream(file_location, FileMode.Open))
             {
                 byte[] buffer = new byte[reader.Length];
-                reader.Read(buffer, 0, (int)reader.Length);
-                string strContent = Convert.ToBase64String(buffer);
+#if NET7_0_OR_GREATER
+										reader.ReadExactly(buffer);
+#else
+								reader.Read(buffer, 0, (int)reader.Length);
+#endif
+								string strContent = Convert.ToBase64String(buffer);
 
                 System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
                 return encoding.GetBytes(strContent);
@@ -74,8 +86,14 @@
                 using (FileStream reader = new FileStream(file_location, FileMode.Open))
                 {
                     byte[] buffer = new byte[reader.Length];
-                    await reader.ReadAsync(buffer, 0, (int)reader.Length);
-                    string strContent = Convert.ToBase64String(buffer);
+
+#if NET7_0_OR_GREATER
+										await reader.ReadExactlyAsync(buffer);
+#else
+										await reader.ReadAsync(buffer, 0, (int)reader.Length);
+#endif
+
+										string strContent = Convert.ToBase64String(buffer);
 
                     System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
                     return System.Text.Encoding.ASCII.GetString(encoding.GetBytes(strContent));
@@ -98,8 +116,13 @@
             using (FileStream reader = new FileStream(file_location, FileMode.Open))
             {
                 byte[] buffer = new byte[reader.Length];
-                await reader.ReadAsync(buffer, 0, (int)reader.Length);
-                string strContent = Convert.ToBase64String(buffer);
+
+#if NET7_0_OR_GREATER
+								await reader.ReadExactlyAsync(buffer);
+#else
+								await reader.ReadAsync(buffer, 0, (int)reader.Length);
+#endif
+								string strContent = Convert.ToBase64String(buffer);
 
                 System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
                 return encoding.GetBytes(strContent);

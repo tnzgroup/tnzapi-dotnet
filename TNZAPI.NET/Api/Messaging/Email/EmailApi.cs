@@ -160,7 +160,7 @@ namespace TNZAPI.NET.Api.Messaging.Email
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "SubAccount", Entity.SubAccount));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Department", Entity.Department));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ChargeCode", Entity.ChargeCode));
-						//messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ErrorEmailNotify", Entity.ErrorEmailNotify));
+						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ServiceName", Entity.ServiceName));
 						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ReportTo", Entity.ReportTo));
 						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "EmailSubject", Entity.EmailSubject));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "SMTPFrom", Entity.SMTPFrom));
@@ -322,44 +322,45 @@ namespace TNZAPI.NET.Api.Messaging.Email
         }
 
 
-        /// <summary>
-        /// Send Email Message
-        /// </summary>
-        /// <param name="messageID">MessageID object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="emailSubject">Subject field used in the email</param>
-        /// <param name="messagePlain">Content used for the message/plain section of the email (overrides 'Template')</param>
-        /// <param name="messageHTML">Content used for the message/html section of the email (overrides 'Template' and 'MessagePlain')</param>
-        /// <param name="reference">Tracking ID or message description</param>
-        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="chargeCode">Cost allocation for billing</param>
-        /// <param name="smtpFrom">Sets the email Sender/Return-Path at the SMTP level (this address receives bounce-back emails and is used for SPF/DKIM type authentication; 'FromEmail' is used if not specified)</param>
-        /// <param name="fromName">Sets the email sender's Friendly Name (seen by the email recipient)</param>
-        /// <param name="fromEmail">Sets the email sender's Email Address (seen by the email recipient; API 'Sender' is used if not specified)</param>
-        /// <param name="replyTo">Sets the email sender's Reply-To Address (if the recipient replies, the Reply To will receive the reply)</param>
-        /// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
-        /// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-        /// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="destination">Sets the email destination</param>
-        /// <param name="destinations">Sets the list of email addresses</param>
-        /// <param name="recipient">Sets the email recipient - Recipient() object</param>
-        /// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
-        /// <param name="file">Sets the attachment (file location)</param>
-        /// <param name="files">Sets the list of attachments (file locations)</param>
-        /// <param name="attachment">Sets the attachment - Attachment() object</param>
-        /// <param name="attachments">Sets the list of attachments</param>
-        /// <param name="webhookCallbackURL">Webhook callback URL</param>
-        /// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
-        /// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
-        /// <returns>MessageApiResult</returns>
-        public MessageApiResult SendMessage(
+				/// <summary>
+				/// Send Email Message
+				/// </summary>
+				/// <param name="messageID">MessageID object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+				/// <param name="emailSubject">Subject field used in the email</param>
+				/// <param name="messagePlain">Content used for the message/plain section of the email (overrides 'Template')</param>
+				/// <param name="messageHTML">Content used for the message/html section of the email (overrides 'Template' and 'MessagePlain')</param>
+				/// <param name="reference">Tracking ID or message description</param>
+				/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+				/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+				/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="chargeCode">Cost allocation for billing</param>
+				/// <param name="serviceName">Service name for your app</param>
+				/// <param name="smtpFrom">Sets the email Sender/Return-Path at the SMTP level (this address receives bounce-back emails and is used for SPF/DKIM type authentication; 'FromEmail' is used if not specified)</param>
+				/// <param name="fromName">Sets the email sender's Friendly Name (seen by the email recipient)</param>
+				/// <param name="fromEmail">Sets the email sender's Email Address (seen by the email recipient; API 'Sender' is used if not specified)</param>
+				/// <param name="replyTo">Sets the email sender's Reply-To Address (if the recipient replies, the Reply To will receive the reply)</param>
+				/// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
+				/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+				/// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="destination">Sets the email destination</param>
+				/// <param name="destinations">Sets the list of email addresses</param>
+				/// <param name="recipient">Sets the email recipient - Recipient() object</param>
+				/// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
+				/// <param name="file">Sets the attachment (file location)</param>
+				/// <param name="files">Sets the list of attachments (file locations)</param>
+				/// <param name="attachment">Sets the attachment - Attachment() object</param>
+				/// <param name="attachments">Sets the list of attachments</param>
+				/// <param name="webhookCallbackURL">Webhook callback URL</param>
+				/// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
+				/// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
+				/// <returns>MessageApiResult</returns>
+				public MessageApiResult SendMessage(
                 MessageID messageID = null,                     // MessageID object
                 string emailSubject = null,
                 string messagePlain = null,
@@ -370,7 +371,8 @@ namespace TNZAPI.NET.Api.Messaging.Email
                 string subaccount = null,
                 string department = null,
                 string chargeCode = null,
-                string smtpFrom = null,
+								string serviceName = null,
+								string smtpFrom = null,
                 string fromName = null,
                 string fromEmail = null,
                 string replyTo = null,
@@ -412,7 +414,9 @@ namespace TNZAPI.NET.Api.Messaging.Email
                     SubAccount = subaccount,
                     Department = department,
                     ChargeCode = chargeCode,
-                    SMTPFrom = smtpFrom,
+										ServiceName = serviceName,
+
+										SMTPFrom = smtpFrom,
                     From = fromName,
                     FromEmail = fromEmail,
                     ReplyTo = replyTo,
@@ -496,44 +500,45 @@ namespace TNZAPI.NET.Api.Messaging.Email
             return await SendMessageAsync();
         }
 
-        /// <summary>
-        /// Send Email Message Async
-        /// </summary>
-        /// <param name="messageID">MessageiD object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="emailSubject">Subject field used in the email</param>
-        /// <param name="messagePlain">Content used for the message/plain section of the email (overrides 'Template')</param>
-        /// <param name="messageHTML">Content used for the message/html section of the email (overrides 'Template' and 'MessagePlain')</param>
-        /// <param name="reference">Tracking ID or message description</param>
-        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="chargeCode">Cost allocation for billing</param>
-        /// <param name="smtpFrom">Sets the email Sender/Return-Path at the SMTP level (this address receives bounce-back emails and is used for SPF/DKIM type authentication; 'FromEmail' is used if not specified)</param>
-        /// <param name="fromName">Sets the email sender's Friendly Name (seen by the email recipient)</param>
-        /// <param name="fromEmail">Sets the email sender's Email Address (seen by the email recipient; API 'Sender' is used if not specified)</param>
-        /// <param name="replyTo">Sets the email sender's Reply-To Address (if the recipient replies, the Reply To will receive the reply)</param>
-        /// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
-        /// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-        /// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="destination">Sets the email destination</param>
-        /// <param name="destinations">Sets the list of email addresses</param>
-        /// <param name="recipient">Sets the email recipient - Recipient() object</param>
-        /// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
-        /// <param name="file">Sets the attachment (file location)</param>
-        /// <param name="files">Sets the list of attachments (file locations)</param>
-        /// <param name="attachment">Sets the attachment - Attachment() object</param>
-        /// <param name="attachments">Sets the list of attachments</param>
-        /// <param name="webhookCallbackURL">Webhook callback URL</param>
-        /// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
-        /// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
-        /// <returns>Task<MessageApiResult></returns>
-        [ComVisible(false)]
+				/// <summary>
+				/// Send Email Message Async
+				/// </summary>
+				/// <param name="messageID">MessageiD object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+				/// <param name="emailSubject">Subject field used in the email</param>
+				/// <param name="messagePlain">Content used for the message/plain section of the email (overrides 'Template')</param>
+				/// <param name="messageHTML">Content used for the message/html section of the email (overrides 'Template' and 'MessagePlain')</param>
+				/// <param name="reference">Tracking ID or message description</param>
+				/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+				/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+				/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="chargeCode">Cost allocation for billing</param>
+				/// <param name="serviceName">Service name for your app</param>
+				/// <param name="smtpFrom">Sets the email Sender/Return-Path at the SMTP level (this address receives bounce-back emails and is used for SPF/DKIM type authentication; 'FromEmail' is used if not specified)</param>
+				/// <param name="fromName">Sets the email sender's Friendly Name (seen by the email recipient)</param>
+				/// <param name="fromEmail">Sets the email sender's Email Address (seen by the email recipient; API 'Sender' is used if not specified)</param>
+				/// <param name="replyTo">Sets the email sender's Reply-To Address (if the recipient replies, the Reply To will receive the reply)</param>
+				/// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
+				/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+				/// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="destination">Sets the email destination</param>
+				/// <param name="destinations">Sets the list of email addresses</param>
+				/// <param name="recipient">Sets the email recipient - Recipient() object</param>
+				/// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
+				/// <param name="file">Sets the attachment (file location)</param>
+				/// <param name="files">Sets the list of attachments (file locations)</param>
+				/// <param name="attachment">Sets the attachment - Attachment() object</param>
+				/// <param name="attachments">Sets the list of attachments</param>
+				/// <param name="webhookCallbackURL">Webhook callback URL</param>
+				/// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
+				/// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
+				/// <returns>Task<MessageApiResult></returns>
+				[ComVisible(false)]
         public async Task<MessageApiResult> SendMessageAsync(
                 MessageID messageID = null,                     // MessageID object
                 string emailSubject = null,
@@ -545,7 +550,8 @@ namespace TNZAPI.NET.Api.Messaging.Email
                 string subaccount = null,
                 string department = null,
                 string chargeCode = null,
-                string smtpFrom = null,
+								string serviceName = null,
+								string smtpFrom = null,
                 string fromName = null,
                 string fromEmail = null,
                 string replyTo = null,
@@ -587,7 +593,9 @@ namespace TNZAPI.NET.Api.Messaging.Email
                     SubAccount = subaccount,
                     Department = department,
                     ChargeCode = chargeCode,
-                    SMTPFrom = smtpFrom,
+										ServiceName = serviceName,
+
+										SMTPFrom = smtpFrom,
                     From = fromName,
                     FromEmail = fromEmail,
                     ReplyTo = replyTo,

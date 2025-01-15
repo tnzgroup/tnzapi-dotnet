@@ -22,8 +22,9 @@ namespace TNZAPI.NET.Api.Messaging.Email.Dto
         public string SubAccount { get; set; } = "";
         public string Department { get; set; } = "";
         public string ChargeCode { get; set; } = "";
+				public string ServiceName { get; set; } = "";
 
-        public string EmailSubject { get; set; } = "";
+				public string EmailSubject { get; set; } = "";
         public string MessagePlain { get; set; } = "";
         public string MessageHTML { get; set; } = "";
 

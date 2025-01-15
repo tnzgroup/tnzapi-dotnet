@@ -19,7 +19,8 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
             string subaccount = null,
             string department = null,
             string chargeCode = null,
-            string smsEmailReply = null,
+						string serviceName = null,
+						string smsEmailReply = null,
             string forceGSMChars = null,
             string messageText = null,
             GroupModel group = null,                        // GroupModel object
@@ -52,7 +53,8 @@ namespace TNZAPI.NET.Core.Interfaces.Messaging
             string subaccount = null,
             string department = null,
             string chargeCode = null,
-            string smsEmailReply = null,
+						string serviceName = null,
+						string smsEmailReply = null,
             string forceGSMChars = null,
             string messageText = null,
             GroupModel group = null,                        // GroupModel object

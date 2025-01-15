@@ -24,10 +24,9 @@ namespace TNZAPI.NET.Api.Messaging.Voice.Dto
         public string SubAccount { get; set; } = "";
         public string Department { get; set; } = "";
         public string ChargeCode { get; set; } = "";
+				public string ServiceName { get; set; } = "";
 
-        
-
-        public string CallerID { get; set; } = "";
+				public string CallerID { get; set; } = "";
         public string Options { get; set; } = "";
 
         public int NumberOfOperators { get; set; } = 0;

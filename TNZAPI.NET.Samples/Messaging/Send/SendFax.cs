@@ -144,7 +144,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
             var webhookCallbackURL = "https://example.com/webhook";
             var webhookCallbackFormat = Enums.WebhookCallbackType.XML;
-            var errorEmailNotify = "notify@example.com";
+            var reportTo = "notify@example.com";
 
             var recipient1 = "+6491111111";
             var recipient2 = "+6492222222";
@@ -305,9 +305,9 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     WebhookCallbackURL = webhookCallbackURL,            // Webhook Callback URL
                     WebhookCallbackFormat = webhookCallbackFormat,      // Webhook Callback Format (XML/JSON)
 
-                    ErrorEmailNotify = errorEmailNotify,                // Error Email Notify (Receive email when it errored)
+                    ReportTo = reportTo,                                // Notification email address (Receive email for notifications)
 
-                    MessageID = new MessageID(""),                      // MessageID - Leave blank to auto-generate
+										MessageID = new MessageID(""),                      // MessageID - Leave blank to auto-generate
                     Reference = reference,                              // Reference
                     SubAccount = "",                                    // SubAccount
                     Department = "",                                    // Department

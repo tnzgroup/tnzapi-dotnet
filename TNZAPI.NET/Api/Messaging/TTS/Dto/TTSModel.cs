@@ -24,8 +24,9 @@ namespace TNZAPI.NET.Api.Messaging.TTS.Dto
         public string SubAccount { get; set; } = "";
         public string Department { get; set; } = "";
         public string ChargeCode { get; set; } = "";
+				public string ServiceName { get; set; } = "";
 
-        public string CallerID { get; set; } = "";
+				public string CallerID { get; set; } = "";
         public TTSVoiceType TTSVoice { get; set; } = TTSVoiceType.Female1;
         public string Options { get; set; } = "";
 

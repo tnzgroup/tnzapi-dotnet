@@ -160,7 +160,7 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "SubAccount", Entity.SubAccount));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Department", Entity.Department));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ChargeCode", Entity.ChargeCode));
-						//messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ErrorEmailNotify", Entity.ErrorEmailNotify));
+						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ServiceName", Entity.ServiceName));
 						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ReportTo", Entity.ReportTo));
 						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Resolution", Entity.Resolution));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "CSID", Entity.CSID));
@@ -329,44 +329,45 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             return SendMessage();
         }
 
-        /// <summary>
-        /// Send Fax Message
-        /// </summary>
-        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="reference">Tracking ID or message description</param>
-        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="chargeCode">Cost allocation for billing</param>
-        /// <param name="resolution">Hi/Low - Quality of the fax image. High for better quality, low for lower quality (faster delivery speed)</param>
-        /// <param name="csid">Called Subscriber Identification - Maximum 30 characters</param>
-        /// <param name="watermarkFolder">Directory/location of Watermark file to use</param>
-        /// <param name="watermarkFirstPage">Watermark file to apply to the first page only</param>
-        /// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
-        /// <param name="retryAttempts">Number of retries (retry_period required)</param>
-        /// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
-        /// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
-        /// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-        /// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="destination">Sets the email destination</param>
-        /// <param name="destinations">Sets the list of email addresses</param>
-        /// <param name="recipient">Sets the email recipient - Recipient() object</param>
-        /// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
-        /// <param name="file">Sets the attachment (file location)</param>
-        /// <param name="files">Sets the list of attachments (file locations)</param>
-        /// <param name="attachment">Sets the attachment - Attachment() object</param>
-        /// <param name="attachments">Sets the list of attachments</param>
-        /// <param name="webhookCallbackURL">Webhook callback URL</param>
-        /// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
-        /// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
-        /// <returns>MessageApiResult</returns>
-        [ComVisible(false)]
+				/// <summary>
+				/// Send Fax Message
+				/// </summary>
+				/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+				/// <param name="reference">Tracking ID or message description</param>
+				/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+				/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+				/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="chargeCode">Cost allocation for billing</param>
+				/// <param name="serviceName">Service name for your app</param>
+				/// <param name="resolution">Hi/Low - Quality of the fax image. High for better quality, low for lower quality (faster delivery speed)</param>
+				/// <param name="csid">Called Subscriber Identification - Maximum 30 characters</param>
+				/// <param name="watermarkFolder">Directory/location of Watermark file to use</param>
+				/// <param name="watermarkFirstPage">Watermark file to apply to the first page only</param>
+				/// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
+				/// <param name="retryAttempts">Number of retries (retry_period required)</param>
+				/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
+				/// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
+				/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+				/// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="destination">Sets the email destination</param>
+				/// <param name="destinations">Sets the list of email addresses</param>
+				/// <param name="recipient">Sets the email recipient - Recipient() object</param>
+				/// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
+				/// <param name="file">Sets the attachment (file location)</param>
+				/// <param name="files">Sets the list of attachments (file locations)</param>
+				/// <param name="attachment">Sets the attachment - Attachment() object</param>
+				/// <param name="attachments">Sets the list of attachments</param>
+				/// <param name="webhookCallbackURL">Webhook callback URL</param>
+				/// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
+				/// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
+				/// <returns>MessageApiResult</returns>
+				[ComVisible(false)]
         public MessageApiResult SendMessage(
                 MessageID messageID = null,                     // MessageID object
                 string reference = null,
@@ -375,7 +376,8 @@ namespace TNZAPI.NET.Api.Messaging.Fax
                 string subaccount = null,
                 string department = null,
                 string chargeCode = null,
-                string resolution = null,
+								string serviceName = null,
+								string resolution = null,
                 string csid = null,
                 string watermarkFolder = null,
                 string watermarkFirstPage = null,
@@ -416,7 +418,8 @@ namespace TNZAPI.NET.Api.Messaging.Fax
                 SubAccount = subaccount,
                 Department = department,
                 ChargeCode = chargeCode,
-                Resolution = resolution,
+								ServiceName = serviceName,
+								Resolution = resolution,
                 CSID = csid,
 
                 WatermarkFolder = watermarkFolder,
@@ -505,44 +508,45 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             return await SendMessageAsync();
         }
 
-        /// <summary>
-        /// Send Fax Message (async)
-        /// </summary>
-        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="reference">Tracking ID or message description</param>
-        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="chargeCode">Cost allocation for billing</param>
-        /// <param name="resolution">Hi/Low - Quality of the fax image. High for better quality, low for lower quality (faster delivery speed)</param>
-        /// <param name="csid">Called Subscriber Identification - Maximum 30 characters</param>
-        /// <param name="watermarkFolder">Directory/location of Watermark file to use</param>
-        /// <param name="watermarkFirstPage">Watermark file to apply to the first page only</param>
-        /// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
-        /// <param name="retryAttempts">Number of retries (retry_period required)</param>
-        /// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
-        /// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
-        /// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-        /// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="destination">Sets the email destination</param>
-        /// <param name="destinations">Sets the list of email addresses</param>
-        /// <param name="recipient">Sets the email recipient - Recipient() object</param>
-        /// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
-        /// <param name="file">Sets the attachment (file location)</param>
-        /// <param name="files">Sets the list of attachments (file locations)</param>
-        /// <param name="attachment">Sets the attachment - Attachment() object</param>
-        /// <param name="attachments">Sets the list of attachments</param>
-        /// <param name="webhookCallbackURL">Webhook callback URL</param>
-        /// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
-        /// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
-        /// <returns>Task<MessageApiResult></returns>
-        [ComVisible(false)]
+				/// <summary>
+				/// Send Fax Message (async)
+				/// </summary>
+				/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+				/// <param name="reference">Tracking ID or message description</param>
+				/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+				/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+				/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="chargeCode">Cost allocation for billing</param>
+				/// <param name="serviceName">Service name for your app</param>
+				/// <param name="resolution">Hi/Low - Quality of the fax image. High for better quality, low for lower quality (faster delivery speed)</param>
+				/// <param name="csid">Called Subscriber Identification - Maximum 30 characters</param>
+				/// <param name="watermarkFolder">Directory/location of Watermark file to use</param>
+				/// <param name="watermarkFirstPage">Watermark file to apply to the first page only</param>
+				/// <param name="watermarkAllPages">Watermark file to apply to all pages</param>
+				/// <param name="retryAttempts">Number of retries (retry_period required)</param>
+				/// <param name="retryPeriod">Minutes between retries (retry_attempts required)</param>
+				/// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
+				/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+				/// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="destination">Sets the email destination</param>
+				/// <param name="destinations">Sets the list of email addresses</param>
+				/// <param name="recipient">Sets the email recipient - Recipient() object</param>
+				/// <param name="recipients">Sets the list of email recipients - List<Recipient>()</param>
+				/// <param name="file">Sets the attachment (file location)</param>
+				/// <param name="files">Sets the list of attachments (file locations)</param>
+				/// <param name="attachment">Sets the attachment - Attachment() object</param>
+				/// <param name="attachments">Sets the list of attachments</param>
+				/// <param name="webhookCallbackURL">Webhook callback URL</param>
+				/// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
+				/// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
+				/// <returns>Task<MessageApiResult></returns>
+				[ComVisible(false)]
         public async Task<MessageApiResult> SendMessageAsync(
                 MessageID messageID = null,                     // MessageID object
                 string reference = null,
@@ -551,7 +555,8 @@ namespace TNZAPI.NET.Api.Messaging.Fax
                 string subaccount = null,
                 string department = null,
                 string chargeCode = null,
-                string resolution = null,
+								string serviceName = null,
+								string resolution = null,
                 string csid = null,
                 string watermarkFolder = null,
                 string watermarkFirstPage = null,
@@ -592,7 +597,8 @@ namespace TNZAPI.NET.Api.Messaging.Fax
                 SubAccount = subaccount,
                 Department = department,
                 ChargeCode = chargeCode,
-                Resolution = resolution,
+								ServiceName = serviceName,
+								Resolution = resolution,
                 CSID = csid,
 
                 WatermarkFolder = watermarkFolder,

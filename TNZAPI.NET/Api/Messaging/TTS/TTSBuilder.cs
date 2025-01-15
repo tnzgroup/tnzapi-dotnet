@@ -196,13 +196,25 @@ namespace TNZAPI.NET.Api.Messaging.TTS
             return this;
         }
 
-        /// <summary>
-        /// Adding messages
-        /// </summary>
-        /// <param name="messageDataType">Type of message - enum Voice.MessageDataType</param>
-        /// <param name="ttsMessage">Message to be sent (Text format)</param>
-        /// <returns></returns>
-        public TTSBuilder SetMessageData(MessageDataType messageDataType, string ttsMessage)
+				/// <summary>
+				/// Sets ServiceName value of the message
+				/// </summary>
+				/// <param name="serviceName">Service Name Value</param>
+				/// <returns>TTSBuilder</returns>
+				public TTSBuilder SetServiceName(string serviceName)
+				{
+						Entity.ServiceName = serviceName;
+
+						return this;
+				}
+
+				/// <summary>
+				/// Adding messages
+				/// </summary>
+				/// <param name="messageDataType">Type of message - enum Voice.MessageDataType</param>
+				/// <param name="ttsMessage">Message to be sent (Text format)</param>
+				/// <returns></returns>
+				public TTSBuilder SetMessageData(MessageDataType messageDataType, string ttsMessage)
         {
             switch (messageDataType)
             {

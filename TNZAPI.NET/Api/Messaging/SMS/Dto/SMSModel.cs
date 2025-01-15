@@ -22,6 +22,7 @@ namespace TNZAPI.NET.Api.Messaging.SMS.Dto
         public string SubAccount { get; set; } = "";
         public string Department { get; set; } = "";
         public string ChargeCode { get; set; } = "";
+        public string ServiceName { get; set; } = "";
 
 
         public string FromNumber { get; set; } = "";

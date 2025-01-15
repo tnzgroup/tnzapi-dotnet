@@ -154,7 +154,7 @@ namespace TNZAPI.NET.Samples.Messaging.Send
 
             var webhookCallbackURL = "https://example.com/webhook";
             var webhookCallbackFormat = Enums.WebhookCallbackType.XML;
-            var errorEmailNotify = "notify@example.com";
+            var reportTo = "notify@example.com";
 
             var smsEmailReply = "reply@test.com";
             var forceGSMChars = "True";
@@ -320,14 +320,13 @@ namespace TNZAPI.NET.Samples.Messaging.Send
                     WebhookCallbackURL = webhookCallbackURL,            // Webhook Callback URL
                     WebhookCallbackFormat = webhookCallbackFormat,      // Webhook Callback Format (XML/JSON)
 
-                    ErrorEmailNotify = errorEmailNotify,                // Error Email Notify (Receive email when it errored)
-
                     MessageID = new MessageID("ABCD12345"),             // MessageID - Leave blank to auto-generate
                     Reference = reference,                              // Reference
                     SubAccount = "",                                    // SubAccount
                     Department = "",                                    // Department
                     SMSEmailReply = smsEmailReply,                      // SMSEmailReply - For email (SMTP) reply receipt notifications
-                    ForceGSMChars = forceGSMChars,                      // ForceGSMChars
+										ReportTo = reportTo,                                // Notification email address (Receive email for notifications)
+										ForceGSMChars = forceGSMChars,                      // ForceGSMChars
                     MessageText = messageText,                          // SMS Message
 
                     Recipients = recipients.ToList(),                   // Recipient List

@@ -196,16 +196,28 @@ namespace TNZAPI.NET.Api.Messaging.SMS
             return this;
         }
 
-        #endregion
+				/// <summary>
+				/// Sets ServiceName value of the message
+				/// </summary>
+				/// <param name="serviceName">Service Name Value</param>
+				/// <returns>SMSBuilder</returns>
+				public SMSBuilder SetServiceName(string serviceName)
+				{
+						Entity.ServiceName = serviceName;
 
-        #region SMS Specific
+						return this;
+				}
 
-        /// <summary>
-        /// Sets origination number (to overseas only)
-        /// </summary>
-        /// <param name="number">From number</param>
-        /// <returns>SMSBuilder</returns>
-        public SMSBuilder SetFromNumber(string number)
+				#endregion
+
+				#region SMS Specific
+
+				/// <summary>
+				/// Sets origination number (to overseas only)
+				/// </summary>
+				/// <param name="number">From number</param>
+				/// <returns>SMSBuilder</returns>
+				public SMSBuilder SetFromNumber(string number)
         {
             Entity.FromNumber = number;
 

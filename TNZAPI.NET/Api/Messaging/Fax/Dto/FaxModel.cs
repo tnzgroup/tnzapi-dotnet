@@ -21,8 +21,9 @@ namespace TNZAPI.NET.Api.Messaging.Fax.Dto
         public string SubAccount { get; set; } = "";
         public string Department { get; set; } = "";
         public string ChargeCode { get; set; } = "";
+				public string ServiceName { get; set; } = "";
 
-        public string Resolution { get; set; } = "high";
+				public string Resolution { get; set; } = "high";
         public string CSID { get; set; } = "";
         public string StampFormat { get; set; } = "";
 

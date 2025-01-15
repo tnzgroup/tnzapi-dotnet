@@ -198,16 +198,28 @@ namespace TNZAPI.NET.Api.Messaging.Fax
             return this;
         }
 
-        #endregion
+				/// <summary>
+				/// Sets ServiceName value of the message
+				/// </summary>
+				/// <param name="serviceName">Service Name Value</param>
+				/// <returns>FaxBuilder</returns>
+				public FaxBuilder SetServiceName(string serviceName)
+				{
+						Entity.ServiceName = serviceName;
 
-        #region Fax Specific
+						return this;
+				}
 
-        /// <summary>
-        /// Sets fax resolution
-        /// </summary>
-        /// <param name="resolution">HIGH/LOW</param>
-        /// <returns>FaxBuilder</returns>
-        public FaxBuilder SetResolution(string resolution)
+				#endregion
+
+				#region Fax Specific
+
+				/// <summary>
+				/// Sets fax resolution
+				/// </summary>
+				/// <param name="resolution">HIGH/LOW</param>
+				/// <returns>FaxBuilder</returns>
+				public FaxBuilder SetResolution(string resolution)
         {
             Entity.Resolution = resolution;
 

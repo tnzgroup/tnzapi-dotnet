@@ -197,16 +197,28 @@ namespace TNZAPI.NET.Api.Messaging.Voice
             return this;
         }
 
-        #endregion
+				/// <summary>
+				/// Sets ServiceName value of the message
+				/// </summary>
+				/// <param name="serviceName">Service Name Value</param>
+				/// <returns>VoiceBuilder</returns>
+				public VoiceBuilder SetServiceName(string serviceName)
+				{
+						Entity.ServiceName = serviceName;
 
-        #region Voice Specific
+						return this;
+				}
 
-        /// <summary>
-        /// Sets Caller ID
-        /// </summary>
-        /// <param name="callerID">Caller ID / Phone Number</param>
-        /// <returns>VoiceBuilder</returns>
-        public VoiceBuilder SetCallerID(string callerID)
+				#endregion
+
+				#region Voice Specific
+
+				/// <summary>
+				/// Sets Caller ID
+				/// </summary>
+				/// <param name="callerID">Caller ID / Phone Number</param>
+				/// <returns>VoiceBuilder</returns>
+				public VoiceBuilder SetCallerID(string callerID)
         {
             Entity.CallerID = callerID;
 

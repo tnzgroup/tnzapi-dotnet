@@ -198,6 +198,18 @@ namespace TNZAPI.NET.Api.Messaging.Email
             return this;
         }
 
+        /// <summary>
+        /// Sets ServiceName value of the message
+        /// </summary>
+        /// <param name="serviceName">Service Name Value</param>
+        /// <returns>EmailBuilder</returns>
+        public EmailBuilder SetServiceName(string serviceName)
+        {
+            Entity.ServiceName = serviceName;
+
+            return this;
+        }
+
         #endregion
 
         #region Email Specific

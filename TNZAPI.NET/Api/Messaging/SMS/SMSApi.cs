@@ -167,7 +167,7 @@ namespace TNZAPI.NET.Api.Messaging.SMS
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ChargeCode", Entity.ChargeCode));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "FromNumber", Entity.FromNumber));
             messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "SMSEmailReply", Entity.SMSEmailReply));
-						//messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ErrorEmailNotify", Entity.ErrorEmailNotify));
+						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ServiceName", Entity.ServiceName));
 						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "ReportTo", Entity.ReportTo));
 						messageDataNode.AppendChild(XMLHelpers.addChildNode(xmlDoc, "Message", Entity.MessageText));
 
@@ -323,41 +323,42 @@ namespace TNZAPI.NET.Api.Messaging.SMS
             return SendMessage();
         }
 
-        /// <summary>
-        /// Send SMS Message
-        /// </summary>
-        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="messageID">MessageID object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="reference">Tracking ID or message description</param>
-        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="chargeCode">Cost allocation for billing</param>
-        /// <param name="smsEmailReply">For email (SMTP) reply receipt notifications</param>
-        /// <param name="forceGSMChars">Convert multi-byte characters into normalised GSM character format. ie. © to (C)</param>
-        /// <param name="messageText">Plain or UTF-8 formatted SMS message</param>
-        /// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
-        /// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-        /// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="destination">Sets the SMS destination</param>
-        /// <param name="destinations">Sets the list of SMS destinations</param>
-        /// <param name="recipient">Sets the SMS recipient - Recipient() object</param>
-        /// <param name="recipients">Sets the list of SMS recipients - List<Recipient>()</param>
-        /// <param name="file">Sets the attachment (file location)</param>
-        /// <param name="files">Sets the list of attachments (file locations)</param>
-        /// <param name="attachment">Sets the attachment - Attachment() object</param>
-        /// <param name="attachments">Sets the list of attachments</param>
-        /// <param name="webhookCallbackURL">Webhook callback URL</param>
-        /// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
-        /// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
-        /// <returns>MessageApiResult</returns>
-        [ComVisible(false)]
+				/// <summary>
+				/// Send SMS Message
+				/// </summary>
+				/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+				/// <param name="messageID">MessageID object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+				/// <param name="reference">Tracking ID or message description</param>
+				/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+				/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+				/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="chargeCode">Cost allocation for billing</param>
+				/// <param name="serviceName">Service name for your app</param>
+				/// <param name="smsEmailReply">For email (SMTP) reply receipt notifications</param>
+				/// <param name="forceGSMChars">Convert multi-byte characters into normalised GSM character format. ie. © to (C)</param>
+				/// <param name="messageText">Plain or UTF-8 formatted SMS message</param>
+				/// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
+				/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+				/// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="destination">Sets the SMS destination</param>
+				/// <param name="destinations">Sets the list of SMS destinations</param>
+				/// <param name="recipient">Sets the SMS recipient - Recipient() object</param>
+				/// <param name="recipients">Sets the list of SMS recipients - List<Recipient>()</param>
+				/// <param name="file">Sets the attachment (file location)</param>
+				/// <param name="files">Sets the list of attachments (file locations)</param>
+				/// <param name="attachment">Sets the attachment - Attachment() object</param>
+				/// <param name="attachments">Sets the list of attachments</param>
+				/// <param name="webhookCallbackURL">Webhook callback URL</param>
+				/// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
+				/// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
+				/// <returns>MessageApiResult</returns>
+				[ComVisible(false)]
         public MessageApiResult SendMessage(
                 MessageID messageID = null,                     // MessageID object
                 string reference = null,
@@ -366,6 +367,7 @@ namespace TNZAPI.NET.Api.Messaging.SMS
                 string subaccount = null,
                 string department = null,
                 string chargeCode = null,
+                string serviceName = null,
                 string smsEmailReply = null,
                 string forceGSMChars = null,
                 string messageText = null,
@@ -403,7 +405,9 @@ namespace TNZAPI.NET.Api.Messaging.SMS
                 SubAccount = subaccount,
                 Department = department,
                 ChargeCode = chargeCode,
-                SMSEmailReply = smsEmailReply,
+								ServiceName = serviceName,
+
+								SMSEmailReply = smsEmailReply,
                 ForceGSMChars = forceGSMChars,
                 MessageText = messageText,
 
@@ -488,41 +492,42 @@ namespace TNZAPI.NET.Api.Messaging.SMS
             return await SendMessageAsync();
         }
 
-        /// <summary>
-        /// Send SMS Message (async)
-        /// </summary>
-        /// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="messageID">MessageID object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
-        /// <param name="reference">Tracking ID or message description</param>
-        /// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
-        /// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
-        /// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
-        /// <param name="chargeCode">Cost allocation for billing</param>
-        /// <param name="smsEmailReply">For email (SMTP) reply receipt notifications</param>
-        /// <param name="forceGSMChars">Convert multi-byte characters into normalised GSM character format. ie. © to (C)</param>
-        /// <param name="messageText">Plain or UTF-8 formatted SMS message</param>
-        /// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
-        /// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
-        /// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
-        /// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
-        /// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
-        /// <param name="destination">Sets the SMS destination</param>
-        /// <param name="destinations">Sets the list of SMS destinations</param>
-        /// <param name="recipient">Sets the SMS recipient - Recipient() object</param>
-        /// <param name="recipients">Sets the list of SMS recipients - List<Recipient>()</param>
-        /// <param name="file">Sets the attachment (file location)</param>
-        /// <param name="files">Sets the list of attachments (file locations)</param>
-        /// <param name="attachment">Sets the attachment - Attachment() object</param>
-        /// <param name="attachments">Sets the list of attachments</param>
-        /// <param name="webhookCallbackURL">Webhook callback URL</param>
-        /// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
-        /// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
-        /// <returns>Task<MessageApiResult></returns>
-        public async Task<MessageApiResult> SendMessageAsync(
+				/// <summary>
+				/// Send SMS Message (async)
+				/// </summary>
+				/// <param name="messageID">A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+				/// <param name="messageID">MessageID object, A message tracking identifier (maximum 40 characters, alphanumeric). If you do not supply this field, the API will return one for you in the response body (UUID v4 of 36 characters)</param>
+				/// <param name="reference">Tracking ID or message description</param>
+				/// <param name="sendTime">Delay sending until the specified date/time (your local timezone, specified by your Sender setting or overridden using the Timezone)</param>
+				/// <param name="timezone">Timezone specified using Windows timezone value (default set using Web Dashboard can be overridden here)</param>
+				/// <param name="subaccount">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="department">Used for reporting, billing and Web Dashboard segmentation</param>
+				/// <param name="chargeCode">Cost allocation for billing</param>
+				/// <param name="serviceName">Service name for your app</param>
+				/// <param name="smsEmailReply">For email (SMTP) reply receipt notifications</param>
+				/// <param name="forceGSMChars">Convert multi-byte characters into normalised GSM character format. ie. © to (C)</param>
+				/// <param name="messageText">Plain or UTF-8 formatted SMS message</param>
+				/// <param name="group">GroupModel object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groups">List of GroupModel objects, Sets the recipient groups by group ids (from TNZ Addressbook)</param>
+				/// <param name="groupID">GroupID object, Sets the recipient group by group id (from TNZ Addressbook)</param>
+				/// <param name="groupIDs">List of GroupID objects, Sets the list of recipient groups by list of group ids (from TNZ Addressbook)</param>
+				/// <param name="contact">ContactModel object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contacts">List of ContactModel objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="contactID">ContactID object, Sets the recipient by contact id (from TNZ Addressbook)</param>
+				/// <param name="contactIDs">List of ContactID objects, Sets the list of recipient by list of contact ids (from TNZ Addressbook)</param>
+				/// <param name="destination">Sets the SMS destination</param>
+				/// <param name="destinations">Sets the list of SMS destinations</param>
+				/// <param name="recipient">Sets the SMS recipient - Recipient() object</param>
+				/// <param name="recipients">Sets the list of SMS recipients - List<Recipient>()</param>
+				/// <param name="file">Sets the attachment (file location)</param>
+				/// <param name="files">Sets the list of attachments (file locations)</param>
+				/// <param name="attachment">Sets the attachment - Attachment() object</param>
+				/// <param name="attachments">Sets the list of attachments</param>
+				/// <param name="webhookCallbackURL">Webhook callback URL</param>
+				/// <param name="webhookCallbackFormat">Webhool callback format - XML or JSON</param>
+				/// <param name="sendMode">SendModeType.Live or SendModeType.Test</param>
+				/// <returns>Task<MessageApiResult></returns>
+				public async Task<MessageApiResult> SendMessageAsync(
                 MessageID messageID = null,                     // MessageID object
                 string reference = null,
                 DateTime? sendTime = null,
@@ -530,7 +535,8 @@ namespace TNZAPI.NET.Api.Messaging.SMS
                 string subaccount = null,
                 string department = null,
                 string chargeCode = null,
-                string smsEmailReply = null,
+								string serviceName = null,
+								string smsEmailReply = null,
                 string forceGSMChars = null,
                 string messageText = null,
                 GroupModel group = null,                        // GroupModel object
@@ -567,6 +573,8 @@ namespace TNZAPI.NET.Api.Messaging.SMS
                 SubAccount = subaccount,
                 Department = department,
                 ChargeCode = chargeCode,
+                ServiceName = serviceName,
+
                 SMSEmailReply = smsEmailReply,
                 ForceGSMChars = forceGSMChars,
                 MessageText = messageText,

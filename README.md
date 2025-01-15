@@ -15,6 +15,7 @@ This library supports the following .NET implementations:
 * .NET6
 * .NET7
 * .NET8
+* .NET9
 
 ## Getting Started
 

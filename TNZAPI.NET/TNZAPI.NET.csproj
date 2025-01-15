@@ -4,7 +4,7 @@
 		<TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
-		<VersionPrefix>2.4.1.1</VersionPrefix>
+		<VersionPrefix>2.4.1.2</VersionPrefix>
 		<AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
 		<FileVersion>$(VersionPrefix)</FileVersion>
     <PackageReadmeFile>readme.md</PackageReadmeFile>

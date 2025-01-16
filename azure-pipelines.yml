@@ -22,18 +22,17 @@ steps:
 - script: dotnet build TNZAPI.NET/*.csproj -c $(buildConfiguration)
   displayName: 'dotnet build TNZAPI.NET/*.csproj $(buildConfiguration)'
 
-  steps:
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'pack'
-      packDirectory: "$(Build.ArtifactStagingDirectory)/packages"
-      packagesToPack: 'TNZAPI.NET/*.csproj'
-      versioningScheme: 'off'
-    displayName: 'Create package'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packDirectory: "$(Build.ArtifactStagingDirectory)/packages"
+    packagesToPack: 'TNZAPI.NET/*.csproj;'
+    versioningScheme: 'off'
+  displayName: 'Create package'
 
-  - task: NuGetCommand@2
-    inputs:
-      command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/packages/*.*nupkg'
-      nuGetFeedType: 'external'
-      publishFeedCredentials: 'TNZAPI.NET.Nuget'
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/packages/*.*nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'TNZAPI.NET.Nuget'

@@ -8,14 +8,16 @@
 		<AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
 		<FileVersion>$(VersionPrefix)</FileVersion>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://www.tnz.co.nz/Docs/dotNetLib/</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Copyright>Copyright © TNZ Group Ltd. 2025</Copyright>
 	</PropertyGroup>
   
   <ItemGroup>
     <None Include="..\readme.md" Pack="true" PackagePath="\" />
+    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

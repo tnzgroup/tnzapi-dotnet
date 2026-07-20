@@ -14,7 +14,9 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://www.tnz.co.nz/Docs/dotNetLib/</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-		<Copyright>Copyright © TNZ Group Ltd. 2025</Copyright>
+    <RepositoryUrl>https://github.com/tnzgroup/tnzapi-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+		<Copyright>Copyright © TNZ Group Ltd. 2026</Copyright>
 	</PropertyGroup>
   
   <ItemGroup>

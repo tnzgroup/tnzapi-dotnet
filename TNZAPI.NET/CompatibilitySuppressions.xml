@@ -16901,6 +16901,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IContactGroupApi.SetAPIUser(TNZAPI.NET.Core.ITNZAuth)</Target>
+    <Left>lib/net6.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net6.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IContactGroupApi.SetAuthToken(System.String)</Target>
+    <Left>lib/net6.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net6.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
     <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupApi.Delete(TNZAPI.NET.Api.Messaging.Common.Dto.GroupID)</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
@@ -17013,6 +17027,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupContactApi.SetAPIUser(TNZAPI.NET.Core.ITNZAuth)</Target>
+    <Left>lib/net6.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net6.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupContactApi.SetAuthToken(System.String)</Target>
+    <Left>lib/net6.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net6.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
     <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.Abort(TNZAPI.NET.Api.Messaging.Common.Dto.MessageID)</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
@@ -17055,7 +17083,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessage(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17069,7 +17097,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessageAsync(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17139,7 +17167,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessage(System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessage(System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17153,7 +17181,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessageAsync(System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17195,14 +17223,28 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.Int32,System.Int32,System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.DateTime,System.Nullable{System.DateTime},System.Int32,System.Int32)</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.Int32,System.Int32,System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.Int32,System.Int32,System.Int32)</Target>
+    <Left>lib/net6.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net6.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.DateTime,System.Nullable{System.DateTime},System.Int32,System.Int32)</Target>
+    <Left>lib/net6.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net6.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.Int32,System.Int32,System.Int32)</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17223,7 +17265,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessage(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17237,7 +17279,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessageAsync(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17335,7 +17377,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessage(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17349,7 +17391,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessageAsync(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17433,7 +17475,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessage(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17447,7 +17489,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessageAsync(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net6.0/TNZAPI.NET.dll</Left>
     <Right>lib/net6.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17692,6 +17734,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IContactGroupApi.SetAPIUser(TNZAPI.NET.Core.ITNZAuth)</Target>
+    <Left>lib/net7.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net7.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IContactGroupApi.SetAuthToken(System.String)</Target>
+    <Left>lib/net7.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net7.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
     <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupApi.Delete(TNZAPI.NET.Api.Messaging.Common.Dto.GroupID)</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
@@ -17804,6 +17860,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupContactApi.SetAPIUser(TNZAPI.NET.Core.ITNZAuth)</Target>
+    <Left>lib/net7.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net7.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupContactApi.SetAuthToken(System.String)</Target>
+    <Left>lib/net7.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net7.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
     <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.Abort(TNZAPI.NET.Api.Messaging.Common.Dto.MessageID)</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
@@ -17846,7 +17916,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessage(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17860,7 +17930,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessageAsync(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17930,7 +18000,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessage(System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessage(System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17944,7 +18014,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessageAsync(System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -17986,14 +18056,28 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.Int32,System.Int32,System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.DateTime,System.Nullable{System.DateTime},System.Int32,System.Int32)</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.Int32,System.Int32,System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.Int32,System.Int32,System.Int32)</Target>
+    <Left>lib/net7.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net7.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.DateTime,System.Nullable{System.DateTime},System.Int32,System.Int32)</Target>
+    <Left>lib/net7.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net7.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.Int32,System.Int32,System.Int32)</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18014,7 +18098,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessage(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18028,7 +18112,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessageAsync(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18126,7 +18210,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessage(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18140,7 +18224,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessageAsync(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18224,7 +18308,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessage(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18238,7 +18322,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessageAsync(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net7.0/TNZAPI.NET.dll</Left>
     <Right>lib/net7.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18483,6 +18567,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IContactGroupApi.SetAPIUser(TNZAPI.NET.Core.ITNZAuth)</Target>
+    <Left>lib/net8.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net8.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IContactGroupApi.SetAuthToken(System.String)</Target>
+    <Left>lib/net8.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net8.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
     <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupApi.Delete(TNZAPI.NET.Api.Messaging.Common.Dto.GroupID)</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
@@ -18595,6 +18693,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupContactApi.SetAPIUser(TNZAPI.NET.Core.ITNZAuth)</Target>
+    <Left>lib/net8.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net8.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupContactApi.SetAuthToken(System.String)</Target>
+    <Left>lib/net8.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net8.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
     <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.Abort(TNZAPI.NET.Api.Messaging.Common.Dto.MessageID)</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
@@ -18637,7 +18749,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessage(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18651,7 +18763,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessageAsync(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18721,7 +18833,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessage(System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessage(System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18735,7 +18847,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessageAsync(System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18777,14 +18889,28 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.Int32,System.Int32,System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.DateTime,System.Nullable{System.DateTime},System.Int32,System.Int32)</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.Int32,System.Int32,System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.Int32,System.Int32,System.Int32)</Target>
+    <Left>lib/net8.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net8.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.DateTime,System.Nullable{System.DateTime},System.Int32,System.Int32)</Target>
+    <Left>lib/net8.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net8.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.Int32,System.Int32,System.Int32)</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18805,7 +18931,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessage(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18819,7 +18945,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessageAsync(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18917,7 +19043,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessage(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -18931,7 +19057,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessageAsync(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19015,7 +19141,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessage(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19029,7 +19155,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessageAsync(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net8.0/TNZAPI.NET.dll</Left>
     <Right>lib/net8.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19274,6 +19400,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IContactGroupApi.SetAPIUser(TNZAPI.NET.Core.ITNZAuth)</Target>
+    <Left>lib/net9.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net9.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IContactGroupApi.SetAuthToken(System.String)</Target>
+    <Left>lib/net9.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net9.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
     <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupApi.Delete(TNZAPI.NET.Api.Messaging.Common.Dto.GroupID)</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
@@ -19386,6 +19526,20 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupContactApi.SetAPIUser(TNZAPI.NET.Core.ITNZAuth)</Target>
+    <Left>lib/net9.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net9.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Addressbook.IGroupContactApi.SetAuthToken(System.String)</Target>
+    <Left>lib/net9.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net9.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
     <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.Abort(TNZAPI.NET.Api.Messaging.Common.Dto.MessageID)</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
@@ -19428,7 +19582,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessage(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19442,7 +19596,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IEmailApi.SendMessageAsync(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19512,7 +19666,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessage(System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessage(System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19526,7 +19680,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IFaxApi.SendMessageAsync(System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19568,14 +19722,28 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.Int32,System.Int32,System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.DateTime,System.Nullable{System.DateTime},System.Int32,System.Int32)</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.Int32,System.Int32,System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.Received(System.Int32,System.Int32,System.Int32)</Target>
+    <Left>lib/net9.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net9.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.DateTime,System.Nullable{System.DateTime},System.Int32,System.Int32)</Target>
+    <Left>lib/net9.0/TNZAPI.NET.dll</Left>
+    <Right>lib/net9.0/TNZAPI.NET.dll</Right>
+    <IsBaselineSuppression>true</IsBaselineSuppression>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0006</DiagnosticId>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.ReceivedAsync(System.Int32,System.Int32,System.Int32)</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19596,7 +19764,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessage(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19610,7 +19778,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ISMSApi.SendMessageAsync(System.String,System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Attachment},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19708,7 +19876,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessage(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19722,7 +19890,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.ITTSApi.SendMessageAsync(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19806,7 +19974,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessage(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessage(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>
@@ -19820,7 +19988,7 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0006</DiagnosticId>
-    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessageAsync(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
+    <Target>M:TNZAPI.NET.Core.Interfaces.Messaging.IVoiceApi.SendMessageAsync(System.String,System.Object,System.String,System.String,System.String,System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.ContactID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Dto.GroupID},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Recipient},System.Collections.Generic.ICollection{TNZAPI.NET.Api.Messaging.Common.Components.Destination},System.Nullable{TNZAPI.NET.Core.Enums.NotificationType},System.Nullable{TNZAPI.NET.Core.Enums.SendModeType})</Target>
     <Left>lib/net9.0/TNZAPI.NET.dll</Left>
     <Right>lib/net9.0/TNZAPI.NET.dll</Right>
     <IsBaselineSuppression>true</IsBaselineSuppression>

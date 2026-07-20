@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "TNZAPI.NET.Demo.Api": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5080"
+    }
+  }
+}

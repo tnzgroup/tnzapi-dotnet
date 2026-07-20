@@ -1,0 +1,52 @@
+name: tnzapi-dotnet-demo
+
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: TNZAPI.NET.Demo/Api/Dockerfile
+    ports:
+      - "5080:5080"
+    # env_file (not `environment: - TNZ_AUTH_TOKEN=${TNZ_AUTH_TOKEN}`) so a missing/empty .env
+    # leaves TNZ_AUTH_TOKEN completely unset in the container rather than forcing it to an empty
+    # string — ASP.NET Core's config precedence is env vars > appsettings.{Environment}.json, so an
+    # explicit empty env var would silently blank out a real token from appsettings.Development.json.
+    # required: false means "no .env file" is fine; Api/appsettings.Development.json (bind-mounted
+    # below, loaded because the Dockerfile fixes ASPNETCORE_ENVIRONMENT=Development) is then the
+    # fallback source of truth for the token instead.
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      # Mounts the whole repo root (matching the build context and the Dockerfile's WORKDIR /src)
+      # so `dotnet watch` sees live edits to both Api/ and the sibling TNZAPI.NET project it
+      # references — without this, the image's build-time COPY snapshot never changes and every
+      # backend edit needs a full `docker-compose up --build` to take effect. bin/obj are excluded
+      # via anonymous volumes for both projects so the container's own Linux-built artifacts aren't
+      # overwritten by whatever the host happens to have on disk from local (Windows/Mac) builds.
+      - ..:/src
+      - /src/TNZAPI.NET.Demo/Api/bin
+      - /src/TNZAPI.NET.Demo/Api/obj
+      - /src/TNZAPI.NET/bin
+      - /src/TNZAPI.NET/obj
+    networks:
+      - demo
+
+  web:
+    build:
+      context: ./Web
+      dockerfile: Dockerfile
+    ports:
+      - "5373:5373"
+    environment:
+      - VITE_API_PROXY_TARGET=http://api:5080
+    volumes:
+      - ./Web:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    networks:
+      - demo
+
+networks:
+  demo:

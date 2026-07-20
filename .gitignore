@@ -1,0 +1,33 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.git
+/.vs
+/packages/
+**/bin/*
+**/obj/*
+**/logs/*
+**/.playwright/*
+**/.playwright-mcp/*
+
+# dependencies
+**/node_modules
+
+# production
+**/dist
+*.tsbuildinfo
+
+# env files (can opt-in for committing if needed)
+.env*
+!.env.local.example
+appsettings.*.json
+
+# certs / keys / secrets
+*.pfx
+*.pem
+*.key
+secrets.json
+local.settings.json
+
+.claude/settings.local.json

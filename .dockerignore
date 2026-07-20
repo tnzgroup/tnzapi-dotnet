@@ -1,0 +1,7 @@
+.git
+**/bin
+**/obj
+**/node_modules
+**/.env
+**/appsettings.Development.json
+TNZAPI.NET.Demo/Web

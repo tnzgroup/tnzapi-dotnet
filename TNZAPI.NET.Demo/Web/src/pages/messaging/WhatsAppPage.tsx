@@ -13,7 +13,7 @@ const CUSTOM_FIELDS = Array.from({ length: 9 }, (_, i) => `Custom${i + 1}`)
 export default function WhatsAppPage() {
   const [sendFields, setSendFields] = useState<FieldValues>({
     ToNumber: '',
-    Message: 'Hello from TNZAPI.NET Demo!',
+    Message: 'Hello from TNZAPI Demo!',
   })
   const [attachments, setAttachments] = useState<AttachmentValue[]>([])
   const [fallbackMode, setFallbackMode] = useState<string[]>([])

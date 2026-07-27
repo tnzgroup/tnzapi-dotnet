@@ -46,6 +46,20 @@ export async function apiRequest<T = unknown>(
   }
 }
 
+// Every Actions page (Abort/Reschedule/Resubmit/Pacing) needs the same Message ID handling before
+// building its PATCH URL: trim whitespace-only input to empty, reject empty with a clear error
+// (rather than let a blank/whitespace value reach the API as a malformed or %20-only URL segment),
+// then URL-encode it — a raw Message ID is now a path segment, unlike the old POST-body shape where
+// any string was safe. Centralized so all four pages give the same "Message ID is required"
+// response and stay in sync if that error shape or validation ever changes.
+export function resolveMessageId(raw: string | undefined): { messageId: string } | { status: number; data: unknown } {
+  const trimmed = (raw ?? '').trim()
+  if (!trimmed) {
+    return { status: 400, data: { Result: 'Failed', ErrorMessage: ['Message ID is required'] } }
+  }
+  return { messageId: encodeURIComponent(trimmed) }
+}
+
 // Attachment wire shape is identical across every messaging channel that supports Files —
 // { FileName, FileContent } maps straight onto the SDK's Attachment(fileName, fileContent) ctor.
 // PascalCase to match the C# request records verbatim (Program.cs sets PropertyNamingPolicy = null

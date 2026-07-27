@@ -30,8 +30,8 @@ describe('EmailPage', () => {
         method: 'POST',
         body: expect.objectContaining({
           EmailAddress: 'test@example.com',
-          Subject: 'Hello from TNZAPI.NET Demo!',
-          MessageHtml: '<p>Hello from TNZAPI.NET Demo!</p>',
+          Subject: 'Hello from TNZAPI Demo!',
+          MessageHtml: '<p>Hello from TNZAPI Demo!</p>',
         }),
       }),
     )

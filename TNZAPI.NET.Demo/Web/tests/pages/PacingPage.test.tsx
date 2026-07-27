@@ -16,7 +16,7 @@ describe('PacingPage', () => {
     mockedApiRequest.mockReset()
   })
 
-  it('submits Message ID, defaults Channel to TTS, and converts Number Of Operators to a number', async () => {
+  it('submits Message ID, and PATCHes the pacing endpoint for the selected channel with Number Of Operators as a number', async () => {
     mockedApiRequest.mockResolvedValue({ status: 200, data: { ActionResult: 'OK' } })
     const user = userEvent.setup()
     render(<PacingPage />)
@@ -26,11 +26,8 @@ describe('PacingPage', () => {
     await user.click(screen.getByRole('button', { name: 'Update Pacing' }))
 
     expect(mockedApiRequest).toHaveBeenCalledWith(
-      '/api/actions/pacing',
-      expect.objectContaining({
-        method: 'POST',
-        body: { MessageID: 'abc-123', Channel: 'TTS', NumberOfOperators: 5 },
-      }),
+      '/api/tts/abc-123/pacing',
+      expect.objectContaining({ method: 'PATCH', body: { NumberOfOperators: 5 } }),
     )
   })
 
@@ -44,6 +41,44 @@ describe('PacingPage', () => {
 
     const body = mockedApiRequest.mock.calls[0][1]?.body as { NumberOfOperators: number }
     expect(body.NumberOfOperators).toBe(0)
+  })
+
+  it('URL-encodes a Message ID containing reserved characters', async () => {
+    mockedApiRequest.mockResolvedValue({ status: 200, data: { ActionResult: 'OK' } })
+    const user = userEvent.setup()
+    render(<PacingPage />)
+
+    await user.type(screen.getByLabelText('Message ID'), 'abc/123?x=1')
+    await user.type(screen.getByLabelText('Number Of Operators'), '5')
+    await user.click(screen.getByRole('button', { name: 'Update Pacing' }))
+
+    expect(mockedApiRequest).toHaveBeenCalledWith(
+      '/api/tts/abc%2F123%3Fx%3D1/pacing',
+      expect.objectContaining({ method: 'PATCH', body: { NumberOfOperators: 5 } }),
+    )
+  })
+
+  it('rejects an empty Message ID without calling apiRequest', async () => {
+    const user = userEvent.setup()
+    render(<PacingPage />)
+
+    await user.type(screen.getByLabelText('Number Of Operators'), '5')
+    await user.click(screen.getByRole('button', { name: 'Update Pacing' }))
+
+    expect(mockedApiRequest).not.toHaveBeenCalled()
+    expect(await screen.findByText('Error (HTTP 400)')).toBeInTheDocument()
+  })
+
+  it('rejects a whitespace-only Message ID without calling apiRequest', async () => {
+    const user = userEvent.setup()
+    render(<PacingPage />)
+
+    await user.type(screen.getByLabelText('Message ID'), '   ')
+    await user.type(screen.getByLabelText('Number Of Operators'), '5')
+    await user.click(screen.getByRole('button', { name: 'Update Pacing' }))
+
+    expect(mockedApiRequest).not.toHaveBeenCalled()
+    expect(await screen.findByText('Error (HTTP 400)')).toBeInTheDocument()
   })
 
   it('only offers TTS and Voice', async () => {

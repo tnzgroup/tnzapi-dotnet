@@ -9,6 +9,7 @@ using TNZAPI.NET.Demo.Api.Helpers;
 namespace TNZAPI.NET.Demo.Api.Controllers
 {
     public record WhatsAppAttachmentRequest(string FileName, string FileContent);
+    public record WhatsAppRescheduleRequest(string SendTime);
 
     // Every field WhatsAppModel supports, aside from ContactID/GroupID (addressbook references,
     // need a contact/group picker rather than a text field — out of scope for this phase).
@@ -141,6 +142,41 @@ namespace TNZAPI.NET.Demo.Api.Controllers
             try
             {
                 var result = await _client.Messaging.WhatsApp.StatusAsync(new MessageID(id));
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/abort")]
+        public async Task<IActionResult> Abort(string id)
+        {
+            try
+            {
+                var result = await _client.Actions.WhatsApp.AbortAsync(new MessageID(id));
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/reschedule")]
+        public async Task<IActionResult> Reschedule(string id, [FromBody] WhatsAppRescheduleRequest request)
+        {
+            try
+            {
+                if (!DateTime.TryParse(request.SendTime, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var sendTime))
+                {
+                    return BadRequest(new { Result = "Failed", ErrorMessage = new[] { $"Invalid SendTime: '{request.SendTime}' could not be parsed as a date/time." } });
+                }
+
+                var result = await _client.Actions.WhatsApp.RescheduleAsync(new MessageID(id), sendTime);
 
                 return this.RespondWithResult(result);
             }

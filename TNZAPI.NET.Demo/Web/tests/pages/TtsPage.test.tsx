@@ -30,7 +30,7 @@ describe('TtsPage', () => {
         method: 'POST',
         body: expect.objectContaining({
           ToNumber: '+6421000001',
-          MessageToPeople: 'Hello from TNZAPI.NET Demo!',
+          MessageToPeople: 'Hello from TNZAPI Demo!',
         }),
       }),
     )

@@ -12,6 +12,9 @@ namespace TNZAPI.NET.Demo.Api.Controllers
     // Unlike TTS, PlayFile/File are meaningful here — Voice's KeypadModel actually uses them for
     // file-based keypad playback.
     public record VoiceKeypadRequest(int Tone, string? Play, string? RouteNumber, string? PlaySection, string? PlayFile, string? File);
+    public record VoiceRescheduleRequest(string SendTime);
+    public record VoiceResubmitRequest(string SendTime);
+    public record VoicePacingRequest(int NumberOfOperators);
 
     // Every field VoiceModel supports, aside from ContactID/GroupID (addressbook references, need a
     // contact/group picker rather than a text field — out of scope for this phase) and VoiceFiles
@@ -156,6 +159,81 @@ namespace TNZAPI.NET.Demo.Api.Controllers
             try
             {
                 var result = await _client.Messaging.Voice.StatusAsync(new MessageID(id));
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/abort")]
+        public async Task<IActionResult> Abort(string id)
+        {
+            try
+            {
+                var result = await _client.Actions.Voice.AbortAsync(new MessageID(id));
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/reschedule")]
+        public async Task<IActionResult> Reschedule(string id, [FromBody] VoiceRescheduleRequest request)
+        {
+            try
+            {
+                if (!DateTime.TryParse(request.SendTime, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var sendTime))
+                {
+                    return BadRequest(new { Result = "Failed", ErrorMessage = new[] { $"Invalid SendTime: '{request.SendTime}' could not be parsed as a date/time." } });
+                }
+
+                var result = await _client.Actions.Voice.RescheduleAsync(new MessageID(id), sendTime);
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/resubmit")]
+        public async Task<IActionResult> Resubmit(string id, [FromBody] VoiceResubmitRequest request)
+        {
+            try
+            {
+                if (!DateTime.TryParse(request.SendTime, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var sendTime))
+                {
+                    return BadRequest(new { Result = "Failed", ErrorMessage = new[] { $"Invalid SendTime: '{request.SendTime}' could not be parsed as a date/time." } });
+                }
+
+                var result = await _client.Actions.Voice.ResubmitAsync(new MessageID(id), sendTime);
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/pacing")]
+        public async Task<IActionResult> Pacing(string id, [FromBody] VoicePacingRequest request)
+        {
+            try
+            {
+                if (request.NumberOfOperators < 1)
+                {
+                    return BadRequest(new { Result = "Failed", ErrorMessage = new[] { $"Invalid NumberOfOperators: '{request.NumberOfOperators}' must be at least 1." } });
+                }
+
+                var result = await _client.Actions.Voice.PacingAsync(new MessageID(id), request.NumberOfOperators);
 
                 return this.RespondWithResult(result);
             }

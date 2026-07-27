@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold">TNZAPI.NET Demo</h1>
+        <h1 className="text-2xl font-semibold">TNZAPI Demo</h1>
         <p className="text-sm text-muted-foreground">
           Every card below exercises one operation of the TNZAPI.NET SDK end-to-end.
         </p>

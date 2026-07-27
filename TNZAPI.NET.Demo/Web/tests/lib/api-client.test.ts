@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
-import { apiRequest } from '@/lib/api-client'
+import { apiRequest, resolveMessageId } from '@/lib/api-client'
 
 describe('apiRequest', () => {
   afterEach(() => {
@@ -108,5 +108,37 @@ describe('apiRequest', () => {
 
     expect(result.status).toBe(200)
     expect(result.data.Error).toBe('Response body was not valid JSON')
+  })
+})
+
+describe('resolveMessageId', () => {
+  it('URL-encodes a valid Message ID', () => {
+    const result = resolveMessageId('abc/123?x=1')
+
+    expect(result).toEqual({ messageId: 'abc%2F123%3Fx%3D1' })
+  })
+
+  it('trims surrounding whitespace before encoding', () => {
+    const result = resolveMessageId('  abc-123  ')
+
+    expect(result).toEqual({ messageId: 'abc-123' })
+  })
+
+  it('rejects an empty Message ID', () => {
+    const result = resolveMessageId('')
+
+    expect(result).toEqual({ status: 400, data: { Result: 'Failed', ErrorMessage: ['Message ID is required'] } })
+  })
+
+  it('rejects a whitespace-only Message ID', () => {
+    const result = resolveMessageId('   ')
+
+    expect(result).toEqual({ status: 400, data: { Result: 'Failed', ErrorMessage: ['Message ID is required'] } })
+  })
+
+  it('rejects an undefined Message ID', () => {
+    const result = resolveMessageId(undefined)
+
+    expect(result).toEqual({ status: 400, data: { Result: 'Failed', ErrorMessage: ['Message ID is required'] } })
   })
 })

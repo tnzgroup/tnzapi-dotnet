@@ -2,13 +2,15 @@ import { useState, type FormEvent } from 'react'
 import { Button } from '@/components/ui/button'
 import { TextField, SelectField, type FieldValues } from '@/components/form-fields'
 import { ResponseViewer } from '@/components/response-viewer'
-import { apiRequest } from '@/lib/api-client'
+import { apiRequest, resolveMessageId } from '@/lib/api-client'
 
 // Mirrors tnzapi-ts-samples/nextjs/app/actions/resubmit (client.Actions.Resubmit.SendRequest),
 // which already correctly limits this to Email/Fax/TTS/Voice (confirmed via the .NET SDK's
 // Core/Interfaces/Actions/*.cs — SMS/WhatsApp/RCS have no Resubmit method). Unlike the ts reference,
 // SendTime is a required field here: the .NET SDK's Resubmit(MessageID, DateTime) has no optional
 // overload, so it can't be left blank the way the ts sample's form implies.
+// Channel now only builds the URL (PATCH /api/{channel}/{messageId}/resubmit) — it's no longer
+// sent in the body, matching the real TNZ REST API's own per-channel wire shape.
 const CHANNELS = ['Email', 'Fax', 'TTS', 'Voice']
 
 export default function ResubmitPage() {
@@ -24,12 +26,16 @@ export default function ResubmitPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setSubmitting(true)
-    const body = {
-      MessageID: (fields.MessageID as string) ?? '',
-      Channel: (fields.Channel as string) ?? 'Email',
-      SendTime: (fields.SendTime as string) ?? '',
+    const channel = ((fields.Channel as string) ?? 'Email').toLowerCase()
+    const resolved = resolveMessageId(fields.MessageID as string)
+    if ('status' in resolved) {
+      setStatus(resolved.status)
+      setData(resolved.data)
+      setSubmitting(false)
+      return
     }
-    const { status: resStatus, data: resData } = await apiRequest('/api/actions/resubmit', { method: 'POST', body })
+    const body = { SendTime: (fields.SendTime as string) ?? '' }
+    const { status: resStatus, data: resData } = await apiRequest(`/api/${channel}/${resolved.messageId}/resubmit`, { method: 'PATCH', body })
     setStatus(resStatus)
     setData(resData)
     setSubmitting(false)

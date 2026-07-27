@@ -28,7 +28,7 @@ describe('RcsPage', () => {
       '/api/rcs/send',
       expect.objectContaining({
         method: 'POST',
-        body: expect.objectContaining({ ToNumber: '+64211234567', Message: 'Hello from TNZAPI.NET Demo!' }),
+        body: expect.objectContaining({ ToNumber: '+64211234567', Message: 'Hello from TNZAPI Demo!' }),
       }),
     )
   })

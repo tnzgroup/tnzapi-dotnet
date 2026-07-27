@@ -11,6 +11,9 @@ namespace TNZAPI.NET.Demo.Api.Controllers
     // PlayFile/File are deliberately omitted — TTSModel's KeypadModel carries them only for shape
     // parity with Voice's shared KeypadModel; setting them on a TTS message has no effect.
     public record TtsKeypadRequest(int Tone, string? Play, string? RouteNumber, string? PlaySection);
+    public record TtsRescheduleRequest(string SendTime);
+    public record TtsResubmitRequest(string SendTime);
+    public record TtsPacingRequest(int NumberOfOperators);
 
     // Every field TTSModel supports, aside from ContactID/GroupID (addressbook references, need a
     // contact/group picker rather than a text field — out of scope for this phase).
@@ -148,6 +151,81 @@ namespace TNZAPI.NET.Demo.Api.Controllers
             try
             {
                 var result = await _client.Messaging.TTS.StatusAsync(new MessageID(id));
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/abort")]
+        public async Task<IActionResult> Abort(string id)
+        {
+            try
+            {
+                var result = await _client.Actions.TTS.AbortAsync(new MessageID(id));
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/reschedule")]
+        public async Task<IActionResult> Reschedule(string id, [FromBody] TtsRescheduleRequest request)
+        {
+            try
+            {
+                if (!DateTime.TryParse(request.SendTime, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var sendTime))
+                {
+                    return BadRequest(new { Result = "Failed", ErrorMessage = new[] { $"Invalid SendTime: '{request.SendTime}' could not be parsed as a date/time." } });
+                }
+
+                var result = await _client.Actions.TTS.RescheduleAsync(new MessageID(id), sendTime);
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/resubmit")]
+        public async Task<IActionResult> Resubmit(string id, [FromBody] TtsResubmitRequest request)
+        {
+            try
+            {
+                if (!DateTime.TryParse(request.SendTime, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var sendTime))
+                {
+                    return BadRequest(new { Result = "Failed", ErrorMessage = new[] { $"Invalid SendTime: '{request.SendTime}' could not be parsed as a date/time." } });
+                }
+
+                var result = await _client.Actions.TTS.ResubmitAsync(new MessageID(id), sendTime);
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/pacing")]
+        public async Task<IActionResult> Pacing(string id, [FromBody] TtsPacingRequest request)
+        {
+            try
+            {
+                if (request.NumberOfOperators < 1)
+                {
+                    return BadRequest(new { Result = "Failed", ErrorMessage = new[] { $"Invalid NumberOfOperators: '{request.NumberOfOperators}' must be at least 1." } });
+                }
+
+                var result = await _client.Actions.TTS.PacingAsync(new MessageID(id), request.NumberOfOperators);
 
                 return this.RespondWithResult(result);
             }

@@ -12,7 +12,7 @@ const FALLBACK_MODES = ['SMS', 'Voice', 'WhatsApp']
 export default function RcsPage() {
   const [sendFields, setSendFields] = useState<FieldValues>({
     ToNumber: '',
-    Message: 'Hello from TNZAPI.NET Demo!',
+    Message: 'Hello from TNZAPI Demo!',
   })
   const [attachments, setAttachments] = useState<AttachmentValue[]>([])
   const [fallbackMode, setFallbackMode] = useState<string[]>([])

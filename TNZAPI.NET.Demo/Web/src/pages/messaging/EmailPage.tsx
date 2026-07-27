@@ -11,9 +11,9 @@ import type { SendEmailRequest, MessageApiResult, MessageStatusApiResult } from 
 export default function EmailPage() {
   const [sendFields, setSendFields] = useState<FieldValues>({
     EmailAddress: '',
-    Subject: 'Hello from TNZAPI.NET Demo!',
+    Subject: 'Hello from TNZAPI Demo!',
   })
-  const [messageHtml, setMessageHtml] = useState('<p>Hello from TNZAPI.NET Demo!</p>')
+  const [messageHtml, setMessageHtml] = useState('<p>Hello from TNZAPI Demo!</p>')
   const [attachments, setAttachments] = useState<AttachmentValue[]>([])
   const [sendStatus, setSendStatus] = useState<number | null>(null)
   const [sendData, setSendData] = useState<unknown>(null)

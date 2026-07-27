@@ -1,8 +1,6 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
 using TNZAPI.NET.Demo.Api.Tests.Helpers;
 
 namespace TNZAPI.NET.Demo.Api.Tests.Controllers;
@@ -42,11 +40,7 @@ public class ContactGroupsControllerTests : DemoApiTestBase
     {
         var handler = FakeResponse(HttpStatusCode.OK, "{}");
 
-        var request = new HttpRequestMessage(HttpMethod.Delete, "/api/addressbook/contact-groups")
-        {
-            Content = new StringContent(JsonSerializer.Serialize(new { ContactID = "contact-1", GroupID = "group-1" }), Encoding.UTF8, "application/json"),
-        };
-        var response = await Client.SendAsync(request);
+        var response = await Client.DeleteAsync("/api/addressbook/contact-groups/contact-1/group-1");
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("https://api.tnz.co.nz/api/v3.00/addressbook/contact/contact-1/group/group-1", handler.LastRequest!.RequestUri!.ToString());

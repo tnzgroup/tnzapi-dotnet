@@ -16,7 +16,7 @@ function toOptionalNumber(value: string | undefined): number | undefined {
 export default function TtsPage() {
   const [sendFields, setSendFields] = useState<FieldValues>({
     ToNumber: '',
-    MessageToPeople: 'Hello from TNZAPI.NET Demo!',
+    MessageToPeople: 'Hello from TNZAPI Demo!',
   })
   const [keypads, setKeypads] = useState<KeypadValue[]>([])
   const [sendStatus, setSendStatus] = useState<number | null>(null)

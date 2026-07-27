@@ -53,12 +53,12 @@ namespace TNZAPI.NET.Demo.Api.Controllers
             }
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Remove([FromBody] ContactGroupRequest request)
+        [HttpDelete("{contactID}/{groupID}")]
+        public async Task<IActionResult> Remove(string contactID, string groupID)
         {
             try
             {
-                var result = await _client.Addressbook.Contact.Group.RemoveAsync(new ContactID(request.ContactID), new GroupID(request.GroupID));
+                var result = await _client.Addressbook.Contact.Group.RemoveAsync(new ContactID(contactID), new GroupID(groupID));
                 return this.RespondWithResult(result);
             }
             catch (Exception ex)

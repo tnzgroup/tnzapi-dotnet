@@ -2,12 +2,14 @@ import { useState, type FormEvent } from 'react'
 import { Button } from '@/components/ui/button'
 import { TextField, SelectField, type FieldValues } from '@/components/form-fields'
 import { ResponseViewer } from '@/components/response-viewer'
-import { apiRequest } from '@/lib/api-client'
+import { apiRequest, resolveMessageId } from '@/lib/api-client'
 
 // Mirrors tnzapi-ts-samples/nextjs/app/actions/abort (client.Actions.Abort.SendRequest), with one
 // fix: that reference's channel list is missing WhatsApp/RCS. The .NET SDK's own Actions interfaces
 // (Core/Interfaces/Actions/*.cs) confirm Abort exists on all 7 channels that have an Actions facade
 // at all — SMS/Email/Fax/TTS/Voice/WhatsApp/RCS. Workflow has no Actions facade (docs/workflow.md).
+// Channel now only builds the URL (PATCH /api/{channel}/{messageId}/abort) — it's no longer sent
+// in the body, matching the real TNZ REST API's own per-channel wire shape.
 const CHANNELS = ['SMS', 'Email', 'Fax', 'TTS', 'Voice', 'WhatsApp', 'RCS']
 
 export default function AbortPage() {
@@ -23,11 +25,15 @@ export default function AbortPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setSubmitting(true)
-    const body = {
-      MessageID: (fields.MessageID as string) ?? '',
-      Channel: (fields.Channel as string) ?? 'SMS',
+    const channel = ((fields.Channel as string) ?? 'SMS').toLowerCase()
+    const resolved = resolveMessageId(fields.MessageID as string)
+    if ('status' in resolved) {
+      setStatus(resolved.status)
+      setData(resolved.data)
+      setSubmitting(false)
+      return
     }
-    const { status: resStatus, data: resData } = await apiRequest('/api/actions/abort', { method: 'POST', body })
+    const { status: resStatus, data: resData } = await apiRequest(`/api/${channel}/${resolved.messageId}/abort`, { method: 'PATCH' })
     setStatus(resStatus)
     setData(resData)
     setSubmitting(false)

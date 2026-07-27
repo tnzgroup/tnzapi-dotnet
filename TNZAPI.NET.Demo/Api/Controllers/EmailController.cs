@@ -9,6 +9,8 @@ using TNZAPI.NET.Demo.Api.Helpers;
 namespace TNZAPI.NET.Demo.Api.Controllers
 {
     public record EmailAttachmentRequest(string FileName, string FileContent);
+    public record EmailRescheduleRequest(string SendTime);
+    public record EmailResubmitRequest(string SendTime);
 
     // Every field EmailModel supports, aside from ContactID/GroupID (addressbook references, need
     // a contact/group picker rather than a text field — out of scope for this phase).
@@ -116,6 +118,61 @@ namespace TNZAPI.NET.Demo.Api.Controllers
             try
             {
                 var result = await _client.Messaging.Email.StatusAsync(new MessageID(id));
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/abort")]
+        public async Task<IActionResult> Abort(string id)
+        {
+            try
+            {
+                var result = await _client.Actions.Email.AbortAsync(new MessageID(id));
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/reschedule")]
+        public async Task<IActionResult> Reschedule(string id, [FromBody] EmailRescheduleRequest request)
+        {
+            try
+            {
+                if (!DateTime.TryParse(request.SendTime, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var sendTime))
+                {
+                    return BadRequest(new { Result = "Failed", ErrorMessage = new[] { $"Invalid SendTime: '{request.SendTime}' could not be parsed as a date/time." } });
+                }
+
+                var result = await _client.Actions.Email.RescheduleAsync(new MessageID(id), sendTime);
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/resubmit")]
+        public async Task<IActionResult> Resubmit(string id, [FromBody] EmailResubmitRequest request)
+        {
+            try
+            {
+                if (!DateTime.TryParse(request.SendTime, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var sendTime))
+                {
+                    return BadRequest(new { Result = "Failed", ErrorMessage = new[] { $"Invalid SendTime: '{request.SendTime}' could not be parsed as a date/time." } });
+                }
+
+                var result = await _client.Actions.Email.ResubmitAsync(new MessageID(id), sendTime);
 
                 return this.RespondWithResult(result);
             }

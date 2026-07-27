@@ -2,12 +2,14 @@ import { useState, type FormEvent } from 'react'
 import { Button } from '@/components/ui/button'
 import { TextField, SelectField, type FieldValues } from '@/components/form-fields'
 import { ResponseViewer } from '@/components/response-viewer'
-import { apiRequest } from '@/lib/api-client'
+import { apiRequest, resolveMessageId } from '@/lib/api-client'
 
 // Mirrors tnzapi-ts-samples/nextjs/app/actions/pacing (client.Actions.Pacing.SendRequest), which
 // already correctly limits this to TTS/Voice (confirmed via the .NET SDK's
 // Core/Interfaces/Actions/{ITTSActionsApi,IVoiceActionsApi}.cs — no other channel has a Pacing
 // method). NumberOfOperators is a required int on the .NET SDK's Pacing(MessageID, int) signature.
+// Channel now only builds the URL (PATCH /api/{channel}/{messageId}/pacing) — it's no longer sent
+// in the body, matching the real TNZ REST API's own per-channel wire shape.
 const CHANNELS = ['TTS', 'Voice']
 
 export default function PacingPage() {
@@ -23,12 +25,16 @@ export default function PacingPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setSubmitting(true)
-    const body = {
-      MessageID: (fields.MessageID as string) ?? '',
-      Channel: (fields.Channel as string) ?? 'TTS',
-      NumberOfOperators: Number(fields.NumberOfOperators ?? 0),
+    const channel = ((fields.Channel as string) ?? 'TTS').toLowerCase()
+    const resolved = resolveMessageId(fields.MessageID as string)
+    if ('status' in resolved) {
+      setStatus(resolved.status)
+      setData(resolved.data)
+      setSubmitting(false)
+      return
     }
-    const { status: resStatus, data: resData } = await apiRequest('/api/actions/pacing', { method: 'POST', body })
+    const body = { NumberOfOperators: Number(fields.NumberOfOperators ?? 0) }
+    const { status: resStatus, data: resData } = await apiRequest(`/api/${channel}/${resolved.messageId}/pacing`, { method: 'PATCH', body })
     setStatus(resStatus)
     setData(resData)
     setSubmitting(false)

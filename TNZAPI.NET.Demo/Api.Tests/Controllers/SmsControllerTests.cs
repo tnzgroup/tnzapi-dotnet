@@ -189,4 +189,41 @@ public class SmsControllerTests : DemoApiTestBase
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         Assert.Null(handler.LastRequest);
     }
+    
+    [Fact]
+    public async Task Abort_SendsPatchToAbortEndpoint()
+    {
+        var handler = FakeResponse(HttpStatusCode.OK, "{\"ActionResult\":\"OK\"}");
+
+        var response = await Client.PatchAsync("/api/sms/abc-123/abort", null);
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal(HttpMethod.Patch, handler.LastRequest!.Method);
+        Assert.Equal("https://api.tnz.co.nz/api/v3.00/sms/abc-123/abort", handler.LastRequest!.RequestUri!.ToString());
+    }
+
+    [Fact]
+    public async Task Reschedule_SendsPatchWithSendTime()
+    {
+        var handler = FakeResponse(HttpStatusCode.OK, "{\"ActionResult\":\"OK\"}");
+
+        var response = await Client.PatchAsJsonAsync("/api/sms/abc-123/reschedule", new { SendTime = "2026-08-01 09:00:00" });
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal("https://api.tnz.co.nz/api/v3.00/sms/abc-123/reschedule", handler.LastRequest!.RequestUri!.ToString());
+        Assert.Contains("SendTime", handler.LastRequestBody);
+    }
+
+    [Fact]
+    public async Task Reschedule_WithInvalidSendTime_ReturnsBadRequestWithoutCallingSdk()
+    {
+        var handler = FakeResponse(HttpStatusCode.OK, "{\"ActionResult\":\"OK\"}");
+
+        var response = await Client.PatchAsJsonAsync("/api/sms/abc-123/reschedule", new { SendTime = "not-a-date" });
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        var body = JsonDocument.Parse(await response.Content.ReadAsStringAsync()).RootElement;
+        Assert.Contains("Invalid SendTime", body.GetProperty("ErrorMessage")[0].GetString());
+        Assert.Null(handler.LastRequest);
+    }
 }

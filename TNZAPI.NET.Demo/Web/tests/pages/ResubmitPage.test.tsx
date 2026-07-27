@@ -16,7 +16,7 @@ describe('ResubmitPage', () => {
     mockedApiRequest.mockReset()
   })
 
-  it('submits Message ID and defaults Channel to Email', async () => {
+  it('submits Message ID and New Send Time, and PATCHes the resubmit endpoint for the selected channel', async () => {
     mockedApiRequest.mockResolvedValue({ status: 200, data: { ActionResult: 'OK' } })
     const user = userEvent.setup()
     render(<ResubmitPage />)
@@ -26,12 +26,47 @@ describe('ResubmitPage', () => {
     await user.click(screen.getByRole('button', { name: 'Resubmit' }))
 
     expect(mockedApiRequest).toHaveBeenCalledWith(
-      '/api/actions/resubmit',
-      expect.objectContaining({
-        method: 'POST',
-        body: { MessageID: 'abc-123', Channel: 'Email', SendTime: '2026-08-01 09:00:00' },
-      }),
+      '/api/email/abc-123/resubmit',
+      expect.objectContaining({ method: 'PATCH', body: { SendTime: '2026-08-01 09:00:00' } }),
     )
+  })
+
+  it('URL-encodes a Message ID containing reserved characters', async () => {
+    mockedApiRequest.mockResolvedValue({ status: 200, data: { ActionResult: 'OK' } })
+    const user = userEvent.setup()
+    render(<ResubmitPage />)
+
+    await user.type(screen.getByLabelText('Message ID'), 'abc/123?x=1')
+    await user.type(screen.getByLabelText('New Send Time'), '2026-08-01 09:00:00')
+    await user.click(screen.getByRole('button', { name: 'Resubmit' }))
+
+    expect(mockedApiRequest).toHaveBeenCalledWith(
+      '/api/email/abc%2F123%3Fx%3D1/resubmit',
+      expect.objectContaining({ method: 'PATCH', body: { SendTime: '2026-08-01 09:00:00' } }),
+    )
+  })
+
+  it('rejects an empty Message ID without calling apiRequest', async () => {
+    const user = userEvent.setup()
+    render(<ResubmitPage />)
+
+    await user.type(screen.getByLabelText('New Send Time'), '2026-08-01 09:00:00')
+    await user.click(screen.getByRole('button', { name: 'Resubmit' }))
+
+    expect(mockedApiRequest).not.toHaveBeenCalled()
+    expect(await screen.findByText('Error (HTTP 400)')).toBeInTheDocument()
+  })
+
+  it('rejects a whitespace-only Message ID without calling apiRequest', async () => {
+    const user = userEvent.setup()
+    render(<ResubmitPage />)
+
+    await user.type(screen.getByLabelText('Message ID'), '   ')
+    await user.type(screen.getByLabelText('New Send Time'), '2026-08-01 09:00:00')
+    await user.click(screen.getByRole('button', { name: 'Resubmit' }))
+
+    expect(mockedApiRequest).not.toHaveBeenCalled()
+    expect(await screen.findByText('Error (HTTP 400)')).toBeInTheDocument()
   })
 
   it('only offers Email/Fax/TTS/Voice — not SMS/WhatsApp/RCS', async () => {

@@ -9,6 +9,8 @@ using TNZAPI.NET.Demo.Api.Helpers;
 namespace TNZAPI.NET.Demo.Api.Controllers
 {
     public record FaxAttachmentRequest(string FileName, string FileContent);
+    public record FaxRescheduleRequest(string SendTime);
+    public record FaxResubmitRequest(string SendTime);
 
     // Every field FaxModel supports, aside from ContactID/GroupID (addressbook references, need a
     // contact/group picker rather than a text field — out of scope for this phase). Fax has no
@@ -120,6 +122,61 @@ namespace TNZAPI.NET.Demo.Api.Controllers
             try
             {
                 var result = await _client.Messaging.Fax.StatusAsync(new MessageID(id));
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/abort")]
+        public async Task<IActionResult> Abort(string id)
+        {
+            try
+            {
+                var result = await _client.Actions.Fax.AbortAsync(new MessageID(id));
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/reschedule")]
+        public async Task<IActionResult> Reschedule(string id, [FromBody] FaxRescheduleRequest request)
+        {
+            try
+            {
+                if (!DateTime.TryParse(request.SendTime, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var sendTime))
+                {
+                    return BadRequest(new { Result = "Failed", ErrorMessage = new[] { $"Invalid SendTime: '{request.SendTime}' could not be parsed as a date/time." } });
+                }
+
+                var result = await _client.Actions.Fax.RescheduleAsync(new MessageID(id), sendTime);
+
+                return this.RespondWithResult(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Result = "Failed", ErrorMessage = new[] { ex.Message } });
+            }
+        }
+
+        [HttpPatch("{id}/resubmit")]
+        public async Task<IActionResult> Resubmit(string id, [FromBody] FaxResubmitRequest request)
+        {
+            try
+            {
+                if (!DateTime.TryParse(request.SendTime, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var sendTime))
+                {
+                    return BadRequest(new { Result = "Failed", ErrorMessage = new[] { $"Invalid SendTime: '{request.SendTime}' could not be parsed as a date/time." } });
+                }
+
+                var result = await _client.Actions.Fax.ResubmitAsync(new MessageID(id), sendTime);
 
                 return this.RespondWithResult(result);
             }

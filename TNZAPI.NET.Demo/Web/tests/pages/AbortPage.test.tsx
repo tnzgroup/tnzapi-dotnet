@@ -16,7 +16,7 @@ describe('AbortPage', () => {
     mockedApiRequest.mockReset()
   })
 
-  it('submits Message ID and defaults Channel to SMS', async () => {
+  it('submits Message ID and PATCHes the abort endpoint for the selected channel', async () => {
     mockedApiRequest.mockResolvedValue({ status: 200, data: { ActionResult: 'OK' } })
     const user = userEvent.setup()
     render(<AbortPage />)
@@ -24,10 +24,39 @@ describe('AbortPage', () => {
     await user.type(screen.getByLabelText('Message ID'), 'abc-123')
     await user.click(screen.getByRole('button', { name: 'Abort' }))
 
-    expect(mockedApiRequest).toHaveBeenCalledWith(
-      '/api/actions/abort',
-      expect.objectContaining({ method: 'POST', body: { MessageID: 'abc-123', Channel: 'SMS' } }),
-    )
+    expect(mockedApiRequest).toHaveBeenCalledWith('/api/sms/abc-123/abort', expect.objectContaining({ method: 'PATCH' }))
+  })
+
+  it('URL-encodes a Message ID containing reserved characters', async () => {
+    mockedApiRequest.mockResolvedValue({ status: 200, data: { ActionResult: 'OK' } })
+    const user = userEvent.setup()
+    render(<AbortPage />)
+
+    await user.type(screen.getByLabelText('Message ID'), 'abc/123?x=1')
+    await user.click(screen.getByRole('button', { name: 'Abort' }))
+
+    expect(mockedApiRequest).toHaveBeenCalledWith('/api/sms/abc%2F123%3Fx%3D1/abort', expect.objectContaining({ method: 'PATCH' }))
+  })
+
+  it('rejects an empty Message ID without calling apiRequest', async () => {
+    const user = userEvent.setup()
+    render(<AbortPage />)
+
+    await user.click(screen.getByRole('button', { name: 'Abort' }))
+
+    expect(mockedApiRequest).not.toHaveBeenCalled()
+    expect(await screen.findByText('Error (HTTP 400)')).toBeInTheDocument()
+  })
+
+  it('rejects a whitespace-only Message ID without calling apiRequest', async () => {
+    const user = userEvent.setup()
+    render(<AbortPage />)
+
+    await user.type(screen.getByLabelText('Message ID'), '   ')
+    await user.click(screen.getByRole('button', { name: 'Abort' }))
+
+    expect(mockedApiRequest).not.toHaveBeenCalled()
+    expect(await screen.findByText('Error (HTTP 400)')).toBeInTheDocument()
   })
 
   it('offers all 7 channels with an Actions facade, including WhatsApp and RCS', async () => {

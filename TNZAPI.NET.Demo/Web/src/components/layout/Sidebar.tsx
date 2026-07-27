@@ -6,7 +6,7 @@ export function Sidebar() {
   return (
     <nav className="w-64 shrink-0 border-r bg-muted/30 p-4 space-y-6 overflow-y-auto">
       <Link to="/" className="block text-lg font-semibold mb-2">
-        TNZAPI.NET Demo
+        TNZAPI Demo
       </Link>
       {NAV_SECTIONS.map((section) => (
         <div key={section.title}>
